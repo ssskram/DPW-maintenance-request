@@ -1,0 +1,12 @@
+/home/ssskram/applications/DPW_maintenancerequest/bin/Debug/netcoreapp2.0/app.db
+/home/ssskram/applications/DPW_maintenancerequest/bin/Debug/netcoreapp2.0/DPW_maintenancerequest.deps.json
+/home/ssskram/applications/DPW_maintenancerequest/bin/Debug/netcoreapp2.0/DPW_maintenancerequest.runtimeconfig.json
+/home/ssskram/applications/DPW_maintenancerequest/bin/Debug/netcoreapp2.0/DPW_maintenancerequest.runtimeconfig.dev.json
+/home/ssskram/applications/DPW_maintenancerequest/bin/Debug/netcoreapp2.0/DPW_maintenancerequest.dll
+/home/ssskram/applications/DPW_maintenancerequest/bin/Debug/netcoreapp2.0/DPW_maintenancerequest.pdb
+/home/ssskram/applications/DPW_maintenancerequest/obj/Debug/netcoreapp2.0/DPW_maintenancerequest.csproj.CoreCompileInputs.cache
+/home/ssskram/applications/DPW_maintenancerequest/obj/Debug/netcoreapp2.0/UserSecretsAssemblyInfo.cs
+/home/ssskram/applications/DPW_maintenancerequest/obj/Debug/netcoreapp2.0/DPW_maintenancerequest.AssemblyInfoInputs.cache
+/home/ssskram/applications/DPW_maintenancerequest/obj/Debug/netcoreapp2.0/DPW_maintenancerequest.AssemblyInfo.cs
+/home/ssskram/applications/DPW_maintenancerequest/obj/Debug/netcoreapp2.0/DPW_maintenancerequest.dll
+/home/ssskram/applications/DPW_maintenancerequest/obj/Debug/netcoreapp2.0/DPW_maintenancerequest.pdb

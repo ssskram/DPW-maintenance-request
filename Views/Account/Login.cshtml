@@ -1,0 +1,34 @@
+﻿@using System.Collections.Generic
+@using System.Linq
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Authentication
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    ViewData["Title"] = "Log in";
+}
+<div class="row">
+    <div class="col-md-12">
+        <img src="~/images/ip.png" class="img-responsive center-block" style="opacity: 0.7; max-height: 350px !important; margin-bottom: 25px;"/> 
+    </div>
+    <div class="col-md-12 text-center">
+     @{
+        var loginProviders = (await SignInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+        <form asp-action="ExternalLogin" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
+            <div> 
+                <p>
+                    @foreach (var provider in loginProviders)
+                    {
+                        <button style="margin-top: 15px; letter-spacing: 1px; font-weight: bold;" type="submit" class="btn btn-default" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">Log in</button>
+                    }
+                </p>
+            </div>
+        </form>
+    }
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

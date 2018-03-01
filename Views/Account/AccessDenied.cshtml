@@ -1,0 +1,23 @@
+﻿@using System.Collections.Generic
+@using System.Linq
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Authentication
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    ViewData["Title"] = "401";
+}
+<div class="row">
+    <div class="col-md-12">
+        <img src="~/images/ip.png" class="img-responsive center-block" style="opacity: 0.7; max-height: 350px !important;"/> 
+    </div>
+    <div class="col-md-12 text-center">
+        <h1 style="letter-spacing: 1px; padding: 3px;">Sorry,</h1>
+        <h1 style="font-weight: bold; letter-spacing: 1px; padding: 3px;">You don't have access.</h1>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
