@@ -252,6 +252,9 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
     overflow-x: hidden !important;
     line-height: 1.4;
 }
+.leaflet-control-attribution {
+    display: none !important;
+}
 
 /* datatable elements */
 .dataTables_filter, .dataTables_info { 
