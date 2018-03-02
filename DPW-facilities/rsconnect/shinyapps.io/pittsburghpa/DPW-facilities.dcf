@@ -1,0 +1,12 @@
+name: DPW-facilities
+title: DPW-facilities
+username:
+account: pittsburghpa
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 291247
+bundleId: 1247718
+url: https://pittsburghpa.shinyapps.io/DPW-facilities/
+when: 1519941409.33769
+asMultiple: FALSE
+asStatic: FALSE
