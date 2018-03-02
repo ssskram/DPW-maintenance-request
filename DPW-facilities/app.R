@@ -10,6 +10,7 @@ library(httr)
 library(sp)
 library(maptools)
 library(jsonlite)
+library(dplyr)
 
 # Enter Button Code
 enterButton <- '
@@ -38,7 +39,7 @@ cg_un <- keys$cgApiUn
 cg_pw <- keys$cgApiPw
   
 cgShape <- function(class, fields) {
-  url <- paste0("https://cgweb06.cartegraphoms.com/PittsburghPA/api/v1/classes/", class, "?fields=", fields, ",InactiveField,cgShape")
+  url <- paste0("https://cgweb06.cartegraphoms.com/PittsburghPA/api/v1/classes/", class, "?fields=", fields, "cgShape")
   request <- GET(url, authenticate(cg_un, cg_pw, type = "basic"))
   content <- content(request, as = "text")
   load <- jsonlite::fromJSON(content)[[class]]
@@ -93,10 +94,27 @@ ui <- fluidPage(
 # Define server logic required to draw a histogram
 server <- function(input, output, session) {
   facilitiesLoad <- reactive({
-    facilities <- cgShape("cgFacilitiesClass", "Oid,IDField,FacilityTypeField,PrimaryUserField,AddressNumberField,StreetField,ZipCodeField,PrimaryAttachmentField")
-    facilities@data <- cbind(facilities@data, coordinates(facilities))
+    facilities <- cgShape("cgFacilitiesClass", "Oid,IDField,FacilityTypeField,PrimaryUserField,AddressNumberField,StreetField")
+    facilities <- facilities %>% 
+      mutate(x = coordinates(facilities)[1],
+             y = coordinates(facilities)[2],
+             image = )
     
     return(facilities)
+  })
+  facilitiesFilter <- reactive({
+    # Search Filter
+    facilities <- facilitiesLoad()
+    if (!is.null(input$search) && input$search != "") {
+      facilities <- facilities[apply(facilities@data, 1, function(row){any(row %in% input$search)}), ]
+    }
+  })
+  renderUI({
+    facilities <- facilitiesLoad()
+    cols <- facilities@data[2:(ncol(facilities@data)-3)]
+    
+    search_list <- split(facilities, seq(nrow(facilities)))
+    
   })
   output$map <- renderLeaflet({
      facilities <- facilitiesLoad()
