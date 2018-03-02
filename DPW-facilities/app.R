@@ -11,25 +11,8 @@ library(sp)
 library(maptools)
 library(jsonlite)
 library(dplyr)
-
-# Enter Button Code
-enterButton <- '
-$(function() {
-  var $els = $("[data-proxy-click]");
-  $.each(
-    $els,
-    function(idx, el) {
-      var $el = $(el);
-      var $proxy = $("#" + $el.data("proxyClick"));
-      $el.keydown(function (e) {
-        if (e.keyCode == 13) {
-          $proxy.click();
-        }
-      });
-    }
-  );
-});
-'
+library(reshape2)
+library(tools)
 
 keys <- jsonlite::fromJSON("key.json")
 
@@ -39,7 +22,7 @@ cg_un <- keys$cgApiUn
 cg_pw <- keys$cgApiPw
   
 cgShape <- function(class, fields) {
-  url <- paste0("https://cgweb06.cartegraphoms.com/PittsburghPA/api/v1/classes/", class, "?fields=", fields, "cgShape")
+  url <- paste0("https://cgweb06.cartegraphoms.com/PittsburghPA/api/v1/classes/", class, "?fields=", fields, ",cgShape")
   request <- GET(url, authenticate(cg_un, cg_pw, type = "basic"))
   content <- content(request, as = "text")
   load <- jsonlite::fromJSON(content)[[class]]
@@ -70,74 +53,63 @@ ui <- fluidPage(
   tags$head(tags$link(rel = "shortcut icon", type = "image/png", href = "favicon.png")),
   tags$style(type = "text/css", "#map {height: calc(100vh) !important;}
              .container-fluid {padding:0;}"),
-  tags$head(tags$script(HTML(enterButton))),
   leafletOutput("map"),
-  absolutePanel(top = 5, left = 50, width = '320px', style = "padding: 5px;",
-                wellPanel(id = "tPanel", style = "overflow-y: auto; min-height: 10px; max-height: calc(100vh - 10px)",
-                          column(10, offset = 0, style='padding:0px;',
-                                 tagAppendAttributes(
-                                   textInput("geocode",
-                                             value = "",
-                                             label = NULL,
-                                             placeholder = "Go to Address/Place"),
-                                   `data-proxy-click` = "btn")
-                                 ),
-                          column(2, offset = 0, style='padding:0px;',
-                                 actionButton("btn",
-                                              "",
-                                              icon = icon("search-plus"))
-                                 )
-                          )
+  absolutePanel(top = 5, left = 50, width = '320px', style = "padding: 5px; overflow-y: visible;",
+                uiOutput("search_field")
+    )
   )
-)
 
 # Define server logic required to draw a histogram
 server <- function(input, output, session) {
   facilitiesLoad <- reactive({
     facilities <- cgShape("cgFacilitiesClass", "Oid,IDField,FacilityTypeField,PrimaryUserField,AddressNumberField,StreetField")
-    facilities <- facilities %>% 
+    facilities@data <- facilities@data %>% 
       mutate(x = coordinates(facilities)[1],
              y = coordinates(facilities)[2],
-             image = )
+             address = paste0(ifelse(is.na(AddressNumberField), "", paste0(AddressNumberField, " ")), ifelse(is.na(StreetField), "", toTitleCase(tolower(StreetField)))),
+             image = paste0("https://tools.wprdc.org/images/pittsburgh/facilities/", gsub(" ", "_", IDField), ".jpg"))
     
     return(facilities)
   })
   facilitiesFilter <- reactive({
     # Search Filter
     facilities <- facilitiesLoad()
+  
     if (!is.null(input$search) && input$search != "") {
       facilities <- facilities[apply(facilities@data, 1, function(row){any(row %in% input$search)}), ]
     }
+    
+    return(facilities)
   })
-  renderUI({
+  output$search_field <- renderUI({
     facilities <- facilitiesLoad()
-    cols <- facilities@data[2:(ncol(facilities@data)-3)]
+    cols <- facilities@data %>% 
+      select(IDField, FacilityTypeField, PrimaryUserField, address)  
     
-    search_list <- split(facilities, seq(nrow(facilities)))
+    cols$indx <- row.names(cols)
     
+    search_single <- melt(cols, "indx") %>% 
+      filter(!is.na(value) & value != " " & value != "")
+    
+    search_list <- levels(as.factor(search_single$value))
+
+    selectInput("search",
+                NULL,
+                c(`Search`='', search_list),
+                selectize = TRUE,
+                multiple = TRUE)
   })
   output$map <- renderLeaflet({
-     facilities <- facilitiesLoad()
+     facilities <- facilitiesFilter()
      
      leaflet() %>%
        addTiles(urlTemplate = "http://mt0.google.com/vt/lyrs=m&hl=en&x={x}&y={y}&z={z}&s=Ga", attribution = 'Google') %>%
-       addPolygons(data = facilities, popup = paste0("<b>Facility:</b> ", facilities$IDField,
-                                                    "<br><b>Address:</b> ", facilities$AddressNumberField, facilities$StreetField,
-                                                    "<br><b>Type:</b> ", facilities$FacilityTypeField,
-                                                    "<center>Link Place Holder</center>")
+       addPolygons(data = facilities, popup = paste0('<center><img id="imgPicture" src="', facilities$image, '" style="width:250px;"></center>',
+                                                     "<br><b>Facility:</b> ", facilities$IDField,
+                                                     "<br><b>Address:</b> ", facilities$address,
+                                                     "<br><b>Type:</b> ", facilities$FacilityTypeField,
+                                                     "<center>Link Place Holder</center>")
                    ) 
-  })
-  # Address Zoom
-  observeEvent(input$btn, {
-    if (input$geocode != "") {
-      lookUp <- paste0(gsub(" ", "+", input$geocode), "Pittsburgh,+PA")
-      url <- paste0("https://maps.googleapis.com/maps/api/geocode/json?address=", lookUp, "&key=", google_api)
-      address <- rlang::flatten(content(GET(url, timeout(500)))$results)
-      if (is.list(address)) {
-        leafletProxy("map") %>%
-          setView(lng = address$geometry$location$lng[1], lat = address$geometry$location$lat[1], zoom = 20)
-      }
-    }
   })
 }
 
