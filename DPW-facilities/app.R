@@ -150,7 +150,18 @@ server <- function(input, output, session) {
                                                      '<center>', facilities$url, '</center>')
                    )
   })
+  # Bookmarking stuff 
+  setBookmarkExclude(c("baseUrl", "map_bounds", "map_shape_click", "map_shape_mouseout", "map_shape_mouseover", "map_zoom", "map_center"))
+  # Bookmark Update
+  observe({
+    reactiveValuesToList(input)
+    session$doBookmark()
+  })
+  # Update page URL
+  onBookmarked(function(url) {
+    updateQueryString(url)
+  })
 }
 
 # Run the application 
-shinyApp(ui = ui, server = server)
+shinyApp(ui = ui, server = server, enableBookmarking = "url")
