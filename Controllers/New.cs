@@ -15,7 +15,8 @@ namespace DPW_maintenancerequest.Controllers
 
         public IActionResult WorkOrder(string OID)
         {
-            ViewBag.OID = OID;
+            // get facility
+            // write facility data to viewmodel to display in infowindow
             return View();
         }
         
