@@ -5,8 +5,9 @@ account: pittsburghpa
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 291247
-bundleId: 1255221
+bundleId: 1255551
 url: https://pittsburghpa.shinyapps.io/DPW-facilities/
-when: 1520351311.3032
+when: 1520361650.73731
 asMultiple: FALSE
 asStatic: FALSE
+ignoredFiles: .RData|app.db
