@@ -2,11 +2,8 @@
     ViewData["Title"] = "Work order";
 }
 @model WorkOrder
-<script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
-<script type="text/javascript" src="~/js/workorder.js"></script>
-<script src=@ViewData["apistringmap"] async defer ></script>
 
-<form asp-controller="New" asp-action="Submit" method="post" id="form" style="display:none;">
+<form asp-controller="New" asp-action="Submit" method="post" id="form">
 <div class="row">
   <div class="col-sm-3"></div>
     <div class="col-md-12">
@@ -19,26 +16,14 @@
         <h3>Describe the request</h3>
         <div class="form-group">
             <div class="col-md-12">
-                <input asp-for="OwnersLastName" class="form-control">
-                <span asp-validation-for="OwnersLastName" class="text-danger" />
+                <input asp-for="OID" class="form-control" value="@ViewBag.Facility.OID">
+                <span asp-validation-for="OID" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
             <div class="col-md-12">
-                <input asp-for="OwnersFirstName" class="form-control">
-                <span asp-validation-for="OwnersFirstName" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-12">
-                <input asp-for="CitationNumber" class="form-control">
-                <span asp-validation-for="CitationNumber" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-12">
-                <textarea rows="3" asp-for="Comments" class="form-control" onkeyup="textAreaAdjust(this)"></textarea>
-                <span asp-validation-for="Comments" class="text-danger" />
+                <input asp-for="WORK" class="form-control">
+                <span asp-validation-for="WORK" class="text-danger" />
             </div>
         </div>
     </div>
@@ -50,3 +35,7 @@
     </div>
 </div>
 </form>
+<img src="@ViewBag.ImageData" />
+<script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="~/js/workorder.js"></script>
+<script src=@ViewData["apistring"] async defer ></script>

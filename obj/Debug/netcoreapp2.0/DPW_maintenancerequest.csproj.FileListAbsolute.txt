@@ -1,4 +1,3 @@
-/home/ssskram/applications/DPW_maintenancerequest/bin/Debug/netcoreapp2.0/app.db
 /home/ssskram/applications/DPW_maintenancerequest/bin/Debug/netcoreapp2.0/DPW_maintenancerequest.deps.json
 /home/ssskram/applications/DPW_maintenancerequest/bin/Debug/netcoreapp2.0/DPW_maintenancerequest.runtimeconfig.json
 /home/ssskram/applications/DPW_maintenancerequest/bin/Debug/netcoreapp2.0/DPW_maintenancerequest.runtimeconfig.dev.json
