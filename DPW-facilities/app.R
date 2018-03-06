@@ -84,12 +84,12 @@ ui <- fluidPage(
 # Define server logic required to draw a histogram
 server <- function(input, output, session) {
   facilitiesLoad <- reactive({
-    if (input$baseUrl == "https://pittsburghpa.shinyapps.io/DPW-facilities/") {
+    if (input$baseUrl != "https://pittsburghpa.shinyapps.io/DPW-facilities/") {
       facilities_WPRDC <- readOGR("https://data.wprdc.org/dataset/e33e12d9-1268-45ed-ae47-ae3a76dcc0aa/resource/fd532423-b0ec-4028-98ff-5d414c47e01a/download/facilitiesimg.geojson")
       facilities_WPRDC@data <- facilities_WPRDC@data %>%
         mutate(x = coordinates(facilities_WPRDC)[1],
                y = coordinates(facilities_WPRDC)[2],
-               address = paste0(ifelse(is.na(address_number), "", paste0(address_number, " ")), ifelse(is.na(street), "", toTitleCase(tolower(street)))),
+               address = paste0(ifelse(is.na(address_number), "", paste0(as.integer(address_number), " ")), ifelse(is.na(street), "", toTitleCase(tolower(street)))),
                url = paste0('<a href="https://maintenancerequest.azurewebsites.us/New/WorkOrder?OID=', id, '"target="_parent">Submit a Maintence Request</a>')) %>%
         rename(Oid = id,
                AddressNumberField = address_number,
