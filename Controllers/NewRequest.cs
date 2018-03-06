@@ -12,9 +12,9 @@ namespace DPW_maintenancerequest.Controllers
     [Authorize]
     public class NewRequest : Controller
     {
-        public IActionResult Form(string name)
+        public IActionResult Form(string OID)
         {
-            ViewBag.OID = name;
+            ViewBag.OID = OID;
             return View();
         }
     }
