@@ -16,12 +16,6 @@ namespace DPW_maintenancerequest.Controllers
         {
             return View();
         }
-
-        public IActionResult NewRequest(string OID)
-        {
-            ViewBag.OID = OID;
-            return View();
-        }
         
         public IActionResult Error()
         {
