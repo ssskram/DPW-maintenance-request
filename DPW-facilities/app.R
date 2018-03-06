@@ -20,6 +20,13 @@ google_api <- keys$google_places
 google_sv <- keys$gogole_street_view
 cg_un <- keys$cgApiUn
 cg_pw <- keys$cgApiPw
+
+baseUrl<- '$(document).on("shiny:connected", function(e) {
+var baseUrl = (window.location != window.parent.location)
+            ? document.referrer
+: document.location.href;
+  Shiny.onInputChange("baseUrl", baseUrl);
+});'
   
 cgShape <- function(class, fields) {
   url <- paste0("https://cgweb06.cartegraphoms.com/PittsburghPA/api/v1/classes/", class, "?fields=", fields, ",cgShape")
@@ -53,6 +60,7 @@ ui <- fluidPage(
   tags$head(tags$link(rel = "shortcut icon", type = "image/png", href = "favicon.png")),
   tags$style(type = "text/css", "#map {height: calc(100vh) !important;}
              .container-fluid {padding:0;}"),
+  tags$script(baseUrl),
   leafletOutput("map"),
   absolutePanel(top = 5, left = 50, width = '320px', style = "padding: 5px; overflow-y: visible;",
                 uiOutput("search_field")
@@ -108,7 +116,7 @@ server <- function(input, output, session) {
                                                      "<br><b>Facility:</b> ", facilities$IDField,
                                                      "<br><b>Address:</b> ", facilities$address,
                                                      "<br><b>Type:</b> ", facilities$FacilityTypeField,
-                                                     "<center>Link Place Holder</center>")
+                                                     '<center><a href="', input$baseUrl, 'New/WorkOrder?OID=', facilities$Oid, '"target="_parent">Submit a Maintence Request</a></center>')
                    ) 
   })
 }
