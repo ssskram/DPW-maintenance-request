@@ -10,7 +10,8 @@ namespace DPW_maintenancerequest.Models
     {
         public string FacilityName { get; set; }
         public string Address { get; set; }
-        public string Type { get; set; }
+        public string Lat { get; set; }
+        public string Long { get; set; }
         public string OID { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -11,8 +12,6 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Identity;
-using System.Drawing;
-
 
 namespace DPW_maintenancerequest.Controllers
 {
@@ -33,13 +32,7 @@ namespace DPW_maintenancerequest.Controllers
             var facilitydata = GetFacility(OID).Result;
 
             await GetImage(OID);
-            var image = GetImage(OID).Result;
-
-            byte[] imageByteData = Encoding.ASCII.GetBytes(image);
-            string imageBase64Data= Convert.ToBase64String(imageByteData);
-            string imageDataURL= string.Format("data:image/png;base64,{0}", imageBase64Data);
-            
-            ViewBag.ImageData = image;
+            ViewBag.ImageData = GetImage(OID).Result;
             
             var googleapikey = Environment.GetEnvironmentVariable("googleapikey");
             ViewData["apistring"] =
@@ -48,12 +41,14 @@ namespace DPW_maintenancerequest.Controllers
                     googleapikey); // 0
 
             dynamic deserialized = JObject.Parse(facilitydata)["cgFacilitiesClass"][0];
+            dynamic points = JObject.Parse(facilitydata)["cgFacilitiesClass"][0]["CgShape"]["Center"];
             Facility fty = new Facility()
             {
                 OID = OID,
+                Lat = points.Lat,
+                Long = points.Lng, 
                 FacilityName = deserialized.IDField,
-                Address = deserialized.StreetField,
-                Type = deserialized.FacilityTypeField
+                Address = deserialized.StreetField
             };
             ViewBag.Facility = fty;
             return View();
@@ -91,8 +86,11 @@ namespace DPW_maintenancerequest.Controllers
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Authorization =
                 new AuthenticationHeaderValue("Basic", key);
-            var content = await client.GetStringAsync(cartegraphUrl);
-            return content;
+            HttpResponseMessage response = await client.GetAsync(cartegraphUrl);
+            byte[] myBytes = await response.Content.ReadAsByteArrayAsync();
+            var base64 = Convert.ToBase64String(myBytes);
+            var imgSrc = String.Format("data:image/jpeg;base64,{0}", base64);
+            return imgSrc;
         }
 
         public async Task PostWorkOrder(WorkOrder model)
@@ -108,8 +106,7 @@ namespace DPW_maintenancerequest.Controllers
                 String.Format
                 ("{{ 'cgLabor_OvertimeLogsClass' : [ {{ 'ParentOid' : '{0}' , 'CalledByField' : '{1}' , 'ResponseField' : '{2}' }} ] }}",
                     model.OID, // 0
-                    submittedby, // 1
-                    model.WORK); //2
+                    submittedby); // 1
             client.DefaultRequestHeaders.Add("ContentLength", json.Length.ToString());
             try
             {

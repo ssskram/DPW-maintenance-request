@@ -150,10 +150,9 @@ button.bs-placeholder[role='button']>span {
     -webkit-transition-duration: .2s;
     -moz-transition-duration: .2s;
     /* other */
-    background-color:white;
+    background-color:rgba(136, 130, 149,.15);
     padding: 10px 15px;
     margin: 7px;
-    box-shadow: 1px 1px 1px 1px #888;
     width: 200px;
   }
 .btn-big {
@@ -224,7 +223,7 @@ button.bs-placeholder[role='button']>span {
     content:none !important;
 }
 #map {
-    height: 125px;
+    height: 250px;
     width: 100%;
 }
 .gmnoprint { 
