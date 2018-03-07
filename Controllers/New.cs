@@ -57,7 +57,7 @@ namespace DPW_maintenancerequest.Controllers
         public async Task<IActionResult> Create(WorkOrder model)
         {
             await PostWorkOrder(model);
-            return RedirectToAction("Success");
+            return View("~/Views/Home/Index.cshtml");
         }
 
         // API calls
