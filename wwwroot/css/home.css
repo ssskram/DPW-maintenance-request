@@ -36,6 +36,10 @@ html, body, .container, .row, #column, #AddresForm, #column {
   .navbar-inverse {
     border: 0px !important;
   }
-  .navbar-brand { 
-    border-radius: 10px;
+  .navbar-head { 
+    float: left;
+    height: 50px;
+    padding: 15px 10px;
+    font-size: 18px;
+    line-height: 20px;
   }
