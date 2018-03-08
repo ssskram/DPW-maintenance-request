@@ -31,26 +31,45 @@ namespace DPW_maintenancerequest.Controllers
             await GetFacility(OID);
             var facilitydata = GetFacility(OID).Result;
 
+            await GetIssueTypes();
+            var issuetypes = GetIssueTypes().Result;
+
             await GetImage(OID);
             ViewBag.ImageData = GetImage(OID).Result;
-            
-            var googleapikey = Environment.GetEnvironmentVariable("googleapikey");
-            ViewData["apistring"] =
-                String.Format
-                ("https://maps.googleapis.com/maps/api/js?key={0}&libraries=places,visualization&callback=initMap",
-                    googleapikey); // 0
 
-            dynamic deserialized = JObject.Parse(facilitydata)["cgFacilitiesClass"][0];
+            // handle facility data
+            dynamic facility = JObject.Parse(facilitydata)["cgFacilitiesClass"][0];
             dynamic points = JObject.Parse(facilitydata)["cgFacilitiesClass"][0]["CgShape"]["Center"];
             Facility fty = new Facility()
             {
                 OID = OID,
                 Lat = points.Lat,
                 Long = points.Lng, 
-                FacilityName = deserialized.IDField,
-                Address = deserialized.StreetField
+                FacilityName = facility.IDField,
+                Address = facility.StreetField
             };
             ViewBag.Facility = fty;
+
+            //handle issue types
+            dynamic issues = JObject.Parse(issuetypes)["cgRequestIssuesClass"];
+            List<IssueTypes> it = new List<IssueTypes>();
+            foreach (var item in issues)
+            {
+                IssueTypes issue = new IssueTypes() 
+                {
+                    Name = item.IssueField,
+                };
+                it.Add(issue);  
+            }
+            ViewBag.Issues = it;
+
+            // set api key for google
+            var googleapikey = Environment.GetEnvironmentVariable("googleapikey");
+            ViewData["apistring"] =
+                String.Format
+                ("https://maps.googleapis.com/maps/api/js?key={0}&libraries=places,visualization&callback=initMap",
+                    googleapikey); // 0
+
             return View();
         }
 
@@ -69,6 +88,17 @@ namespace DPW_maintenancerequest.Controllers
             String.Format
             ("https://cgweb06.cartegraphoms.com/PittsburghPA/api/v1/Classes/cgFacilitiesClass/{0}",
                 OID); // 0
+            client.DefaultRequestHeaders.Clear();
+            client.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Basic", key);
+            string content = await client.GetStringAsync(cartegraphUrl);
+            return content;
+        }
+
+        public async Task<string> GetIssueTypes()
+        {
+            var key = Environment.GetEnvironmentVariable("CartegraphAPIkey");
+            var cartegraphUrl = "https://cgweb06.cartegraphoms.com/PittsburghPA/api/v1/Classes/cgRequestIssuesClass";
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Authorization =
                 new AuthenticationHeaderValue("Basic", key);

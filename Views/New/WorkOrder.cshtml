@@ -18,9 +18,11 @@
         <h3 style="padding-left: 30px;">Submit an issue</h3>
         <div class="form-group" style="margin-bottom: 5px;">
             <div class="col-md-12">
-                <select asp-for="Issue" data-style="btn-info" class="selectpicker form-control" title="Select an issue type">
-                    <option>Issue type 1</option>
-                    <option>Issue type 2</option>
+                <select asp-for="Issue" data-style="btn-info" class="selectpicker form-control" title="Select an issue type" required="true" data-dropup-auto="false">
+                    @foreach(var Issue in ViewBag.Issues)
+                    {
+                    <option>@Issue.Name</option>
+                    }
                 </select>
             </div>
         </div>
