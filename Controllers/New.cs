@@ -57,9 +57,13 @@ namespace DPW_maintenancerequest.Controllers
             {
                 IssueTypes issue = new IssueTypes() 
                 {
-                    Name = item.IssueField,
+                    Type = item.AppliesTocgFacilitiesField,
+                    Name = item.IssueField
                 };
-                it.Add(issue);  
+                if (issue.Type == true)
+                {
+                    it.Add(issue); 
+                } 
             }
             ViewBag.Issues = it;
 
@@ -73,10 +77,10 @@ namespace DPW_maintenancerequest.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Create(WorkOrder model)
+        public async Task<IActionResult> Submit(WorkOrder model)
         {
             await PostWorkOrder(model);
-            return View("~/Views/Home/Index.cshtml");
+            return RedirectToAction(nameof(Home.Index), "Home", new { status = "Success" });
         }
 
         // API calls
@@ -127,16 +131,19 @@ namespace DPW_maintenancerequest.Controllers
         {
             var key = Environment.GetEnvironmentVariable("CartegraphAPIkey");
             var submittedby = _userManager.GetUserName(HttpContext.User);
-            var cartegraphUrl = "https://cgweb06.cartegraphoms.com/PittsburghPA/api/v1/Classes/{enter rest here}}";
+            var cartegraphUrl = "https://cgweb06.cartegraphoms.com/PittsburghPA/api/v1/Classes/cgRequestsClass";
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Add("X-HTTP-Method", "POST");
             client.DefaultRequestHeaders.Authorization =
                 new AuthenticationHeaderValue("Basic", key);
             var json =
                 String.Format
-                ("{{ 'cgLabor_OvertimeLogsClass' : [ {{ 'ParentOid' : '{0}' , 'CalledByField' : '{1}' , 'ResponseField' : '{2}' }} ] }}",
-                    model.OID, // 0
-                    submittedby); // 1
+                ("{{ 'cgRequestsClass' : [ {{ 'BuildingNameField' : '{0}' , 'IssueField' : '{1}' , 'DescriptionField' : '{2}', 'SubmitterPhoneNumberField' : '{3}', 'SubmittedByField' : '{4}'  }} ] }}",
+                    model.Name, // 0
+                    model.Issue, // 1
+                    model.Description, // 2
+                    model.Phone, // 3
+                    submittedby); // 4
             client.DefaultRequestHeaders.Add("ContentLength", json.Length.ToString());
             try
             {

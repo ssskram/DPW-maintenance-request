@@ -2,8 +2,8 @@
     ViewData["Title"] = "Home";
     Layout = "~/Views/Shared/_MapLayout.cshtml";
 }
-
 <link rel="stylesheet" href="~/css/home.css">
+
 <div class="row">
   <div class="col-md-12" id="column">
     <div id="map">
@@ -11,3 +11,11 @@
     </div>
   </div>
 </div>
+
+<div id="status" hidden>@ViewBag.Trigger</div>
+<div id="dialog" title="Success" style="text-align: center;">
+  <p>Your issue was submitted successfully<br><br><strong>Thanks for your time</strong></p>
+</div>
+
+<script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="~/js/home.js"></script>

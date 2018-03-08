@@ -38,17 +38,16 @@
         </div>
         <div class="col-md-12" style="margin-top: 10px;">
             <input style="float: left; margin: 10px; width: 120px;" type="button" value="&laquo; Back" class="btn btn-default overlaytrigger" onclick="location.href='@Url.Action("Index", "Home")'"/>
-            <input style="float: right; margin: 10px; width: 120px; font-weight: bold;" type="button" id="submit" value="Submit" class="btn btn-default overlaytrigger" onclick="location.href='@Url.Action("Index", "Home")'"/>
+            <input style="float: right; margin: 10px; width: 120px; font-weight: bold;" type="Submit" id="Submit" value="Submit" class="btn btn-default overlaytrigger"/>
         </div>
     </div>
 </div>
-</form>
-
 <input value="@ViewBag.Facility.Lat" id="lat" hidden>
 <input value="@ViewBag.Facility.Long" id="long" hidden>
-<input value="@ViewBag.Facility.FacilityName" id="name" hidden>
+<input asp-for="Name" value="@ViewBag.Facility.FacilityName" id="name" hidden>
 <input value="@ViewBag.Facility.Address" id="address" hidden>
-<input asp-for="OID" value="@ViewBag.Facility.OID" hidden>
+<input value="@ViewBag.Facility.OID" hidden>
+</form>
 
 <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript" src="~/js/workorder.js"></script>

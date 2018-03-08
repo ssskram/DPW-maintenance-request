@@ -311,3 +311,13 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
     margin: 20px 0;
     background-color: rgba(88, 109, 116, .1);
 }
+
+/* jquery ui dialog box */
+.ui-widget-header {
+    background: #fffaee;
+    color: #383838;
+}
+.ui-widget-content { 
+    color: #383838;
+    font-size: 20px;
+}
