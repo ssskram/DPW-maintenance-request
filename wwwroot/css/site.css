@@ -145,7 +145,7 @@ button.bs-placeholder[role='button']>span {
     /* border */
     border: .5px;
     border-style: solid;
-    border-radius: 10px;
+    border-radius: 2px;
     /* transitions */
     transition-duration: .2s;
     -webkit-transition-duration: .2s;
@@ -306,7 +306,7 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
 }
 .requestcard { 
     border: .5px solid;
-    border-radius: 1px;
+    border-radius: 5px;
     padding-bottom: 10px;
     margin: 20px 0;
     background-color: rgba(88, 109, 116, .1);
