@@ -9,7 +9,6 @@ namespace DPW_maintenancerequest.Models
         [Display(Prompt = "Enter your phone number")]
         public string Phone { get; set; }
         public string Issue { get; set; }
-        public string Urgency { get; set; }
         [Display(Prompt = "Describe the issue")]
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }

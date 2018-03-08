@@ -2,38 +2,25 @@
     ViewData["Title"] = "Work order";
 }
 @model WorkOrder
-<input value="@ViewBag.Facility.Lat" id="lat" hidden>
-<input value="@ViewBag.Facility.Long" id="long" hidden>
-<input value="@ViewBag.Facility.FacilityName" id="name" hidden>
-<input value="@ViewBag.Facility.Address" id="address" hidden>
-<form asp-controller="New" asp-action="Submit" method="post" id="form">
-<input asp-for="OID" value="@ViewBag.Facility.OID" hidden>
+
 <div class="row">
     <div class="col-md-4 hidden-sm hidden-xs">
-        <img src="@ViewBag.ImageData" class="img-responsive center-block" style="height: 250px; width: 100%;">
+        <img src="@ViewBag.ImageData" class="img-responsive center-block" style="height: 250px; width: 100%; border-radius: 0px 0px 10px 10px;">
     </div>
     <div class="col-md-8">
         <div id="map"></div>
     </div>
 </div>
+<form asp-controller="New" asp-action="Submit" method="post" id="form">
 <div class="row">
     <div class="col-md-1"></div>
-    <div class="col-md-8">
-        <h3 style="padding-left: 30px;">New request</h3>
+    <div class="col-md-8 requestcard" id="requestcard">
+        <h3 style="padding-left: 30px;">Submit an issue</h3>
         <div class="form-group" style="margin-bottom: 5px;">
             <div class="col-md-12">
                 <select asp-for="Issue" data-style="btn-info" class="selectpicker form-control" title="Select an issue type">
                     <option>Issue type 1</option>
                     <option>Issue type 2</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group" style="margin-bottom: 10px;">
-            <div class="col-md-12">
-                <select asp-for="Urgency" data-style="btn-info" class="selectpicker form-control" title="Identify the urgency">
-                    <option>Emergency</option>
-                    <option>Urgent</option>
-                    <option>Routine</option>
                 </select>
             </div>
         </div>
@@ -54,6 +41,13 @@
     </div>
 </div>
 </form>
+
+<input value="@ViewBag.Facility.Lat" id="lat" hidden>
+<input value="@ViewBag.Facility.Long" id="long" hidden>
+<input value="@ViewBag.Facility.FacilityName" id="name" hidden>
+<input value="@ViewBag.Facility.Address" id="address" hidden>
+<input asp-for="OID" value="@ViewBag.Facility.OID" hidden>
+
 <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript" src="~/js/workorder.js"></script>
 <script src=@ViewData["apistring"] async defer ></script>
