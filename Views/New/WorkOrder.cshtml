@@ -18,7 +18,7 @@
         <h3 style="padding-left: 30px;">Submit an issue</h3>
         <div class="form-group" style="margin-bottom: 5px;">
             <div class="col-md-12">
-                <select asp-for="Issue" data-style="btn-info" class="selectpicker form-control" title="Select an issue type" required="true" data-dropup-auto="false">
+                <select asp-for="Issue" data-style="btn-info" class="selectpicker form-control" title="Select issue type" required="true" data-dropup-auto="false">
                     @foreach(var Issue in ViewBag.Issues)
                     {
                     <option>@Issue.Name</option>
@@ -38,7 +38,7 @@
         </div>
         <div class="col-md-12" style="margin-top: 10px;">
             <input style="float: left; margin: 10px; width: 120px;" type="button" value="&laquo; Back" class="btn btn-default overlaytrigger" onclick="location.href='@Url.Action("Index", "Home")'"/>
-            <input style="float: right; margin: 10px; width: 120px;" type="button" id="submit" value="Submit" class="btn btn-default overlaytrigger" onclick="location.href='@Url.Action("Index", "Home")'"/>
+            <input style="float: right; margin: 10px; width: 120px; font-weight: bold;" type="button" id="submit" value="Submit" class="btn btn-default overlaytrigger" onclick="location.href='@Url.Action("Index", "Home")'"/>
         </div>
     </div>
 </div>
