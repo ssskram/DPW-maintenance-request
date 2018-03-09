@@ -24,20 +24,8 @@ html, body, .container, .row, #column, #AddresForm, #column {
     left: 0px !important;
     padding: 10px !important;
   }
-  #iframe {
-    width:100% !important;
-    height:100% !important;
-    position: absolute !important;
-    top: 0px !important;
-    left: 0px !important;
-    border-width: 0px !important;
-    overflow: hidden !important;
-  }
   footer {
     display: none;
-  }
-  .navbar-inverse {
-    border: 0px !important;
   }
   .navbar-head { 
     float: left;
@@ -47,14 +35,13 @@ html, body, .container, .row, #column, #AddresForm, #column {
     line-height: 20px;
   }
 /* jquery ui dialog box */
-.ui-widget-header {
-  background: #fffaee;
-  color: #383838;
+.ui-dialog-titlebar-close {
+  visibility: hidden;
 }
 .ui-widget-content { 
   color: #383838;
   font-size: 20px;
 }
 .ui-dialog-title { 
-  font-style: italic;
+  display:none;
 }

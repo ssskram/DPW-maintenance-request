@@ -22,3 +22,14 @@ function initMap() {
     });
     infoWindow.open(map);
 }
+
+$( "#image" ).dialog({
+    position: { my: "right", at: "top", of: window },
+    width: 450,
+    height: 205
+});
+$( "#form" ).dialog({
+    position: { my: "left", at: "left", of: window },
+    width: 450,
+    height: 450
+});

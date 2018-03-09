@@ -28,14 +28,21 @@ namespace DPW_maintenancerequest.Controllers
 
         public async Task<IActionResult> WorkOrder(string OID)
         {
+            // set api key for google
+            var googleapikey = Environment.GetEnvironmentVariable("googleapikey");
+            ViewData["apistring"] =
+                String.Format
+                ("https://maps.googleapis.com/maps/api/js?key={0}&libraries=places,visualization&callback=initMap",
+                    googleapikey); // 0
+                    
+            await GetImage(OID);
+            ViewBag.ImageData = GetImage(OID).Result;
+
             await GetFacility(OID);
             var facilitydata = GetFacility(OID).Result;
 
             await GetIssueTypes();
             var issuetypes = GetIssueTypes().Result;
-
-            await GetImage(OID);
-            ViewBag.ImageData = GetImage(OID).Result;
 
             // handle facility data
             dynamic facility = JObject.Parse(facilitydata)["cgFacilitiesClass"][0];
@@ -66,13 +73,6 @@ namespace DPW_maintenancerequest.Controllers
                 } 
             }
             ViewBag.Issues = it;
-
-            // set api key for google
-            var googleapikey = Environment.GetEnvironmentVariable("googleapikey");
-            ViewData["apistring"] =
-                String.Format
-                ("https://maps.googleapis.com/maps/api/js?key={0}&libraries=places,visualization&callback=initMap",
-                    googleapikey); // 0
 
             return View();
         }
