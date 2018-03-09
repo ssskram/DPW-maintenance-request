@@ -67,7 +67,7 @@ ui <- fluidPage(
   tags$style(type = "text/css", 
               '#map {
                  height: calc(100vh - 77px) !important;
-                 z-index: 1035;
+                 z-index: 1;
               }
               .overlayloader {
                  align-items: center;
@@ -217,6 +217,13 @@ server <- function(input, output, session) {
         setView(lng = input$map_center[1], lat = input$map_center[2], zoom = 20)
       }
     })
+  observeEvent(input$map_shape_click, {
+    shape_click <- ifelse(is.null(input$map_shape_click), FALSE, TRUE)
+    if (shape_click) {
+      leafletProxy("map", session = session) %>%
+        setView(lng = input$map_shape_click$lng, lat = input$map_shape_click$lat, zoom = input$map_zoom)
+    }
+  })
 }
 
 # Run the application 
