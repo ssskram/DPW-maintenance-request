@@ -4,6 +4,9 @@ $(document).ready(function () {
     var status = $('#status').text();
     if ( status == "Success" )
     {
-        $( "#dialog" ).dialog();
+        $( "#dialog" ).dialog({
+            width: 450,
+            height: 205
+        });
     }
 });

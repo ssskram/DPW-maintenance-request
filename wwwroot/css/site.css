@@ -321,3 +321,6 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
     color: #383838;
     font-size: 20px;
 }
+.ui-dialog-title { 
+    font-style: italic;
+}

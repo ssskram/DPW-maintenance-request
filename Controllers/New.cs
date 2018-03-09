@@ -80,7 +80,8 @@ namespace DPW_maintenancerequest.Controllers
         public async Task<IActionResult> Submit(WorkOrder model)
         {
             await PostWorkOrder(model);
-            return RedirectToAction(nameof(Home.Index), "Home", new { status = "Success" });
+            TempData["status"] = "Success";
+            return RedirectToAction(nameof(Home.Index), "Home");
         }
 
         // API calls

@@ -12,9 +12,9 @@ namespace DPW_maintenancerequest.Controllers
     [Authorize]
     public class Home : Controller
     {
-        public IActionResult Index(string status)
+        public IActionResult Index()
         {
-            ViewBag.Trigger = status;
+            ViewBag.Trigger = TempData["status"];
             return View();
         }
         
