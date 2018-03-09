@@ -12,15 +12,11 @@
   </div>
 </div>
 
-<div id="image" title="Success!" style="text-align: center;">
-    <img src="@ViewBag.ImageData" class="img-responsive center-block" style="height: 250px; width: 100%;">
-</div>
-
-<div id="form" title="Success!" style="text-align: center;">
-    <form asp-controller="New" asp-action="Submit" method="post" id="form">
-    <div class="row">
+<div id="form" class="form-card">
+    <form asp-controller="New" asp-action="Submit" method="post" class="form">
+    <div class="row" style="overflow:visible">
         <div class="col-md-12" id="requestcard">
-            <h3 style="padding-left: 30px;">Report an issue</h3>
+            <h3>Report an issue</h3>
             <div class="form-group" style="margin-bottom: 5px;">
                 <div class="col-md-12">
                     <select asp-for="Issue" data-style="btn-info" class="selectpicker form-control" title="Select issue type" required="true" data-dropup-auto="false">
@@ -42,8 +38,7 @@
                 </div>
             </div>
             <div class="col-md-12" style="margin-top: 10px;">
-                <input style="float: left; margin: 10px; width: 120px;" type="button" value="&laquo; Back" class="btn btn-default overlaytrigger" onclick="location.href='@Url.Action("Index", "Home")'"/>
-                <input style="float: right; margin: 10px; width: 120px; font-weight: bold;" type="Submit" id="Submit" value="Submit" class="btn btn-default overlaytrigger"/>
+                <input style="margin: 10px 0; width: 100%; font-weight: bold; border-radius: 5px;" type="Submit" id="Submit" value="Submit" class="btn btn-default overlaytrigger"/>
             </div>
         </div>
     </div>
@@ -51,7 +46,12 @@
     <input value="@ViewBag.Facility.Address" id="address" hidden>
     <input value="@ViewBag.Facility.Lat" id="lat" hidden>
     <input value="@ViewBag.Facility.Long" id="long" hidden>
+    <input value="@ViewBag.ImageData" id="img" hidden>
     </form>
+</div>
+
+<div class="back" id="back">
+    <input style="float: left; margin: 10px; width: 150px;" type="button" value="&laquo; Back" class="btn btn-default overlaytrigger" onclick="location.href='@Url.Action("Index", "Home")'"/>
 </div>
 
 <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>

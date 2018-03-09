@@ -34,14 +34,35 @@ html, body, .container, .row, #column, #AddresForm, #column {
     font-size: 18px;
     line-height: 20px;
   }
-/* jquery ui dialog box */
-.ui-dialog-titlebar-close {
-  visibility: hidden;
+.form-card { 
+    text-align: center;
+
+    background-color: white;
+    border-radius: 10px;
+    margin-left: 75px;
+    margin-bottom: 150px;
+    width: 400px;
+    box-shadow: 2px 1px 5px 1px rgba(0,0,0,0.4);
+    overflow: visible;
 }
-.ui-widget-content { 
-  color: #383838;
-  font-size: 20px;
+.form { 
+  overflow: visible;
 }
-.ui-dialog-title { 
-  display:none;
+.gm-style-iw + div {
+    display: none;
+}
+.gm-style .gm-style-iw {
+    font-size: 16px;
+}
+.gm-style-iw { 
+    text-align: center;
+}
+.dropdown-menu open {
+    overflow: visible; 
+}
+.dropdown-menu inner { 
+    overflow: visible; 
+}
+.dropdown-menu { 
+  overflow: visible; 
 }

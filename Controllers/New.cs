@@ -34,9 +34,6 @@ namespace DPW_maintenancerequest.Controllers
                 String.Format
                 ("https://maps.googleapis.com/maps/api/js?key={0}&libraries=places,visualization&callback=initMap",
                     googleapikey); // 0
-                    
-            await GetImage(OID);
-            ViewBag.ImageData = GetImage(OID).Result;
 
             await GetFacility(OID);
             var facilitydata = GetFacility(OID).Result;
@@ -56,6 +53,14 @@ namespace DPW_maintenancerequest.Controllers
                 Address = facility.StreetField
             };
             ViewBag.Facility = fty;
+
+            // generate image url
+            var encodedName = facility.IDField.ToString().Replace(" ", "_");
+            var link =
+                String.Format
+                ("https://tools.wprdc.org/images/pittsburgh/facilities/{0}.jpg",
+                    encodedName); // 0
+            ViewBag.ImageData = link;
 
             //handle issue types
             dynamic issues = JObject.Parse(issuetypes)["cgRequestIssuesClass"];
@@ -109,23 +114,6 @@ namespace DPW_maintenancerequest.Controllers
                 new AuthenticationHeaderValue("Basic", key);
             string content = await client.GetStringAsync(cartegraphUrl);
             return content;
-        }
-
-        public async Task<string> GetImage(string OID)
-        {
-            var key = Environment.GetEnvironmentVariable("CartegraphAPIkey");
-            var cartegraphUrl =
-            String.Format
-            ("https://cgweb06.cartegraphoms.com/PittsburghPA/api/v1/attachments/primary/cgFacilitiesClass/{0}",
-                OID); // 0
-            client.DefaultRequestHeaders.Clear();
-            client.DefaultRequestHeaders.Authorization =
-                new AuthenticationHeaderValue("Basic", key);
-            HttpResponseMessage response = await client.GetAsync(cartegraphUrl);
-            byte[] myBytes = await response.Content.ReadAsByteArrayAsync();
-            var base64 = Convert.ToBase64String(myBytes);
-            var imgSrc = String.Format("data:image/jpeg;base64,{0}", base64);
-            return imgSrc;
         }
 
         public async Task PostWorkOrder(WorkOrder model)

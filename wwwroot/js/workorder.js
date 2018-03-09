@@ -8,12 +8,13 @@ var lng = parseFloat(document.getElementById('long').value);
 var lat_lng = {lat: lat, lng: lng};
 var address = document.getElementById('address').value;
 var name = document.getElementById('name').value;
-var content = "<b>" + name + "</b> <br/>" + address;
+var link = document.getElementById('img').value;
+var content = "<img style='width:300px; border-radius: 10px 10px 10px 10px;' src=" + link + "><br/><br/><b>" + name + "</b> <br/>" + address;
 
 function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
         center: lat_lng,
-        zoom: 16
+        zoom: 18
       });
     var infoWindow = new google.maps.InfoWindow({
         content: content,
@@ -21,15 +22,10 @@ function initMap() {
         position: lat_lng
     });
     infoWindow.open(map);
+    var frm = document.getElementById('form');
+    var bck = document.getElementById('back');
+    map.controls[google.maps.ControlPosition.LEFT_CENTER].push(frm);
+    map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(bck);
 }
 
-$( "#image" ).dialog({
-    position: { my: "right", at: "top", of: window },
-    width: 450,
-    height: 205
-});
-$( "#form" ).dialog({
-    position: { my: "left", at: "left", of: window },
-    width: 450,
-    height: 450
-});
+$( "#form" ).draggable();

@@ -68,7 +68,7 @@ h1, h2, h3, h4, h5 {
 /* form styles */
 /* text box */
 .form-control {
-    margin: 5px !important;
+    margin: 5px 0 !important;
     height: auto;
 }
 /* formatting for read-only fields */
@@ -277,6 +277,15 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
     border: 0px solid transparent !important;
     border-radius: 0px !important;
 }
+/* center login page */
+.login {
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+
 
 /* loader to save screen on network activity */
 .overlayloader {
