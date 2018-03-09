@@ -119,7 +119,7 @@ server <- function(input, output, session) {
         mutate(x = coordinates(facilities_WPRDC)[1],
                y = coordinates(facilities_WPRDC)[2],
                name = as.factor(name),
-               address = as.factor(paste0(ifelse(is.na(address_number), "", paste0(as.integer(address_number), " ")), ifelse(is.na(street), "", street))),
+               address = as.factor(paste0(ifelse(is.na(address_number), "", paste0(as.integer(address_number), " ")), ifelse(is.na(street), "",as.character(street)))),
                url = paste0('<font size = "4"><a href="https://maintenancerequest.azurewebsites.us/New/WorkOrder?OID=', id, '"target="_top" id = "link">Report an issue</a></font>')) %>%
         rename(Oid = id,
                AddressNumberField = address_number,
