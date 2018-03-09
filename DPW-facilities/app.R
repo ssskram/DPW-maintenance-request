@@ -64,7 +64,7 @@ ui <- fluidPage(
   # Favicon
   tags$head(tags$link(rel = "shortcut icon", type = "image/png", href = "favicon.png")),
   # Big Map
-  tags$style(type = "text/css", '#map {height: calc(100vh - 76px) !important;}
+  tags$style(type = "text/css", '#map {height: calc(100vh - 77px) !important;}
              .container-fluid {
                 padding:0; 
                 background-image: url("Loading_2.gif");
@@ -81,7 +81,7 @@ ui <- fluidPage(
                 border-right: none;
                 border-top: none;
                 border-bottom-color: black;
-                min-height: 76px;
+                height: 77px;
              }
              .selectize-input.items.not-full.has-options {
                 width: 300px;
