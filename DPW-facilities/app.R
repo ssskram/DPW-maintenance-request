@@ -117,12 +117,13 @@ ui <- fluidPage(
              }
              .selectize-input.items.not-full.has-options {
                 width: 300px;
-                z: 100;
+                z-index: 100;
              }
              .control-label {
                 font-weight: normal;
                 font-size: 15px;
              }
+             .leaflet-popup-pane { z-index: 1035;}
              .form-group.shiny-input-container {margin: 0px;}
              .shiny-notification-close { display: none;}
              .shiny-notification {
@@ -218,11 +219,8 @@ server <- function(input, output, session) {
       }
     })
   observeEvent(input$map_shape_click, {
-    shape_click <- ifelse(is.null(input$map_shape_click), FALSE, TRUE)
-    if (shape_click) {
-      leafletProxy("map", session = session) %>%
-        setView(lng = input$map_shape_click$lng, lat = input$map_shape_click$lat, zoom = input$map_zoom)
-    }
+    leafletProxy("map", session = session) %>%
+      setView(lng = input$map_shape_click$lng, lat = input$map_shape_click$lat, zoom = input$map_zoom)
   })
 }
 
