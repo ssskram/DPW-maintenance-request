@@ -284,8 +284,7 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
     top: 40%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-  }
-
+}
 
 /* loader to save screen on network activity */
 .overlayloader {
