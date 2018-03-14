@@ -64,14 +64,46 @@ ui <- fluidPage(
   # Favicon
   tags$head(tags$link(rel = "shortcut icon", type = "image/png", href = "favicon.png")),
   # Big Map
-  tags$style(type = "text/css", '#map {height: calc(100vh - 77px) !important;}
+  tags$style(type = "text/css", 
+              '#map {
+                 height: calc(100vh - 77px) !important;
+                 z-index: 1;
+              }
+              .overlayloader {
+                 align-items: center;
+                 justify-content: center;
+                 background-color: rgba(0,0,0,0.7);
+                 position: fixed;
+                 z-index: -1;
+                 height: 100%;
+                 width: 100%;
+                 top: 0;
+                 left: 0;
+                 overflow: hidden;
+             }
+             .loader {
+               position: absolute;
+               margin: auto;
+               top: 0;
+               right: 0;
+               bottom: 0;
+               left: 0;
+               width: 100px;
+               height: 100px;
+               border: 16px solid #fffaee;
+               border-top: 16px solid rgba(202, 205, 206,.35);
+               border-radius: 50%;
+               width: 150px;
+               height: 150px;
+               opacity: 0.7;
+               animation: spin 4s linear infinite;
+             }
+             @keyframes spin {
+               0% { transform: rotate(0deg); }
+               100% { transform: rotate(360deg); }
+             }
              .container-fluid {
-                padding:0; 
-                background-image: url("Loading_2.gif");
-                background-repeat: no-repeat;
-                background-attachment: fixed;
-                background-position: center; 
-                background-size: 198px 198px; 
+                padding:0;
              }
              .shiny-input-panel {
                 background-color: #fffaee;
@@ -85,12 +117,13 @@ ui <- fluidPage(
              }
              .selectize-input.items.not-full.has-options {
                 width: 300px;
-                z: 100;
+                z-index: 100;
              }
              .control-label {
                 font-weight: normal;
                 font-size: 15px;
              }
+             .leaflet-popup-pane { z-index: 1035;}
              .form-group.shiny-input-container {margin: 0px;}
              .shiny-notification-close { display: none;}
              .shiny-notification {
@@ -103,10 +136,12 @@ ui <- fluidPage(
   # Run base URL
   tags$script(baseUrl),
   inputPanel(style = "padding-left: 42px; padding-right: 0px; padding-top: 0px; overflow-y: visible; background-color: #fffaee;",
-                uiOutput("search_field")#,
-             # HTML('<div style = "position: absolute; right: 24px; top: 13px;">Click on a facility then click the "Submit a Maintenance Request" link!<br></div>')
+                uiOutput("search_field")
              ),
-  leafletOutput("map")
+  leafletOutput("map"),
+  HTML('<div class="overlayloader">
+          <div class="loader"></div>
+       </div>')
   )
 
 # Define server logic required to draw a histogram
@@ -183,6 +218,10 @@ server <- function(input, output, session) {
         setView(lng = input$map_center[1], lat = input$map_center[2], zoom = 20)
       }
     })
+  observeEvent(input$map_shape_click, {
+    leafletProxy("map", session = session) %>%
+      setView(lng = input$map_shape_click$lng, lat = input$map_shape_click$lat, zoom = input$map_zoom)
+  })
 }
 
 # Run the application 
