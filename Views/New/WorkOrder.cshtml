@@ -34,6 +34,11 @@
             </div>
             <div class="form-group">
                 <div class="col-md-12">
+                    <textarea asp-for="LocationDescription" class="form-control" onkeyup="textAreaAdjust(this)"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
                     <input asp-for="Phone" class="form-control">
                 </div>
             </div>

@@ -12,6 +12,9 @@ namespace DPW_maintenancerequest.Models
         [Display(Prompt = "Describe the issue")]
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
+        [Display(Prompt = "Describe the location")]
+        [DataType(DataType.MultilineText)]
+        public string LocationDescription { get; set; }
 
     }
 }

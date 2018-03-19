@@ -127,12 +127,13 @@ namespace DPW_maintenancerequest.Controllers
                 new AuthenticationHeaderValue("Basic", key);
             var json =
                 String.Format
-                ("{{ 'cgRequestsClass' : [ {{ 'BuildingNameField' : '{0}' , 'IssueField' : '{1}' , 'DescriptionField' : '{2}', 'SubmitterPhoneNumberField' : '{3}', 'SubmittedByField' : '{4}'  }} ] }}",
+                ("{{ 'cgRequestsClass' : [ {{ 'BuildingNameField' : '{0}' , 'IssueField' : '{1}' , 'DescriptionField' : '{2}', 'SubmitterPhoneNumberField' : '{3}', 'SubmittedByField' : '{4}', 'LocationDescriptionField' : '{5}'  }} ] }}",
                     model.Name, // 0
                     model.Issue, // 1
                     model.Description, // 2
                     model.Phone, // 3
-                    submittedby); // 4
+                    submittedby, // 4
+                    model.LocationDescription); // 5
             client.DefaultRequestHeaders.Add("ContentLength", json.Length.ToString());
             try
             {
