@@ -36,9 +36,6 @@ html, body, .container, .row, #column, #AddresForm, #column {
   footer {
     display: none;
   }
-  .navbar-inverse {
-    border: 0px !important;
-  }
   .navbar-head { 
     float: left;
     height: 50px;

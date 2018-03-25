@@ -10,3 +10,11 @@ $(document).ready(function () {
         });
     }
 });
+
+function initMap() {
+    var map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: 40.450714, lng: -79.985514},
+        zoom: 12,
+        disableDefaultUI: true
+      });
+}

@@ -3,12 +3,9 @@
     Layout = "~/Views/Shared/_MapLayout.cshtml";
 }
 <link rel="stylesheet" href="~/css/home.css">
-<div>Test</div>
 <div class="row">
   <div class="col-md-12" id="column">
-    <div id="map">
-        <iframe id="iframe" src="https://pittsburghpa.shinyapps.io/DPW-facilities/"></iframe>
-    </div>
+    <div id="map"></div>
   </div>
 </div>
 
@@ -26,4 +23,7 @@
 </div>
 
 <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="~/js/jqueryUI.js"></script>
 <script type="text/javascript" src="~/js/home.js"></script>
+<script src=@ViewData["apistring"] async defer ></script>
+
