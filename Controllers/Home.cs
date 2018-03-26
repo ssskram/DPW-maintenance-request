@@ -53,7 +53,7 @@ namespace DPW_maintenancerequest.Controllers
             ViewBag.Issues = it;
 
             // lists to populate with facilities & shapes
-            List<Facility> Faciltiies = new List<Facility>();
+            List<Facility> Facilities = new List<Facility>();
             string Shapes = "";
 
             // handle faciltiies
@@ -71,13 +71,13 @@ namespace DPW_maintenancerequest.Controllers
                 
                 Facility fty = new Facility()
                 {
-                    OID = item.OID,
+                    OID = item.Oid,
                     FacilityName = item.IDField,
                     Address = item.StreetField,
                     Neighborhood = item.NeighborhoodField,
                     ImagePath = link.ToString()
                 };
-                Faciltiies.Add(fty);
+                Facilities.Add(fty);
                 Shapes += formattedshape;
             }
             // pass array of shapes to viewbag
@@ -93,7 +93,7 @@ namespace DPW_maintenancerequest.Controllers
                     googleapikey); // 0
 
             // pass facility data as model to view
-            return View(Faciltiies);
+            return View(Facilities);
         }
 
         // submit method

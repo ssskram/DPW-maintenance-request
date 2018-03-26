@@ -1,6 +1,15 @@
 // this file contains client side functions for the home page
 
 // add datatable
+var table = $("#dt").DataTable({
+
+    searching: false,
+    paging: false,
+    ordering: false,
+    order: [[ 1, "desc" ]],
+    bLengthChange: false,
+});
+new $.fn.dataTable.Responsive( table, {} );
 
 // submission confirmation
 $(document).ready(function () {
@@ -17,9 +26,14 @@ $(document).ready(function () {
 var map, infoWindow;
 function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 40.450714, lng: -79.985514},
+        center: {lat: 40.444935, lng: -80.056070},
         zoom: 12,
+        mapTypeControl: false,
+        disableDefaultUI: true
       });
+
+    var card = document.getElementById('tablecontainer');
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(card);
 
     var arr = new Array();
     var shapes = $('#shapes').text()
@@ -44,5 +58,7 @@ function initMap() {
           });
           shape.setMap(map);
     });
-    
+
 }
+
+$( "#tablecontainer" ).draggable();

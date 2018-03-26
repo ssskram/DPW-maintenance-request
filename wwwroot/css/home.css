@@ -55,3 +55,42 @@ html, body, .container, .row, #column, #AddresForm, #column {
 .ui-dialog-title { 
   font-style: italic;
 }
+.form-card { 
+  text-align: center;
+  background-color: white;
+  border-radius: 10px;
+  margin-left: 75px;
+  margin-bottom: 150px;
+  width: 400px;
+  box-shadow: 2px 1px 5px 1px rgba(0,0,0,0.4);
+  overflow: visible;
+}
+.tablecontainer {
+  width: 25%;
+  height: 95%;
+  background-color: white;
+  opacity: 0.9;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 15px;
+  box-shadow: 2px 1px 5px 1px rgba(0,0,0,0.4);
+  overflow: auto;
+}
+.searchbar {
+  width: 100%;
+}
+::-webkit-scrollbar {
+  width: 15px;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #888; 
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}

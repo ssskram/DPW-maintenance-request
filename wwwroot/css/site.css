@@ -216,10 +216,6 @@ button.bs-placeholder[role='button']>span {
 }
 
 /* google map elements */
-.addresscontainer {
-    width: 100%;
-    max-width: 450px;
-}
 .pac-container:after{
     content:none !important;
 }
