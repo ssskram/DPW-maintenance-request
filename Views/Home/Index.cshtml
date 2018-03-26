@@ -2,8 +2,9 @@
     ViewData["Title"] = "Home";
     Layout = "~/Views/Shared/_MapLayout.cshtml";
 }
-
 <link rel="stylesheet" href="~/css/home.css">
+<div id="shapes" hidden>@ViewBag.Shapes</div>
+
 <div class="row">
   <div class="col-md-12" id="column">
     <div id="map"></div>

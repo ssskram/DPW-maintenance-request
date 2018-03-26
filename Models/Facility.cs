@@ -13,5 +13,7 @@ namespace DPW_maintenancerequest.Models
         public string Lat { get; set; }
         public string Long { get; set; }
         public string OID { get; set; }
+        public string Neighborhood { get; set; }
+        public string ImagePath { get; set; }
     }
 }
