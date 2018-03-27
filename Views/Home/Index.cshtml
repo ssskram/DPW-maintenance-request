@@ -16,7 +16,7 @@
 <!-- table of facilities, div pushed to bottom of map -->
 <div class="row col-md-12">
   <div class="headercontainer text-center hidden-sm hidden-xs hidden-md" id="headercontainer">
-    <h3 style="color:#fffaee;">Select a facility from the map, <br/> or search the table</h3>
+    <h3 style="color:#fffaee; cursor: default;" id="helper"> Select a facility from the map, <br/> or search the table</h3>
   </div>
   <div class="tablecontainer" id="tablecontainer">
     <input id="search" class="form-control searchbar" type="text" placeholder="Search...">
@@ -39,7 +39,7 @@
   </div>
     <!-- reset table and map -->
   <div class="backbutton text-center" id="back" hidden>
-      <input style="width: 100%; border-radius: 2px;" type="button" value="Clear selection" class="btn btn-default" onclick=""/>
+      <input style="width: 100%; border-radius: 2px;" type="button" value="Start over" class="btn btn-default" onclick=""/>
   </div>
 </div>
 

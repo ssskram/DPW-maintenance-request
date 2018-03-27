@@ -16,39 +16,10 @@ $("#search").keyup(function(){
 
 $( "#form" ).draggable();
 
+var helper = document.getElementById('helper');
 var map;
 var infoWindows = [];
 function initMap() {
-
-    var clickpolygon = function() {
-        var center = $(this).parent().parent().find( "#centerrelay" ).text();
-        center = center.replace(/[{()}]/g, '');
-        alert(center);
-        var commaPos = center.indexOf(',');
-        var coordinatesLat = parseFloat(center.substring(0, commaPos));
-        var coordinatesLong = parseFloat(center.substring(commaPos + 1, center.length));
-        var centerPoint = new google.maps.LatLng(coordinatesLat, coordinatesLong)
-        map.setCenter(centerPoint); 
-        map.setZoom(16);
-        href_formatted = '<a><span style="font-size: 16px;" onclick="openfromInfowindow()">Report an issue</span></a>'
-        facilityname = $ ( "td" ).eq(1).find( "#name" ).text();
-        neighborhood = $ ( "td" ).eq(2).find( "#neighborhood" ).text();
-        image = $ ( "td" ).eq(2).find( "#link" ).text();
-        var content = "<div class='text-center'><img style='width:300px; border-radius: 10px 10px 10px 10px;' src=" + image + "><br/><br/><b>" + facilityname + "</b> <br/>" + neighborhood + "<br/>" + href_formatted + "</div>";
-        var infoWindow = new google.maps.InfoWindow({
-            content: content,
-            center: centerPoint,
-            position: centerPoint
-        });
-        infoWindows.push(infoWindow); 
-        infoWindow.open(map);
-        $('#formname').val( facilityname );
-        $("#back").show();
-    }
-    Array.from(tablebuttons).forEach(function(element) {
-        element.addEventListener('click', clickpolygon);
-    });
-
     var map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 40.445982, lng: -79.997847},
         zoom: 13,
@@ -56,7 +27,7 @@ function initMap() {
         mapTypeControl: false
       });
 
-    // reset map
+    // reset app
     $('#back').on('click', function () {
         map.setCenter({lat: 40.445982, lng: -79.997847}); 
         map.setZoom(13);
@@ -64,8 +35,13 @@ function initMap() {
         for (var i=0;i<infoWindows.length;i++) {
             infoWindows[i].close();
         }
+        $('#search').val(null);
+        $('#search').keyup();
+        table.search("").draw();
         $("#back").hide();
         $("#form").hide();
+        table.rows('.parent').nodes().to$().find('td:first-child').trigger('click');
+        helper.innerHTML = "Select a facility from the map, <br/> or search the table"
     });
 
     var card = document.getElementById('tablecontainer');
@@ -87,11 +63,11 @@ function initMap() {
         });
         var shape = new google.maps.Polygon({
             paths: arr,
-            strokeColor: '#FF0000',
-            strokeOpacity: .7,
+            strokeColor: 'rgb(0, 51, 255)',
+            strokeOpacity: .6,
             strokeWeight: 4,
-            fillColor: '#FF0000',
-            fillOpacity: 0.35
+            fillColor: 'rgb(0, 51, 255)',
+            fillOpacity: 0.2
           });
         shape.setMap(map);
 
@@ -114,14 +90,18 @@ function initMap() {
             }
           });
 
+        // polygon click events
         shape.addListener('click', function() {
+            $('#search').val(null);
+            $('#search').keyup();
+            table.search("").draw();
             for (var i=0;i<infoWindows.length;i++) {
                 infoWindows[i].close();
             }
             map.setCenter(bounds.getCenter()); 
             map.setZoom(16);
             table.columns( 1 ).search( oid ).draw();
-            href_formatted = '<a><span style="font-size: 16px;" onclick="openfromInfowindow()">Report an issue</span></a>'
+            href_formatted = '<a><span style="font-size: 22px;" onclick="openfromInfowindow()">Report an issue</span></a>'
             facilityname = $ ( "td" ).eq(1).find( "#name" ).text();
             neighborhood = $ ( "td" ).eq(2).find( "#neighborhood" ).text();
             image = $ ( "td" ).eq(2).find( "#link" ).text();
@@ -133,10 +113,42 @@ function initMap() {
             });
             infoWindows.push(infoWindow); 
             infoWindow.open(map);
+            helper.innerHTML = "This the one?<br/><a onclick='openfromInfowindow()'><font style='color:white;'>Report the issue</font></a>"
             $('#formname').val( facilityname );
             $("#back").show();
           });
     });
+
+    // table item click events
+    var clickpolygon = function() {
+        var center = $(this).parent().parent().find( "#centerrelay" ).text();
+        center = center.replace(/[{()}]/g, '');
+        var commaPos = center.indexOf(',');
+        var coordinatesLat = parseFloat(center.substring(0, commaPos));
+        var coordinatesLong = parseFloat(center.substring(commaPos + 1, center.length));
+        var centerPoint = new google.maps.LatLng(coordinatesLat, coordinatesLong)
+        map.setCenter(centerPoint); 
+        map.setZoom(16);
+        href_formatted = '<a><span style="font-size: 22px;" onclick="openfromInfowindow()">Report an issue</span></a>'
+        facilityname = $ ( "td" ).eq(1).find( "#name" ).text();
+        neighborhood = $ ( "td" ).eq(2).find( "#neighborhood" ).text();
+        image = $ ( "td" ).eq(2).find( "#link" ).text();
+        var content = "<div class='text-center'><img style='width:300px; border-radius: 10px 10px 10px 10px;' src=" + image + "><br/><br/><b>" + facilityname + "</b> <br/>" + neighborhood + "<br/>" + href_formatted + "</div>";
+        var infoWindow = new google.maps.InfoWindow({
+            content: content,
+            center: centerPoint,
+            position: centerPoint
+        });
+        infoWindows.push(infoWindow); 
+        infoWindow.open(map);
+        helper.innerHTML = "This the one?<br/><a onclick='openfromInfowindow()'><font style='color:white;'>Report the issue</font></a>"
+        $('#formname').val( facilityname );
+        $("#back").show();
+    }
+    Array.from(tablebuttons).forEach(function(element) {
+        element.addEventListener('click', clickpolygon);
+    });
+
     var bck = document.getElementById('back');
     map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(bck);
     var header = document.getElementById('headercontainer');
@@ -158,6 +170,7 @@ Array.from(tablebuttons).forEach(function(element) {
 });
 
 function openfromInfowindow() {
+    helper.innerHTML = "Describe the issue,<br/> and submit your request"
     $("#form").show();
 }
 
