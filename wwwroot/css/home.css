@@ -93,6 +93,7 @@ html, body, .container, .row, #column, #AddresForm, #column {
   position: absolute;
   z-index: 1030;
   margin: 15px;
+  margin-bottom: 20px;
 }
 .searchbar {
   width: 100%;

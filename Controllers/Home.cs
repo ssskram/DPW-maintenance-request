@@ -60,29 +60,32 @@ namespace DPW_maintenancerequest.Controllers
             dynamic facilities = JObject.Parse(facilitydata)["cgFacilitiesClass"];
             foreach (var item in facilities)
             {
-                string shape = item.CgShape.Points.ToString();
-                string oid = item.Oid;
-                string oidformatted = "{\"oid\":" + oid + "},";
-                string join = shape.Insert(1, oidformatted); 
-                string formattedshape = join + ",";
-
-                // generate image url from data center
-                var encodedName = item.IDField.ToString().Replace(" ", "_");
-                var link =
-                    String.Format
-                    ("https://tools.wprdc.org/images/pittsburgh/facilities/{0}.jpg",
-                        encodedName); // 0
-                
-                Facility fty = new Facility()
+                if (item.InactiveField == "False")
                 {
-                    OID = item.Oid,
-                    FacilityName = item.IDField,
-                    Address = item.StreetField,
-                    Neighborhood = item.NeighborhoodField,
-                    ImagePath = link.ToString()
-                };
-                Facilities.Add(fty);
-                Shapes += formattedshape;
+                    string shape = item.CgShape.Points.ToString();
+                    string oid = item.Oid;
+                    string oidformatted = "{\"oid\":" + oid + "},";
+                    string join = shape.Insert(1, oidformatted); 
+                    string formattedshape = join + ",";
+
+                    // generate image url from data center
+                    var encodedName = item.IDField.ToString().Replace(" ", "_");
+                    var link =
+                        String.Format
+                        ("https://tools.wprdc.org/images/pittsburgh/facilities/{0}.jpg",
+                            encodedName); // 0
+                    
+                    Facility fty = new Facility()
+                    {
+                        OID = item.Oid,
+                        FacilityName = item.IDField,
+                        Address = item.StreetField,
+                        Neighborhood = item.NeighborhoodField,
+                        ImagePath = link.ToString()
+                    };
+                    Facilities.Add(fty);
+                    Shapes += formattedshape;
+                }
             }
             // pass array of shapes to viewbag
             Shapes = Shapes.TrimEnd(',');
