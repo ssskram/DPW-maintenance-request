@@ -61,7 +61,11 @@ namespace DPW_maintenancerequest.Controllers
             foreach (var item in facilities)
             {
                 string shape = item.CgShape.Points.ToString();
-                string formattedshape = shape + ",";
+                string oid = item.Oid;
+                string oidformatted = "{\"oid\":" + oid + "},";
+                string join = shape.Insert(1, oidformatted); 
+                string formattedshape = join + ",";
+
                 // generate image url from data center
                 var encodedName = item.IDField.ToString().Replace(" ", "_");
                 var link =
