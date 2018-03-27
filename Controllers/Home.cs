@@ -101,7 +101,38 @@ namespace DPW_maintenancerequest.Controllers
         }
 
         // submit method
-
+        public async Task Submit(Facility model)
+        {
+            var key = Environment.GetEnvironmentVariable("CartegraphAPIkey");
+            var submittedby = _userManager.GetUserName(HttpContext.User);
+            var cartegraphUrl = "https://cgweb06.cartegraphoms.com/PittsburghPA/api/v1/Classes/cgRequestsClass";
+            client.DefaultRequestHeaders.Clear();
+            client.DefaultRequestHeaders.Add("X-HTTP-Method", "POST");
+            client.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Basic", key);
+            var json =
+                String.Format
+                ("{{ 'cgRequestsClass' : [ {{ 'BuildingNameField' : '{0}' , 'IssueField' : '{1}' , 'DescriptionField' : '{2}', 'SubmitterPhoneNumberField' : '{3}', 'SubmittedByField' : '{4}', 'LocationDescriptionField' : '{5}'  }} ] }}",
+                    model.Name, // 0
+                    model.Issue, // 1
+                    model.Description, // 2
+                    model.Phone, // 3
+                    submittedby, // 4
+                    model.LocationDescription); // 5
+            client.DefaultRequestHeaders.Add("ContentLength", json.Length.ToString());
+            try
+            {
+                StringContent strContent = new StringContent(json);
+                strContent.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json;odata=verbose");
+                HttpResponseMessage response = client.PostAsync(cartegraphUrl, strContent).Result;
+                response.EnsureSuccessStatusCode();
+                var content = await response.Content.ReadAsStringAsync();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
+        }
 
         // API calls
 

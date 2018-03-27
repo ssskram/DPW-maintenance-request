@@ -16,7 +16,7 @@
 <!-- table of facilities, div pushed to bottom of map -->
 <div class="row col-md-12">
   <div class="headercontainer text-center hidden-sm hidden-xs hidden-md" id="headercontainer">
-    <h3 style="color:#fffaee;">Select a facility from the map, <br/> or select a facility from the table</h3>
+    <h3 style="color:#fffaee;">Select a facility from the map, <br/> or search the table</h3>
   </div>
   <div class="tablecontainer" id="tablecontainer">
     <input id="search" class="form-control searchbar" type="text" placeholder="Search...">
@@ -37,24 +37,52 @@
         </tbody>
     </table>
   </div>
+    <!-- reset table and map -->
+  <div class="backbutton text-center" id="back" hidden>
+      <input style="width: 100%; border-radius: 2px;" type="button" value="Clear selection" class="btn btn-default" onclick=""/>
+  </div>
 </div>
 
 <!-- user's submitted items, dialog -->
 
-<!-- work order form, dialog -->
-
-<!-- submission confirmation elements, dialog -->
-<div id="status" hidden>@ViewBag.Trigger</div>
-<div id="dialog" title="Success!" style="text-align: center; margin-top: 10px;">
-  <div class="row">
-    <div class="col-md-4">
-      <img src="~/images/dpw_icon.jpg" class="img-responsive center-block" style="opacity: 0.8;"/>       
+<!-- work order form -->
+<div id="form" class="form-card" hidden>
+    <form id="formdata" method="post" class="form">
+    <input name="Name" id="formname" required hidden>
+    <div class="row" style="overflow:visible">
+        <div class="col-md-12" id="requestcard">
+            <h3>Report an issue</h3>
+            <div class="form-group" style="margin-bottom: 5px;">
+                <div class="col-md-12">
+                    <select name="Issue" data-style="btn-info" class="selectpicker form-control" title="Select issue type" required="true" data-dropup-auto="false">
+                        @foreach(var Issue in ViewBag.Issues)
+                        {
+                        <option>@Issue.Name</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <textarea name="Description" class="form-control" placeholder="Describe the issue" onkeyup="textAreaAdjust(this)"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <textarea name="LocationDescription" class="form-control" placeholder="Identify the location (floor, room, etc.)"onkeyup="textAreaAdjust(this)"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <input mame="Phone" class="form-control" placeholder="Enter your phone number">
+                </div>
+            </div>
+            <div class="col-md-12" style="margin-top: 10px;">
+                <input style="margin: 10px 0; width: 100%; font-weight: bold; border-radius: 5px;" onclick="submititem()" value="Submit" class="btn btn-default overlaytrigger"/>
+            </div>
+        </div>
     </div>
-    <div class="col-md-8">
-      <div class="row">Your issue was submitted successfully,</div>
-      <div class="row"><strong>Thanks for your time</strong></div>
-    </div>
-  </div>
+    </form>
 </div>
 
 <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>

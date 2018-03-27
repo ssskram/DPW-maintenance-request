@@ -1,10 +1,11 @@
 @model Facility
 <tr>
     <td>
-    <a href="#" style="font-size: 12px;">Report Issue</a>
+    <div class="tablebutton"><a class="btn btn-link" style="font-size: 12px; width:100%;">Select</a></div>
     </td>
     <td>
     <div id="oid" hidden>@Model.OID</div>
+    <div id="centerrelay" class="centerrelay" hidden>@Model.OID</div>
     <div id="name">@Model.FacilityName</div>
     </td>
     <td>

@@ -75,6 +75,7 @@ html, body, .container, .row, #column, #AddresForm, #column {
   margin: 15px;
   box-shadow: 2px 1px 5px 1px rgba(0,0,0,0.4);
   overflow: auto;
+  position: relative;
 }
 .headercontainer {
   background-color: rgba(56, 56, 56, 0.85);
@@ -86,7 +87,12 @@ html, body, .container, .row, #column, #AddresForm, #column {
   margin: 15px;
   box-shadow: 2px 1px 5px 1px rgba(0,0,0,0.4);
   overflow: auto;
-  
+}
+.backbutton {
+  width: 24%;
+  position: absolute;
+  z-index: 1030;
+  margin: 15px;
 }
 .searchbar {
   width: 100%;
@@ -105,4 +111,25 @@ html, body, .container, .row, #column, #AddresForm, #column {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #555; 
+}
+.form-card { 
+  text-align: center;
+  background-color: white;
+  border-radius: 10px;
+  margin-right: 50px;
+  width: 400px;
+  box-shadow: 2px 1px 5px 1px rgba(0,0,0,0.4);
+  overflow: visible;
+}
+.form { 
+overflow: visible;
+}
+.dropdown-menu open {
+  overflow: visible; 
+}
+.dropdown-menu inner { 
+  overflow: visible; 
+}
+.dropdown-menu { 
+overflow: visible; 
 }
