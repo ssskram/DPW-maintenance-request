@@ -186,7 +186,7 @@ namespace DPW_maintenancerequest.Controllers
             var submittedby = _userManager.GetUserName(HttpContext.User);
             var apiKey = Environment.GetEnvironmentVariable("sendgrid");
             var client = new SendGridClient(apiKey);
-            var from = new EmailAddress("DPW@pittsburghpa.gov", "Department of Public Works");
+            var from = new EmailAddress(submittedby, "Department of Public Works");
             var subject = "Your maintenance request has been received";
             var to = new EmailAddress(submittedby, "Client");
             var plainTextContent = 

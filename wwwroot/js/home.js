@@ -208,7 +208,7 @@ function openfromInfowindow() {
 }
 
 function submititem() {
-    helper.innerHTML = "Sending your request to <br/> someone who can <strong>help</strong>"
+    helper.innerHTML = "Sending your request to <br/> someone who can help"
     var data = $('#formdata').serialize();
     var cleandata = data.replace(/\'/g, '');
     $.ajax(
