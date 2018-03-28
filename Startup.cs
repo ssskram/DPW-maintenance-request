@@ -20,6 +20,7 @@ namespace DPW_maintenancerequest
         string _MSClientSecret = null;
         string _CartegraphAPIkey = null;
         string _googleapikey = null;
+        string _sendgrid = null;
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -50,6 +51,7 @@ namespace DPW_maintenancerequest
             _MSClientSecret = Configuration["MSClientSecret"];
             _CartegraphAPIkey = Configuration["CartegraphAPIkey"];
             _googleapikey = Configuration["googleapikey"];
+            _sendgrid = Configuration["sendgrid"];
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseInMemoryDatabase(Guid.NewGuid().ToString()));
@@ -67,6 +69,7 @@ namespace DPW_maintenancerequest
             // add application services
             Environment.SetEnvironmentVariable("CartegraphAPIkey", Configuration["CartegraphAPIkey"]);
             Environment.SetEnvironmentVariable("googleapikey", Configuration["googleapikey"]);
+            Environment.SetEnvironmentVariable("sendgrid", Configuration["sendgrid"]);
 
             services.AddMvc()
                 .AddSessionStateTempDataProvider();
