@@ -44,16 +44,25 @@ html, body, .container, .row, #column, #AddresForm, #column {
     line-height: 20px;
   }
 /* jquery ui dialog box */
+.ui-dialog {
+  z-index: 1500!important;
+  position:absolute !important;
+  border-radius: 10px;
+}
 .ui-widget-header {
   background: #fffaee;
   color: #383838;
+  padding: 5px;
+  border-radius: 8px 8px 0 0;
 }
 .ui-widget-content { 
   color: #383838;
-  font-size: 20px;
+  font-size: 14px;
 }
-.ui-dialog-title { 
-  font-style: italic;
+.ui-dialog-title {
+  font-weight: 100;
+  font-size: 18px;
+  letter-spacing: 2px;
 }
 .form-card { 
   text-align: center;

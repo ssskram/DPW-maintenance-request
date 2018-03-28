@@ -27,36 +27,78 @@ namespace DPW_maintenancerequest.Controllers
         HttpClient client = new HttpClient();
         public async Task<IActionResult> Index()
         {
-            // get facilties
-            await GetFacilities();
-            var facilitydata = GetFacilities().Result;
+            var user = _userManager.GetUserName(HttpContext.User);
 
             // get issue types
             await GetIssueTypes();
             var issuetypes = GetIssueTypes().Result;
+
+            // get requests
+            await GetRequests();
+            var requests = GetRequests().Result;
+
+            // get facilties
+            await GetFacilities();
+            var facilitydata = GetFacilities().Result;
 
             // handle issue types
             dynamic issues = JObject.Parse(issuetypes)["cgRequestIssuesClass"];
             List<IssueTypes> it = new List<IssueTypes>();
             foreach (var item in issues)
             {
-                IssueTypes issue = new IssueTypes() 
+                if (item.AppliesTocgFacilitiesField == true)
                 {
-                    Type = item.AppliesTocgFacilitiesField,
-                    Name = item.IssueField
-                };
-                if (issue.Type == true)
-                {
+                    IssueTypes issue = new IssueTypes() 
+                    {
+                        Name = item.IssueField
+                    };
                     it.Add(issue); 
-                } 
+                }
             }
             ViewBag.Issues = it;
 
+            // handle requests
+            dynamic requestitems = JObject.Parse(requests)["cgRequestsClass"];
+            List<Requests> ri = new List<Requests>();
+            int counter = 0;
+            var dateformat = "MM/dd/yyyy";
+            var datetimeformat = "MM/dd/yyyy HH:mm";
+            foreach (var item in requestitems)
+            {
+                string status = "";
+                if (item.SubmittedByField == user)
+                {
+                    if (item.CompletedField == 0)
+                    {
+                        status += "Open";
+                    }
+                    else
+                    {
+                        status += "Closed";
+                    }
+                    counter++;
+                    Requests req = new Requests()
+                    {
+                        FacilityName = item.BuildingNameField,
+                        Issue = item.IssueField,
+                        Completed = status,
+                        PercentComplete = item.ProgressField.Amount,
+                        LastActivity = item.cgLastModifiedField.ToString(dateformat),
+                        Submitted = item.EntryDateField.ToString(datetimeformat),
+                        Description = item.DescriptionField,
+                        LocationDescription = item.LocationDescriptionField
+                    };
+                    ri.Add(req);
+                }
+            }
+            ViewBag.Items = counter;
+            ViewBag.Requests = ri;
+
+            // handle faciltiies
             // lists to populate with facilities & shapes
             List<Facility> Facilities = new List<Facility>();
             string Shapes = "";
 
-            // handle faciltiies
             dynamic facilities = JObject.Parse(facilitydata)["cgFacilitiesClass"];
             foreach (var item in facilities)
             {
@@ -154,6 +196,17 @@ namespace DPW_maintenancerequest.Controllers
         {
             var key = Environment.GetEnvironmentVariable("CartegraphAPIkey");
             var cartegraphUrl = "https://cgweb06.cartegraphoms.com/PittsburghPA/api/v1/Classes/cgRequestIssuesClass";
+            client.DefaultRequestHeaders.Clear();
+            client.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Basic", key);
+            string content = await client.GetStringAsync(cartegraphUrl);
+            return content;
+        }
+
+        public async Task<string> GetRequests()
+        {
+            var key = Environment.GetEnvironmentVariable("CartegraphAPIkey");
+            var cartegraphUrl = "https://cgweb06.cartegraphoms.com/PittsburghPA/api/v1/Classes/cgRequestsClass";
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Authorization =
                 new AuthenticationHeaderValue("Basic", key);

@@ -1,6 +1,34 @@
 // this file contains client side functions for the home page
 
-// add datatable
+
+var helper = document.getElementById('helper');
+var map;
+var infoWindows = [];
+
+// user's items
+var items = $('#items').text();
+if ( items >= 0 )
+{
+    helper.innerHTML = "Your requests"
+    var aWidth = $(window).width(); 
+    var Width = aWidth * 0.7;
+    $( "#dialog" ).dialog({
+        width: Width,
+        height: 400,
+        modal: true,
+        close: function () {
+            helper.innerHTML = "Select a facility from the map, <br/> or search the table"
+        }
+    });
+}
+
+$("#search").keyup(function(){
+    table.search( this.value ).draw();
+});
+
+$( "#form" ).draggable();
+
+// add datatables
 var table = $("#dt").DataTable({
     searching: true,
     paging: false,
@@ -9,16 +37,21 @@ var table = $("#dt").DataTable({
     bLengthChange: false,
 });
 new $.fn.dataTable.Responsive( table, {} );
-
-$("#search").keyup(function(){
-    table.search( this.value ).draw();
+$.fn.dataTable.moment( 'MM/DD/YYYY HH:mm');
+var othertable = $("#dtui").DataTable({
+    pageLength : 5,
+    searching: true,
+    paging: true,
+    ordering: true,
+    order: [[ 0, "desc" ]],
+    bLengthChange: false,
+    columnDefs: [
+        { orderable: false, targets: 2 },
+        { orderable: false, targets: 3 }
+    ]
 });
+new $.fn.dataTable.Responsive( othertable, {} );
 
-$( "#form" ).draggable();
-
-var helper = document.getElementById('helper');
-var map;
-var infoWindows = [];
 function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 40.445982, lng: -79.997847},
@@ -175,6 +208,7 @@ function openfromInfowindow() {
 }
 
 function submititem() {
+    helper.innerHTML = "Sending your request to <br/> someone who can <strong>help</strong>"
     var data = $('#formdata').serialize();
     var cleandata = data.replace(/\'/g, '');
     $.ajax(
