@@ -143,3 +143,7 @@ overflow: visible;
 .dropdown-menu { 
 overflow: visible; 
 }
+.ui-dialog-titlebar-close { 
+  width: 25px !important; 
+  height: 25px !important; 
+}

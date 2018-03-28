@@ -187,7 +187,7 @@ function initMap() {
     var header = document.getElementById('headercontainer');
     map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(header);
     var frm = document.getElementById('form');
-    map.controls[google.maps.ControlPosition.RIGHT_TOP].push(frm);
+    map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(frm);
 }
 
 // handling table buttons
