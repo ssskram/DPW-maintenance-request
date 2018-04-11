@@ -238,3 +238,49 @@ function submititem() {
         );
     }
 }
+
+function throwcontacts () {
+    var type = $('#Issue').val();
+    prompt = document.getElementById('alternativeprompt');
+    if ( type == "Pest Control" || type == "Elevators")
+    {
+        prompt.innerHTML = "Please contact John Sibbet at <br><b>412-600-6106</b>"
+        $('#alternativeprompt').show();
+        $('#formfields').hide();
+    }
+    else if ( type == "Tree Issues")
+    {
+        prompt.innerHTML = "Please contact DPW Forestry at <br><b>412-665-3625</b>"
+        $('#alternativeprompt').show();
+        $('#formfields').hide();
+    }
+    else if ( type == "Masonry/Concrete Work")
+    {
+        prompt.innerHTML = "Please contact DPW Construction at <br><b>412-782-7631</b>"
+        $('#alternativeprompt').show();
+        $('#formfields').hide();
+    }
+    else if ( type == "Landscape Maintenance (Snow or Leaves)")
+    {
+        prompt.innerHTML = "Please contact the DPW Parks division that services your area:<br><b><a href='http://pittsburghpa.gov/dpw/park-maintenance/index.html'>Maintenance Regions</a></b>"
+        $('#alternativeprompt').show();
+        $('#formfields').hide();
+    }
+    else if ( type == "Door Name Lettering")
+    {
+        prompt.innerHTML = "Please contact DOMI Sign Shop at <br><b>412-255-2872</b>"
+        $('#alternativeprompt').show();
+        $('#formfields').hide();
+    }
+    else if ( type == "Office Renovation")
+    {
+        prompt.innerHTML = "Please contact Chris Hornstein at <br><b>412-255-2498</b> or at<br>chirs.hornstein@pittsburghpa.gov"
+        $('#alternativeprompt').show();
+        $('#formfields').hide();
+    }
+    else
+    {
+        $('#alternativeprompt').hide();
+        $('#formfields').show();
+    }
+}

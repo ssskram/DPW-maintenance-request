@@ -88,6 +88,7 @@
         }
         </tbody>
     </table>
+    <h5 style="text-align:center; font-style: italic;"><b>Notice:</b> The hours of operation for DPW are 7:00 AM to 3:00 PM, Monday through Friday</h5>
 </div>  
 
 <!-- work order form -->
@@ -99,7 +100,7 @@
             <h3>Report an issue</h3>
             <div class="form-group" style="margin-bottom: 5px;">
                 <div class="col-md-12">
-                    <select id="Issue" name="Issue" data-style="btn-info" class="selectpicker form-control" title="Select issue type" required="true" data-dropup-auto="false" required>
+                    <select id="Issue" name="Issue" data-style="btn-info" class="selectpicker form-control" title="Select issue type" required="true" data-dropup-auto="false" onchange="throwcontacts()" required>
                         @foreach(var Issue in ViewBag.Issues)
                         {
                         <option>@Issue.Name</option>
@@ -108,27 +109,30 @@
                     <label for="Issue" class="error" hidden></label>
                 </div>
             </div>
-            <div class="form-group">
-                <div class="col-md-12">
-                    <textarea name="Description" class="form-control" placeholder="Describe the issue" onkeyup="textAreaAdjust(this)" required></textarea>
-                    <label for="Description" class="error" hidden></label>
+            <div id="formfields">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <textarea name="Description" class="form-control" placeholder="Describe the issue" onkeyup="textAreaAdjust(this)" required></textarea>
+                        <label for="Description" class="error" hidden></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <textarea name="LocationDescription" class="form-control" placeholder="Identify the location (floor, room, etc.)"onkeyup="textAreaAdjust(this)" required></textarea>
+                        <label for="LocationDescription" class="error" hidden></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <input name="Phone" class="form-control" placeholder="Enter your phone number" required>
+                        <label for="Phone" class="error" hidden></label>
+                    </div>
+                </div>
+                <div class="col-md-12" style="margin-top: 10px;">
+                    <input style="margin: 10px 0; width: 100%; font-weight: bold; border-radius: 5px;" onclick="submititem()" value="Submit" class="btn btn-default"/>
                 </div>
             </div>
-            <div class="form-group">
-                <div class="col-md-12">
-                    <textarea name="LocationDescription" class="form-control" placeholder="Identify the location (floor, room, etc.)"onkeyup="textAreaAdjust(this)" required></textarea>
-                    <label for="LocationDescription" class="error" hidden></label>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-12">
-                    <input name="Phone" class="form-control" placeholder="Enter your phone number" required>
-                    <label for="Phone" class="error" hidden></label>
-                </div>
-            </div>
-            <div class="col-md-12" style="margin-top: 10px;">
-                <input style="margin: 10px 0; width: 100%; font-weight: bold; border-radius: 5px;" onclick="submititem()" value="Submit" class="btn btn-default"/>
-            </div>
+            <div id="alternativeprompt" class="alternativeprompt" hidden></div>
         </div>
     </div>
     </form>

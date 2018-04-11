@@ -108,7 +108,7 @@ html, body, .container, .row, #column, #AddresForm, #column {
   width: 100%;
 }
 ::-webkit-scrollbar {
-  width: 15px;
+  width: 5px;
   border-radius: 10px;
 }
 ::-webkit-scrollbar-track {
@@ -146,4 +146,9 @@ overflow: visible;
 .ui-dialog-titlebar-close { 
   width: 25px !important; 
   height: 25px !important; 
+}
+.alternativeprompt {
+  padding: 15px;
+  font-size: 20px;
+  text-align: center;
 }
