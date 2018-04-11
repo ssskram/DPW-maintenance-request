@@ -1,13 +1,12 @@
 // this file contains client side functions for the home page
 
-
 var helper = document.getElementById('helper');
 var map;
 var infoWindows = [];
 
 // user's items
 var items = $('#items').text();
-if ( items >= 0 )
+if ( items > 0 )
 {
     helper.innerHTML = "Your requests"
     var aWidth = $(window).width(); 
@@ -187,7 +186,7 @@ function initMap() {
     var header = document.getElementById('headercontainer');
     map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(header);
     var frm = document.getElementById('form');
-    map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(frm);
+    map.controls[google.maps.ControlPosition.RIGHT_TOP].push(frm);
 }
 
 // handling table buttons
