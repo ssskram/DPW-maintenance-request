@@ -48,7 +48,7 @@ namespace DPW_maintenancerequest.Controllers
             List<IssueTypes> it = new List<IssueTypes>();
             foreach (var item in issues)
             {
-                if (item.AppliesTocgFacilitiesField == true)
+                if (item.AppliesTocgFacilitiesField == true && item.InactiveField == false)
                 {
                     IssueTypes issue = new IssueTypes() 
                     {
@@ -84,7 +84,6 @@ namespace DPW_maintenancerequest.Controllers
                         FacilityName = item.BuildingNameField,
                         Issue = item.IssueField,
                         Completed = status,
-                        PercentComplete = item.ProgressField.Amount,
                         LastActivity = item.cgLastModifiedField.ToString(dateformat),
                         Submitted = item.EntryDateField.ToString(datetimeformat),
                         Description = item.DescriptionField,

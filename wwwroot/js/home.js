@@ -109,7 +109,7 @@ function initMap() {
             strokeColor: 'rgb(0, 51, 255)',
             strokeOpacity: .6,
             strokeWeight: 4,
-            fillColor: 'rgb(0, 51, 255)',
+            fillColor: 'rgb(44, 62, 80)',
             fillOpacity: 0.2
           });
         shape.setMap(map);

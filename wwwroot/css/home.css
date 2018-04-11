@@ -50,8 +50,8 @@ html, body, .container, .row, #column, #AddresForm, #column {
   border-radius: 10px;
 }
 .ui-widget-header {
-  background: #fffaee;
-  color: #383838;
+  background: rgb(44, 62, 80) !important; 
+  color: #fffaee;
   padding: 5px;
   border-radius: 8px 8px 0 0;
 }
@@ -103,21 +103,22 @@ html, body, .container, .row, #column, #AddresForm, #column {
   z-index: 1030;
   margin: 15px;
   margin-bottom: 20px;
+  text-align: center;
 }
 .searchbar {
   width: 100%;
 }
 ::-webkit-scrollbar {
-  width: 5px;
-  border-radius: 10px;
+  width: 10px;
+  border-radius: 20px;
 }
 ::-webkit-scrollbar-track {
   background: #f1f1f1; 
-  border-radius: 10px;
+  border-radius: 0px 20px 20px 0px;
 }
 ::-webkit-scrollbar-thumb {
-  background: #888; 
-  border-radius: 10px;
+  background: rgb(44, 62, 80); 
+  border-radius: 25px
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #555; 
@@ -145,7 +146,8 @@ overflow: visible;
 }
 .ui-dialog-titlebar-close { 
   width: 25px !important; 
-  height: 25px !important; 
+  height: 25px !important;
+  margin-top: -12px !important; 
 }
 .alternativeprompt {
   padding: 15px;

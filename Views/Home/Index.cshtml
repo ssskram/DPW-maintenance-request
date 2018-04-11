@@ -39,7 +39,7 @@
   </div>
     <!-- reset table and map -->
   <div class="backbutton text-center" id="back" hidden>
-      <input style="width: 100%; border-radius: 5px;" type="button" value="Start over" class="btn btn-default" onclick=""/>
+      <input style="width: 100%; border-radius: 20px;" type="button" value="Start over" class="btn btn-default" onclick=""/>
   </div>
 </div>
 
@@ -100,7 +100,7 @@
             <h3>Report an issue</h3>
             <div class="form-group" style="margin-bottom: 5px;">
                 <div class="col-md-12">
-                    <select id="Issue" name="Issue" data-style="btn-info" class="selectpicker form-control" title="Select issue type" required="true" data-dropup-auto="false" onchange="throwcontacts()" required>
+                    <select id="Issue" name="Issue" data-style="btn-info" class="selectpicker btn-form-control" title="Select issue type" required="true" data-dropup-auto="false" onchange="throwcontacts()" required>
                         @foreach(var Issue in ViewBag.Issues)
                         {
                         <option>@Issue.Name</option>
