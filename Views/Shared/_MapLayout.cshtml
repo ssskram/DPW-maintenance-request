@@ -6,7 +6,6 @@
 <head>
     <!-- jquery UI for confirmation box -->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - DPW Maintenance Requests</title>
@@ -43,10 +42,6 @@
     </nav>
     <div class="container body-content">
         @RenderBody() 
-        <footer>
-            <hr />
-            <p>&copy; 2018 - City of Pittsburgh</p>
-        </footer>
     </div>
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -74,7 +69,9 @@
     <script type="text/javascript" src="~/js/bootstrapselect.js"></script>
     <!-- jquery UI for confirmation box -->
     <script type="text/javascript" src="~/js/jqueryUI.js"></script>
-
+    <!-- jquery validation -->
+    <script type="text/javascript" src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    
     @RenderSection("Scripts", required: false)
 </body>
 </html>

@@ -13,7 +13,7 @@ if ( items > 0 )
     var Width = aWidth * 0.7;
     $( "#dialog" ).dialog({
         width: Width,
-        height: 400,
+        height: 'auto',
         modal: true,
         close: function () {
             helper.innerHTML = "Select a facility from the map, <br/> or search the table"
@@ -59,6 +59,17 @@ function initMap() {
         mapTypeControl: false
       });
 
+      // form validation
+    $("#formdata").validate({
+        messages: {
+            Issue: 'This field is required'
+        }
+    });
+    var validator = $( "#formdata" ).validate();
+    $( "#Issue" ).change(function() {
+        validator.element("#Issue");
+    });
+    
     // reset app
     $('#back').on('click', function () {
         map.setCenter({lat: 40.445982, lng: -79.997847}); 
@@ -207,20 +218,23 @@ function openfromInfowindow() {
 }
 
 function submititem() {
-    helper.innerHTML = "Sending your request to <br/> someone who can help"
-    var data = $('#formdata').serialize();
-    var cleandata = data.replace(/\'/g, '');
-    $.ajax(
-        {
-            url: "/Home/Submit",
-            type: 'POST',
-            data: cleandata,
-            success:function(result) {
-                location.reload(true);
-            },
-            error: function(result) {
-                alert("Failed to post.  Please try again.");
+    if ($("#formdata").valid()) {
+        document.getElementById('overlayloader').style.display = 'flex';
+        helper.innerHTML = "Sending your request to <br/> someone who can help"
+        var data = $('#formdata').serialize();
+        var cleandata = data.replace(/\'/g, '');
+        $.ajax(
+            {
+                url: "/Home/Submit",
+                type: 'POST',
+                data: cleandata,
+                success:function(result) {
+                    location.reload(true);
+                },
+                error: function(result) {
+                    alert("Failed to post.  Please try again.");
+                }
             }
-        }
-    );
+        );
+    }
 }
