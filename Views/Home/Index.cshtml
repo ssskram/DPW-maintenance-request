@@ -3,6 +3,8 @@
     Layout = "~/Views/Shared/_MapLayout.cshtml";
 }
 @model List<Facility>
+<script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+<!-- jquery validation -->
 <link rel="stylesheet" href="~/css/datatables.css">
 <link rel="stylesheet" href="~/css/home.css">
 <div id="shapes" hidden>@ViewBag.Shapes</div>
@@ -138,8 +140,6 @@
     </form>
 </div>
 
-<script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
-<!-- jquery validation -->
 <script type="text/javascript" src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
 <script type="text/javascript" src="~/js/datatables.js"></script>
 <script type="text/javascript" src="~/js/jqueryUI.js"></script>

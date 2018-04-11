@@ -110,10 +110,12 @@ button.bs-placeholder[role='button']>span {
 /* button styles */
 .btn-link {
     margin-left: 5px;
+    outline: none;
 }
 .btn-link:hover, .btn-link:focus, .btn-link:active {
     border: .5px solid #fffaee;
     background-color: transparent !important;
+    outline: none;
 }
 .btn-default:active, .btn-big:active, .btn-default:focus, .btn-big:focus, .btn-default:hover, .btn-big:hover {
     background-color: rgb(26, 36, 47) !important;
