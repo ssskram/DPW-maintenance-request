@@ -72,8 +72,6 @@ function initMap() {
     
     // reset app
     $('#back').on('click', function () {
-        map.setCenter({lat: 40.445982, lng: -79.997847}); 
-        map.setZoom(13);
         table.columns( 1 ).search("").draw();
         for (var i=0;i<infoWindows.length;i++) {
             infoWindows[i].close();
@@ -85,6 +83,8 @@ function initMap() {
         $("#form").hide();
         table.rows('.parent').nodes().to$().find('td:first-child').trigger('click');
         helper.innerHTML = "Select a facility from the map, <br/> or search the table"
+        map.setCenter({lat: 40.445982, lng: -79.997847}); 
+        map.setZoom(13);
     });
 
     var card = document.getElementById('tablecontainer');
