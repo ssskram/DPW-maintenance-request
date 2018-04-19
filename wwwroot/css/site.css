@@ -362,31 +362,31 @@ label.error {
     z-index: 1500!important;
     position:absolute !important;
     border-radius: 10px;
-  }
-  .ui-widget-header {
+}
+.ui-widget-header {
     background: transparent !important; 
     color: rgb(44, 62, 80);
     border: 0px;
-  }
-  .ui-widget-content { 
+}
+.ui-widget-content { 
     color: #383838;
     font-size: 14px;
-  }
-  .ui-dialog-title {
+}
+.ui-dialog-title {
     font-weight: 600;
     font-size: 20px;
     letter-spacing: 2px;
     margin-bottom: -20px !important;
     margin-left: 25px !important;
-  }
-  .ui-dialog-titlebar-close { 
+}
+.ui-dialog-titlebar-close { 
     width: 25px !important; 
     height: 25px !important;
     margin-top: 10px;
-    border: 0px !important;
     outline: none;
-    background-color: transparent !important;
-  }
+    background: none !important;
+    border: none !important;
+}
 
 .form-card { 
     text-align: center;

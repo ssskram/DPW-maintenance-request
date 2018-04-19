@@ -224,7 +224,7 @@ var back = function() {
     map.setZoom(13);
 };
 
-// instantiate popup
+// instantiate helper container
 function openfromInfowindow() {
     helper.innerHTML = "Describe the issue,<br/> and submit your request"
     $("#form").show();
