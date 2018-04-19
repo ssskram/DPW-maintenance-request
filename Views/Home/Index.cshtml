@@ -1,12 +1,7 @@
 ﻿@{
-    ViewData["Title"] = "Home";
-    Layout = "~/Views/Shared/_MapLayout.cshtml";
+    Layout = "~/Views/Shared/_NoMarginLayout.cshtml";
 }
 @model List<Facility>
-<script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
-<!-- jquery validation -->
-<link rel="stylesheet" href="~/css/datatables.css">
-<link rel="stylesheet" href="~/css/home.css">
 <div id="shapes" hidden>@ViewBag.Shapes</div>
 
 <div class="row">
@@ -15,34 +10,34 @@
   </div>
 </div>
 
-<!-- table of facilities, div pushed to bottom of map -->
+
 <div class="row col-md-12">
-  <div class="headercontainer text-center hidden-sm hidden-xs hidden-md" id="headercontainer">
-    <h3 style="color:#fffaee; cursor: default;" id="helper"> Select a facility from the map, <br/> or search the table</h3>
-  </div>
-  <div class="tablecontainer" id="tablecontainer">
-    <input id="search" class="form-control searchbar" type="text" placeholder="Search...">
-    <table id="dt" class="table table-striped dataTable" cellspacing="0">
-        <thead>
-        </tr>
-            <tr>
-                <th style="width:10% !important;" class="all"></th>
-                <th style="width:40% !important;"class="all">Facility</th>
-                <th style="width:20% !important;">Neighborhood</th>
+
+    <!-- helper container, div pushed to bottom -->
+    <div class="helpercontainer text-center hidden-sm hidden-xs hidden-md" id="helpercontainer">
+        <h3 style="color:#fffaee; cursor: default;" id="helper"> Select a facility from the map, <br/> or search the table</h3>
+    </div>
+
+    <!-- table of facilities, div pushed to left -->
+    <div class="tablecontainer" id="tablecontainer">
+        <input id="search" class="form-control searchbar" type="text" placeholder="Search...">
+        <table id="dt" class="table table-striped dataTable" cellspacing="0">
+            <thead>
             </tr>
-        </thead>
-        <tbody>
-        @foreach(Facility item in Model)
-        {
-          @Html.Partial("~/Views/Home/_Facility.cshtml", item)
-        }
-        </tbody>
-    </table>
-  </div>
-    <!-- reset table and map -->
-  <div class="backbutton text-center" id="back" hidden>
-      <input style="width: 100%; border-radius: 20px;" type="button" value="Start over" class="btn btn-default" onclick=""/>
-  </div>
+                <tr>
+                    <th style="width:10% !important;" class="all"></th>
+                    <th style="width:40% !important;"class="all">Facility</th>
+                    <th style="width:20% !important;">Neighborhood</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach(Facility item in Model)
+            {
+            @Html.Partial("~/Views/Home/_Facility.cshtml", item)
+            }
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <!-- user's submitted items, dialog -->
@@ -102,7 +97,8 @@
             <h3>Report an issue</h3>
             <div class="form-group" style="margin-bottom: 5px;">
                 <div class="col-md-12">
-                    <select id="Issue" name="Issue" data-style="btn-info" class="selectpicker btn-form-control" title="Select issue type" required="true" data-dropup-auto="false" onchange="throwcontacts()" required>
+                    <h5 class="form-h5">Select an issue type</h5>
+                    <select id="Issue" name="Issue" data-style="btn-info" class="selectpicker btn-form-control" title="Issue types" required="true" data-dropup-auto="false" onchange="throwcontacts()" required>
                         @foreach(var Issue in ViewBag.Issues)
                         {
                         <option>@Issue.Name</option>
@@ -114,24 +110,30 @@
             <div id="formfields">
                 <div class="form-group">
                     <div class="col-md-12">
-                        <textarea name="Description" class="form-control" placeholder="Describe the issue" onkeyup="textAreaAdjust(this)" required></textarea>
+                        <h5 class="form-h5">Describe the issue</h5>
+                        <textarea name="Description" class="form-control" placeholder="Description" onkeyup="textAreaAdjust(this)" required></textarea>
                         <label for="Description" class="error" hidden></label>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-12">
-                        <textarea name="LocationDescription" class="form-control" placeholder="Identify the location (floor, room, etc.)"onkeyup="textAreaAdjust(this)" required></textarea>
+                        <h5 class="form-h5">Describe the location</h5>
+                        <textarea name="LocationDescription" class="form-control" placeholder="Room, floor, etc."onkeyup="textAreaAdjust(this)" required></textarea>
                         <label for="LocationDescription" class="error" hidden></label>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-12">
-                        <input name="Phone" class="form-control" placeholder="Enter your phone number" required>
+                        <h5 class="form-h5">Enter your phone number</h5>
+                        <input name="Phone" class="form-control" placeholder="Phone number" required>
                         <label for="Phone" class="error" hidden></label>
                     </div>
                 </div>
                 <div class="col-md-12" style="margin-top: 10px;">
-                    <input style="margin: 10px 0; width: 100%; font-weight: bold; border-radius: 5px;" onclick="submititem()" value="Submit" class="btn btn-default"/>
+                    <input style="margin: 10px 0; width: 85%; font-weight: bold; border-radius: 5px;" onclick="submititem()" value="Submit" class="btn btn-default"/>
+                </div>
+                <div class="col-md-12">
+                    <input style="margin: 10px 0; width: 65%; border-radius: 5px;" type="button" value="Start over" onclick="back()" class="btn btn-default back"/>
                 </div>
             </div>
             <div id="alternativeprompt" class="alternativeprompt" hidden></div>
@@ -139,10 +141,4 @@
     </div>
     </form>
 </div>
-
-<script type="text/javascript" src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-<script type="text/javascript" src="~/js/datatables.js"></script>
-<script type="text/javascript" src="~/js/jqueryUI.js"></script>
-<script type="text/javascript" src="~/js/home.js"></script>
-<script src=@ViewData["apistring"] async defer ></script>
 

@@ -9,3 +9,4 @@
 /home/ssskram/applications/DPW_maintenancerequest/obj/Debug/netcoreapp2.0/DPW_maintenancerequest.AssemblyInfo.cs
 /home/ssskram/applications/DPW_maintenancerequest/obj/Debug/netcoreapp2.0/DPW_maintenancerequest.dll
 /home/ssskram/applications/DPW_maintenancerequest/obj/Debug/netcoreapp2.0/DPW_maintenancerequest.pdb
+/home/ssskram/applications/DPW_maintenancerequest/obj/Debug/netcoreapp2.0/DPW_maintenancerequest.csprojResolveAssemblyReference.cache
