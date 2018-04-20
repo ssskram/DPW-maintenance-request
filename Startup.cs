@@ -66,6 +66,13 @@ namespace DPW_maintenancerequest
                     microsoftOptions.ClientSecret = Configuration["MSClientSecret"];
                 });
 
+            services.AddDataProtection()
+                .SetApplicationName("SharedCookieApp");
+
+            services.ConfigureApplicationCookie(options => {
+                options.Cookie.Name = ".AspNet.SharedCookie";
+            });
+            
             // add application services
             Environment.SetEnvironmentVariable("CartegraphAPIkey", Configuration["CartegraphAPIkey"]);
             Environment.SetEnvironmentVariable("googleapikey", Configuration["googleapikey"]);
