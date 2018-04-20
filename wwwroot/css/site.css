@@ -144,6 +144,7 @@ button.bs-placeholder[role='button']>span {
     margin-left: 15px;
     text-align: left !important;
     font-size: 14px;
+    margin-bottom: 0px;
 }
 
 /* button styles */
@@ -356,7 +357,6 @@ label.error {
     position: relative;
 }
 
-
 /* jquery ui dialog box */
 .ui-dialog {
     z-index: 1500!important;
@@ -388,6 +388,7 @@ label.error {
     border: none !important;
 }
 
+/* app elements */
 .form-card { 
     text-align: center;
     background-color: white;
@@ -439,4 +440,19 @@ label.error {
     padding: 15px;
     font-size: 20px;
     text-align: center;
+}
+/* responsive app elements */
+@media (max-width: 800px) {
+    .tablecontainer {
+        width: 90%;
+        height: 40%;
+        z-index: 0 !important;
+    }
+    .gm-style .gm-style-iw {
+        z-index: 900 !important;
+    }
+    .form-card {
+        width: 95%;
+        margin: 10px;
+    }
 }
