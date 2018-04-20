@@ -53,16 +53,23 @@ h1, h2, h3, h4, h5 {
     line-height: 20px;
 }
 .navbar-header {
-    padding: 0px 25px !important;
+    padding-left: 25px !important;
 }
 .navbar-right {
     margin-right: -5px;
 }
 .navbar-toggle {
-    margin-right: -5px;
+    margin-right: 20px;
 }
 .navbar-inverse .navbar-nav > li > a {
     color: #fffaee;
+}
+.navbar-inverse .navbar-nav > li > a:hover {
+    background: rgb(26, 36, 47) !important;
+    color: #fffaee;
+}
+.navbar-inverse .navbar-nav > li > a:focus {
+    outline:0;
 }
 .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
     border: 0px !important;
@@ -400,7 +407,7 @@ label.error {
 }
 .tablecontainer {
     width: 25%;
-    height: 90%;
+    height: 88%;
     background-color: white;
     opacity: 0.9;
     border-radius: 10px;
@@ -447,9 +454,6 @@ label.error {
         width: 90%;
         height: 40%;
         z-index: 0 !important;
-    }
-    .gm-style .gm-style-iw {
-        z-index: 900 !important;
     }
     .form-card {
         width: 95%;

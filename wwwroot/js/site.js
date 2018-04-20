@@ -4,13 +4,21 @@ var map;
 var infoWindows = [];
 var infoWindow;
 
-// throw user user's items
-var items = $('#items').text();
-if ( items > 0 )
-{
+function usersitems() {
     helper.innerHTML = "Your requests"
     var aWidth = $(window).width(); 
-    var Width = aWidth * 0.7;
+    if (aWidth > 1000)
+    {
+        var Width = aWidth * 0.6;
+    }
+    else if (aWidth > 800)
+    {
+        var Width = aWidth * 0.8;
+    }
+    else if (aWidth < 800)
+    {
+        var Width = aWidth * .98;
+    }
     $( "#dialog" ).dialog({
         width: Width,
         height: 'auto',
@@ -19,6 +27,12 @@ if ( items > 0 )
             helper.innerHTML = "Select a facility from the map, <br/> or search the table"
         }
     });
+}
+// if existent, throw user user's items on startup
+var items = $('#items').text();
+if ( items > 0 )
+{
+    usersitems();
 }
 
 // do that map thang
