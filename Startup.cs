@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -68,6 +69,7 @@ namespace DPW_maintenancerequest
                 });
 
             services.AddDataProtection()
+                .PersistKeysToFileSystem(GetKeyRingDirInfo())
                 .SetApplicationName("SharedCookieApp");
 
             services.ConfigureApplicationCookie(options => {
@@ -110,6 +112,25 @@ namespace DPW_maintenancerequest
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+        }
+        private DirectoryInfo GetKeyRingDirInfo()
+        {
+            var startupAssembly = System.Reflection.Assembly.GetExecutingAssembly();
+            var applicationBasePath = System.AppContext.BaseDirectory;
+            var directoryInfo = new DirectoryInfo(applicationBasePath);
+            do
+            {
+                directoryInfo = directoryInfo.Parent;
+
+                var keyRingDirectoryInfo = new DirectoryInfo(Path.Combine(directoryInfo.FullName, "KeyRing"));
+                if (keyRingDirectoryInfo.Exists)
+                {
+                    return keyRingDirectoryInfo;
+                }
+            }
+            while (directoryInfo.Parent != null);
+
+            throw new Exception($"KeyRing folder could not be located using the application root {applicationBasePath}.");
         }
     }
 }
