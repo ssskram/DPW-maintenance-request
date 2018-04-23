@@ -74,6 +74,7 @@ namespace DPW_maintenancerequest
             Uri storageUri = new Uri($"{uri}");
             CloudBlobClient blobClient = new CloudBlobClient(storageUri);
             CloudBlobContainer container = blobClient.GetContainerReference("keys");
+            container.CreateIfNotExistsAsync();
             services.AddDataProtection()
                 .SetApplicationName(".PGH_SSO")
                 .PersistKeysToAzureBlobStorage(container, "keys.xml");
