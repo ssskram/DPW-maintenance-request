@@ -62,10 +62,16 @@ namespace DPW_maintenancerequest
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddAuthentication().AddMicrosoftAccount(microsoftOptions =>
+            services.AddAuthentication()
+                .AddMicrosoftAccount(microsoftOptions =>
                 {
                     microsoftOptions.ClientId = Configuration["MSClientId"];
                     microsoftOptions.ClientSecret = Configuration["MSClientSecret"];
+                })
+                .Services.ConfigureApplicationCookie(options =>
+                {
+                    options.Cookie.Name = ".PGH_SSO";    
+                    options.Cookie.Domain = ".azurewebsites.us";
                 });
 
             // begin sso config
