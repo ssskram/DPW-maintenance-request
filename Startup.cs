@@ -82,10 +82,6 @@ namespace DPW_maintenancerequest
             services.AddDataProtection()
                 .SetApplicationName("PGH_SSO")
                 .PersistKeysToAzureBlobStorage(container, "key.xml");
-            services.ConfigureApplicationCookie(options => {
-                options.Cookie.Name = ".PGH_SSO";
-                options.Cookie.Domain = ".azurewebsites.us";
-            });
             // end sso config
 
             // add application services
