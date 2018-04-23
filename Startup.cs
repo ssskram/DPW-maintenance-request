@@ -60,8 +60,7 @@ namespace DPW_maintenancerequest
                 options.UseInMemoryDatabase(Guid.NewGuid().ToString()));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
+                .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddAuthentication().AddMicrosoftAccount(microsoftOptions =>
                 {
@@ -74,7 +73,6 @@ namespace DPW_maintenancerequest
             Uri storageUri = new Uri($"{uri}");
             CloudBlobClient blobClient = new CloudBlobClient(storageUri);
             CloudBlobContainer container = blobClient.GetContainerReference("keys");
-            container.CreateIfNotExistsAsync();
             services.AddDataProtection()
                 .SetApplicationName("PGH_SSO")
                 .PersistKeysToAzureBlobStorage(container, "key.xml");
@@ -119,25 +117,6 @@ namespace DPW_maintenancerequest
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-        }
-        private DirectoryInfo GetKeyRingDirInfo()
-        {
-            var startupAssembly = System.Reflection.Assembly.GetExecutingAssembly();
-            var applicationBasePath = System.AppContext.BaseDirectory;
-            var directoryInfo = new DirectoryInfo(applicationBasePath);
-            do
-            {
-                directoryInfo = directoryInfo.Parent;
-
-                var keyRingDirectoryInfo = new DirectoryInfo(Path.Combine(directoryInfo.FullName, "KeyRing"));
-                if (keyRingDirectoryInfo.Exists)
-                {
-                    return keyRingDirectoryInfo;
-                }
-            }
-            while (directoryInfo.Parent != null);
-
-            throw new Exception($"KeyRing folder could not be located using the application root {applicationBasePath}.");
         }
     }
 }

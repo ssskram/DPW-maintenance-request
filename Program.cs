@@ -18,7 +18,7 @@ namespace DPW_maintenancerequest
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
-                // .UseUrls("http://localhost:5002")
+                .UseUrls("http://localhost:5002")
                 .Build();
     }
 }
