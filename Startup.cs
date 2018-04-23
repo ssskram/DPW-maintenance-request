@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration.UserSecrets;
 using DPW_maintenancerequest.Data;
+using Microsoft.WindowsAzure.Storage.Blob;
 using DPW_maintenancerequest.Models;
 
 namespace DPW_maintenancerequest
@@ -68,13 +69,18 @@ namespace DPW_maintenancerequest
                     microsoftOptions.ClientSecret = Configuration["MSClientSecret"];
                 });
 
+            // begin sso config
+            string uri = Configuration.GetValue<string>("SSOuri");
+            Uri storageUri = new Uri($"{uri}");
+            CloudBlobClient blobClient = new CloudBlobClient(storageUri);
+            CloudBlobContainer container = blobClient.GetContainerReference("keys");
             services.AddDataProtection()
-                .PersistKeysToFileSystem(GetKeyRingDirInfo())
-                .SetApplicationName("SharedCookieApp");
-
+                .SetApplicationName(".PGH_SSO")
+                .PersistKeysToAzureBlobStorage(container, "keys.xml");
             services.ConfigureApplicationCookie(options => {
-                options.Cookie.Name = ".AspNet.SharedCookie";
+                options.Cookie.Name = ".PGH_SSO";
             });
+            // end sso config
 
             // add application services
             Environment.SetEnvironmentVariable("CartegraphAPIkey", Configuration["CartegraphAPIkey"]);
