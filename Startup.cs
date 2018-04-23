@@ -71,12 +71,13 @@ namespace DPW_maintenancerequest
 
             // begin sso config
             string uri = Configuration.GetValue<string>("SSOuri");
+            // string uri = "https://dpkey.blob.core.usgovcloudapi.net/?sv=2017-07-29&ss=b&srt=sco&sp=rwdlac&se=2018-04-23T09:52:25Z&st=2018-04-23T01:52:25Z&spr=https&sig=DXAdNsyEpivPpYgq0GmZ%2FSaZsDVL%2B4Mweqx74%2BS95e4%3D";
             Uri storageUri = new Uri($"{uri}");
             CloudBlobClient blobClient = new CloudBlobClient(storageUri);
             CloudBlobContainer container = blobClient.GetContainerReference("keys");
             container.CreateIfNotExistsAsync();
             services.AddDataProtection()
-                .SetApplicationName(".PGH_SSO")
+                .SetApplicationName("PGH_SSO")
                 .PersistKeysToAzureBlobStorage(container, "keys.xml");
             services.ConfigureApplicationCookie(options => {
                 options.Cookie.Name = ".PGH_SSO";
