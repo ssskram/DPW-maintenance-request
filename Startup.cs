@@ -24,8 +24,15 @@ namespace DPW_maintenancerequest
         string _CartegraphAPIkey = null;
         string _googleapikey = null;
         string _sendgrid = null;
-        public Startup(IHostingEnvironment env)
+        private readonly IHostingEnvironment _currentEnvironment;   
+        public IConfiguration HostingConfig { get; private set; }
+        public IConfiguration Configuration { get; }
+
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
+            _currentEnvironment = env;
+            HostingConfig = configuration;
+
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
@@ -40,16 +47,10 @@ namespace DPW_maintenancerequest
             Configuration = builder.Build();
         }
 
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
-
-        public IConfiguration Configuration { get; }
-
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // add application services
             _MSClientID = Configuration["MSClientId"];
             _MSClientSecret = Configuration["MSClientSecret"];
             _CartegraphAPIkey = Configuration["CartegraphAPIkey"];
@@ -62,27 +63,37 @@ namespace DPW_maintenancerequest
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddAuthentication()
-                .AddMicrosoftAccount(microsoftOptions =>
-                {
-                    microsoftOptions.ClientId = Configuration["MSClientId"];
-                    microsoftOptions.ClientSecret = Configuration["MSClientSecret"];
-                })
-                .Services.ConfigureApplicationCookie(options =>
-                {
-                    options.Cookie.Name = ".PGH_SSO";    
-                    options.Cookie.Domain = ".azurewebsites.us";
-                });
-
-            // begin sso config
-            string uri = Configuration.GetValue<string>("SSOuri");
-            Uri storageUri = new Uri($"{uri}");
-            CloudBlobClient blobClient = new CloudBlobClient(storageUri);
-            CloudBlobContainer container = blobClient.GetContainerReference("keys");
-            services.AddDataProtection()
-                .SetApplicationName("PGH_SSO")
-                .PersistKeysToAzureBlobStorage(container, "key.xml");
-            // end sso config
+            // sso in production
+            if (_currentEnvironment.IsProduction())
+            {
+                string uri = Configuration.GetValue<string>("SSOuri");
+                Uri storageUri = new Uri($"{uri}");
+                CloudBlobClient blobClient = new CloudBlobClient(storageUri);
+                CloudBlobContainer container = blobClient.GetContainerReference("keys");
+                services.AddAuthentication()
+                    .AddMicrosoftAccount(microsoftOptions =>
+                    {
+                        microsoftOptions.ClientId = Configuration["MSClientId"];
+                        microsoftOptions.ClientSecret = Configuration["MSClientSecret"];
+                    })
+                    .Services.ConfigureApplicationCookie(options =>
+                    {
+                        options.Cookie.Name = ".PGH_SSO";    
+                        options.Cookie.Domain = ".azurewebsites.us";
+                    });
+                services.AddDataProtection()
+                    .SetApplicationName("PGH_SSO")
+                    .PersistKeysToAzureBlobStorage(container, "key.xml");
+            }
+            else
+            {
+                services.AddAuthentication()
+                    .AddMicrosoftAccount(microsoftOptions =>
+                    {
+                        microsoftOptions.ClientId = Configuration["MSClientId"];
+                        microsoftOptions.ClientSecret = Configuration["MSClientSecret"];
+                    });
+            }
 
             // add application services
             Environment.SetEnvironmentVariable("CartegraphAPIkey", Configuration["CartegraphAPIkey"]);
