@@ -174,7 +174,10 @@ var othertable = $("#dtui").DataTable({
     columnDefs: [
         { orderable: false, targets: 2 },
         { orderable: false, targets: 3 }
-    ]
+    ],
+    language: {
+        emptyTable: "You have not submitted any maintenance requests"
+    }
 });
 new $.fn.dataTable.Responsive( othertable, {} );
 
