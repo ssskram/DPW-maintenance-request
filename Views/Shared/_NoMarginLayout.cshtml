@@ -35,7 +35,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="#" onclick="usersitems()" class="top-nav-button">My requests</a></li>
+                    <li><a href="#" id="mystuff" onclick="usersitems()" class="top-nav-button">My requests</a></li>
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
             </div>
@@ -58,7 +58,7 @@
         <script type="text/javascript" src="~/js/datatables.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script type="text/javascript" src="~/js/jqueryUI.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
     
     <link rel="stylesheet" href="~/css/bootstrapselect.css">

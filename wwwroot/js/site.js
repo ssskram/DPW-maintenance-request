@@ -5,7 +5,6 @@ var infoWindows = [];
 var infoWindow;
 
 function usersitems() {
-    back();
     helper.innerHTML = "Your requests"
     var aWidth = $(window).width(); 
     if (aWidth > 1000)
@@ -316,3 +315,7 @@ function submititem() {
         );
     }
 }
+
+$("#mystuff").click(function (e) {
+    back();
+});
