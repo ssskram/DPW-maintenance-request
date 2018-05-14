@@ -67,26 +67,17 @@ namespace DPW_maintenancerequest.Controllers
             var datetimeformat = "MM/dd/yyyy HH:mm";
             foreach (var item in requestitems)
             {
-                string status = "";
                 if (item.SubmittedByField == user)
                 {
-                    if (item.CompletedField == 0)
-                    {
-                        status += "Open";
-                    }
-                    else
-                    {
-                        status += "Closed";
-                    }
                     counter++;
                     Requests req = new Requests()
                     {
                         FacilityName = item.BuildingNameField,
                         Issue = item.IssueField,
-                        Completed = status,
                         LastActivity = item.cgLastModifiedField.ToString(dateformat),
                         Submitted = item.EntryDateField.ToString(datetimeformat),
                         Description = item.DescriptionField,
+                        Status = item.TaskStatusField,
                         LocationDescription = item.LocationDescriptionField
                     };
                     ri.Add(req);
