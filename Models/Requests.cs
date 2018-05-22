@@ -11,6 +11,7 @@ namespace DPW_maintenancerequest.Models
     {
         public string FacilityName { get; set; }
         public string Issue { get; set; }
+        public string IssueType { get; set; }
         public string Status { get; set; }
         public string LastActivity { get; set; }
         public string Submitted { get; set; }
