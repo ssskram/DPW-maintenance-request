@@ -5,7 +5,11 @@ namespace DPW_maintenancerequest.Models
 {
     public class IssueTypes
     {
-        public bool Type { get; set; }
+        public string Type { get; set; }
+        public Issue[] Options { get; set; }
+    }
+    public class Issue
+    {
         public string Name { get; set; }
     }
 }

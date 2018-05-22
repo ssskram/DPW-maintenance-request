@@ -105,7 +105,7 @@
                     <select id="IssueType" name="IssueType" data-style="btn-info" class="selectpicker btn-form-control" title="Issue types" required="true" data-dropup-auto="false" onchange="populateissues()" required>
                         @foreach(var Issue in ViewBag.Issues)
                         {
-                            <option>@Issue.Name</option>
+                            <option>@Issue.Type</option>
                         }
                     </select>
                     <label for="Issue" class="error" hidden></label>
