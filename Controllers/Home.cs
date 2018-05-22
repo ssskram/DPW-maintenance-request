@@ -29,15 +29,15 @@ namespace DPW_maintenancerequest.Controllers
         HttpClient client = new HttpClient();
         public async Task<IActionResult> Index()
         {
-            var user = _userManager.GetUserName(HttpContext.User);
+            var user = _userManager.GetUserName(HttpContext.User).ToString();
 
             // get issue types
             await GetIssueTypes();
             var issuetypes = GetIssueTypes().Result;
 
             // get requests
-            await GetRequests();
-            var requests = GetRequests().Result;
+            await GetUsersItems(user);
+            var tasks = GetUsersItems(user).Result;
 
             // get facilties
             await GetFacilities();
@@ -60,28 +60,26 @@ namespace DPW_maintenancerequest.Controllers
             ViewBag.Issues = it;
 
             // handle requests
-            dynamic requestitems = JObject.Parse(requests)["cgRequestsClass"];
-            List<Requests> ri = new List<Requests>();
+            dynamic requestitems = JObject.Parse(tasks)["cgTasksClass"];
+            List<Tasks> ri = new List<Tasks>();
             int counter = 0;
             var dateformat = "MM/dd/yyyy";
             var datetimeformat = "MM/dd/yyyy HH:mm";
             foreach (var item in requestitems)
             {
-                if (item.SubmittedByField == user)
+                counter++;
+                Tasks req = new Tasks()
                 {
-                    counter++;
-                    Requests req = new Requests()
-                    {
-                        FacilityName = item.BuildingNameField,
-                        Issue = item.IssueField,
-                        LastActivity = item.cgLastModifiedField.ToString(dateformat),
-                        Submitted = item.EntryDateField.ToString(datetimeformat),
-                        Description = item.DescriptionField,
-                        Status = item.TaskStatusField,
-                        LocationDescription = item.LocationDescriptionField
-                    };
-                    ri.Add(req);
-                }
+                    FacilityName = item.cgAssetIDField,
+                    Issue = item.TaskDescriptionField,
+                    LastActivity = item.cgLastModifiedField.ToString(dateformat),
+                    Submitted = item.EntryDateField.ToString(datetimeformat),
+                    Description = item.NotesField,
+                    Status = item.StatusField,
+                    LocationDescription = item.LocationDescriptionField,
+                    Id = item.IDField
+                };
+                ri.Add(req);
             }
             ViewBag.Items = counter;
             ViewBag.Requests = ri;
@@ -225,10 +223,13 @@ namespace DPW_maintenancerequest.Controllers
             return content;
         }
 
-        public async Task<string> GetRequests()
+        public async Task<string> GetUsersItems(string user)
         {
             var key = Environment.GetEnvironmentVariable("CartegraphAPIkey");
-            var cartegraphUrl = "https://cgweb06.cartegraphoms.com/PittsburghPA/api/v1/Classes/cgRequestsClass";
+            var cartegraphUrl = 
+            String.Format 
+            ("https://cgweb06.cartegraphoms.com/PittsburghPA/api/v1/classes/cgTasksClass?filter=(([RequesterEmail] is equal to \"{0}\"))",
+                user); // 0
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Authorization =
                 new AuthenticationHeaderValue("Basic", key);

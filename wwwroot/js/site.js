@@ -167,7 +167,7 @@ var table = $("#dt").DataTable({
     paging: false,
     ordering: false,
     order: [
-        [1, "desc"]
+        [0, "desc"]
     ],
     bLengthChange: false,
 });

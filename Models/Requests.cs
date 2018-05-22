@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DPW_maintenancerequest.Models
 {
-    public class Requests
+    public class Tasks
     {
         public string FacilityName { get; set; }
         public string Issue { get; set; }
@@ -17,5 +17,6 @@ namespace DPW_maintenancerequest.Models
         public string Submitted { get; set; }
         public string Description { get; set; }
         public string LocationDescription { get; set; }
+        public int Id { get; set; }
     }
 }
