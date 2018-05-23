@@ -153,6 +153,9 @@ button.bs-placeholder[role='button']>span {
     font-size: 14px;
     margin-bottom: 0px;
 }
+#issue_parent {
+    padding: 25px 0px;
+}
 
 /* button styles */
 .btn-link {

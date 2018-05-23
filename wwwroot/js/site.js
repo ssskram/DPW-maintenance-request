@@ -9,7 +9,7 @@ var infoWindows = [];
 var infoWindow;
 
 // issues types
-var issueObj = JSON.parse($('#issues').text());
+var issueObj = JSON.parse($('#issuesObj').text());
 
 // get em
 function usersitems() {
@@ -245,6 +245,8 @@ var back = function () {
     $('#search').keyup();
     table.search("").draw();
     $("#form").hide();
+    $('#issues_children').hide();
+    $('#issue_parent').show();
     table.rows('.parent').nodes().to$().find('td:first-child').trigger('click');
     helper.innerHTML = "Select a facility from the map, <br/> or search the table"
     map.setCenter({
@@ -252,6 +254,11 @@ var back = function () {
         lng: -79.997847
     });
     map.setZoom(13);
+    var elements = document.getElementById("IssueType").options;
+    for(var i = 0; i < elements.length; i++){
+      elements[i].selected = false;
+    }
+    $('.selectpicker').selectpicker('refresh');
 };
 
 // instantiate helper container
@@ -272,17 +279,17 @@ function populateissues() {
 
     // get and process new type
     var item = $('#IssueType').val();
-    var index = 0;
     issueObj.forEach(function(element) {
         if (element.Type == item) {
             var opt = document.createElement("option");
-            opt.value = index;
             opt.innerHTML = element.Name;
             select.add(opt);
-            index++;
         }
     });
     $('.selectpicker').selectpicker('refresh');
+    $('#issues_children').show();
+    $('#issue_parent').hide();
+    $('#is_typ').text(item);
 }
 
 // for certain issues, throw contact information

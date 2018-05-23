@@ -3,7 +3,7 @@
 }
 @model List<Facility>
 <div id="shapes" hidden>@ViewBag.Shapes</div>
-<div id="issues" hidden>@ViewBag.Issues</div>
+<div id="issuesObj" hidden>@ViewBag.Issues</div>
 
 <div class="row">
   <div class="col-md-12" id="column">
@@ -100,54 +100,55 @@
     <div class="row" style="overflow:visible">
         <div class="col-md-12" id="requestcard">
             <h3>Report an issue</h3>
-            <div class="form-group" style="margin-bottom: 5px;">
-                <div class="col-md-12">
-                    <h5 class="form-h5">Select an issue type</h5>
-                    <select id="IssueType" name="IssueType" data-style="btn-info" class="selectpicker btn-form-control" title="Issue types" required="true" data-dropup-auto="false" onchange="populateissues()" required>
-                        @foreach(var IssueType in ViewBag.IssueTypes)
-                        {
-                            <option>@IssueType.Type</option>
-                        }
-                    </select>
-                    <label for="Issue" class="error" hidden></label>
-                </div>
+            <div id="issue_parent" class="col-md-12">
+                <h5 class="form-h5">Select an issue type</h5>
+                <select id="IssueType" name="IssueType" data-style="btn-info" class="selectpicker btn-form-control" title="Issue types" required="true" data-dropup-auto="false" onchange="populateissues()" required>
+                    @foreach(var IssueType in ViewBag.IssueTypes)
+                    {
+                        <option>@IssueType.Type</option>
+                    }
+                </select>
+                <label for="Issue" class="error" hidden></label>
+            </div>
+            <div id="issues_children" hidden>
+                <h4 id="is_typ" style="font-style:italic;"></h4>
                 <div class="col-md-12">
                     <h5 class="form-h5">Select an issue</h5>
                     <select id="Issue" name="Issue" data-style="btn-info" class="selectpicker btn-form-control" title="Issue" required="true" data-dropup-auto="false" onchange="throwcontacts()" required>
                     </select>
                     <label for="Issue" class="error" hidden></label>
                 </div>
+                <div id="formfields">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <h5 class="form-h5">Describe the issue</h5>
+                            <textarea name="Description" class="form-control" placeholder="Description" onkeyup="textAreaAdjust(this)" required></textarea>
+                            <label for="Description" class="error" hidden></label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <h5 class="form-h5">Describe the location</h5>
+                            <textarea name="LocationDescription" class="form-control" placeholder="Room, floor, etc."onkeyup="textAreaAdjust(this)" required></textarea>
+                            <label for="LocationDescription" class="error" hidden></label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <h5 class="form-h5">Enter your phone number</h5>
+                            <input name="Phone" class="form-control" placeholder="Phone number" required>
+                            <label for="Phone" class="error" hidden></label>
+                        </div>
+                    </div>
+                    <div class="col-md-12" style="margin-top: 10px;">
+                        <input style="margin: 10px 0; width: 85%; font-weight: bold; border-radius: 5px;" onclick="submititem()" value="Submit" class="btn btn-default"/>
+                    </div>
+                    <div class="col-md-12">
+                        <input style="margin: 10px 0; width: 65%; border-radius: 10px; font-size: 14px;" type="button" value="Start over" onclick="back()" class="btn btn-default back"/>
+                    </div>
+                </div>
+                <div id="alternativeprompt" class="alternativeprompt" hidden></div>
             </div>
-            <div id="formfields">
-                <div class="form-group">
-                    <div class="col-md-12">
-                        <h5 class="form-h5">Describe the issue</h5>
-                        <textarea name="Description" class="form-control" placeholder="Description" onkeyup="textAreaAdjust(this)" required></textarea>
-                        <label for="Description" class="error" hidden></label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-12">
-                        <h5 class="form-h5">Describe the location</h5>
-                        <textarea name="LocationDescription" class="form-control" placeholder="Room, floor, etc."onkeyup="textAreaAdjust(this)" required></textarea>
-                        <label for="LocationDescription" class="error" hidden></label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-12">
-                        <h5 class="form-h5">Enter your phone number</h5>
-                        <input name="Phone" class="form-control" placeholder="Phone number" required>
-                        <label for="Phone" class="error" hidden></label>
-                    </div>
-                </div>
-                <div class="col-md-12" style="margin-top: 10px;">
-                    <input style="margin: 10px 0; width: 85%; font-weight: bold; border-radius: 5px;" onclick="submititem()" value="Submit" class="btn btn-default"/>
-                </div>
-                <div class="col-md-12">
-                    <input style="margin: 10px 0; width: 65%; border-radius: 10px; font-size: 14px;" type="button" value="Start over" onclick="back()" class="btn btn-default back"/>
-                </div>
-            </div>
-            <div id="alternativeprompt" class="alternativeprompt" hidden></div>
         </div>
     </div>
     </form>
