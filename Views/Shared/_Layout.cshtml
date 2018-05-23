@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pgh SPA w/ redux</title>
+    <base href="~/" />
+    <!-- css libraries -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway|Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/datepicker.css" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="~/dist/vendor.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/dist/site.css" asp-append-version="true" />
+</head>
+<body>
+    @RenderBody()
+    <!-- js libraries -->
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="~/js/jqueryUI.js"></script>
+    <script type="text/javascript" src="~/js/datepicker.js"></script>
+    <link rel="stylesheet" href="~/css/bootstrapselect.css">
+    <script type="text/javascript" src="~/js/bootstrapselect.js"></script>
+    <script src="~/dist/vendor.js" asp-append-version="true"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

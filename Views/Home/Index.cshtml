@@ -1,0 +1,11 @@
+<div id="popup"></div>
+
+<div id="react-app" asp-prerender-module="ClientApp/dist/main-server">
+    <div id="overlayloader" class="overlayloader" style="display:flex">
+        <div class="loader"></div>
+    </div>      
+</div>
+
+@section scripts {
+    <script src="~/dist/main-client.js" asp-append-version="true"></script>
+}
