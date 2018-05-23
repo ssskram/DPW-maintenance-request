@@ -3,6 +3,7 @@
 }
 @model List<Facility>
 <div id="shapes" hidden>@ViewBag.Shapes</div>
+<div id="issues" hidden>@ViewBag.Issues</div>
 
 <div class="row">
   <div class="col-md-12" id="column">
@@ -103,9 +104,9 @@
                 <div class="col-md-12">
                     <h5 class="form-h5">Select an issue type</h5>
                     <select id="IssueType" name="IssueType" data-style="btn-info" class="selectpicker btn-form-control" title="Issue types" required="true" data-dropup-auto="false" onchange="populateissues()" required>
-                        @foreach(var Issue in ViewBag.Issues)
+                        @foreach(var IssueType in ViewBag.IssueTypes)
                         {
-                            <option>@Issue.Type</option>
+                            <option>@IssueType.Type</option>
                         }
                     </select>
                     <label for="Issue" class="error" hidden></label>

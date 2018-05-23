@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 using Microsoft.AspNetCore.Identity;
 using SendGrid;
 using SendGrid.Helpers.Mail;
@@ -46,42 +47,47 @@ namespace DPW_maintenancerequest.Controllers
             // handle issue types
             dynamic issues = JObject.Parse(issuetypes)["cgRequestIssuesClass"];
             List<IssueTypes> it = new List<IssueTypes>();
+            List<Issues> iss = new List<Issues>();
             HashSet<string> alreadyEncountered = new HashSet<string>();
-            foreach (var i in issues)
+
+            foreach (var parent in issues)
             {
-                var parentType = i.InternalRequestCategoryField.ToString();
-                if (parentType == "")
+                var parentType = parent.InternalRequestCategoryField.ToString();
+                if (parentType != "")
                 {
                     if (alreadyEncountered.Contains(parentType))
                     {
                         continue;
                     }
-                    else 
+                    else
                     {
-                        IssueTypes type = new IssueTypes();
-                        List<Issue> issue = new List<Issue>();
+                        IssueTypes types = new IssueTypes()
+                        {
+                            Type = parentType
+                        };
                         foreach (var child in issues)
                         {
-                            IssueTypes types = new IssueTypes()
+                            string chil = child.InternalRequestCategoryField.ToString();
+                            if (chil == parentType)
                             {
-                                Type = i.InternalRequestCategoryField,
-                                Options = null
-                            };
-                            if (child.InternalRequestCategoryField.ToString() == parentType)
-                            {
-                                Issue y = new Issue()
+                                Issues isu = new Issues()
                                 {
-                                    Name = child.InternalRequestCategoryField.ToString()
+                                    Type = parentType,
+                                    Name = child.IssueField
                                 };
-                                issue.Add(y);
+                                iss.Add(isu);
                             }
-                            it.Add(types);
                         }
+                        it.Add(types);
+                        alreadyEncountered.Add(parentType);
                     }
                 }
             }
-
-            ViewBag.Issues = it;
+            List<Issues> sortedIssues = iss.OrderBy(o=>o.Name).ToList();
+            string output = JsonConvert.SerializeObject(sortedIssues);
+            ViewBag.Issues = output;
+            List<IssueTypes> sortedTypes = it.OrderBy(o=>o.Type).ToList();
+            ViewBag.IssueTypes = sortedTypes;
 
             // handle requests
             dynamic requestitems = JObject.Parse(tasks)["cgTasksClass"];

@@ -8,15 +8,8 @@ var map;
 var infoWindows = [];
 var infoWindow;
 
-// issue type collections
-var windowsType = [];
-windowsType.push("window");
-windowsType.push("stuff");
-windowsType.push("here");
-var gasType = [];
-gasType.push("gas");
-gasType.push("stuff");
-gasType.push("here");
+// issues types
+var issueObj = JSON.parse($('#issues').text());
 
 // get em
 function usersitems() {
@@ -279,26 +272,16 @@ function populateissues() {
 
     // get and process new type
     var item = $('#IssueType').val();
-    index = 0;
-    switch (item) {
-        case 'Broken Window':
-            for (val of windowsType) {
-                var opt = document.createElement("option");
-                opt.value = index;
-                opt.innerHTML = val;
-                select.add(opt);
-                index++;
-            }
-            break;
-        case 'Gas Odor':
-            for (val of gasType) {
-                var opt = document.createElement("option");
-                opt.value = index;
-                opt.innerHTML = val;
-                select.add(opt);
-                index++;
-            }
-    }
+    var index = 0;
+    issueObj.forEach(function(element) {
+        if (element.Type == item) {
+            var opt = document.createElement("option");
+            opt.value = index;
+            opt.innerHTML = element.Name;
+            select.add(opt);
+            index++;
+        }
+    });
     $('.selectpicker').selectpicker('refresh');
 }
 
