@@ -31,10 +31,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque non faucib
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris semper malesuada imperdiet. Sed nec ex gravida, cursus enim consectetur, cursus tellus. Donec non fringilla tellus, vel iaculis enim.
 
-#### Doors, Locks, & Windows
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ornare pharetra quam a convallis. Donec dictum lacus ac pulvinar aliquet. Maecenas vel turpis quis elit ultricies euismod at id lorem. Nullam urna quam, finibus congue mattis sit amet, elementum at turpis. Nullam euismod mauris in tristique tincidunt.
-
 #### Plumbing & Gas
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vestibulum in nunc et maximus. Curabitur turpis.
