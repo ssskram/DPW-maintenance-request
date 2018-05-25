@@ -136,6 +136,9 @@ label.error {
 }
 .navbar-inverse .navbar-nav > li > a {
     color: #fffaee;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
 }
 .navbar-inverse .navbar-nav > li > a:hover {
     color: rgba(186, 134, 6, 1);
@@ -150,6 +153,9 @@ label.error {
 .navbar-brand {
     color: #fffaee !important;
     letter-spacing: 1.5px;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
 }
 .navbar-inverse .navbar-brand:hover, 
 .navbar-inverse .navbar-brand:focus {
@@ -414,4 +420,8 @@ button.bs-placeholder[role='button']>span {
     text-align: center;
     background-color: rgba(255, 250, 238, .5) !important;
     font-family: 'Raleway', sans-serif;
+}
+#map {
+    height: 100vh;
+    margin-left: -15px;
 }

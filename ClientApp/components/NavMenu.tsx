@@ -34,29 +34,24 @@ export class NavMenu extends React.Component<{}, {}>  {
                     <ul className='nav navbar-nav'>
                         <li className="sidenav-header">Submit</li>
                         <li>
-                            <NavLink to={'/'} activeClassName='active' data-toggle="collapse" data-target=".in">
-                                <span className='glyphicon glyphicon-education'></span> Select facility from map
+                            <NavLink to={'/Map'} activeClassName='active' data-toggle="collapse" data-target=".in">
+                                <span className='glyphicon glyphicon-map-marker'></span> Select facility from map
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to={'/'} activeClassName='active' data-toggle="collapse" data-target=".in">
-                                <span className='glyphicon glyphicon-th-list'></span> Select facility from table
+                            <NavLink to={'/Table'} activeClassName='active' data-toggle="collapse" data-target=".in">
+                                <span className='glyphicon glyphicon-list'></span> Select facility from table
                             </NavLink>
                         </li>
                         <li className="sidenav-header">Track</li>
                         <li>
-                            <NavLink to={'/'} activeClassName='active' data-toggle="collapse" data-target=".in">
-                                <span className='glyphicon glyphicon-education'></span> My open requests
+                            <NavLink to={'/MyRequests'} activeClassName='active' data-toggle="collapse" data-target=".in">
+                                <span className='glyphicon glyphicon-chevron-right'></span> My requests
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to={'/'} activeClassName='active' data-toggle="collapse" data-target=".in">
-                                <span className='glyphicon glyphicon-th-list'></span> My closed requests
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to={'/'} activeClassName='active' data-toggle="collapse" data-target=".in">
-                                <span className='glyphicon glyphicon-th-list'></span> All requests
+                            <NavLink to={'/AllRequests'} activeClassName='active' data-toggle="collapse" data-target=".in">
+                            <span className='glyphicon glyphicon-chevron-right'></span> All requests
                             </NavLink>
                         </li>
                         <div className='accountcontainer'>

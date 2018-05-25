@@ -2,6 +2,16 @@
   "name": "maintenance_reqsts",
   "version": "0.0.0",
   "dependencies": {
+    "@types/google-map-react": {
+      "version": "0.23.2",
+      "from": "@types/google-map-react@0.23.2",
+      "resolved": "https://registry.npmjs.org/@types/google-map-react/-/google-map-react-0.23.2.tgz"
+    },
+    "@types/googlemaps": {
+      "version": "3.30.8",
+      "from": "@types/googlemaps@latest",
+      "resolved": "https://registry.npmjs.org/@types/googlemaps/-/googlemaps-3.30.8.tgz"
+    },
     "@types/history": {
       "version": "4.6.0",
       "from": "@types/history@4.6.0",
@@ -1009,6 +1019,11 @@
       "version": "9.18.0",
       "from": "globals@>=9.0.0 <10.0.0",
       "resolved": "https://registry.npmjs.org/globals/-/globals-9.18.0.tgz"
+    },
+    "google-maps-react": {
+      "version": "2.0.2",
+      "from": "google-maps-react@>=2.0.2 <3.0.0",
+      "resolved": "https://registry.npmjs.org/google-maps-react/-/google-maps-react-2.0.2.tgz"
     },
     "graceful-fs": {
       "version": "4.1.11",
@@ -2636,8 +2651,7 @@
     "uglify-to-browserify": {
       "version": "1.0.2",
       "from": "uglify-to-browserify@>=1.0.0 <1.1.0",
-      "resolved": "https://registry.npmjs.org/uglify-to-browserify/-/uglify-to-browserify-1.0.2.tgz",
-      "optional": true
+      "resolved": "https://registry.npmjs.org/uglify-to-browserify/-/uglify-to-browserify-1.0.2.tgz"
     },
     "union-value": {
       "version": "0.2.4",
