@@ -1,8 +1,13 @@
-# Maintenance Requests
+# Submitting a maintenance request
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel est ornare, pharetra tellus eget, facilisis arcu. Donec sit amet eleifend ex. Mauris quis varius libero. Cras hendrerit nec nibh sit amet ultrices. Donec nisi nisi, sollicitudin et tempor at, sollicitudin vel sapien. Nunc congue nulla at sollicitudin viverra. Donec ultricies arcu vitae lorem imperdiet, sit amet varius purus faucibus. Donec eleifend porttitor diam, in vestibulum ligula.
 
-## Submitting requests
+#### 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel est ornare 
+#### 2. Pharetra tellus eget, facilisis arcu. Donec sit amet eleifend ex. Mauris quis varius libero. 
+#### 3. Cras hendrerit nec nibh sit amet ultrices. Donec nisi nisi, sollicitudin et tempor at, sollicitudin vel sapien. 
+#### 4. Nunc congue nulla at sollicitudin viverra. Donec ultricies arcu vitae lorem imperdiet, sit amet varius purus faucibus. 
+#### 5. Donec eleifend porttitor diam, in vestibulum ligula.
+
+## Issue types
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur dapibus vehicula libero, ut fermentum nulla sagittis ac. Phasellus blandit varius quam, a gravida purus scelerisque lobortis.
 
@@ -37,7 +42,3 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vestibulum in nun
 #### Roofing
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer molestie augue at massa eleifend, sit amet commodo sem tincidunt. Ut nec libero in sapien pharetra dictum sed.
-
-## Tracking requests
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel est ornare, pharetra tellus eget, facilisis arcu. Donec sit amet eleifend ex. Mauris quis varius libero. Cras hendrerit nec nibh sit amet ultrices. Donec nisi nisi, sollicitudin et tempor at, sollicitudin vel sapien. Nunc congue nulla at sollicitudin viverra. Donec ultricies arcu vitae lorem imperdiet, sit amet varius purus faucibus. Donec eleifend porttitor diam, in vestibulum ligula.

@@ -25,7 +25,7 @@ export class selectMap extends React.Component<any, any> {
                 <Map
                     className="map"
                     google={this.props.google}
-                    zoom={14}
+                    zoom={13}
                     initialCenter={{
                         lat: this.state.lat,
                         lng: this.state.lng
