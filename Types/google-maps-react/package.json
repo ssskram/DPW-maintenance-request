@@ -36,5 +36,7 @@
   "name": "@types/google-maps-rewact",
   "optionalDependencies": {},
   "peerDependencies": {},
-  "scripts": {}
+  "scripts": {},
+  "typeScriptVersion": "2.0",
+  "version": "0.0.1"
 }
