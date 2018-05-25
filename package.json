@@ -3,8 +3,6 @@
   "private": true,
   "version": "0.0.0",
   "dependencies": {
-    "@types/google-map-react": "^0.23.2",
-    "@types/googlemaps": "^3.30.8",
     "@types/history": "4.6.0",
     "@types/react": "15.0.35",
     "@types/react-dom": "15.5.1",
