@@ -40,7 +40,7 @@ export class NavMenu extends React.Component<{}, {}>  {
                         </li>
                         <li>
                             <NavLink to={'/Table'} activeClassName='active' data-toggle="collapse" data-target=".in">
-                                <span className='glyphicon glyphicon-list'></span> Select facility from table
+                                <span className='glyphicon glyphicon-list'></span> Search facility by name
                             </NavLink>
                         </li>
                         <li className="sidenav-header">Track</li>
