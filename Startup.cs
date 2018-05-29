@@ -22,6 +22,8 @@ namespace maintenance_reqsts
         string _MSClientID = null;
         string _MSClientSecret = null;
         string _sendgrid = null;
+        string _CartegraphAPIkey = null;
+
         private readonly IHostingEnvironment _currentEnvironment;   
         public IConfiguration HostingConfig { get; private set; }
         public IConfiguration Configuration { get; }
@@ -49,6 +51,7 @@ namespace maintenance_reqsts
             _MSClientID = Configuration["MSClientId"];
             _MSClientSecret = Configuration["MSClientSecret"];
             _sendgrid = Configuration["sendgrid"];
+            _CartegraphAPIkey = Configuration["CartegraphAPIkey"];
 
             // add application services
             services.AddDbContext<ApplicationDbContext>(options =>
@@ -91,6 +94,7 @@ namespace maintenance_reqsts
             }
 
             Environment.SetEnvironmentVariable("sendgrid", Configuration["sendgrid"]);
+            Environment.SetEnvironmentVariable("CartegraphAPIkey", Configuration["CartegraphAPIkey"]);
 
             services.AddMvc()
                 .AddSessionStateTempDataProvider();
