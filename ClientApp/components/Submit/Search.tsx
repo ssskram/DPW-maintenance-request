@@ -2,17 +2,24 @@ import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { Link, NavLink, Redirect } from 'react-router-dom';
 
-export default class selectTable extends React.Component<RouteComponentProps<{}>, any> {
+export default class Search extends React.Component<RouteComponentProps<{}>, any> {
   constructor() {
     super();
     this.state = {
       facility: '',
-      panels: []
+      panels: [],
+      facilities: []
     }
   }
 
   componentDidMount() {
     let self = this;
+    fetch('/getFacilities')
+    .then(response => response.json())
+    .then(data => this.setState({ facilities: data.cgFacilitiesClass }));
+
+    // get facilities here
+
     var classname = document.getElementsByClassName('panel');
     self.setState({ panels: classname });
   }
@@ -31,6 +38,16 @@ export default class selectTable extends React.Component<RouteComponentProps<{}>
 
 
   public render() {
+    
+    // const { facilities } = this.state;
+    // return (
+    //   <div className="container">
+    //   {facilities().map(facilities =>
+
+    //   )}
+    // </div>
+    // );
+
     return (
       <div className="container-fluid">
         <div className="row">
