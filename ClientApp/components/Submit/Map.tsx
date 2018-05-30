@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
-import { Link, NavLink, Redirect } from 'react-router-dom';
-import Select from './Select';
+import { MemoryRouter, Link, NavLink, Redirect } from 'react-router-dom';
 
 const imgStyle= {
     maxWidth: '300px',
@@ -101,7 +100,9 @@ export class selectMap extends React.Component<any, any> {
                             <img style={imgStyle} src={this.state.selectedPlace.img}/>
                             <h3>{this.state.selectedPlace.name}</h3>
                             <h4>{this.state.selectedPlace.neighborhood}</h4>
-                            <Select />
+                            <MemoryRouter>
+                                <Link to={ '/Issue' } className="btn btn-default">Select</Link>
+                            </MemoryRouter>
                         </div>
                     </InfoWindow>
                 </Map>

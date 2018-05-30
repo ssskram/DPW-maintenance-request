@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { Link, NavLink, Redirect } from 'react-router-dom';
-import Select from './Select';
 
-const imgStyle= {
+const imgStyle = {
   maxWidth: '300px',
   borderRadius: '10px',
   margin: '7px'
@@ -18,7 +17,7 @@ export default class Search extends React.Component<RouteComponentProps<{}>, any
       facilities: []
     }
   }
-  
+
   componentDidMount() {
     let self = this;
     fetch('/api/facilities/search', {
@@ -67,15 +66,15 @@ export default class Search extends React.Component<RouteComponentProps<{}>, any
             <div className="facility col-md-6 col-sm-12" id={facility.name}>
               <div className="panel">
                 <div className="panel-body text-center">
-                  <img style={imgStyle} src={facility.imgSrc}/>
+                  <img style={imgStyle} src={facility.imgSrc} />
                   <h3>{facility.name}</h3>
                   <h4>{facility.neighborhood}</h4>
-                  <Select />
+                  <Link to={ '/Issue' } className="btn btn-default">Select</Link>
                 </div>
               </div>
             </div>
           </div>
-          )}
+        )}
       </div>
     );
   }
