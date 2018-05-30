@@ -69,8 +69,8 @@ export class selectMap extends React.Component<any, any> {
                     zoom={13}
                     onClick={this.onMapClicked.bind(this)}
                     initialCenter={{
-                        lat: '40.445982',
-                        lng: '-79.997847'
+                        lat: '40.437470539681442',
+                        lng: '-79.987124601795273'
                     }}>
                     {facilities.map(facility =>
                         <Marker
@@ -80,6 +80,9 @@ export class selectMap extends React.Component<any, any> {
                             img={facility.imgSrc}
                             position={{ lat: facility.lat, lng: facility.lng }}
                             onClick={this.markerClick.bind(this)}
+                            icon={{
+                                url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+                            }}
                         />,
                     )}
                     <InfoWindow
