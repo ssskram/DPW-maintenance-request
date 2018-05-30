@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
-import { Link, NavLink, Redirect } from 'react-router-dom';
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
+import { Link, NavLink, Redirect } from 'react-router-dom';
+import Select from './Select';
 
 const imgStyle= {
     maxWidth: '300px',
@@ -13,8 +14,13 @@ export class selectMap extends React.Component<any, any> {
     constructor() {
         super();
         this.state = {
-            facilities: [],
+            center: {
+                lat: '40.437470539681442',
+                lng: '-79.987124601795273'
+            },
+            zoom: 13,
             showingInfoWindow: true,
+            facilities: [],
             activeMarker: {},
             selectedPlace: {}
         }
@@ -48,11 +54,15 @@ export class selectMap extends React.Component<any, any> {
         }
     }
 
+    passToForm() {
+        alert("test")
+    }
+
     markerClick(props, marker) {
         this.setState({
+            showingInfoWindow: true,
             selectedPlace: props,
-            activeMarker: marker,
-            showingInfoWindow: true
+            activeMarker: marker
         });
     }
 
@@ -66,18 +76,17 @@ export class selectMap extends React.Component<any, any> {
                 <Map
                     className="map"
                     google={this.props.google}
-                    zoom={13}
-                    onClick={this.onMapClicked.bind(this)}
-                    initialCenter={{
-                        lat: '40.437470539681442',
-                        lng: '-79.987124601795273'
-                    }}>
+                    initialCenter={this.state.center}
+                    zoom={this.state.zoom}
+                    onClick={this.onMapClicked.bind(this)}>
                     {facilities.map(facility =>
                         <Marker
                             oid={facility.oid}
                             name={facility.name}
                             neighborhood={facility.neighborhood}
                             img={facility.imgSrc}
+                            lat={facility.lat}
+                            lng={facility.lng}
                             position={{ lat: facility.lat, lng: facility.lng }}
                             onClick={this.markerClick.bind(this)}
                             icon={{
@@ -92,6 +101,7 @@ export class selectMap extends React.Component<any, any> {
                             <img style={imgStyle} src={this.state.selectedPlace.img}/>
                             <h3>{this.state.selectedPlace.name}</h3>
                             <h4>{this.state.selectedPlace.neighborhood}</h4>
+                            <Select />
                         </div>
                     </InfoWindow>
                 </Map>

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { Link, NavLink, Redirect } from 'react-router-dom';
+import Select from './Select';
 
 const imgStyle= {
   maxWidth: '300px',
@@ -69,7 +70,7 @@ export default class Search extends React.Component<RouteComponentProps<{}>, any
                   <img style={imgStyle} src={facility.imgSrc}/>
                   <h3>{facility.name}</h3>
                   <h4>{facility.neighborhood}</h4>
-                  <NavLink to="/Search" role="button" value={facility.oid} className="btn btn-default">Select</NavLink>
+                  <Select />
                 </div>
               </div>
             </div>
