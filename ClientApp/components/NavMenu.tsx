@@ -39,7 +39,7 @@ export class NavMenu extends React.Component<{}, {}>  {
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to={'/Table'} activeClassName='active' data-toggle="collapse" data-target=".in">
+                            <NavLink to={'/Search'} activeClassName='active' data-toggle="collapse" data-target=".in">
                                 <span className='glyphicon glyphicon-list'></span> Search facility by name
                             </NavLink>
                         </li>

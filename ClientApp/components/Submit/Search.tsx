@@ -2,6 +2,12 @@ import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { Link, NavLink, Redirect } from 'react-router-dom';
 
+const imgStyle= {
+  'width': '300px',
+  'border-radius': '10px',
+  'margin': '7px'
+}
+
 export default class Search extends React.Component<RouteComponentProps<{}>, any> {
   constructor() {
     super();
@@ -14,14 +20,14 @@ export default class Search extends React.Component<RouteComponentProps<{}>, any
 
   componentDidMount() {
     let self = this;
-    fetch('/api/facilities/get', {
+    fetch('/api/facilities/search', {
       credentials: 'same-origin',
       headers: {
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
       },
     })
       .then(response => response.json())
-      .then(data => this.setState({ facilities: data.cgFacilitiesClass }));
+      .then(data => this.setState({ facilities: data }));
     var classname = document.getElementsByClassName('panel');
     self.setState({ panels: classname });
   }
@@ -54,22 +60,18 @@ export default class Search extends React.Component<RouteComponentProps<{}>, any
             </div>
           </div>
         </div>
-        <div className="row">
-          {facilities.map(facility =>
-            <div className="col-md-4">
-              <div className="panel" id="Facility 1">
-                <div className="panel-body">
-                  <h3>Facility 1</h3>
-                  <p>Address</p>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget posuere sapien. Phasellus blandit neque porttitor.</p>
-                  <div className="text-center">
-                    <NavLink to="/Table" role="button" className="btn btn-default">Select</NavLink>
-                  </div>
-                </div>
+        {facilities.map(facility =>
+          <div className="col-md-6">
+            <div className="panel" id={facility.name}>
+              <div className="panel-body text-center">
+                <img style={imgStyle} src={'https://tools.wprdc.org/images/pittsburgh/facilities/' + facility.imgSrc + '.jpg'}/>
+                <h3>{facility.name}</h3>
+                <h4>{facility.neighborhood}</h4>
+                <NavLink to="/Table" role="button" value={facility.oid} className="btn btn-default">Select</NavLink>
               </div>
             </div>
+          </div>
           )}
-        </div>
       </div>
     );
   }
