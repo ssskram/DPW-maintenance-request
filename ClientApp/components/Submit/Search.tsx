@@ -3,9 +3,9 @@ import { RouteComponentProps } from 'react-router';
 import { Link, NavLink, Redirect } from 'react-router-dom';
 
 const imgStyle= {
-  'width': '300px',
-  'border-radius': '10px',
-  'margin': '7px'
+  maxWidth: '300px',
+  borderRadius: '10px',
+  margin: '7px'
 }
 
 export default class Search extends React.Component<RouteComponentProps<{}>, any> {
@@ -28,7 +28,8 @@ export default class Search extends React.Component<RouteComponentProps<{}>, any
     })
       .then(response => response.json())
       .then(data => this.setState({ facilities: data }));
-    var classname = document.getElementsByClassName('panel');
+
+    var classname = document.getElementsByClassName('facility');
     self.setState({ panels: classname });
   }
 
@@ -39,7 +40,7 @@ export default class Search extends React.Component<RouteComponentProps<{}>, any
         element.style.display = "none";
       }
       else {
-        element.style.display = "block";
+        element.style.display = "";
       }
     });
   }
@@ -61,13 +62,15 @@ export default class Search extends React.Component<RouteComponentProps<{}>, any
           </div>
         </div>
         {facilities.map(facility =>
-          <div className="col-md-6">
-            <div className="panel" id={facility.name}>
-              <div className="panel-body text-center">
-                <img style={imgStyle} src={'https://tools.wprdc.org/images/pittsburgh/facilities/' + facility.imgSrc + '.jpg'}/>
-                <h3>{facility.name}</h3>
-                <h4>{facility.neighborhood}</h4>
-                <NavLink to="/Table" role="button" value={facility.oid} className="btn btn-default">Select</NavLink>
+          <div>
+            <div className="facility col-md-6 col-sm-12" id={facility.name}>
+              <div className="panel">
+                <div className="panel-body text-center">
+                  <img style={imgStyle} src={'https://tools.wprdc.org/images/pittsburgh/facilities/' + facility.imgSrc + '.jpg'}/>
+                  <h3>{facility.name}</h3>
+                  <h4>{facility.neighborhood}</h4>
+                  <NavLink to="/Table" role="button" value={facility.oid} className="btn btn-default">Select</NavLink>
+                </div>
               </div>
             </div>
           </div>
