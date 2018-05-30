@@ -28,13 +28,16 @@ namespace maintenance_reqsts.Controllers
             foreach (var item in facilities)
             {
                 var encodedName = item.IDField.ToString().Replace(" ", "_");
-
+                var link =
+                    String.Format
+                    ("https://tools.wprdc.org/images/pittsburgh/facilities/{0}.jpg",
+                        encodedName); // 0
                 Facility fty = new Facility()
                 {
                     oid = item.Oid,
                     name = item.IDField,
                     neighborhood = item.NeighborhoodField,
-                    imgSrc = encodedName
+                    imgSrc = link
                 };
                 Facilities.Add(fty);
             }
@@ -42,10 +45,31 @@ namespace maintenance_reqsts.Controllers
         }
 
         [HttpGet("[action]")]
-        public async Task Map()
+        public async Task<object> map()
         {
             await get();
             var response = get().Result;
+            dynamic facilities = JObject.Parse(response)["cgFacilitiesClass"];
+            List<Facility> Facilities = new List<Facility>();
+            foreach (var item in facilities)
+            {
+                var encodedName = item.IDField.ToString().Replace(" ", "_");
+                var link =
+                    String.Format
+                    ("https://tools.wprdc.org/images/pittsburgh/facilities/{0}.jpg",
+                        encodedName); // 0
+                Facility fty = new Facility()
+                {
+                    oid = item.Oid,
+                    lat = item.CgShape.Center.Lat,
+                    lng = item.CgShape.Center.Lng,
+                    name = item.IDField,
+                    neighborhood = item.NeighborhoodField,
+                    imgSrc = link
+                };
+                Facilities.Add(fty);
+            }
+            return(Facilities);
         }
 
         public async Task<string> get() 

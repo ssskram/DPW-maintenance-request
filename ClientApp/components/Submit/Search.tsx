@@ -17,7 +17,7 @@ export default class Search extends React.Component<RouteComponentProps<{}>, any
       facilities: []
     }
   }
-
+  
   componentDidMount() {
     let self = this;
     fetch('/api/facilities/search', {
@@ -66,10 +66,10 @@ export default class Search extends React.Component<RouteComponentProps<{}>, any
             <div className="facility col-md-6 col-sm-12" id={facility.name}>
               <div className="panel">
                 <div className="panel-body text-center">
-                  <img style={imgStyle} src={'https://tools.wprdc.org/images/pittsburgh/facilities/' + facility.imgSrc + '.jpg'}/>
+                  <img style={imgStyle} src={facility.imgSrc}/>
                   <h3>{facility.name}</h3>
                   <h4>{facility.neighborhood}</h4>
-                  <NavLink to="/Table" role="button" value={facility.oid} className="btn btn-default">Select</NavLink>
+                  <NavLink to="/Search" role="button" value={facility.oid} className="btn btn-default">Select</NavLink>
                 </div>
               </div>
             </div>
