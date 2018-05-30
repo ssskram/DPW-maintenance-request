@@ -51,7 +51,7 @@ namespace maintenance_reqsts.Controllers
         public async Task<string> get() 
         {
             var key = Environment.GetEnvironmentVariable("CartegraphAPIkey");
-            var cartegraphUrl = "https://cgweb06.cartegraphoms.com/PittsburghPA/api/v1/Classes/cgFacilitiesClass";
+            var cartegraphUrl = "https://cgweb06.cartegraphoms.com/PittsburghPA/api/v1/Classes/cgFacilitiesClass?fields=Oid,CgShape,IDField,NeighborhoodField,InactiveField&filter=(([Inactive] is equal to false))";
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Authorization =
             new AuthenticationHeaderValue("Basic", key);
