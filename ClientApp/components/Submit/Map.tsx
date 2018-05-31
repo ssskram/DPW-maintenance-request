@@ -112,5 +112,5 @@ export class selectMap extends React.Component<any, any> {
 }
 
 export default GoogleApiWrapper({
-    apiKey: ('AIzaSyDnUmaTY-ZQfPybWpoeLjonYMfHHK46uPg')
+    apiKey: ('AIzaSyA89-c5tGTUcwg5cbyoY9QX1nFwATbvk6g')
 })(selectMap)
