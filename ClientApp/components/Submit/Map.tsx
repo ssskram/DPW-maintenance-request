@@ -13,11 +13,6 @@ export class selectMap extends React.Component<any, any> {
     constructor() {
         super();
         this.state = {
-            center: {
-                lat: '40.437470539681442',
-                lng: '-79.987124601795273'
-            },
-            zoom: 13,
             showingInfoWindow: true,
             facilities: [],
             activeMarker: {},
@@ -75,8 +70,11 @@ export class selectMap extends React.Component<any, any> {
                 <Map
                     className="map"
                     google={this.props.google}
-                    initialCenter={this.state.center}
-                    zoom={this.state.zoom}
+                    initialCenter={{
+                        lat: '40.437470539681442',
+                        lng: '-79.987124601795273'
+                    }}
+                    zoom={13}
                     onClick={this.onMapClicked.bind(this)}>
                     {facilities.map(facility =>
                         <Marker

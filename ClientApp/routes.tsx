@@ -5,6 +5,7 @@ import Home from './components/Home';
 import selectMap from './components/Submit/Map';
 import Search from './components/Submit/Search';
 import Issue from './components/Submit/Issue';
+import Form from './components/Submit/Form';
 import MyRequests from './components/Track/MyRequests';
 import AllRequests from './components/Track/AllRequests';
 import { Login } from './components/Account/Login';
@@ -14,6 +15,7 @@ export const routes = <Layout>
     <Route path='/Map' component={ selectMap } />
     <Route path='/Search' component={ Search } />
     <Route path='/Issue' component={ Issue } />
+    <Route path='/Form' component={ Form } />    
     <Route path='/MyRequests' component={ MyRequests } />
     <Route path='/AllRequests' component={ AllRequests } />
     <Route path='/Account/Login' component={ Login } />

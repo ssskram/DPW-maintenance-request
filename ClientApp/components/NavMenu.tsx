@@ -51,7 +51,7 @@ export class NavMenu extends React.Component<{}, {}>  {
                         </li>
                         <li>
                             <NavLink to={'/AllRequests'} activeClassName='active' data-toggle="collapse" data-target=".in">
-                            <span className='glyphicon glyphicon-chevron-right'></span> All requests
+                                <span className='glyphicon glyphicon-chevron-right'></span> All requests
                             </NavLink>
                         </li>
                         <div className='accountcontainer'>
@@ -61,6 +61,11 @@ export class NavMenu extends React.Component<{}, {}>  {
                                 <NavLink to={'/Account/Login'} activeClassName='active' id="logout" className='btn btn-link navbar-logout-btn navbar-link'>
                                     <span className='glyphicon glyphicon-user'></span>Logout
                                 </NavLink>
+                            </li>
+                        </div>
+                        <div className='cartcontainer'>
+                            <li className='cart'>
+                                Enter "cart" component here
                             </li>
                         </div>
                     </ul>

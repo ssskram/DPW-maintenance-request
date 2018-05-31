@@ -26,43 +26,43 @@ export default class Issue extends React.Component<RouteComponentProps<{}>, any>
         </div>
         <div className="col-md-12">
           <div className='col-md-6 text-center'>
-            <Link to={'/'} type="button" className="btn btn-big">
+            <Link to={'/Form'} type="button" className="btn btn-big">
               <img src={String(door)} /><br />
               <div>Doors, Locks, & Windows</div>
             </Link>
           </div>
           <div className='col-md-6 text-center'>
-            <Link to={'/'} type="button" className="btn btn-big">
+            <Link to={'/Form'} type="button" className="btn btn-big">
               <img src={String(electric)} /><br />
               <div>Electrical & Lighting</div>
             </Link>
           </div>
           <div className='col-md-6 text-center'>
-            <Link to={'/'} type="button" className="btn btn-big">
+            <Link to={'/Form'} type="button" className="btn btn-big">
               <img src={String(hvac)} /><br />
               <div>Heating & Air Conditioning</div>
             </Link>
           </div>
           <div className='col-md-6 text-center'>
-            <Link to={'/'} type="button" className="btn btn-big">
+            <Link to={'/Form'} type="button" className="btn btn-big">
               <img src={String(misc)} /><br />
               <div>Miscellaneous</div>
             </Link>
           </div>
           <div className='col-md-6 text-center'>
-            <Link to={'/'} type="button" className="btn btn-big">
+            <Link to={'/Form'} type="button" className="btn btn-big">
               <img src={String(paint)} /><br />
               <div>Carpentry & Painting</div>
             </Link>
           </div>
           <div className='col-md-6 text-center'>
-            <Link to={'/'} type="button" className="btn btn-big">
+            <Link to={'/Form'} type="button" className="btn btn-big">
               <img src={String(plumbing)} /><br />
               <div>Plumbing & Gas</div>
             </Link>
           </div>
           <div className='col-md-6 text-center'>
-            <Link to={'/'} type="button" className="btn btn-big">
+            <Link to={'/Form'} type="button" className="btn btn-big">
               <img src={String(roofing)} /><br />
               <div>Roofing</div>
             </Link>
