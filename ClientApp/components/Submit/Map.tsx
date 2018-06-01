@@ -29,7 +29,7 @@ export class selectMap extends React.Component<any, any> {
             },
         })
             .then(response => response.json())
-            .then(data => this.setState({ facilities: data }));
+            .then(data => this.setState({ facilities: data }));  
     }
    
     componentWillMount() {
@@ -40,13 +40,14 @@ export class selectMap extends React.Component<any, any> {
         document.body.style.backgroundColor = null;
     }
 
-    markerClick(props, marker) {
-        this.setState({
-            showingInfoWindow: true,
-            selectedPlace: props,
-            activeMarker: marker
-        });
-    }
+    // markerClick(props, marker) {
+    //     let self = this;
+    //     self.setState({
+    //         showingInfoWindow: true,
+    //         selectedPlace: props,
+    //         activeMarker: marker
+    //     });
+    // }
 
     onMapClicked() {
         if (this.state.showingInfoWindow) {
@@ -82,7 +83,7 @@ export class selectMap extends React.Component<any, any> {
                             lat={facility.lat}
                             lng={facility.lng}
                             position={{ lat: facility.lat, lng: facility.lng }}
-                            onClick={this.markerClick.bind(this)}
+                            // onClick={this.markerClick.bind(this)}
                             icon={{
                                 url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
                             }}
