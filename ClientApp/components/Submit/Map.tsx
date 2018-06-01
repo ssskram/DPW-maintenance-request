@@ -90,6 +90,15 @@ export class selectMap extends React.Component<any, any> {
                     }}
                 />,
             )}
+            <InfoWindow
+            marker={activeMarker}
+            visible={showingInfoWindow}>
+            <div className="text-center">
+                <img style={imgStyle} src={this.state.selectedPlace.img}/>
+                <h3>{this.state.selectedPlace.name}</h3>
+
+            </div>
+            </InfoWindow>
         </Map>
             </div>
         );
