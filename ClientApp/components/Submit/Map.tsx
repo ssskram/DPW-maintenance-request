@@ -65,44 +65,7 @@ export class selectMap extends React.Component<any, any> {
 
         return (
             <div id="map">
-                <Map
-                    className="map"
-                    google={this.props.google}
-                    initialCenter={{
-                        lat: '40.437470539681442',
-                        lng: '-79.987124601795273'
-                    }}
-                    zoom={12}>
 
-                    {facilities.map(facility =>
-                        <Marker
-                            key={facility.oid}
-                            oid={facility.oid}
-                            name={facility.name}
-                            neighborhood={facility.neighborhood}
-                            img={facility.imgSrc}
-                            lat={facility.lat}
-                            lng={facility.lng}
-                            position={{ lat: facility.lat, lng: facility.lng }}
-
-                            icon={{
-                                url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
-                            }}
-                        />,
-                    )}
-                    <InfoWindow
-                        marker={activeMarker}
-                        visible={showingInfoWindow}>
-                        <div className="text-center">
-                            <img style={imgStyle} src={this.state.selectedPlace.img}/>
-                            <h3>{this.state.selectedPlace.name}</h3>
-                            <h4>{this.state.selectedPlace.neighborhood}</h4>
-                            <MemoryRouter>
-                                <Link to={ '/Issue' } className="btn btn-default">Select</Link>
-                            </MemoryRouter>
-                        </div>
-                    </InfoWindow>
-                </Map>
             </div>
         );
     }
