@@ -93,6 +93,9 @@ export class selectMap extends React.Component<any, any> {
             <InfoWindow
             marker={activeMarker}
             visible={showingInfoWindow}>
+                <MemoryRouter>
+                    <Link to={ '/Issue' } className="btn btn-default">Select</Link>
+                </MemoryRouter>
             </InfoWindow>
         </Map>
             </div>
