@@ -62,8 +62,8 @@ export class selectMap extends React.Component<any, any> {
         const { facilities } = this.state;
         const { showingInfoWindow } = this.state;
         const { activeMarker } = this.state;
-
         const place = require('../../icons/place.png');
+        const content = this.state.selectedPlace.name;
 
         return (
             <div id="map">
@@ -93,11 +93,9 @@ export class selectMap extends React.Component<any, any> {
                         />,
                     )}
                     <InfoWindow
+                        content={content}
                         marker={activeMarker}
                         visible={showingInfoWindow}>
-                        <div>
-                        {this.state.selectedPlace.name}
-                        </div>
                     </InfoWindow>
                 </Map>
             </div>
