@@ -32,13 +32,13 @@ export class selectMap extends React.Component<any, any> {
             .then(data => this.setState({ facilities: data }));  
     }
    
-    componentWillMount() {
-        document.body.style.backgroundColor = "rgb(44, 62, 80)";
-    }
+    // componentWillMount() {
+    //     document.body.style.backgroundColor = "rgb(44, 62, 80)";
+    // }
 
-    componentWillUnmount() {
-        document.body.style.backgroundColor = null;
-    }
+    // componentWillUnmount() {
+    //     document.body.style.backgroundColor = null;
+    // }
 
     // markerClick(props, marker) {
     //     let self = this;
@@ -49,14 +49,14 @@ export class selectMap extends React.Component<any, any> {
     //     });
     // }
 
-    onMapClicked() {
-        if (this.state.showingInfoWindow) {
-            this.setState({
-                showingInfoWindow: false,
-                activeMarker: null
-            });
-        }
-    }
+    // onMapClicked() {
+    //     if (this.state.showingInfoWindow) {
+    //         this.setState({
+    //             showingInfoWindow: false,
+    //             activeMarker: null
+    //         });
+    //     }
+    // }
 
     render() {
         const { facilities } = this.state;
@@ -72,10 +72,11 @@ export class selectMap extends React.Component<any, any> {
                         lat: '40.437470539681442',
                         lng: '-79.987124601795273'
                     }}
-                    zoom={12}
-                    onClick={this.onMapClicked.bind(this)}>
+                    zoom={12}>
+
                     {facilities.map(facility =>
                         <Marker
+                            key={facility.oid}
                             oid={facility.oid}
                             name={facility.name}
                             neighborhood={facility.neighborhood}
@@ -83,7 +84,7 @@ export class selectMap extends React.Component<any, any> {
                             lat={facility.lat}
                             lng={facility.lng}
                             position={{ lat: facility.lat, lng: facility.lng }}
-                            // onClick={this.markerClick.bind(this)}
+
                             icon={{
                                 url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
                             }}
