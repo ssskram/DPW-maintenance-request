@@ -62,6 +62,7 @@ export class selectMap extends React.Component<any, any> {
         const { facilities } = this.state;
         const { showingInfoWindow } = this.state;
         const { activeMarker } = this.state;
+        const content= "test";
 
         return (
             <div id="map">
@@ -91,11 +92,9 @@ export class selectMap extends React.Component<any, any> {
                 />,
             )}
             <InfoWindow
-            marker={activeMarker}
-            visible={showingInfoWindow}>
-                <div>
-
-                </div>
+                content={content}
+                marker={activeMarker}
+                visible={showingInfoWindow}>
             </InfoWindow>
         </Map>
             </div>
