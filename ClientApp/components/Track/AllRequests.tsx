@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
+import ReactTable from "react-table";
 
 export default class AllRequests extends React.Component<RouteComponentProps<{}>, {}> {
     public render() {

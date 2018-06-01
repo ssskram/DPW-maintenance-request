@@ -31,13 +31,14 @@ export class selectMap extends React.Component<any, any> {
             .then(response => response.json())
             .then(data => this.setState({ facilities: data }));
     }
-    // componentWillMount() {
-    //     document.body.style.backgroundColor = "rgb(44, 62, 80)";
-    // }
+   
+    componentWillMount() {
+        document.body.style.backgroundColor = "rgb(44, 62, 80)";
+    }
 
-    // componentWillUnmount() {
-    //     document.body.style.backgroundColor = null;
-    // }
+    componentWillUnmount() {
+        document.body.style.backgroundColor = null;
+    }
 
     markerClick(props, marker) {
         this.setState({
