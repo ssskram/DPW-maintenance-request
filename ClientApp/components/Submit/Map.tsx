@@ -94,7 +94,7 @@ export class selectMap extends React.Component<any, any> {
             marker={activeMarker}
             visible={showingInfoWindow}>
                 <div>
-                Test
+
                 </div>
             </InfoWindow>
         </Map>
