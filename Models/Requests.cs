@@ -12,5 +12,6 @@ namespace maintenance_reqsts.Models
         public string description { get; set; }
         public string submitted { get; set; }
         public string status { get; set; }
+        public string lastModified { get; set; }
     }                      
 }

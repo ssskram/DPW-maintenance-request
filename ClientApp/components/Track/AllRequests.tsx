@@ -2,15 +2,6 @@ import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import ReactTable from "react-table";
 
-const data = [{
-    name: 'Tanner Linsley',
-    age: 26,
-    friend: {
-        name: 'Jason Maurer',
-        age: 23,
-    }
-}]
-
 const columns = [{
     Header: 'Submitted',
     accessor: 'submitted'
@@ -50,10 +41,36 @@ export default class AllRequests extends React.Component<any, any> {
 
     public render() {
         return (
-            <ReactTable
-                data={this.state.requests}
-                columns={columns}
-            />
+            <div>
+            <div className="row">
+                <div className="col-md-12">
+                <div className="form-group">
+                    <div className="form-element">
+                        <h3 className="form-h4">Search all requests</h3>
+                        <input name="filter" id="filter" className="selectpicker form-control" placeholder="Filter by name" />
+                    </div>
+                </div>
+                </div>
+            </div>
+                <div className="col-md-12 table-container">
+                <ReactTable
+                    data={this.state.requests}
+                    columns={columns}
+                    loading={false}
+                    showPageSizeOptions={false}
+                    showPageJump={false}
+                    showPaginationBottom={false}
+                    showPaginationTop={true}
+                    noDataText= 'Finding all requests...'
+                    defaultSorted={[
+                        {
+                            id: 'submitted',
+                            desc: true
+                        }
+                    ]}
+                />
+                </div>
+            </div>
         );
     }
 }

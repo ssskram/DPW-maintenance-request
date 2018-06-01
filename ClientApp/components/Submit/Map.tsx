@@ -71,7 +71,7 @@ export class selectMap extends React.Component<any, any> {
                         lat: '40.437470539681442',
                         lng: '-79.987124601795273'
                     }}
-                    zoom={13}
+                    zoom={12}
                     onClick={this.onMapClicked.bind(this)}>
                     {facilities.map(facility =>
                         <Marker
