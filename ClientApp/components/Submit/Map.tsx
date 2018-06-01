@@ -63,6 +63,8 @@ export class selectMap extends React.Component<any, any> {
         const { showingInfoWindow } = this.state;
         const { activeMarker } = this.state;
 
+        const place = require('../../icons/place.png');
+
         return (
             <div id="map">
                 <Map
@@ -86,18 +88,16 @@ export class selectMap extends React.Component<any, any> {
                             position={{ lat: facility.lat, lng: facility.lng }}
                             onClick={this.markerClick.bind(this)}
                             icon={{
-                                url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+                                url: place
                             }}
                         />,
                     )}
                     <InfoWindow
                         marker={activeMarker}
                         visible={showingInfoWindow}>
-                        {
-                            <div>
-                                {this.state.selectedPlace.name}
-                            </div>
-                        }
+                        <div>
+                        {this.state.selectedPlace.name}
+                        </div>
                     </InfoWindow>
                 </Map>
             </div>
