@@ -32,31 +32,31 @@ export class selectMap extends React.Component<any, any> {
             .then(data => this.setState({ facilities: data }));  
     }
    
-    // componentWillMount() {
-    //     document.body.style.backgroundColor = "rgb(44, 62, 80)";
-    // }
+    componentWillMount() {
+        document.body.style.backgroundColor = "rgb(44, 62, 80)";
+    }
 
-    // componentWillUnmount() {
-    //     document.body.style.backgroundColor = null;
-    // }
+    componentWillUnmount() {
+        document.body.style.backgroundColor = null;
+    }
 
-    // markerClick(props, marker) {
-    //     let self = this;
-    //     self.setState({
-    //         showingInfoWindow: true,
-    //         selectedPlace: props,
-    //         activeMarker: marker
-    //     });
-    // }
+    markerClick(props, marker) {
+        let self = this;
+        self.setState({
+            showingInfoWindow: true,
+            selectedPlace: props,
+            activeMarker: marker
+        });
+    }
 
-    // onMapClicked() {
-    //     if (this.state.showingInfoWindow) {
-    //         this.setState({
-    //             showingInfoWindow: false,
-    //             activeMarker: null
-    //         });
-    //     }
-    // }
+    onMapClicked() {
+        if (this.state.showingInfoWindow) {
+            this.setState({
+                showingInfoWindow: false,
+                activeMarker: null
+            });
+        }
+    }
 
     render() {
         const { facilities } = this.state;
