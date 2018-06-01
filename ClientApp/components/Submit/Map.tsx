@@ -65,7 +65,7 @@ export class selectMap extends React.Component<any, any> {
 
         return (
             <div id="map">
-            <Map
+        <Map
             className="map"
             google={this.props.google}
             initialCenter={{
@@ -90,14 +90,7 @@ export class selectMap extends React.Component<any, any> {
                     }}
                 />,
             )}
-            <InfoWindow
-            marker={activeMarker}
-            visible={showingInfoWindow}>
-            <div className="text-center">
-                <img style={imgStyle} src={this.state.selectedPlace.img}/>
-                <h3>{this.state.selectedPlace.name}</h3>
-
-            </div>
+            <InfoWindow>
             </InfoWindow>
         </Map>
             </div>
