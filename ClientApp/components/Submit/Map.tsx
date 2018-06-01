@@ -31,17 +31,13 @@ export class selectMap extends React.Component<any, any> {
             .then(response => response.json())
             .then(data => this.setState({ facilities: data }));
     }
-    componentWillMount() {
-        document.body.style.backgroundColor = "rgb(44, 62, 80)";
-    }
+    // componentWillMount() {
+    //     document.body.style.backgroundColor = "rgb(44, 62, 80)";
+    // }
 
-    componentWillUnmount() {
-        document.body.style.backgroundColor = null;
-    }
-
-    passToForm() {
-        alert("test")
-    }
+    // componentWillUnmount() {
+    //     document.body.style.backgroundColor = null;
+    // }
 
     markerClick(props, marker) {
         this.setState({
@@ -49,6 +45,15 @@ export class selectMap extends React.Component<any, any> {
             selectedPlace: props,
             activeMarker: marker
         });
+    }
+
+    onMapClicked() {
+        if (this.state.showingInfoWindow) {
+            this.setState({
+                showingInfoWindow: false,
+                activeMarker: null
+            });
+        }
     }
 
     render() {
@@ -65,7 +70,8 @@ export class selectMap extends React.Component<any, any> {
                         lat: '40.437470539681442',
                         lng: '-79.987124601795273'
                     }}
-                    zoom={13}>
+                    zoom={13}
+                    onClick={this.onMapClicked.bind(this)}>
                     {facilities.map(facility =>
                         <Marker
                             oid={facility.oid}
