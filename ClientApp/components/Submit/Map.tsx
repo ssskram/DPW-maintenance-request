@@ -39,15 +39,6 @@ export class selectMap extends React.Component<any, any> {
         document.body.style.backgroundColor = null;
     }
 
-    onMapClicked() {
-        if (this.state.showingInfoWindow) {
-            this.setState({
-                showingInfoWindow: false,
-                activeMarker: null
-            });
-        }
-    }
-
     passToForm() {
         alert("test")
     }
@@ -74,8 +65,7 @@ export class selectMap extends React.Component<any, any> {
                         lat: '40.437470539681442',
                         lng: '-79.987124601795273'
                     }}
-                    zoom={13}
-                    onClick={this.onMapClicked.bind(this)}>
+                    zoom={13}>
                     {facilities.map(facility =>
                         <Marker
                             oid={facility.oid}
