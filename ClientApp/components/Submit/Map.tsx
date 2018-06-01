@@ -62,7 +62,15 @@ export class selectMap extends React.Component<any, any> {
         const { facilities } = this.state;
         const { showingInfoWindow } = this.state;
         const { activeMarker } = this.state;
-        const content= "test";
+        const content=                 
+            <div className="text-center">
+                <img style={imgStyle} src={this.state.selectedPlace.img}/>
+                <h3>{this.state.selectedPlace.name}</h3>
+                <h4>{this.state.selectedPlace.neighborhood}</h4>
+                <MemoryRouter>
+                    <Link to={ '/Issue' } className="btn btn-default">Select</Link>
+                </MemoryRouter>
+            </div>;
 
         return (
             <div id="map">
@@ -92,9 +100,9 @@ export class selectMap extends React.Component<any, any> {
                 />,
             )}
             <InfoWindow
-                content={content}
                 marker={activeMarker}
                 visible={showingInfoWindow}>
+                <span>Test</span>
             </InfoWindow>
         </Map>
             </div>
