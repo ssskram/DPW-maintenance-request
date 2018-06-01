@@ -65,7 +65,32 @@ export class selectMap extends React.Component<any, any> {
 
         return (
             <div id="map">
-
+            <Map
+            className="map"
+            google={this.props.google}
+            initialCenter={{
+                lat: '40.437470539681442',
+                lng: '-79.987124601795273'
+            }}
+            zoom={12}
+            onClick={this.onMapClicked.bind(this)}>
+            {facilities.map(facility =>
+                <Marker
+                    key={facility.oid}
+                    oid={facility.oid}
+                    name={facility.name}
+                    neighborhood={facility.neighborhood}
+                    img={facility.imgSrc}
+                    lat={facility.lat}
+                    lng={facility.lng}
+                    position={{ lat: facility.lat, lng: facility.lng }}
+                    onClick={this.markerClick.bind(this)}
+                    icon={{
+                        url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+                    }}
+                />,
+            )}
+        </Map>
             </div>
         );
     }
