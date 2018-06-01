@@ -72,7 +72,7 @@ export class selectMap extends React.Component<any, any> {
                 lat: '40.437470539681442',
                 lng: '-79.987124601795273'
             }}
-            zoom={12}
+            zoom={12.5}
             onClick={this.onMapClicked.bind(this)}>
             {facilities.map(facility =>
                 <Marker
@@ -93,9 +93,7 @@ export class selectMap extends React.Component<any, any> {
             <InfoWindow
             marker={activeMarker}
             visible={showingInfoWindow}>
-                <MemoryRouter>
-                    <Link to={ '/Issue' } className="btn btn-default">Select</Link>
-                </MemoryRouter>
+                Test
             </InfoWindow>
         </Map>
             </div>
