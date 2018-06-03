@@ -2,12 +2,7 @@ import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 import { MemoryRouter, Link, NavLink, Redirect } from 'react-router-dom';
-
-const imgStyle = {
-    maxWidth: '300px',
-    borderRadius: '10px',
-    margin: '4px'
-}
+import IW from './Infowindow'
 
 export class selectMap extends React.Component<any, any> {
     constructor() {
@@ -63,7 +58,7 @@ export class selectMap extends React.Component<any, any> {
         const { showingInfoWindow } = this.state;
         const { activeMarker } = this.state;
         const place = require('../../icons/place.png');
-        const content = this.state.selectedPlace.name;
+        var content = this.state.selectedPlace.name;
 
         return (
             <div id="map">
@@ -93,9 +88,12 @@ export class selectMap extends React.Component<any, any> {
                         />,
                     )}
                     <InfoWindow
-                        content={content}
                         marker={activeMarker}
                         visible={showingInfoWindow}>
+                            <IW 
+                            name={this.state.selectedPlace.name}
+                            neighborhood={this.state.selectedPlace.neighborhood}
+                            img={this.state.selectedPlace.img} />
                     </InfoWindow>
                 </Map>
             </div>
