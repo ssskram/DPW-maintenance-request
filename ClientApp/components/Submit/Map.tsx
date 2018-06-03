@@ -88,12 +88,14 @@ export class selectMap extends React.Component<any, any> {
                         />,
                     )}
                     <InfoWindow
-                        marker={activeMarker}
-                        visible={showingInfoWindow}>
-                            <IW 
-                            name={this.state.selectedPlace.name}
-                            neighborhood={this.state.selectedPlace.neighborhood}
-                            img={this.state.selectedPlace.img} />
+                    marker={activeMarker}
+                    visible={showingInfoWindow}>
+                    {
+                        <IW 
+                        name={this.state.selectedPlace.name}
+                        neighborhood={this.state.selectedPlace.neighborhood}
+                        img={this.state.selectedPlace.img} />
+                    }
                     </InfoWindow>
                 </Map>
             </div>

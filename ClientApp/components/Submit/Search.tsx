@@ -62,7 +62,7 @@ export default class Search extends React.Component<RouteComponentProps<{}>, any
           </div>
         </div>
         {facilities.map(facility =>
-          <div>
+          <div key={facility.oid}>
             <div className="facility col-md-6 col-sm-12" id={facility.name}>
               <div className="panel">
                 <div className="panel-body text-center">
