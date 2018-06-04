@@ -18,6 +18,7 @@ export default class selectMap extends React.Component<any, any> {
             <div className="text-center">
             <img style={imgStyle} src={this.props.img}/>
             <h3>{this.props.name}</h3>
+            <h1> Test Test Test</h1>
             <h4>{this.props.neighborhood}</h4>
             <MemoryRouter>
                 <Link to={ '/Issue' } className="btn btn-default">Select</Link>

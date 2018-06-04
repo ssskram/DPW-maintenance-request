@@ -4,9 +4,15 @@ import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 import { MemoryRouter, Link, NavLink, Redirect } from 'react-router-dom';
 import IW from './Infowindow'
 
+const imgStyle = {
+    maxWidth: '300px',
+    borderRadius: '10px',
+    margin: '7px'
+  }  
+
 export class selectMap extends React.Component<any, any> {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             showingInfoWindow: true,
             facilities: [],
@@ -58,8 +64,7 @@ export class selectMap extends React.Component<any, any> {
         const { showingInfoWindow } = this.state;
         const { activeMarker } = this.state;
         const place = require('../../icons/place.png');
-        var content = this.state.selectedPlace.name;
-
+        
         return (
             <div id="map">
                 <Map
@@ -90,12 +95,14 @@ export class selectMap extends React.Component<any, any> {
                     <InfoWindow
                     marker={activeMarker}
                     visible={showingInfoWindow}>
-                    {
-                        <IW 
-                        name={this.state.selectedPlace.name}
-                        neighborhood={this.state.selectedPlace.neighborhood}
-                        img={this.state.selectedPlace.img} />
-                    }
+                    <div className="text-center">
+                        <img style={imgStyle} src={this.state.selectedPlace.img}/>
+                        <h3>{this.state.selectedPlace.name}</h3>
+                        <h4>{this.state.selectedPlace.neighborhood}</h4>
+                        <MemoryRouter>
+                            <Link to={ '/Issue' } className="btn btn-default">Select</Link>
+                        </MemoryRouter>
+                    </div>
                     </InfoWindow>
                 </Map>
             </div>
