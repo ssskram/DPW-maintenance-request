@@ -63,11 +63,6 @@ export class NavMenu extends React.Component<{}, {}>  {
                                 </NavLink>
                             </li>
                         </div>
-                        <div className='cartcontainer'>
-                            <li className='cart'>
-                                Enter "cart" component here
-                            </li>
-                        </div>
                     </ul>
                 </div>
             </div>

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { Link, NavLink, Redirect } from 'react-router-dom';
 
-export default class Form extends React.Component<RouteComponentProps<{}>, any> {
+export default class DescribeIssue extends React.Component<any, any> {
     constructor() {
         super();
         this.state = {
@@ -38,9 +38,13 @@ export default class Form extends React.Component<RouteComponentProps<{}>, any> 
                         <label htmlFor="Phone" className="error" hidden />
                     </div>
                 </div>
-                <div className="form-group">
-                    <div className="col-md-12 text-center">
-                        <Link to={ '/MyRequests' } className="btn btn-submit">Submit</Link>
+                <div className="row col-md-12">
+                    <div className="col-md-4">
+                        <button className="btn btn-danger">Back</button>
+                    </div>
+                    <div className="col-md-4" />
+                    <div className="col-md-4">
+                        <button className="btn btn-success">Yes</button>
                     </div>
                 </div>
             </div>

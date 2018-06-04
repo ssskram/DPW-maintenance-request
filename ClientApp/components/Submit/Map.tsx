@@ -3,13 +3,22 @@ import { RouteComponentProps } from 'react-router';
 import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
 import { Link, NavLink, Redirect } from 'react-router-dom';
 import Modal from 'react-modal';
-import Floater from './Floater';
+import Overlay from './Overlay';
 
-const imgStyle = {
-    maxWidth: '300px',
-    borderRadius: '10px',
-    margin: '7px'
-  }  
+const modalStyles = {
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+        backgroundColor: '#fffcf5',
+        border: 'solid 1px rgba(160, 160, 160, 0.3)',
+        boxShadow: '0 1px 4px 0 rgba(0, 0, 0, 0.1)',
+        overlfow: 'scroll'
+    }
+};
 
 Modal.setAppElement('#main')
 
@@ -62,8 +71,8 @@ export class selectMap extends React.Component<any, any> {
         }
     }
     closeModal() {
-        this.setState({modalIsOpen: false});
-      }
+        this.setState({ modalIsOpen: false });
+    }
 
     render() {
         const { facilities } = this.state;
@@ -80,7 +89,7 @@ export class selectMap extends React.Component<any, any> {
                         lat: '40.437470539681442',
                         lng: '-79.987124601795273'
                     }}
-                    zoom={12.5}
+                    zoom={13}
                     onClick={this.onMapClicked.bind(this)}>
                     {facilities.map(facility =>
                         <Marker
@@ -94,16 +103,18 @@ export class selectMap extends React.Component<any, any> {
                             position={{ lat: facility.lat, lng: facility.lng }}
                             onClick={this.markerClick.bind(this)}
                             icon={{
-                                url: place
+                                url: place,
+                                height: 10,
+                                width: 5
                             }}
                         />,
                     )}
                 </Map>
-                <Modal isOpen={this.state.modalIsOpen}>
-                    <Floater 
-                    img={this.state.selectedPlace.img} 
-                    name={this.state.selectedPlace.name} 
-                    neighborhood={this.state.selectedPlace.neighborhood} />
+                <Modal isOpen={this.state.modalIsOpen} style={modalStyles}>
+                    <Overlay
+                        img={this.state.selectedPlace.img}
+                        name={this.state.selectedPlace.name}
+                        neighborhood={this.state.selectedPlace.neighborhood} />
                 </Modal>
             </div>
         );
