@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
-import { Link, NavLink, Redirect } from 'react-router-dom';
 
 const iconStyle = {
     height: '75px',
@@ -9,10 +8,12 @@ const iconStyle = {
 export default class SelectIssue extends React.Component<any, any> {
     constructor(props) {
         super(props);
-        this.state = {
-        }
     }
 
+    componentDidMount() {
+        window.scrollTo(0, 0)
+    }
+    
     public render() {
         const door = require('../../../icons/door.png');
         const electric = require('../../../icons/electric.png');
@@ -21,6 +22,7 @@ export default class SelectIssue extends React.Component<any, any> {
         const paint = require('../../../icons/paint.png');
         const plumbing = require('../../../icons/plumbing.png');
         const roofing = require('../../../icons/roofing.png');
+        const { next } = this.props;
 
         return (
             <div>
@@ -29,46 +31,49 @@ export default class SelectIssue extends React.Component<any, any> {
                 </div>
                 <div>
                     <div className='col-md-4 text-center'>
-                        <Link to={'/Form'} type="button" className="btn btn-big">
+                        <button type="button" className="btn btn-big" value='describe' onClick={next.bind(this)}>
                             <img src={String(door)} style={iconStyle} /><br />
                             <div>Doors, Locks, & Windows</div>
-                        </Link>
+                        </button>
                     </div>
                     <div className='col-md-4 text-center'>
-                        <Link to={'/Form'} type="button" className="btn btn-big">
+                        <button type="button" className="btn btn-big" value='describe' onClick={next.bind(this)}>
                             <img src={String(electric)} style={iconStyle} /><br />
                             <div>Electrical & Lighting</div>
-                        </Link>
+                        </button>
                     </div>
                     <div className='col-md-4 text-center'>
-                        <Link to={'/Form'} type="button" className="btn btn-big">
+                        <button type="button" className="btn btn-big" value='describe' onClick={next.bind(this)}>
                             <img src={String(hvac)} style={iconStyle} /><br />
                             <div>Heating & Air Conditioning</div>
-                        </Link>
+                        </button>
                     </div>
                     <div className='col-md-4 text-center'>
-                        <Link to={'/Form'} type="button" className="btn btn-big">
+                        <button type="button" className="btn btn-big" value='describe' onClick={next.bind(this)}>
                             <img src={String(misc)} style={iconStyle} /><br />
                             <div>Miscellaneous</div>
-                        </Link>
+                        </button>
                     </div>
                     <div className='col-md-4 text-center'>
-                        <Link to={'/Form'} type="button" className="btn btn-big">
+                        <button type="button" className="btn btn-big" value='describe' onClick={next.bind(this)}>
                             <img src={String(paint)} style={iconStyle} /><br />
                             <div>Carpentry & Painting</div>
-                        </Link>
+                        </button>
                     </div>
                     <div className='col-md-4 text-center'>
-                        <Link to={'/Form'} type="button" className="btn btn-big">
+                        <button type="button" className="btn btn-big" value='describe' onClick={next.bind(this)}>
                             <img src={String(plumbing)} style={iconStyle} /><br />
                             <div>Plumbing & Gas</div>
-                        </Link>
+                        </button>
                     </div>
                     <div className='col-md-4 text-center'>
-                        <Link to={'/Form'} type="button" className="btn btn-big">
+                        <button type="button" className="btn btn-big" value='describe' onClick={next.bind(this)}>
                             <img src={String(roofing)} style={iconStyle} /><br />
                             <div>Roofing</div>
-                        </Link>
+                        </button>
+                    </div>
+                    <div className='col-md-12 text-center'>
+                        <button value='confirm' onClick={next.bind(this)} className="btn btn-danger">Back</button>
                     </div>
                 </div>
             </div>

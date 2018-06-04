@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
-import { MemoryRouter, Link, NavLink, Redirect } from 'react-router-dom';
 
 const imgStyle = {
     maxHeight: '500px',
@@ -13,8 +12,12 @@ export default class ConfirmFacility extends React.Component<any, any> {
         super(props);
     }
 
+    componentDidMount() {
+        window.scrollTo(0, 0)
+    }
+    
     render() {
-        const { stage, img, name, neighborhood } = this.props;
+        const { img, name, neighborhood } = this.props;
         const { next } = this.props;
 
         return (
@@ -25,11 +28,11 @@ export default class ConfirmFacility extends React.Component<any, any> {
                 <h3>{neighborhood}</h3>
                 <div className="row col-md-12">
                     <div className="col-md-4">
-                        <button value={0} onClick={next} className="btn btn-danger">No</button>
+                        <button value='exit' onClick={next.bind(this)} className="btn btn-danger">No</button>
                     </div>
                     <div className="col-md-4"/>
                     <div className="col-md-4">
-                        <button value={1} onClick={next} className="btn btn-success">Yes</button>
+                        <button value='issue' onClick={next.bind(this)} className="btn btn-success">Yes</button>
                     </div>
                 </div>
             </div>
