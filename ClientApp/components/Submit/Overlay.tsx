@@ -13,27 +13,24 @@ export default class Overlay extends React.Component<any, any> {
     }
 
     handleChange = event => {
-        this.setState({
-            stage: event.target.id
-        });
+        this.setState({stage: event.currentTarget.value});
     };
 
     returnToFacilities() {
-        alert("kill modal at parent")
+        this.props.exit();
     }
 
     getComponent() {
         var stage = this.state.stage;
-        alert(stage)
         switch (stage) {
             case 'exit':
                 this.returnToFacilities();
             case 'confirm':
-                return (<ConfirmFacility next={this.handleChange.bind(this)} img={this.props.img} name={this.props.name} neighborhood={this.props.neighborhood} />);
+                return (<ConfirmFacility next={this.handleChange} img={this.props.img} name={this.props.name} neighborhood={this.props.neighborhood} />);
             case 'issue':
-                return (<SelectIssue next={this.handleChange.bind(this)} />);
+                return (<SelectIssue next={this.handleChange} />);
             case 'describe':
-                return (<DescribeIssue next={this.handleChange.bind(this)} />);
+                return (<DescribeIssue next={this.handleChange} />);
         }
     }
 

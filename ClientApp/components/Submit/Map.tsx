@@ -20,7 +20,7 @@ const modalStyles = {
     }
 };
 
-Modal.setAppElement('#main')
+Modal.setAppElement('#main');
 
 export class selectMap extends React.Component<any, any> {
     constructor(props) {
@@ -28,7 +28,6 @@ export class selectMap extends React.Component<any, any> {
         this.state = {
             modalIsOpen: false,
             facilities: [],
-            activeMarker: {},
             selectedPlace: {}
         }
     }
@@ -53,31 +52,23 @@ export class selectMap extends React.Component<any, any> {
         document.body.style.backgroundColor = null;
     }
 
-    markerClick(props, marker) {
+    markerClick(props) {
         let self = this;
         self.setState({
             modalIsOpen: true,
             selectedPlace: props,
-            activeMarker: marker
         });
     }
-
-    onMapClicked() {
-        if (this.state.modalIsOpen) {
-            this.setState({
-                modalIsOpen: false,
-                activeMarker: null
-            });
-        }
-    }
+    
     closeModal() {
-        this.setState({ modalIsOpen: false });
+        this.setState({
+            modalIsOpen: false
+        });
     }
 
     render() {
         const { facilities } = this.state;
         const { modalIsOpen } = this.state;
-        const { activeMarker } = this.state;
         const place = require('../../icons/place.png');
 
         return (
@@ -89,8 +80,7 @@ export class selectMap extends React.Component<any, any> {
                         lat: '40.437470539681442',
                         lng: '-79.987124601795273'
                     }}
-                    zoom={13}
-                    onClick={this.onMapClicked.bind(this)}>
+                    zoom={13}>
                     {facilities.map(facility =>
                         <Marker
                             key={facility.oid}
@@ -104,14 +94,13 @@ export class selectMap extends React.Component<any, any> {
                             onClick={this.markerClick.bind(this)}
                             icon={{
                                 url: place,
-                                height: 10,
-                                width: 5
                             }}
                         />,
                     )}
                 </Map>
                 <Modal isOpen={this.state.modalIsOpen} style={modalStyles}>
                     <Overlay
+                        exit={this.closeModal.bind(this)}
                         img={this.state.selectedPlace.img}
                         name={this.state.selectedPlace.name}
                         neighborhood={this.state.selectedPlace.neighborhood} />
