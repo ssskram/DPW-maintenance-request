@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { Link, NavLink, Redirect } from 'react-router-dom';
+import Modal from 'react-modal';
+import Overlay from './Overlay';
+import FacilityCard from './FacilityCard'
 
 const imgStyle = {
   maxWidth: '300px',
@@ -8,13 +11,30 @@ const imgStyle = {
   margin: '7px'
 }
 
+const modalStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    backgroundColor: '#fffcf5',
+    border: 'solid 1px rgba(160, 160, 160, 0.3)',
+    boxShadow: '0 1px 4px 0 rgba(0, 0, 0, 0.1)',
+    overlfow: 'scroll'
+  }
+};
+
 export default class Search extends React.Component<RouteComponentProps<{}>, any> {
   constructor() {
     super();
     this.state = {
       facility: '',
       panels: [],
-      facilities: []
+      facilities: [],
+      modalIsOpen: false,
+      selectedPlace: {}
     }
   }
 
@@ -45,9 +65,24 @@ export default class Search extends React.Component<RouteComponentProps<{}>, any
     });
   }
 
+  buttonClick = props => {
+    alert(props.oid)
+    let self = this;
+    self.setState({
+      modalIsOpen: true
+      // selectedPlace: props.oid
+    });
+  }
+
+  closeModal() {
+    this.setState({
+      modalIsOpen: false
+    });
+  }
 
   public render() {
     const { facilities } = this.state;
+    const { modalIsOpen } = this.state;
 
     return (
       <div className="container-fluid">
@@ -55,26 +90,28 @@ export default class Search extends React.Component<RouteComponentProps<{}>, any
           <div className="col-md-12">
             <div className="form-group">
               <div className="form-element">
-                <h3 className="form-h4">Search facilities</h3>
+                <h2 className="form-h4">Search facilities</h2>
                 <input name="filter" id="filter" className="selectpicker form-control" placeholder="Filter by name" onChange={this.filter.bind(this)} />
               </div>
             </div>
           </div>
         </div>
-        {facilities.map(facility =>
-          <div key={facility.oid}>
-            <div className="facility col-md-6 col-sm-12" id={facility.name}>
-              <div className="panel">
-                <div className="panel-body text-center">
-                  <img style={imgStyle} src={facility.imgSrc} />
-                  <h3>{facility.name}</h3>
-                  <h4>{facility.neighborhood}</h4>
-                  <Link to={ '/Issue' } className="btn btn-default">Select</Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
+          {facilities.map(facility =>
+            <FacilityCard
+              key={facility.oid}
+              oid={facility.oid}
+              name={facility.name}
+              neighborhood={facility.neighborhood}
+              imgSrc={facility.imgSrc}
+              select={this.buttonClick} />
+          )}
+        <Modal isOpen={this.state.modalIsOpen} style={modalStyles}>
+          <Overlay
+            exit={this.closeModal.bind(this)}
+            img={this.state.selectedPlace.img}
+            name={this.state.selectedPlace.name}
+            neighborhood={this.state.selectedPlace.neighborhood} />
+        </Modal>
       </div>
     );
   }

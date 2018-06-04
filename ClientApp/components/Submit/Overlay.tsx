@@ -9,15 +9,23 @@ export default class Overlay extends React.Component<any, any> {
         super(props);
         this.state = {
             stage: 'confirm',
+            issueType: ''
         }
     }
 
-    handleChange = event => {
-        this.setState({stage: event.currentTarget.value});
-    };
-
     returnToFacilities() {
         this.props.exit();
+    }
+
+    handleChange = event => {
+        this.setState({ stage: event.currentTarget.value });
+        if (event.currentTarget.name != null) {
+            this.setIssueType(event);
+        }
+    };
+
+    setIssueType = event => {
+        this.setState({ issueType: event.currentTarget.name });
     }
 
     getComponent() {
@@ -30,13 +38,13 @@ export default class Overlay extends React.Component<any, any> {
             case 'issue':
                 return (<SelectIssue next={this.handleChange} />);
             case 'describe':
-                return (<DescribeIssue next={this.handleChange} />);
+                return (<DescribeIssue next={this.handleChange} type={this.state.issueType} name={this.props.name} neighborhood={this.props.neighborhood} />);
         }
     }
 
     render() {
         return (
-            <div className="text-center">
+            <div>
                 {this.getComponent()}
             </div>
         );

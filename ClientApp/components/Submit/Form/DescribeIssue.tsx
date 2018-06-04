@@ -3,6 +3,14 @@ import { RouteComponentProps } from 'react-router';
 import { Link, NavLink, Redirect } from 'react-router-dom';
 declare var $: any;
 
+const marginTop = {
+    marginTop: '20px'
+}
+
+const red = {
+    color: 'red'
+}
+
 export default class DescribeIssue extends React.Component<any, any> {
     constructor(props) {
         super(props);
@@ -24,7 +32,8 @@ export default class DescribeIssue extends React.Component<any, any> {
             <div>
                 <div className="row">
                     <div className="col-md-12 text-center">
-                        <h2>Enter facility image & issue icon here</h2>
+                        <h2>{this.props.name}</h2>
+                        <h3 style={red}>{this.props.type}</h3>
                     </div>
                 </div>
                 <div className="form-group">
@@ -56,12 +65,11 @@ export default class DescribeIssue extends React.Component<any, any> {
                         <label htmlFor="Phone" className="error" hidden />
                     </div>
                 </div>
-                <div className="row col-md-12">
-                    <div className="col-md-4">
+                <div className="row col-md-12" style={marginTop}>
+                    <div className="col-md-6 text-center">
                         <button value='issue' onClick={next.bind(this)} className="btn btn-danger">Back</button>
                     </div>
-                    <div className="col-md-4" />
-                    <div className="col-md-4">
+                    <div className="col-md-6 text-center">
                         <button className="btn btn-success">Submit</button>
                     </div>
                 </div>
