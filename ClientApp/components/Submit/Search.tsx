@@ -53,7 +53,7 @@ export default class Search extends React.Component<RouteComponentProps<{}>, any
     self.setState({ panels: classname });
   }
 
-  filter(event: any) {
+  filter(event) {
     let self = this;
     Array.from(self.state.panels).forEach(function (element: any) {
       if (element.id.toLowerCase().indexOf(event.target.value.toLowerCase()) === -1) {
@@ -65,12 +65,13 @@ export default class Search extends React.Component<RouteComponentProps<{}>, any
     });
   }
 
-  buttonClick = props => {
-    alert(props.oid)
+  buttonClick = event => {
     let self = this;
+    var obj = this.state.facilities.find(function (obj) { return obj.oid === event.target.id; });
+    console.log(obj)
     self.setState({
-      modalIsOpen: true
-      // selectedPlace: props.oid
+      modalIsOpen: true,
+      selectedPlace: obj
     });
   }
 
@@ -102,8 +103,8 @@ export default class Search extends React.Component<RouteComponentProps<{}>, any
               oid={facility.oid}
               name={facility.name}
               neighborhood={facility.neighborhood}
-              imgSrc={facility.imgSrc}
-              select={this.buttonClick} />
+              img={facility.img}
+              select={this.buttonClick.bind(this)}/>
           )}
         <Modal isOpen={this.state.modalIsOpen} style={modalStyles}>
           <Overlay

@@ -37,7 +37,7 @@ namespace maintenance_reqsts.Controllers
                     oid = item.Oid,
                     name = item.IDField,
                     neighborhood = item.NeighborhoodField,
-                    imgSrc = link
+                    img = link
                 };
                 Facilities.Add(fty);
             }
@@ -65,7 +65,7 @@ namespace maintenance_reqsts.Controllers
                     lng = item.CgShape.Center.Lng,
                     name = item.IDField,
                     neighborhood = item.NeighborhoodField,
-                    imgSrc = link
+                    img = link
                 };
                 Facilities.Add(fty);
             }

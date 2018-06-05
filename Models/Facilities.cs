@@ -11,6 +11,6 @@ namespace maintenance_reqsts.Models
         public string lng { get; set; }
         public string neighborhood { get; set; }
         public string name { get; set; }
-        public string imgSrc { get; set; }
+        public string img { get; set; }
     }                      
 }

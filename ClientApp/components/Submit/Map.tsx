@@ -87,7 +87,7 @@ export class selectMap extends React.Component<any, any> {
                             oid={facility.oid}
                             name={facility.name}
                             neighborhood={facility.neighborhood}
-                            img={facility.imgSrc}
+                            img={facility.img}
                             lat={facility.lat}
                             lng={facility.lng}
                             position={{ lat: facility.lat, lng: facility.lng }}

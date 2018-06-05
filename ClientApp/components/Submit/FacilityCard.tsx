@@ -1,8 +1,11 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { Link, NavLink, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { ApplicationState }  from '../../store';
 import Modal from 'react-modal';
 import Overlay from './Overlay';
+import * as FacilityStore from '../../store/Facility';
 
 const imgStyle = {
     maxWidth: '300px',
@@ -11,13 +14,8 @@ const imgStyle = {
 }
 
 export default class FacilityCard extends React.Component<any, any> {
-    constructor(props) {
-        super(props);
-    }
-
     public render() {
-        const { select } = this.props
-        const { oid } = this.props.name
+        const {select} = this.props
 
         return (
             <div className="container-fluid" key={this.props.oid}>
@@ -25,10 +23,10 @@ export default class FacilityCard extends React.Component<any, any> {
                     <div className="facility" id={this.props.name}>
                         <div className="panel">
                             <div className="panel-body text-center">
-                                <img style={imgStyle} src={this.props.imgSrc} />
+                                <img style={imgStyle} src={this.props.img} />
                                 <h3>{this.props.name}</h3>
                                 <h4>{this.props.neighborhood}</h4>
-                                <button onClick={select.bind(this.props)} className="btn btn-success">Select</button>
+                                <button onClick={select} id={this.props.oid} className="btn btn-success">Select</button>
                             </div> 
                         </div>
                     </div>
