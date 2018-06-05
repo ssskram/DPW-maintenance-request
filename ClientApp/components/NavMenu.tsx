@@ -1,8 +1,13 @@
 import * as React from 'react';
 import { Link, NavLink, Redirect } from 'react-router-dom';
-declare var $: any;
 
-export class NavMenu extends React.Component<{}, {}>  {
+export class NavMenu extends React.Component<any, any>  {
+    constructor() {
+        super();
+        this.state = {
+            user: ''
+        }
+    }
     componentDidMount() {
         fetch('/api/userdata/getuser', {
             credentials: 'same-origin',
@@ -12,12 +17,14 @@ export class NavMenu extends React.Component<{}, {}>  {
         })
             .then(response => response.json())
             .then(data => {
-                if (data != null) {
-                    $('#account').html(data);
-                }
+                this.setState ({
+                    user: data,
+                })
             });
     }
     public render() {
+        const { user } = this.state
+
         return <div className='main-nav'>
             <div className='navbar navbar-inverse'>
                 <div className='navbar-header'>
@@ -55,8 +62,7 @@ export class NavMenu extends React.Component<{}, {}>  {
                             </NavLink>
                         </li>
                         <div className='accountcontainer'>
-                            <li className="account" id="account">
-                            </li>
+                            <li className="account">{user}</li>
                             <li className='logout'>
                                 <NavLink to={'/Account/Login'} activeClassName='active' id="logout" className='btn btn-link navbar-logout-btn navbar-link'>
                                     <span className='glyphicon glyphicon-user'></span>Logout

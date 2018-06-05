@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import ReactTable from "react-table";
+import { connect } from 'react-redux';
+import { ApplicationState } from '../../store';
+import * as RequestsStore from '../../store/requests';
 
 const columns = [{
     Header: 'Request ID',
@@ -25,24 +28,16 @@ const columns = [{
     accessor: 'description'
 }]
 
-export default class MyRequests extends React.Component<any, any> {
-    constructor() {
-        super();
-        this.state = {
-            requests: [],
-        }
-    }
+type RequestsProps =
+    RequestsStore.RequestsState
+    & typeof RequestsStore.actionCreators
+    & RouteComponentProps<{}>;
+
+
+export class MyRequests extends React.Component<RequestsProps, {}> {
 
     componentDidMount() {
-        let self = this;
-        fetch('/api/requests/mine', {
-            credentials: 'same-origin',
-            headers: {
-                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
-            },
-        })
-            .then(response => response.json())
-            .then(data => this.setState({ requests: data }));
+        this.props.requestMyRequests()
     }
 
     public render() {
@@ -60,7 +55,7 @@ export default class MyRequests extends React.Component<any, any> {
             </div>
                 <div className="col-md-12 table-container">
                 <ReactTable
-                    data={this.state.requests}
+                    data={this.props.requests}
                     columns={columns}
                     defaultPageSize={10}
                     noDataText= 'You have not submitted any maintenance requests'
@@ -76,3 +71,8 @@ export default class MyRequests extends React.Component<any, any> {
         );
     }
 }
+
+export default connect(
+    (state: ApplicationState) => state.requests, 
+    RequestsStore.actionCreators               
+  )(MyRequests as any) as typeof MyRequests;
