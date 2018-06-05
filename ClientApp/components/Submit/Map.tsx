@@ -16,7 +16,8 @@ const modalStyles = {
         backgroundColor: '#fffcf5',
         border: 'solid 1px rgba(160, 160, 160, 0.3)',
         boxShadow: '0 1px 4px 0 rgba(0, 0, 0, 0.1)',
-        overlfow: 'scroll'
+        overflow: 'visible',
+        maxWidth: '1500px'
     }
 };
 
@@ -27,21 +28,8 @@ export class selectMap extends React.Component<any, any> {
         super(props);
         this.state = {
             modalIsOpen: false,
-            facilities: [],
             selectedPlace: {}
         }
-    }
-
-    componentDidMount() {
-        let self = this;
-        fetch('/api/facilities/map', {
-            credentials: 'same-origin',
-            headers: {
-                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
-            },
-        })
-            .then(response => response.json())
-            .then(data => this.setState({ facilities: data }));
     }
 
     componentWillMount() {
@@ -59,7 +47,7 @@ export class selectMap extends React.Component<any, any> {
             selectedPlace: props,
         });
     }
-    
+
     closeModal() {
         this.setState({
             modalIsOpen: false
@@ -67,7 +55,6 @@ export class selectMap extends React.Component<any, any> {
     }
 
     render() {
-        const { facilities } = this.state;
         const { modalIsOpen } = this.state;
         const place = require('../../icons/place.png');
 
@@ -81,7 +68,7 @@ export class selectMap extends React.Component<any, any> {
                         lng: '-79.987124601795273'
                     }}
                     zoom={13}>
-                    {facilities.map(facility =>
+                    {this.props.facilities.map(facility =>
                         <Marker
                             key={facility.oid}
                             oid={facility.oid}

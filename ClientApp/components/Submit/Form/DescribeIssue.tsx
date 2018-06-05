@@ -14,22 +14,30 @@ const red = {
 export default class DescribeIssue extends React.Component<any, any> {
     constructor(props) {
         super(props);
+        this.state = {
+            issues: []
+        }
     }
 
     componentDidMount() {
         window.scrollTo(0, 0)
-
-        $('.selectpicker').selectpicker();
-        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
-            $('.selectpicker').selectpicker('mobile');
-        }
+        let self = this;
+        fetch('/api/facilities/issues', {
+            credentials: 'same-origin',
+            headers: {
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+            },
+        })
+            .then(response => response.json())
+            .then(data => this.setState({ issues: data }, () => {$('.selectpicker').selectpicker("refresh")}))
     }
 
     public render() {
         const { next } = this.props;
+        const { issues } = this.state;
 
         return (
-            <div>
+            <div className="form">
                 <div className="row">
                     <div className="col-md-12 text-center">
                         <h2>{this.props.name}</h2>
@@ -40,6 +48,9 @@ export default class DescribeIssue extends React.Component<any, any> {
                     <div className="col-md-12">
                         <h3 className="form-h3">Select an issue</h3>
                         <select id="Issue" name="Issue" data-style="btn-info" className="selectpicker btn-form-control" title="Issue" data-dropup-auto="false">
+                            {issues.map(issue =>
+                                <option key={issue.name}>{issue.name}</option>
+                            )}
                         </select>
                         <label htmlFor="Issue" className="error" hidden></label>
                     </div>

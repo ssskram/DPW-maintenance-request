@@ -531,4 +531,17 @@ button.bs-placeholder[role='button']>span {
 /* ------------------------- */
 .ReactModal__Overlay {
     z-index: 2500;
+    overflow: visible !important;
+}
+.form { 
+    overflow: visible;
+}
+.dropdown-menu open {
+    overflow: visible; 
+}
+.dropdown-menu inner { 
+    overflow: visible; 
+}
+.dropdown-menu { 
+    overflow: visible; 
 }

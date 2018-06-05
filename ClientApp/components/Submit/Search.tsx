@@ -2,6 +2,9 @@ import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { Link, NavLink, Redirect } from 'react-router-dom';
 import Modal from 'react-modal';
+import { connect } from 'react-redux';
+import { ApplicationState } from '../../store';
+import * as FacilitiesStore from '../../store/facilities';
 import Overlay from './Overlay';
 import FacilityCard from './FacilityCard'
 
@@ -22,35 +25,31 @@ const modalStyles = {
     backgroundColor: '#fffcf5',
     border: 'solid 1px rgba(160, 160, 160, 0.3)',
     boxShadow: '0 1px 4px 0 rgba(0, 0, 0, 0.1)',
-    overlfow: 'scroll'
+    overflow: 'visible',
+    maxWidth: '1500px'
   }
 };
 
-export default class Search extends React.Component<RouteComponentProps<{}>, any> {
+type FacilitiesProps =
+  FacilitiesStore.FacilitiesState
+  & typeof FacilitiesStore.actionCreators
+  & RouteComponentProps<{}>;
+
+export class Search extends React.Component<FacilitiesProps, any> {
   constructor() {
     super();
     this.state = {
-      facility: '',
       panels: [],
-      facilities: [],
       modalIsOpen: false,
       selectedPlace: {}
     }
   }
 
   componentDidMount() {
-    let self = this;
-    fetch('/api/facilities/search', {
-      credentials: 'same-origin',
-      headers: {
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
-      },
-    })
-      .then(response => response.json())
-      .then(data => this.setState({ facilities: data }));
+    this.props.requestAllFacilities()
 
     var classname = document.getElementsByClassName('facility');
-    self.setState({ panels: classname });
+    this.setState({ panels: classname });
   }
 
   filter(event) {
@@ -67,8 +66,7 @@ export default class Search extends React.Component<RouteComponentProps<{}>, any
 
   buttonClick = event => {
     let self = this;
-    var obj = this.state.facilities.find(function (obj) { return obj.oid === event.target.id; });
-    console.log(obj)
+    var obj = this.props.facilities.find(function (obj) { return obj.oid === event.target.id; });
     self.setState({
       modalIsOpen: true,
       selectedPlace: obj
@@ -97,15 +95,15 @@ export default class Search extends React.Component<RouteComponentProps<{}>, any
             </div>
           </div>
         </div>
-          {facilities.map(facility =>
-            <FacilityCard
-              key={facility.oid}
-              oid={facility.oid}
-              name={facility.name}
-              neighborhood={facility.neighborhood}
-              img={facility.img}
-              select={this.buttonClick.bind(this)}/>
-          )}
+        {this.props.facilities.map(facility =>
+          <FacilityCard
+            key={facility.oid}
+            oid={facility.oid}
+            name={facility.name}
+            neighborhood={facility.neighborhood}
+            img={facility.img}
+            select={this.buttonClick.bind(this)} />
+        )}
         <Modal isOpen={this.state.modalIsOpen} style={modalStyles}>
           <Overlay
             exit={this.closeModal.bind(this)}
@@ -117,3 +115,8 @@ export default class Search extends React.Component<RouteComponentProps<{}>, any
     );
   }
 }
+
+export default connect(
+  (state: ApplicationState) => state.facility, 
+  FacilitiesStore.actionCreators               
+)(Search as any) as typeof Search;

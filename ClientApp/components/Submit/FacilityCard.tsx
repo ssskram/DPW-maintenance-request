@@ -1,11 +1,6 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { Link, NavLink, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { ApplicationState }  from '../../store';
-import Modal from 'react-modal';
-import Overlay from './Overlay';
-import * as FacilityStore from '../../store/Facility';
 
 const imgStyle = {
     maxWidth: '300px',

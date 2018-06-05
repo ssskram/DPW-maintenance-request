@@ -1,39 +1,29 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
-import * as ReactMarkdown from 'react-markdown';
+import { connect } from 'react-redux';
+import { ApplicationState } from '../store';
+import * as FacilitiesStore from '../store/facilities';
 
-interface HomeState {
-    markdown: string;
-}
+type FacilitiesProps =
+  FacilitiesStore.FacilitiesState
+  & typeof FacilitiesStore.actionCreators
+  & RouteComponentProps<{}>;
 
-export default class Home extends React.Component<RouteComponentProps<{}>, HomeState> {
-    constructor() {
-        super();
-        this.state = {
-            markdown: ''
-        };
-    }
-    
+export class Home extends React.Component<FacilitiesProps, {}> {
     componentDidMount() {
-        fetch("README.md")
-        .then(response => {
-          return response.text()
-        })
-        .then(text => {
-            this.setState({
-                markdown: text
-            })
-        })
+        this.props.requestAllFacilities()
     }
 
     public render() {
         return (
             <div>
-                <ReactMarkdown 
-                escapeHtml={true}
-                source={this.state.markdown} 
-                />
+                <h1>make this nice</h1>
             </div>
         )
     }
 }
+
+export default connect(
+    (state: ApplicationState) => state.facility, 
+    FacilitiesStore.actionCreators               
+  )(Home as any) as typeof Home;
