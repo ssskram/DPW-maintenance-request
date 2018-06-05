@@ -5,12 +5,9 @@ import { ApplicationState } from '../../store';
 import * as FacilitiesStore from '../../store/facilities';
 import Map from './Map'
 
-type FacilitiesProps =
-  FacilitiesStore.FacilitiesState
-  & typeof FacilitiesStore.actionCreators
-  & RouteComponentProps<{}>;
+type AllProps = FacilitiesStore.FacilitiesState & typeof FacilitiesStore.actionCreators & RouteComponentProps<{}>; 
 
-export class MapContainer extends React.Component<any, any> {
+export class MapContainer extends React.Component<AllProps, any> {
     componentDidMount() {
         this.props.requestAllFacilities()
     }
@@ -25,6 +22,6 @@ export class MapContainer extends React.Component<any, any> {
 }
 
 export default connect(
-    (state: ApplicationState) => state.facility,
-    FacilitiesStore.actionCreators                
+    (state: ApplicationState) => state.facility, 
+    FacilitiesStore.actionCreators    
   )(MapContainer as any) as typeof MapContainer;

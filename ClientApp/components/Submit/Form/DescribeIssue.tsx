@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { Link, NavLink, Redirect } from 'react-router-dom';
+import * as IssuesStore from '../../../store/issues';
+import { ApplicationState } from '../../../store';
+import { connect } from 'react-redux';
 declare var $: any;
 
 const marginTop = {
@@ -11,30 +14,25 @@ const red = {
     color: 'red'
 }
 
-export default class DescribeIssue extends React.Component<any, any> {
+type IssuesProps =
+    IssuesStore.IssuesState
+    & typeof IssuesStore.actionCreators
+    & RouteComponentProps<{}>;
+
+export class DescribeIssue extends React.Component<any, any> {
     constructor(props) {
         super(props);
-        this.state = {
-            issues: []
-        }
     }
 
     componentDidMount() {
         window.scrollTo(0, 0)
-        let self = this;
-        fetch('/api/facilities/issues', {
-            credentials: 'same-origin',
-            headers: {
-                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
-            },
-        })
-            .then(response => response.json())
-            .then(data => this.setState({ issues: data }, () => {$('.selectpicker').selectpicker("refresh")}))
+        this.props.requestAllIssues()
+        $('.selectpicker').selectpicker("refresh")
     }
 
     public render() {
         const { next } = this.props;
-        const { issues } = this.state;
+        const { issues } = this.props;
 
         return (
             <div className="form">
@@ -48,9 +46,10 @@ export default class DescribeIssue extends React.Component<any, any> {
                     <div className="col-md-12">
                         <h3 className="form-h3">Select an issue</h3>
                         <select id="Issue" name="Issue" data-style="btn-info" className="selectpicker btn-form-control" title="Issue" data-dropup-auto="false">
-                            {issues.map(issue =>
-                                <option key={issue.name}>{issue.name}</option>
-                            )}
+                            {issues.map(issue => {
+                                if (issue.type == this.props.type)
+                                return<option key={issue.name}>{issue.name}</option>
+                            })}
                         </select>
                         <label htmlFor="Issue" className="error" hidden></label>
                     </div>
@@ -88,3 +87,8 @@ export default class DescribeIssue extends React.Component<any, any> {
         );
     }
 }
+
+export default connect(
+    (state: ApplicationState) => state.issues,
+    IssuesStore.actionCreators
+)(DescribeIssue as any) as typeof DescribeIssue;

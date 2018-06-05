@@ -70,6 +70,7 @@ export class selectMap extends React.Component<any, any> {
                     zoom={13}>
                     {this.props.facilities.map(facility =>
                         <Marker
+                            issues={this.props.issues}
                             key={facility.oid}
                             oid={facility.oid}
                             name={facility.name}
