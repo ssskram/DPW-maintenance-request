@@ -4,6 +4,7 @@ import { Link, NavLink, Redirect } from 'react-router-dom';
 import * as IssuesStore from '../../../store/issues';
 import { ApplicationState } from '../../../store';
 import { connect } from 'react-redux';
+import * as MessagesStore from '../../../store/messages';
 declare var $: any;
 
 const marginTop = {
@@ -14,10 +15,12 @@ const red = {
     color: 'red'
 }
 
-type IssuesProps =
-    IssuesStore.IssuesState
-    & typeof IssuesStore.actionCreators
-    & RouteComponentProps<{}>;
+type AllProps =
+    IssuesStore.IssuesState &
+    MessagesStore.MessageState &
+    typeof IssuesStore.actionCreators &
+    typeof MessagesStore.actionCreators &
+    RouteComponentProps<{}>;
 
 export class DescribeIssue extends React.Component<any, any> {
     constructor(props) {
@@ -25,9 +28,13 @@ export class DescribeIssue extends React.Component<any, any> {
     }
 
     componentDidMount() {
-        this.props.straighten
         this.props.requestAllIssues()
         $('.selectpicker').selectpicker("refresh")
+    }
+
+    submit(event) {
+        // enter post here
+        this.props.success()
     }
 
     public render() {
@@ -80,7 +87,7 @@ export class DescribeIssue extends React.Component<any, any> {
                         <button value='issue' onClick={next.bind(this)} className="btn btn-danger">Back</button>
                     </div>
                     <div className="col-md-6 text-center">
-                        <button className="btn btn-success">Submit</button>
+                        <Link to={'/'} className="btn btn-success" onClick={this.submit.bind(this)}>Submit</Link>
                     </div>
                 </div>
             </div>
@@ -89,6 +96,6 @@ export class DescribeIssue extends React.Component<any, any> {
 }
 
 export default connect(
-    (state: ApplicationState) => state.issues,
-    IssuesStore.actionCreators
+    (state: ApplicationState) => ({...state.messages, ...state.issues}),
+    ({...MessagesStore.actionCreators, ...IssuesStore.actionCreators})
 )(DescribeIssue as any) as typeof DescribeIssue;

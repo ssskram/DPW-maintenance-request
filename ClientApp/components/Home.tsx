@@ -6,6 +6,8 @@ import * as FacilitiesStore from '../store/facilities';
 import * as MyRequestsStore from '../store/myRequests';
 import * as AllRequestsStore from '../store/allRequests';
 import * as IssuesStore from '../store/issues';
+import * as MessagesStore from '../store/messages';
+import Messages from './Messages';
 
 const iconSize = {
     fontSize: '45pt',
@@ -17,23 +19,31 @@ const or = {
 }
 
 type AllProps =
+    MessagesStore.MessageState &
     MyRequestsStore.MyRequestsState &
     AllRequestsStore.AllRequestsState &
     FacilitiesStore.FacilitiesState &
     IssuesStore.IssuesState &
+    typeof MessagesStore.actionCreators &
     typeof MyRequestsStore.actionCreators &
     typeof AllRequestsStore.actionCreators &
     typeof FacilitiesStore.actionCreators &
-    typeof IssuesStore.actionCreators & RouteComponentProps<{}>;
+    typeof IssuesStore.actionCreators 
+    & RouteComponentProps<{}>;
 
-export class Home extends React.Component<AllProps, {}> {
+export class Home extends React.Component<AllProps, any> {
     componentDidMount() {
+        window.scrollTo(0, 0)
         this.props.requestAllFacilities()
         this.props.requestMyRequests()
         this.props.requestAllRequests()
         this.props.requestAllIssues()
     }
 
+    componentWillUnmount() {
+        this.props.clear()
+    }
+    
     public render() {
         const door = require('../icons/door.png');
         const electric = require('../icons/electric.png');
@@ -47,6 +57,7 @@ export class Home extends React.Component<AllProps, {}> {
             <div className="text-center">
                 <h1>DPW <strong>Maintenance Requests</strong></h1>
                 <hr />
+                <Messages messages={this.props.messages}/>
                 <h1>Find your facility...</h1>
                 <br />
                 <div className="row">
@@ -145,6 +156,6 @@ export class Home extends React.Component<AllProps, {}> {
 }
 
 export default connect(
-    (state: ApplicationState) => ({ ...state.myRequests, ...state.allRequests, ...state.facility, ...state.issues }),
-    ({ ...MyRequestsStore.actionCreators, ...AllRequestsStore.actionCreators, ...FacilitiesStore.actionCreators, ...IssuesStore.actionCreators })
+    (state: ApplicationState) => ({ ...state.messages, ...state.myRequests, ...state.allRequests, ...state.facility, ...state.issues }),
+    ({ ...MessagesStore.actionCreators, ...MyRequestsStore.actionCreators, ...AllRequestsStore.actionCreators, ...FacilitiesStore.actionCreators, ...IssuesStore.actionCreators })
 )(Home as any) as typeof Home;

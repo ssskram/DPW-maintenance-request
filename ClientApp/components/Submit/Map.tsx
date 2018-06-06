@@ -87,7 +87,7 @@ export class selectMap extends React.Component<any, any> {
                         lat: '40.437470539681442',
                         lng: '-79.987124601795273'
                     }}
-                    zoom={12.5}>
+                    zoom={13}>
                     {this.props.facilities.map(facility =>
                         <Marker
                             issues={this.props.issues}
