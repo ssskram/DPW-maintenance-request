@@ -74,7 +74,7 @@ export default class SelectIssue extends React.Component<any, any> {
                         </button>
                     </div>
                     <div className='col-md-12 text-center'>
-                        <button value='confirm' onClick={next.bind(this)} className="btn btn-danger">Back</button>
+                        <button value='recents' onClick={next.bind(this)} className="btn btn-danger">Back</button>
                     </div>
                 </div>
             </div>
