@@ -8,12 +8,6 @@ import * as FacilitiesStore from '../../store/facilities';
 import Overlay from './Overlay';
 import FacilityCard from './FacilityCard'
 
-const imgStyle = {
-  maxWidth: '300px',
-  borderRadius: '10px',
-  margin: '7px'
-}
-
 const modalStyles = {
   content: {
     top: '50%',
@@ -26,7 +20,9 @@ const modalStyles = {
     border: 'solid 1px rgba(160, 160, 160, 0.3)',
     boxShadow: '0 1px 4px 0 rgba(0, 0, 0, 0.1)',
     overflow: 'visible',
-    maxWidth: '1500px'
+    maxWidth: '1500px',
+    maxHeight: '100vh',
+    overflowY: 'auto'
   }
 };
 
@@ -47,7 +43,6 @@ export class Search extends React.Component<FacilitiesProps, any> {
 
   componentDidMount() {
     this.props.requestAllFacilities()
-
     var classname = document.getElementsByClassName('facility');
     this.setState({ panels: classname });
   }

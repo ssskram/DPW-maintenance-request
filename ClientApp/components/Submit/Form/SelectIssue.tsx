@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
+import * as ReactDOM from 'react-dom'
 
 const iconStyle = {
     height: '75px',
@@ -11,10 +12,9 @@ export default class SelectIssue extends React.Component<any, any> {
     }
 
     componentDidMount() {
-        let self = this;
-        window.scrollTo(0, 0)
+        ReactDOM.findDOMNode(this).scrollTop = 0
     }
-
+    
     public render() {
         const door = require('../../../icons/door.png');
         const electric = require('../../../icons/electric.png');

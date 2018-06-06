@@ -14,7 +14,7 @@ export default class Overlay extends React.Component<any, any> {
     }
 
     returnToFacilities() {
-        this.props.exit();
+        this.props.exit()
     }
 
     handleChange = event => {
@@ -30,6 +30,7 @@ export default class Overlay extends React.Component<any, any> {
 
     getComponent() {
         var stage = this.state.stage;
+
         switch (stage) {
             case 'exit':
                 this.returnToFacilities();

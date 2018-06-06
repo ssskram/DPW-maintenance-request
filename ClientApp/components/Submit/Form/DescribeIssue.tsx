@@ -25,7 +25,7 @@ export class DescribeIssue extends React.Component<any, any> {
     }
 
     componentDidMount() {
-        window.scrollTo(0, 0)
+        this.props.straighten
         this.props.requestAllIssues()
         $('.selectpicker').selectpicker("refresh")
     }

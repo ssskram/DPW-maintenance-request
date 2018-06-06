@@ -8,6 +8,7 @@ import Map from './Map'
 type AllProps = FacilitiesStore.FacilitiesState & typeof FacilitiesStore.actionCreators & RouteComponentProps<{}>; 
 
 export class MapContainer extends React.Component<AllProps, any> {
+
     componentDidMount() {
         this.props.requestAllFacilities()
     }
