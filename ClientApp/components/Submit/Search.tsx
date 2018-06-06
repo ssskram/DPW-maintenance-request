@@ -56,10 +56,14 @@ export class Search extends React.Component<FacilitiesProps, any> {
           window.location.reload();
         }
       });
-      
+    
     this.props.requestAllFacilities()
+
+    // set panels of faciliies to array, write to state
     var classname = document.getElementsByClassName('facility');
-    this.setState({ panels: classname });
+    this.setState({
+      panels: classname 
+    });
   }
 
   filter(event) {
@@ -90,7 +94,6 @@ export class Search extends React.Component<FacilitiesProps, any> {
   }
 
   public render() {
-    const { facilities } = this.state;
     const { modalIsOpen } = this.state;
 
     return (

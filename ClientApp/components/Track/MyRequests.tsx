@@ -3,7 +3,7 @@ import { RouteComponentProps } from 'react-router';
 import ReactTable from "react-table";
 import { connect } from 'react-redux';
 import { ApplicationState } from '../../store';
-import * as RequestsStore from '../../store/requests';
+import * as RequestsStore from '../../store/myRequests';
 
 const columns = [{
     Header: 'Request ID',
@@ -29,16 +29,22 @@ const columns = [{
 }]
 
 type RequestsProps =
-    RequestsStore.RequestsState
+    RequestsStore.MyRequestsState
     & typeof RequestsStore.actionCreators
     & RouteComponentProps<{}>;
 
 
-export class MyRequests extends React.Component<RequestsProps, {}> {
+export class MyRequests extends React.Component<RequestsProps, any> {
+    constructor(props) {
+        super(props);
+        this.state = {
+            requests: this.props.requests,
+        }
+    }
 
     componentDidMount() {
         window.scrollTo(0, 0)
-        
+        this.props.requestMyRequests()
         // ping server
         fetch('/api/ping/pong', {
             credentials: 'same-origin',
@@ -52,11 +58,35 @@ export class MyRequests extends React.Component<RequestsProps, {}> {
                     window.location.reload();
                 }
             });
+    }
 
-        this.props.requestMyRequests()
+    componentWillReceiveProps(nextProps: RequestsProps) {
+        if (nextProps.requests !== this.state.requests) {
+            this.setState({ requests: nextProps.requests });
+        }
+    }
+
+    filter(event) {
+        let self = this;
+        if (event.target.value == '') {
+            this.setState({
+                requests: this.props.requests
+            });
+        }
+        else {
+            var result = this.props.requests.filter(function (obj) {
+                return obj.building.toLowerCase().includes(event.target.value.toLowerCase()) || 
+                obj.status.toLowerCase().includes(event.target.value.toLowerCase());
+            });
+            this.setState({
+                requests: result
+            });
+        }
     }
 
     public render() {
+        const { requests } = this.state
+
         return (
             <div>
                 <div className="row">
@@ -64,17 +94,17 @@ export class MyRequests extends React.Component<RequestsProps, {}> {
                         <div className="form-group">
                             <div className="form-element">
                                 <h3 className="form-h4">Search my requests</h3>
-                                <input name="filter" id="filter" className="selectpicker form-control" placeholder="Filter by name" />
+                                <input name="filter" id="filter" className="selectpicker form-control" placeholder="Filter by building or status" onChange={this.filter.bind(this)} />
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="col-md-12 table-container">
                     <ReactTable
-                        data={this.props.requests}
+                        data={requests}
                         columns={columns}
                         defaultPageSize={10}
-                        noDataText='You have not submitted any maintenance requests'
+                        noDataText='Nothing to see here'
                         defaultSorted={[
                             {
                                 id: 'submitted',
@@ -89,6 +119,6 @@ export class MyRequests extends React.Component<RequestsProps, {}> {
 }
 
 export default connect(
-    (state: ApplicationState) => state.requests,
+    (state: ApplicationState) => state.myRequests,
     RequestsStore.actionCreators
 )(MyRequests as any) as typeof MyRequests;

@@ -3,15 +3,24 @@ import { RouteComponentProps } from 'react-router';
 import { connect } from 'react-redux';
 import { ApplicationState } from '../store';
 import * as FacilitiesStore from '../store/facilities';
-import * as RequestsStore from '../store/requests';
+import * as MyRequestsStore from '../store/myRequests';
+import * as AllRequestsStore from '../store/allRequests';
 import * as IssuesStore from '../store/issues';
 
-type AllProps = RequestsStore.RequestsState & FacilitiesStore.FacilitiesState & IssuesStore.IssuesState & typeof RequestsStore.actionCreators & typeof FacilitiesStore.actionCreators & typeof IssuesStore.actionCreators & RouteComponentProps<{}>; 
+type AllProps = 
+MyRequestsStore.MyRequestsState & 
+AllRequestsStore.AllRequestsState &
+FacilitiesStore.FacilitiesState & 
+IssuesStore.IssuesState & 
+typeof MyRequestsStore.actionCreators & 
+typeof AllRequestsStore.actionCreators & 
+typeof FacilitiesStore.actionCreators & 
+typeof IssuesStore.actionCreators & RouteComponentProps<{}>; 
 
 export class Home extends React.Component<AllProps, {}> {
     componentDidMount() {
         this.props.requestAllFacilities()
-        this.props.requestAllRequests()
+        this.props.requestMyRequests()
         this.props.requestAllIssues()
     }
 
@@ -25,6 +34,6 @@ export class Home extends React.Component<AllProps, {}> {
 }
 
 export default connect(
-    (state: ApplicationState) => ({...state.requests, ...state.facility, ...state.issues }), 
-    ({...RequestsStore.actionCreators, ...FacilitiesStore.actionCreators, ...IssuesStore.actionCreators })     
+    (state: ApplicationState) => ({...state.myRequests, ...state.allRequests, ...state.facility, ...state.issues }), 
+    ({...MyRequestsStore.actionCreators, ...AllRequestsStore.actionCreators, ...FacilitiesStore.actionCreators, ...IssuesStore.actionCreators })     
   )(Home as any) as typeof Home;
