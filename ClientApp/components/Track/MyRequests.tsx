@@ -103,6 +103,9 @@ export class MyRequests extends React.Component<RequestsProps, any> {
                     <ReactTable
                         data={requests}
                         columns={columns}
+                        loading={false}
+                        showPageSizeOptions={false}
+                        showPageJump={false}
                         defaultPageSize={10}
                         noDataText='Nothing to see here'
                         defaultSorted={[
