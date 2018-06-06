@@ -25,6 +25,16 @@ type AllProps =
 export class DescribeIssue extends React.Component<any, any> {
     constructor(props) {
         super(props);
+        this.state = {
+            issue: '',
+            description: '',
+            location: '',
+            phone: ''
+        }
+    }
+
+    handleChange(event) {
+        this.setState({ [event.target.name]: event.target.value });
     }
 
     componentDidMount() {
@@ -33,13 +43,20 @@ export class DescribeIssue extends React.Component<any, any> {
     }
 
     submit(event) {
+        event.preventDefault();
         // enter post here
         this.props.success()
     }
 
     public render() {
+        const { issue, description, location, phone } = this.state
         const { next } = this.props;
         const { issues } = this.props;
+        const isEnabled =
+            issue.length > 0 &&
+            description.length > 0 &&
+            location.length > 0 &&
+            phone.length > 0;
 
         return (
             <div className="form">
@@ -52,10 +69,10 @@ export class DescribeIssue extends React.Component<any, any> {
                 <div className="form-group">
                     <div className="col-md-12">
                         <h3 className="form-h3">Select an issue</h3>
-                        <select id="Issue" name="Issue" data-style="btn-info" className="selectpicker btn-form-control" title="Issue" data-dropup-auto="false">
+                        <select id="Issue" name="issue" data-style="btn-info" value={this.state.issue} className="selectpicker btn-form-control" title="Issue" data-dropup-auto="false" onChange={this.handleChange.bind(this)}>
                             {issues.map(issue => {
                                 if (issue.type == this.props.type)
-                                return<option key={issue.name}>{issue.name}</option>
+                                    return <option key={issue.name}>{issue.name}</option>
                             })}
                         </select>
                         <label htmlFor="Issue" className="error" hidden></label>
@@ -64,21 +81,21 @@ export class DescribeIssue extends React.Component<any, any> {
                 <div className="form-group">
                     <div className="col-md-12">
                         <h3 className="form-h3">Describe the issue</h3>
-                        <textarea name="Description" className="form-control" placeholder="Description" rows={3} required></textarea>
+                        <textarea name="description" className="form-control" value={this.state.description} placeholder="Description" rows={3} onChange={this.handleChange.bind(this)}></textarea>
                         <label htmlFor="Description" className="error" hidden />
                     </div>
                 </div>
                 <div className="form-group">
                     <div className="col-md-12">
                         <h3 className="form-h3">Describe the location</h3>
-                        <textarea name="LocationDescription" className="form-control" placeholder="Room, floor, etc." rows={3} required></textarea>
+                        <textarea name="location" className="form-control" value={this.state.location} placeholder="Room, floor, etc." rows={3} onChange={this.handleChange.bind(this)}></textarea>
                         <label htmlFor="LocationDescription" className="error" hidden />
                     </div>
                 </div>
                 <div className="form-group">
                     <div className="col-md-12">
                         <h3 className="form-h3">Enter your phone number</h3>
-                        <input name="Phone" className="form-control" placeholder="Phone number" required />
+                        <input name="phone" className="form-control" value={this.state.phone} placeholder="Phone number" onChange={this.handleChange.bind(this)} />
                         <label htmlFor="Phone" className="error" hidden />
                     </div>
                 </div>
@@ -87,7 +104,7 @@ export class DescribeIssue extends React.Component<any, any> {
                         <button value='issue' onClick={next.bind(this)} className="btn btn-danger">Back</button>
                     </div>
                     <div className="col-md-6 text-center">
-                        <Link to={'/'} className="btn btn-success" onClick={this.submit.bind(this)}>Submit</Link>
+                        <Link to={'/'} disabled={!isEnabled} className="btn btn-success" onClick={this.submit.bind(this)}>Submit</Link>
                     </div>
                 </div>
             </div>
@@ -96,6 +113,6 @@ export class DescribeIssue extends React.Component<any, any> {
 }
 
 export default connect(
-    (state: ApplicationState) => ({...state.messages, ...state.issues}),
-    ({...MessagesStore.actionCreators, ...IssuesStore.actionCreators})
+    (state: ApplicationState) => ({ ...state.messages, ...state.issues }),
+    ({ ...MessagesStore.actionCreators, ...IssuesStore.actionCreators })
 )(DescribeIssue as any) as typeof DescribeIssue;
