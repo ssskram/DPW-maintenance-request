@@ -17,7 +17,7 @@ const modalStyles = {
         border: 'solid 1px rgba(160, 160, 160, 0.3)',
         boxShadow: '0 1px 4px 0 rgba(0, 0, 0, 0.1)',
         overflow: 'visible',
-        maxWidth: '1500px',
+        maxWidth: '1300px',
         maxHeight: '100vh',
         overflowY: 'auto'
     }
@@ -87,7 +87,7 @@ export class selectMap extends React.Component<any, any> {
                         lat: '40.437470539681442',
                         lng: '-79.987124601795273'
                     }}
-                    zoom={13}>
+                    zoom={12.5}>
                     {this.props.facilities.map(facility =>
                         <Marker
                             issues={this.props.issues}
