@@ -67,9 +67,9 @@ export class RecentlySubmitted extends React.Component<any, any> {
                         loading={false}
                         showPageSizeOptions={false}
                         showPageJump={false}
-                        showPaginationBottom={false}
+                        showPaginationBottom={true}
                         showPaginationTop={false}
-                        defaultPageSize={5}
+                        defaultPageSize={2}
                         noDataText='No recent maintenance requests here'
                         defaultSorted={[
                             {
