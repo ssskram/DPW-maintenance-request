@@ -34,7 +34,6 @@ export class DescribeIssue extends React.Component<any, any> {
     }
 
     handleChange(event) {
-
         this.setState({ [event.target.name]: event.target.value });
     }
 
@@ -80,8 +79,24 @@ export class DescribeIssue extends React.Component<any, any> {
 
     submit(event) {
         event.preventDefault();
-        // enter post here
+        // serialize data
+        // pass data to post
+
+        // move this there too:
         this.props.success()
+    }
+
+    post(data) {
+        fetch('/api/requests/post', {
+            method: 'POST',
+            body: JSON.stringify(data),
+            credentials: 'same-origin',
+            headers: {
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+            }
+        }).then(res => {
+            this.props.success()
+        })
     }
 
     public render() {
@@ -138,7 +153,7 @@ export class DescribeIssue extends React.Component<any, any> {
                     </div>
                 </div>
                 <div className="row col-md-12">
-                    <div id="alternativeprompt" className="alternativeprompt"></div>
+                    <div id="alternativeprompt" className="alternativeprompt" hidden></div>
                 </div>
                 <div className="row col-md-12" style={marginTop}>
                     <div className="col-md-6 text-center">
