@@ -51,6 +51,7 @@ export default class Overlay extends React.Component<any, any> {
     render() {
         return (
             <div>
+            <button className="topcorner btn-x" onClick={this.props.exit}>x</button>
                 {this.getComponent()}
             </div>
         );

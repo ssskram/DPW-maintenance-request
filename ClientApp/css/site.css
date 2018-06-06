@@ -237,6 +237,38 @@ label.error {
     padding: 7px 5px 5px 5px !important;
 }
 
+.btn-x {
+    /* font */
+    color: #383838;
+    font-size: 30px;
+    font-family: 'Raleway', sans-serif;
+    /* remove blue underline */
+    text-decoration: none;
+    outline: none;
+    /* border */
+    border: 0px rgb(186, 134, 6);
+    border-style: solid;
+    border-radius: 5px;
+    /* transitions */
+    transition: all .3s ease 0s;
+    /* other */
+    background-color: transparent;
+    margin-right: 5px;
+}
+
+.btn-x:active,
+.btn-x:focus,
+.btn-x:hover {
+    background-color: transparent !important;
+    text-shadow: rgb(186, 134, 6) 0 0 4px;
+    transition-duration: .4s;
+    -webkit-transition-duration: .11s;
+    -moz-transition-duration: .6s;
+    border-radius: 10px;
+    color: #383838 !important;
+    transition: all .2s ease 0s;
+}
+
 .btn-link {
     margin-top: 5px;
 }
@@ -681,4 +713,10 @@ fieldset[disabled] .btn {
     padding: 15px;
     font-size: 20px !important;
     text-align: center;
+}
+
+.topcorner {
+    position: absolute;
+    top: 0;
+    right: 0;
 }
