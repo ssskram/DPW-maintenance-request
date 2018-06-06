@@ -676,3 +676,9 @@ fieldset[disabled] .btn {
 .message-body {
     font-weight: 600;
 }
+
+.alternativeprompt {
+    padding: 15px;
+    font-size: 20px !important;
+    text-align: center;
+}
