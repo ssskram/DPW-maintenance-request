@@ -9,7 +9,7 @@ import * as IssuesStore from '../store/issues';
 
 const iconSize = {
     fontSize: '45pt',
-    color: 'rgb(26, 36, 47)'
+    color: 'rgb(44, 62, 80)'
 }
 const or = {
     marginTop: '15px',
