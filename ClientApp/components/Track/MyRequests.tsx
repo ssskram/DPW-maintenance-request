@@ -37,6 +37,7 @@ type RequestsProps =
 export class MyRequests extends React.Component<RequestsProps, {}> {
 
     componentDidMount() {
+        window.scrollTo(0, 0)
         this.props.requestMyRequests()
     }
 

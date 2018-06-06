@@ -30,6 +30,7 @@ type RequestsProps =
 export class AllRequests extends React.Component<RequestsProps, {}> {
 
     componentDidMount() {
+        window.scrollTo(0, 0)
         this.props.requestAllRequests()
     }
 

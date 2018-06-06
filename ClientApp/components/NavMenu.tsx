@@ -34,7 +34,7 @@ export class NavMenu extends React.Component<any, any>  {
                         <span className='icon-bar'></span>
                         <span className='icon-bar'></span>
                     </button>
-                    <Link className='navbar-brand' to={'/'} data-toggle="collapse" data-target=".in">DPW<strong> Maintenance Requests</strong></Link>
+                    <Link className='navbar-brand' to={'/'} data-toggle="collapse" data-target=".in">DPW<strong> Maintenance</strong></Link>
                 </div>
                 <div className='clearfix'></div>
                 <div className='navbar-collapse collapse'>
@@ -47,7 +47,7 @@ export class NavMenu extends React.Component<any, any>  {
                         </li>
                         <li>
                             <NavLink to={'/Search'} activeClassName='active' data-toggle="collapse" data-target=".in">
-                                <span className='glyphicon glyphicon-list'></span> Search facility by name
+                                <span className='glyphicon glyphicon-list'></span> Select facility from list
                             </NavLink>
                         </li>
                         <li className="sidenav-header">Track</li>

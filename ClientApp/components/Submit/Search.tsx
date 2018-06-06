@@ -42,6 +42,7 @@ export class Search extends React.Component<FacilitiesProps, any> {
   }
 
   componentDidMount() {
+    window.scrollTo(0, 0)
     this.props.requestAllFacilities()
     var classname = document.getElementsByClassName('facility');
     this.setState({ panels: classname });
