@@ -23,7 +23,7 @@ export const actionCreators = {
 export const reducer: Reducer<MessageState> = (state: MessageState, action: KnownAction) => {
     switch (action.type) {
         case 'FORM_SUCCESS':
-            return { messages: "Success! Continue to monitor this site for progress on your request" };
+            return { messages: "Success! Help is on it's way" };
         case 'FORM_ERROR':
             return { messages: "Oops! Something isn't right. Please try that again. If the problem persists, please contact I&P" };
         case 'ALREADY_SUBMITTED':
@@ -33,5 +33,5 @@ export const reducer: Reducer<MessageState> = (state: MessageState, action: Know
         default:
             const exhaustiveCheck: never = action;
     }
-    return state || { messages: "" }
+    return state || { messages: "Success! Continue to monitor this site for progress on your request" }
 };

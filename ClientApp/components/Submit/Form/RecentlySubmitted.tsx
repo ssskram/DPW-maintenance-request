@@ -52,7 +52,7 @@ export class RecentlySubmitted extends React.Component<any, any> {
     }
 
     render() {
-        const { img, name, next } = this.props;
+        const { img, name, next } = this.props
 
         return (
             <div className="text-center">
@@ -70,7 +70,7 @@ export class RecentlySubmitted extends React.Component<any, any> {
                         showPaginationBottom={false}
                         showPaginationTop={false}
                         defaultPageSize={5}
-                        noDataText='Finding recent mainteinance requests for...'
+                        noDataText='No recent maintenance requests here'
                         defaultSorted={[
                             {
                                 id: 'submitted',

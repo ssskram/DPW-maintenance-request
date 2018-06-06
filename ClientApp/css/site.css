@@ -668,11 +668,11 @@ fieldset[disabled] .btn {
     border-width: 0 0 0 10px;
 }
 
-.alert-info {
-    border-color: #31708f;
-  }
-  
 .alert-success {
-    background-color: #5cb85c;
+    background-color: rgba(92, 184, 92, .5);
     border-color: #4cae4c;
+}
+
+.message-body {
+    font-weight: 600;
 }

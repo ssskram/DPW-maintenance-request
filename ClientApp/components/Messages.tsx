@@ -3,10 +3,6 @@ import { RouteComponentProps } from 'react-router';
 import { connect } from 'react-redux';
 import { ApplicationState } from '../store';
 
-const font = {
-    color: '#fff'
-}
-
 export default class Messages extends React.Component<any, {}> {
     componentDidMount() {
         window.scrollTo(0, 0)
@@ -16,7 +12,7 @@ export default class Messages extends React.Component<any, {}> {
         return (
             this.props.messages ? (
                 <div role="alert" className="alert alert-success">
-                    <h3 style={font} >{this.props.messages}</h3>
+                    <h3 className="message-body"  >{this.props.messages}</h3>
                 </div>
             ) : null
         )
