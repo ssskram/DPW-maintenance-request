@@ -29,7 +29,8 @@ export class DescribeIssue extends React.Component<any, any> {
             issue: '',
             description: '',
             location: '',
-            phone: ''
+            phone: '',
+            redirect: false
         }
     }
 
@@ -82,12 +83,13 @@ export class DescribeIssue extends React.Component<any, any> {
     }
 
     submit(event) {
-        event.preventDefault();
+        event.preventDefault()
         // serialize data
         // pass data to post
 
         // move this there too:
         this.props.success()
+        this.setState({ redirect: true })
     }
 
     post(data) {
@@ -107,11 +109,16 @@ export class DescribeIssue extends React.Component<any, any> {
         const { issue, description, location, phone } = this.state
         const { next } = this.props;
         const { issues } = this.props;
+        const { redirect } = this.state;
         const isEnabled =
             issue.length > 0 &&
             description.length > 0 &&
             location.length > 0 &&
             phone.length > 0;
+
+        if (redirect) {
+            return <Redirect to='/'/>;
+        }
 
         return (
             <div className="form">
@@ -164,7 +171,7 @@ export class DescribeIssue extends React.Component<any, any> {
                         <button value='issue' onClick={next.bind(this)} className="btn btn-danger">Back</button>
                     </div>
                     <div className="col-md-6 text-center">
-                        <Link to={'/'} disabled={!isEnabled} className="btn btn-success" onClick={this.submit.bind(this)}>Submit</Link>
+                        <button disabled={!isEnabled} className="btn btn-success" onClick={this.submit.bind(this)}>Submit</button>
                     </div>
                 </div>
             </div>

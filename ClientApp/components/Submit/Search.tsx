@@ -19,7 +19,7 @@ const modalStyles = {
     backgroundColor: '#fffcf5',
     border: 'solid 1px rgba(160, 160, 160, 0.3)',
     boxShadow: '0 1px 4px 0 rgba(0, 0, 0, 0.1)',
-    overflow: 'scroll',
+    overflow: 'visible',
     maxWidth: '1300px',
     maxHeight: '100vh',
     overflowY: 'auto'
