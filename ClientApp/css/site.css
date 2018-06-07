@@ -314,6 +314,9 @@ label.error {
 .Select-placeholder {
     padding: 4px 15px;
 }
+.Select-value {
+    padding-top: 4px;
+}
 
 .btn.active.focus,
 .btn.active:focus,
@@ -637,6 +640,10 @@ fieldset[disabled] .btn {
 
 /* Datatables
 /* ------------------------- */
+
+.ReactTable {
+    background-color: rgba(255, 250, 238, .7);
+}
 
 .ReactTable .rt-tbody {
     overflow-x: hidden!important;

@@ -56,20 +56,20 @@ export class Search extends React.Component<FacilitiesProps, any> {
           window.location.reload();
         }
       });
-    
+
     this.props.requestAllFacilities()
 
     // set panels of faciliies to array, write to state
     var classname = document.getElementsByClassName('facility');
     this.setState({
-      panels: classname 
+      panels: classname
     });
   }
 
   filter(event) {
     let self = this;
     Array.from(self.state.panels).forEach(function (element: any) {
-      if (element.id.toLowerCase().indexOf(event.target.value.toLowerCase()) === -1) {
+      if ((element.id.toLowerCase().indexOf(event.target.value.toLowerCase()) === -1)) {
         element.style.display = "none";
       }
       else {

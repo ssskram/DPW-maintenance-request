@@ -61,7 +61,7 @@ export class RecentlySubmitted extends React.Component<any, any> {
 
         return (
             <div className="text-center">
-                <h1>Has your issue already been submitted?</h1>
+                <h1>Has your issue already been reported?</h1>
                 <div className="text-center">
                     <img className="img-responsive" style={imgStyle} src={img} />
                 </div>
@@ -76,7 +76,7 @@ export class RecentlySubmitted extends React.Component<any, any> {
                         showPaginationTop={false}
                         collapseOnPageChange={true}
                         defaultPageSize={3}
-                        noDataText='No maintenance requests here'
+                        noDataText='No open issues here'
                         defaultSorted={[
                             {
                                 id: 'submitted',
