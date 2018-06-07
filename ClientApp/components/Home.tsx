@@ -155,7 +155,7 @@ export class Home extends React.Component<AllProps, any> {
                 </div>
                 <Modal isOpen={this.state.modalIsOpen} style={modalStyles}>
                     <button className="topcorner btn-x" onClick={this.closeModal.bind(this)}>x</button>
-                    <div className="row">
+                    <div className="row text-center">
                         <div style={padding} className="col-md-6">
                             <Link to={'/Map'} className="btn btn-big"><span style={iconSize} className='glyphicon glyphicon-map-marker'></span><br/>Select facility from map</Link>
                         </div>
