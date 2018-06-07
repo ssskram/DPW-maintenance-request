@@ -67,7 +67,7 @@ export class RecentlySubmitted extends React.Component<any, any> {
                 </div>
                 <div className="row" style={babyTable}>
                     <ReactTable
-                        data={this.props.requests.filter(e => e.building === this.props.name)}
+                        data={this.props.requests.filter(e => e.building === this.props.name && e.status == "Open")}
                         columns={columns}
                         loading={false}
                         showPageSizeOptions={false}
@@ -91,7 +91,7 @@ export class RecentlySubmitted extends React.Component<any, any> {
                     </div>
                     <div className="col-md-4" />
                     <div className="col-md-4 text-center">
-                        <button id="next" value='issue' onClick={next.bind(this)} className="btn btn-success">No</button>
+                        <button id="next" value='issue' onClick={next.bind(this)} className="btn btn-success">Continue</button>
                     </div>
                 </div>
             </div>

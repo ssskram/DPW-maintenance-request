@@ -14,7 +14,7 @@ export default class SelectIssue extends React.Component<any, any> {
     componentDidMount() {
         ReactDOM.findDOMNode(this).scrollTop = 0
     }
-    
+
     public render() {
         const door = require('../../../icons/door.png');
         const electric = require('../../../icons/electric.png');
@@ -50,12 +50,6 @@ export default class SelectIssue extends React.Component<any, any> {
                         </button>
                     </div>
                     <div className='col-md-4 text-center'>
-                        <button value='describe' name='Miscellaneous' className="btn btn-big" onClick={next.bind(this)}>
-                            <img src={String(misc)} style={iconStyle} /><br />
-                            <div>Miscellaneous</div>
-                        </button>
-                    </div>
-                    <div className='col-md-4 text-center'>
                         <button value='describe' name='Carpentry and Painting' className="btn btn-big" onClick={next.bind(this)}>
                             <img src={String(paint)} style={iconStyle} /><br />
                             <div>Carpentry & Painting</div>
@@ -71,6 +65,12 @@ export default class SelectIssue extends React.Component<any, any> {
                         <button value='describe' name='Roofing' className="btn btn-big" onClick={next.bind(this)}>
                             <img src={String(roofing)} style={iconStyle} /><br />
                             <div>Roofing</div>
+                        </button>
+                    </div>
+                    <div className='col-md-12 text-center'>
+                        <button value='describe' name='Miscellaneous' className="btn btn-big" onClick={next.bind(this)}>
+                            <img src={String(misc)} style={iconStyle} /><br />
+                            <div>Miscellaneous</div>
                         </button>
                     </div>
                     <div className='col-md-12 text-center'>

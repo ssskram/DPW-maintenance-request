@@ -98,7 +98,7 @@ export class Home extends React.Component<AllProps, any> {
 
         return (
             <div className="text-center">
-                <h1>DPW <strong>Maintenance Requests</strong></h1>
+                <h2>DPW <strong>Maintenance Requests</strong></h2>
                 <hr />
                 <Messages messages={this.props.messages} />
                 <div style={padding} onClick={this.click.bind(this)} className="col-md-4">
@@ -127,14 +127,6 @@ export class Home extends React.Component<AllProps, any> {
                 </div>
                 <div style={padding} onClick={this.click.bind(this)} className="col-md-4">
                     <div className="col-md-12">
-                        <img src={String(misc)}></img>
-                    </div>
-                    <div className="col-md-12">
-                        <h3><i>Miscellaneous</i></h3>
-                    </div>
-                </div>
-                <div style={padding} onClick={this.click.bind(this)} className="col-md-4">
-                    <div className="col-md-12">
                         <img src={String(paint)}></img>
                     </div>
                     <div className="col-md-12">
@@ -155,6 +147,15 @@ export class Home extends React.Component<AllProps, any> {
                     </div>
                     <div className="col-md-12">
                         <h3><i>Roofing</i></h3>
+                    </div>
+                </div>
+                <div className="col-md-12"><h3>- or -</h3></div>
+                <div style={padding} onClick={this.click.bind(this)} className="col-md-12">
+                    <div className="col-md-12">
+                        <img src={String(misc)}></img>
+                    </div>
+                    <div className="col-md-12">
+                        <h3><i>Miscellaneous</i></h3>
                     </div>
                 </div>
                 <Modal isOpen={this.state.modalIsOpen} style={modalStyles}>
