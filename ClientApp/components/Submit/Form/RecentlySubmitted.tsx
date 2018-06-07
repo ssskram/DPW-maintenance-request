@@ -15,6 +15,10 @@ const imgStyle = {
     padding: '5px'
 }
 
+const babyTable = {
+    maxWidth: '100vw',
+    padding: '5px'
+}
 const columns = [{
     Header: 'Submitted',
     accessor: 'submitted'
@@ -57,11 +61,11 @@ export class RecentlySubmitted extends React.Component<any, any> {
 
         return (
             <div className="text-center">
-                <h1>Has your issue been submitted recently?</h1>
+                <h1>Has your issue already been submitted?</h1>
                 <div className="text-center">
                     <img className="img-responsive" style={imgStyle} src={img} />
                 </div>
-                <div className="col-md-12 table-container">
+                <div className="row" style={babyTable}>
                     <ReactTable
                         data={this.props.requests.filter(e => e.building === this.props.name)}
                         columns={columns}
@@ -70,8 +74,9 @@ export class RecentlySubmitted extends React.Component<any, any> {
                         showPageJump={false}
                         showPaginationBottom={true}
                         showPaginationTop={false}
+                        collapseOnPageChange={true}
                         defaultPageSize={3}
-                        noDataText='No recent maintenance requests here'
+                        noDataText='No maintenance requests here'
                         defaultSorted={[
                             {
                                 id: 'submitted',
