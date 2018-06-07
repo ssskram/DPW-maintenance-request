@@ -74,6 +74,10 @@ export class DescribeIssue extends React.Component<any, any> {
 
     componentDidMount() {
         this.props.requestAllIssues()
+        $('.selectpicker').selectpicker()
+    }
+
+    componentWillReceiveProps(nextProps: any) {
         $('.selectpicker').selectpicker("refresh")
     }
 
