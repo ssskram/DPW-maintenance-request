@@ -5,6 +5,7 @@ import * as IssuesStore from '../../../store/issues';
 import { ApplicationState } from '../../../store';
 import { connect } from 'react-redux';
 import * as MessagesStore from '../../../store/messages';
+import Select from 'react-select';
 declare var $: any;
 
 const marginTop = {
@@ -26,20 +27,43 @@ export class DescribeIssue extends React.Component<any, any> {
     constructor(props) {
         super(props);
         this.state = {
+            options: [],
             issue: '',
             description: '',
             location: '',
             phone: '',
+            clearable: false,
             redirect: false
         }
     }
 
+    componentDidMount() {
+        this.props.requestAllIssues()
+    }
+
+    componentWillReceiveProps() {
+        let self = this
+        // set select
+        this.props.issues.forEach(function (element) {
+            if (element.type == self.props.type) {
+                var json = { "value": element.name, "label": element.name };
+                self.state.options.push(json)
+            }
+        })
+    }
+    
     handleChange(event) {
         this.setState({ [event.target.name]: event.target.value });
     }
 
+    handleSelect = (issue) => {
+        if (issue) {
+            this.setState({ issue: issue });
+        }
+    }
+
     componentDidUpdate() {
-        var item = $('#Issue').val();
+        var item = this.state.issue.value;
         var prompt = document.getElementById('alternativeprompt');
         if (prompt) {
             if (item == "Pest Control" || item == "Elevators") {
@@ -73,15 +97,6 @@ export class DescribeIssue extends React.Component<any, any> {
         }
     }
 
-    componentDidMount() {
-        this.props.requestAllIssues()
-        $('.selectpicker').selectpicker()
-    }
-
-    componentWillReceiveProps(nextProps: any) {
-        $('.selectpicker').selectpicker("refresh")
-    }
-
     submit(event) {
         event.preventDefault()
         // serialize data
@@ -108,16 +123,17 @@ export class DescribeIssue extends React.Component<any, any> {
     public render() {
         const { issue, description, location, phone } = this.state
         const { next } = this.props;
-        const { issues } = this.props;
         const { redirect } = this.state;
+        const { clearable } = this.state;
+        const { options } = this.state;
         const isEnabled =
-            issue.length > 0 &&
+            issue != '' &&
             description.length > 0 &&
             location.length > 0 &&
             phone.length > 0;
 
         if (redirect) {
-            return <Redirect to='/'/>;
+            return <Redirect to='/' />;
         }
 
         return (
@@ -131,13 +147,15 @@ export class DescribeIssue extends React.Component<any, any> {
                 <div className="form-group">
                     <div className="col-md-12">
                         <h3 className="form-h3">Select an issue</h3>
-                        <select id="Issue" name="issue" data-style="btn-info" value={this.state.issue} className="selectpicker btn-form-control" title="Issue" data-dropup-auto="false" onChange={this.handleChange.bind(this)}>
-                            {issues.map(issue => {
-                                if (issue.type == this.props.type)
-                                    return <option key={issue.name}>{issue.name}</option>
-                            })}
-                        </select>
-                        <label htmlFor="Issue" className="error" hidden></label>
+                        <Select
+                            id="Issue"
+                            name="issue"
+                            placeholder="Issue"
+                            clearable={clearable}
+                            value={this.state.issue}
+                            onChange={this.handleSelect}
+                            options={options}
+                        />
                     </div>
                 </div>
                 <div id="formfields">
@@ -145,21 +163,18 @@ export class DescribeIssue extends React.Component<any, any> {
                         <div className="col-md-12">
                             <h3 className="form-h3">Describe the issue</h3>
                             <textarea name="description" className="form-control" value={this.state.description} placeholder="Description" rows={3} onChange={this.handleChange.bind(this)}></textarea>
-                            <label htmlFor="Description" className="error" hidden />
                         </div>
                     </div>
                     <div className="form-group">
                         <div className="col-md-12">
                             <h3 className="form-h3">Describe the location</h3>
                             <textarea name="location" className="form-control" value={this.state.location} placeholder="Room, floor, etc." rows={3} onChange={this.handleChange.bind(this)}></textarea>
-                            <label htmlFor="LocationDescription" className="error" hidden />
                         </div>
                     </div>
                     <div className="form-group">
                         <div className="col-md-12">
                             <h3 className="form-h3">Enter your phone number</h3>
                             <input name="phone" className="form-control" value={this.state.phone} placeholder="Phone number" onChange={this.handleChange.bind(this)} />
-                            <label htmlFor="Phone" className="error" hidden />
                         </div>
                     </div>
                 </div>
