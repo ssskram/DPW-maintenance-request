@@ -96,10 +96,7 @@ export class AllRequests extends React.Component<RequestsProps, any> {
                         data={requests}
                         columns={columns}
                         loading={false}
-                        showPageSizeOptions={false}
-                        showPageJump={false}
-                        showPaginationBottom={false}
-                        showPaginationTop={true}
+                        defaultPageSize={10}
                         noDataText='Finding all requests...'
                         defaultSorted={[
                             {

@@ -91,7 +91,7 @@ export class Home extends React.Component<AllProps, any> {
                         <img src={String(electric)}></img>
                     </div>
                     <div className="col-md-12">
-                        <h3><i>Eletrical & Lighting</i></h3>
+                        <h3><i>Electrical & Lighting</i></h3>
                         <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nec ullamcorper dolor. Fusce luctus luctus.</h4>
                     </div>
                 </div>

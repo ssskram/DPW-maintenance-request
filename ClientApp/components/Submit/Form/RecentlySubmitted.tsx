@@ -6,6 +6,7 @@ import { ApplicationState } from '../../../store';
 import * as RequestsStore from '../../../store/allRequests';
 import { Link, NavLink, Redirect } from 'react-router-dom';
 import * as MessagesStore from '../../../store/messages';
+declare var $: any;
 
 const imgStyle = {
     maxHeight: '150px',
@@ -69,7 +70,7 @@ export class RecentlySubmitted extends React.Component<any, any> {
                         showPageJump={false}
                         showPaginationBottom={true}
                         showPaginationTop={false}
-                        defaultPageSize={2}
+                        defaultPageSize={3}
                         noDataText='No recent maintenance requests here'
                         defaultSorted={[
                             {
@@ -85,7 +86,7 @@ export class RecentlySubmitted extends React.Component<any, any> {
                     </div>
                     <div className="col-md-4" />
                     <div className="col-md-4 text-center">
-                        <button value='issue' onClick={next.bind(this)} className="btn btn-success">No</button>
+                        <button id="next" value='issue' onClick={next.bind(this)} className="btn btn-success">No</button>
                     </div>
                 </div>
             </div>
