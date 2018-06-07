@@ -8,6 +8,7 @@ export class NavMenu extends React.Component<any, any>  {
             user: ''
         }
     }
+
     componentDidMount() {
         fetch('/api/userdata/getuser', {
             credentials: 'same-origin',
@@ -22,6 +23,7 @@ export class NavMenu extends React.Component<any, any>  {
                 })
             });
     }
+    
     public render() {
         const { user } = this.state
 
@@ -54,11 +56,6 @@ export class NavMenu extends React.Component<any, any>  {
                         <li>
                             <NavLink to={'/MyRequests'} activeClassName='active' data-toggle="collapse" data-target=".in">
                                 <span className='glyphicon glyphicon-chevron-right'></span> My requests
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to={'/AllRequests'} activeClassName='active' data-toggle="collapse" data-target=".in">
-                                <span className='glyphicon glyphicon-chevron-right'></span> All requests
                             </NavLink>
                         </li>
                         <div className='accountcontainer'>

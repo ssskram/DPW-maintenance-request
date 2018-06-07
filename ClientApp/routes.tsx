@@ -5,7 +5,6 @@ import Home from './components/Home';
 import MapContainer from './components/Submit/MapContainer';
 import Search from './components/Submit/Search';
 import MyRequests from './components/Track/MyRequests';
-import AllRequests from './components/Track/AllRequests';
 import { Login } from './components/Account/Login';
 
 export const routes = <Layout>
@@ -13,6 +12,5 @@ export const routes = <Layout>
     <Route path='/Map' component={ MapContainer } />
     <Route path='/Search' component={ Search } />  
     <Route path='/MyRequests' component={ MyRequests } />
-    <Route path='/AllRequests' component={ AllRequests } />
     <Route path='/Account/Login' component={ Login } />
 </Layout>;
