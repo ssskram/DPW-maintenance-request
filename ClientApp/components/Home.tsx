@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
+import { Link, NavLink, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { ApplicationState } from '../store';
 import * as FacilitiesStore from '../store/facilities';
@@ -8,15 +9,34 @@ import * as AllRequestsStore from '../store/allRequests';
 import * as IssuesStore from '../store/issues';
 import * as MessagesStore from '../store/messages';
 import Messages from './Messages';
+import Modal from 'react-modal';
+
+const padding = {
+    padding: '15px',
+}
 
 const iconSize = {
     fontSize: '45pt',
     color: 'rgb(44, 62, 80)'
 }
-const or = {
-    marginTop: '15px',
-    marginBottom: '22px'
-}
+
+const modalStyles = {
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+        backgroundColor: '#fffcf5',
+        border: 'solid 1px rgba(160, 160, 160, 0.3)',
+        boxShadow: '0 1px 4px 0 rgba(0, 0, 0, 0.1)',
+        overflow: 'visible',
+        maxWidth: '1300px',
+        maxHeight: '100vh',
+        overflowY: 'auto'
+    }
+};
 
 type AllProps =
     MessagesStore.MessageState &
@@ -28,10 +48,17 @@ type AllProps =
     typeof MyRequestsStore.actionCreators &
     typeof AllRequestsStore.actionCreators &
     typeof FacilitiesStore.actionCreators &
-    typeof IssuesStore.actionCreators 
+    typeof IssuesStore.actionCreators
     & RouteComponentProps<{}>;
 
 export class Home extends React.Component<AllProps, any> {
+    constructor() {
+        super();
+        this.state = {
+            modalIsOpen: false,
+        }
+    }
+
     componentDidMount() {
         window.scrollTo(0, 0)
         this.props.requestAllFacilities()
@@ -43,7 +70,19 @@ export class Home extends React.Component<AllProps, any> {
     componentWillUnmount() {
         this.props.clear()
     }
-    
+
+    click() {
+        this.setState({
+            modalIsOpen: true
+        });
+    }
+
+    closeModal() {
+        this.setState({
+            modalIsOpen: false
+        });
+    }
+
     public render() {
         const door = require('../icons/door.png');
         const electric = require('../icons/electric.png');
@@ -57,99 +96,74 @@ export class Home extends React.Component<AllProps, any> {
             <div className="text-center">
                 <h1>DPW <strong>Maintenance Requests</strong></h1>
                 <hr />
-                <Messages messages={this.props.messages}/>
-                <h1>Find your facility...</h1>
-                <br />
-                <div className="row">
-                    <div className="col-md-3"></div>
-                    <div className="col-md-2">
-                        <span style={iconSize} className='glyphicon glyphicon-map-marker'></span>
-                    </div>
-                    <div className="col-md-2">
-                        <h3 style={or}>- or -</h3>
-                    </div>
-                    <div className="col-md-2">
-                        <span style={iconSize} className='glyphicon glyphicon-list'></span>
-                    </div>
-                    <div className="col-md-3"></div>
-                </div>
-                <br />
-                <h1>...select an issue type...</h1>
-                <br />
-                <div className="row">
+                <Messages messages={this.props.messages} />
+                <div style={padding} onClick={this.click.bind(this)} className="col-md-4">
                     <div className="col-md-12">
                         <img src={String(door)}></img>
                     </div>
                     <div className="col-md-12">
                         <h3><i>Doors, Locks, & Windows</i></h3>
-                        <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nec ullamcorper dolor. Fusce luctus luctus.</h4>
                     </div>
                 </div>
-                <br/>
-                <div className="row">
+                <div style={padding} onClick={this.click.bind(this)} className="col-md-4">
                     <div className="col-md-12">
                         <img src={String(electric)}></img>
                     </div>
                     <div className="col-md-12">
                         <h3><i>Electrical & Lighting</i></h3>
-                        <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nec ullamcorper dolor. Fusce luctus luctus.</h4>
                     </div>
                 </div>
-                <br/>
-                <div className="row">
+                <div style={padding} onClick={this.click.bind(this)} className="col-md-4">
                     <div className="col-md-12">
                         <img src={String(hvac)}></img>
                     </div>
                     <div className="col-md-12">
                         <h3><i>Heating & Air Conditioning</i></h3>
-                        <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nec ullamcorper dolor. Fusce luctus luctus.</h4>
                     </div>
                 </div>
-                <br/>
-                <div className="row">
+                <div style={padding} onClick={this.click.bind(this)} className="col-md-4">
                     <div className="col-md-12">
                         <img src={String(misc)}></img>
                     </div>
                     <div className="col-md-12">
                         <h3><i>Miscellaneous</i></h3>
-                        <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nec ullamcorper dolor. Fusce luctus luctus.</h4>
                     </div>
                 </div>
-                <br/>
-                <div className="row">
+                <div style={padding} onClick={this.click.bind(this)} className="col-md-4">
                     <div className="col-md-12">
                         <img src={String(paint)}></img>
                     </div>
                     <div className="col-md-12">
                         <h3><i>Carpentry & Painting</i></h3>
-                        <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nec ullamcorper dolor. Fusce luctus luctus.</h4>
                     </div>
                 </div>
-                <br/>
-                <div className="row">
+                <div style={padding} onClick={this.click.bind(this)} className="col-md-4">
                     <div className="col-md-12">
                         <img src={String(plumbing)}></img>
                     </div>
                     <div className="col-md-12">
                         <h3><i>Plumbing & Gas</i></h3>
-                        <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nec ullamcorper dolor. Fusce luctus luctus.</h4>
                     </div>
                 </div>
-                <br/>
-                <div className="row">
+                <div style={padding} onClick={this.click.bind(this)} className="col-md-4">
                     <div className="col-md-12">
                         <img src={String(roofing)}></img>
                     </div>
                     <div className="col-md-12">
                         <h3><i>Roofing</i></h3>
-                        <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nec ullamcorper dolor. Fusce luctus luctus.</h4>
                     </div>
-                </div>  
-                <br/>
-                <div className="row">
-                    <h1>...describe, submit, and track!</h1>
                 </div>
-                <br/>
+                <Modal isOpen={this.state.modalIsOpen} style={modalStyles}>
+                    <button className="topcorner btn-x" onClick={this.closeModal.bind(this)}>x</button>
+                    <div className="row">
+                        <div style={padding} className="col-md-6">
+                            <Link to={'/Map'} className="btn btn-big"><span style={iconSize} className='glyphicon glyphicon-map-marker'></span><br/>Select facility from map</Link>
+                        </div>
+                        <div style={padding} className="col-md-6">
+                            <Link to={'/Search'} className="btn btn-big"><span style={iconSize} className='glyphicon glyphicon-list'></span><br/>Select facility from list</Link>
+                        </div>
+                    </div>
+                </Modal>
             </div>
         )
     }
