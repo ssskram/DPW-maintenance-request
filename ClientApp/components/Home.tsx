@@ -12,7 +12,11 @@ import Messages from './Messages';
 import Modal from 'react-modal';
 
 const padding = {
-    padding: '15px',
+    padding: '15px'
+}
+
+const iconPadding = {
+    margin: '30px'
 }
 
 const iconSize = {
@@ -156,11 +160,11 @@ export class Home extends React.Component<AllProps, any> {
                 <Modal isOpen={this.state.modalIsOpen} style={modalStyles}>
                     <button className="topcorner btn-x" onClick={this.closeModal.bind(this)}>x</button>
                     <div className="row text-center">
-                        <div style={padding} className="col-md-6">
-                            <Link to={'/Map'} className="btn btn-big"><span style={iconSize} className='glyphicon glyphicon-map-marker'></span><br/>Select facility from map</Link>
+                        <div className="col-md-6">
+                            <Link style={padding} to={'/Map'} className="btn btn-big"><span style={iconSize} className='glyphicon glyphicon-map-marker'></span><br />Select facility from map</Link>
                         </div>
-                        <div style={padding} className="col-md-6">
-                            <Link to={'/Search'} className="btn btn-big"><span style={iconSize} className='glyphicon glyphicon-list'></span><br/>Select facility from list</Link>
+                        <div className="col-md-6">
+                            <Link style={padding} to={'/Search'} className="btn btn-big"><span style={iconSize} className='glyphicon glyphicon-list'></span><br />Select facility from list</Link>
                         </div>
                     </div>
                 </Modal>
