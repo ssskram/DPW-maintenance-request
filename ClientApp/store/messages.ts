@@ -7,15 +7,13 @@ export interface MessageState {
 }
 
 interface SuccessMessageAction { type: 'FORM_SUCCESS' }
-interface ErrorMessageAction { type: 'FORM_ERROR' }
 interface SurveyMessageAction { type: 'SURVEY_SUBMITTED' }
 interface ClearMessageAction { type: 'CLEAR' }
 
-type KnownAction = SuccessMessageAction | ErrorMessageAction | ClearMessageAction | SurveyMessageAction;
+type KnownAction = SuccessMessageAction | ClearMessageAction | SurveyMessageAction;
 
 export const actionCreators = {
     success: () => <SuccessMessageAction>{ type: 'FORM_SUCCESS' },
-    failure: () => <ErrorMessageAction>{ type: 'FORM_ERROR' },
     surveySubmitted: () => <SurveyMessageAction>{ type: 'SURVEY_SUBMITTED' },
     clear: () => <ClearMessageAction>{ type: 'CLEAR' },
 };
@@ -24,10 +22,8 @@ export const reducer: Reducer<MessageState> = (state: MessageState, action: Know
     switch (action.type) {
         case 'FORM_SUCCESS':
             return { messages: "Success! We'll be seeing you soon." };
-        case 'FORM_ERROR':
-            return { messages: "Oops! Something isn't right. Please try that again. If the problem persists, please contact I&P" };
         case 'SURVEY_SUBMITTED':
-            return { messages: "Thanks for your time!" };
+            return { messages: "Thanks again!" };
         case 'CLEAR':
             return { messages: "" }
         default:

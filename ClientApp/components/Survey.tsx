@@ -70,28 +70,30 @@ export class Survey extends React.Component<any, any> {
 
         return (
             <div className="form col-md-12">
+                <h3>Thanks for your time</h3>
+                <hr />
                 <div id="formfields">
                     <div className="form-group">
                         <div className="col-md-12">
-                            <h3 className="form-h3">Name</h3>
-                            <input name="name" className="form-control" value={this.state.name} onChange={this.handleChange.bind(this)}></input>
+                            <h4 className="form-h4">Name</h4>
+                            <input name="name" className="form-control" placeholder="Enter your name" value={this.state.name} onChange={this.handleChange.bind(this)}></input>
                         </div>
                     </div>
                     <div className="form-group">
                         <div className="col-md-12">
-                            <h3 className="form-h3">Department</h3>
-                            <input name="department" className="form-control" value={this.state.department} onChange={this.handleChange.bind(this)}></input>
+                            <h4 className="form-h4">Department</h4>
+                            <input name="department" className="form-control" placeholder="Enter your department" value={this.state.department} onChange={this.handleChange.bind(this)}></input>
                         </div>
                     </div>
                     <div className="form-group">
                         <div className="col-md-12">
-                            <h3 className="form-h3">Thoughts, suggestions, etc.</h3>
-                            <textarea name="body" className="form-control" rows={6} value={this.state.body} onChange={this.handleChange.bind(this)} />
+                            <h4 className="form-h4">Comments</h4>
+                            <textarea name="body" className="form-control" placeholder="Thoughts, suggestions, etc." rows={4} value={this.state.body} onChange={this.handleChange.bind(this)} />
                         </div>
                     </div>
                     <div className="form-group">
                         <div className="col-md-12">
-                            <h3 className="form-h3">Would you be willing to serve as a participant in user testing for other applications?</h3>
+                            <h4 className="form-h4">Would you be willing to participate in user testing for other applications?</h4>
                             <Select
                                 name="futureUserTesting"
                                 clearable={clearable}
