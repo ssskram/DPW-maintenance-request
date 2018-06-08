@@ -55,6 +55,7 @@ namespace maintenance_reqsts.Controllers
             var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
             msg.AddTo(new EmailAddress("chris.hornstein@pittsburghpa.gov", "Chris Hornstein"));
             msg.AddTo(new EmailAddress("matthew.jacob@pittsburghpa.gov", "Matt Jacob"));
+            msg.AddTo(new EmailAddress("richard.decarlo@pittsburghpa.gov", "Richard DeCarlo"));
             var response = await client.SendEmailAsync(msg);
         }
     }
