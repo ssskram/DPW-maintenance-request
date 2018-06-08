@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { Link, NavLink, Redirect } from 'react-router-dom';
-import * as IssuesStore from '../../../store/issues';
 import { ApplicationState } from '../../../store';
 import { connect } from 'react-redux';
 import * as MessagesStore from '../../../store/messages';
+import * as IssuesStore from '../../../store/issues';
 import Select from 'react-select';
 declare var $: any;
 
@@ -17,10 +17,10 @@ const red = {
 }
 
 type AllProps =
-    IssuesStore.IssuesState &
     MessagesStore.MessageState &
-    typeof IssuesStore.actionCreators &
+    IssuesStore.IssuesState &
     typeof MessagesStore.actionCreators &
+    typeof IssuesStore.actionCreators &
     RouteComponentProps<{}>;
 
 export class DescribeIssue extends React.Component<any, any> {
@@ -28,6 +28,7 @@ export class DescribeIssue extends React.Component<any, any> {
         super(props);
         this.state = {
             options: [],
+            building: this.props.name,
             issue: '',
             description: '',
             location: '',
@@ -51,19 +52,19 @@ export class DescribeIssue extends React.Component<any, any> {
             }
         })
     }
-    
+
     handleChange(event) {
         this.setState({ [event.target.name]: event.target.value });
     }
 
     handleSelect = (issue) => {
         if (issue) {
-            this.setState({ issue: issue });
+            this.setState({ issue: issue.value });
         }
     }
 
     componentDidUpdate() {
-        var item = this.state.issue.value;
+        var item = this.state.issue;
         var prompt = document.getElementById('alternativeprompt');
         if (prompt) {
             if (item == "Pest Control" || item == "Elevators") {
@@ -97,27 +98,22 @@ export class DescribeIssue extends React.Component<any, any> {
         }
     }
 
-    submit(event) {
+    post(event) {
         event.preventDefault()
-        // serialize data
-        // pass data to post
-
-        // move this there too:
-        this.props.success()
-        this.setState({ redirect: true })
-    }
-
-    post(data) {
+        let self = this;
+        let data = JSON.stringify({ issue: self.state.issue, building: self.state.building, description: self.state.description, location: self.state.location, phone: self.state.phone })
+        self.setState({ description: '' })
         fetch('/api/requests/post', {
             method: 'POST',
-            body: JSON.stringify(data),
+            body: data,
             credentials: 'same-origin',
             headers: {
-                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
             }
-        }).then(res => {
-            this.props.success()
         })
+        this.props.success()
+        this.setState({ redirect: true })
     }
 
     public render() {
@@ -186,7 +182,7 @@ export class DescribeIssue extends React.Component<any, any> {
                         <button value='issue' onClick={next.bind(this)} className="btn btn-danger">Back</button>
                     </div>
                     <div className="col-md-6 text-center">
-                        <button disabled={!isEnabled} className="btn btn-success" onClick={this.submit.bind(this)}>Submit</button>
+                        <button disabled={!isEnabled} className="btn btn-success" onClick={this.post.bind(this)}>Submit</button>
                     </div>
                 </div>
             </div>

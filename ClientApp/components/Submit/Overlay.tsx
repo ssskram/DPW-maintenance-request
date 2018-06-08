@@ -4,10 +4,16 @@ import ConfirmFacility from './Form/ConfirmFacility';
 import SelectIssue from './Form/SelectIssue';
 import DescribeIssue from './Form/DescribeIssue';
 import RecentlySubmitted from './Form/RecentlySubmitted';
+import * as IssuesStore from '../../store/issues';
+import { ApplicationState } from '../../store';
+import { connect } from 'react-redux';
 
+type AllProps =
+    IssuesStore.IssuesState &
+    typeof IssuesStore.actionCreators &
+    RouteComponentProps<{}>;
 
-
-export default class Overlay extends React.Component<any, any> {
+export class Overlay extends React.Component<any, any> {
     constructor(props) {
         super(props);
         this.state = {
@@ -16,6 +22,9 @@ export default class Overlay extends React.Component<any, any> {
         }
     }
 
+    componentDidMount() {
+        this.props.requestAllIssues()
+    }
     returnToFacilities() {
         this.props.exit()
     }
@@ -44,7 +53,7 @@ export default class Overlay extends React.Component<any, any> {
             case 'issue':
                 return (<SelectIssue next={this.handleChange} />);
             case 'describe':
-                return (<DescribeIssue next={this.handleChange} type={this.state.issueType} name={this.props.name} neighborhood={this.props.neighborhood} />);
+                return (<DescribeIssue issues={this.props.issues} next={this.handleChange} type={this.state.issueType} name={this.props.name} neighborhood={this.props.neighborhood} />);
         }
     }
 
@@ -57,3 +66,8 @@ export default class Overlay extends React.Component<any, any> {
         );
     }
 }
+
+export default connect(
+    (state: ApplicationState) => state.issues,
+    IssuesStore.actionCreators
+)(Overlay as any) as typeof Overlay;

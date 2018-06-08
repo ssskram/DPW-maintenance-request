@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -77,7 +78,7 @@ namespace maintenance_reqsts.Controllers
         }
 
         [HttpPost("[action]")]
-        public async Task post(Request model)
+        public async Task post([FromBody] Request model)
         {
             await SendEmail(model);
             var key = Environment.GetEnvironmentVariable("CartegraphAPIkey");
