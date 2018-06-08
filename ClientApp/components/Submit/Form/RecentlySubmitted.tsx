@@ -52,10 +52,6 @@ export class RecentlySubmitted extends React.Component<any, any> {
         this.props.requestAllRequests()
     }
 
-    alreadySubmitted(event) {
-        this.props.alreadySubmitted()
-    }
-
     render() {
         const { img, name, next } = this.props
 
@@ -87,7 +83,7 @@ export class RecentlySubmitted extends React.Component<any, any> {
                 </div>
                 <div className="row col-md-12">
                     <div className="col-md-4 text-center">
-                        <Link to={'/'} onClick={this.alreadySubmitted.bind(this)} className="btn btn-danger">Exit</Link>
+                        <Link to={'/'} className="btn btn-danger">Exit</Link>
                     </div>
                     <div className="col-md-4" />
                     <div className="col-md-4 text-center">

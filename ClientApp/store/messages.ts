@@ -8,15 +8,15 @@ export interface MessageState {
 
 interface SuccessMessageAction { type: 'FORM_SUCCESS' }
 interface ErrorMessageAction { type: 'FORM_ERROR' }
-interface AlreadySubmittedMessageAction { type: 'ALREADY_SUBMITTED' }
+interface SurveyMessageAction { type: 'SURVEY_SUBMITTED' }
 interface ClearMessageAction { type: 'CLEAR' }
 
-type KnownAction = SuccessMessageAction | ErrorMessageAction | ClearMessageAction | AlreadySubmittedMessageAction;
+type KnownAction = SuccessMessageAction | ErrorMessageAction | ClearMessageAction | SurveyMessageAction;
 
 export const actionCreators = {
     success: () => <SuccessMessageAction>{ type: 'FORM_SUCCESS' },
     failure: () => <ErrorMessageAction>{ type: 'FORM_ERROR' },
-    alreadySubmitted: () => <AlreadySubmittedMessageAction>{ type: 'ALREADY_SUBMITTED' },
+    surveySubmitted: () => <SurveyMessageAction>{ type: 'SURVEY_SUBMITTED' },
     clear: () => <ClearMessageAction>{ type: 'CLEAR' },
 };
 
@@ -26,12 +26,12 @@ export const reducer: Reducer<MessageState> = (state: MessageState, action: Know
             return { messages: "Success! We'll be seeing you soon." };
         case 'FORM_ERROR':
             return { messages: "Oops! Something isn't right. Please try that again. If the problem persists, please contact I&P" };
-        case 'ALREADY_SUBMITTED':
-            return { messages: "There's no need to submit it again.  Thank you." };
+        case 'SURVEY_SUBMITTED':
+            return { messages: "Thanks for your time!" };
         case 'CLEAR':
             return { messages: "" }
         default:
             const exhaustiveCheck: never = action;
     }
-    return state || { messages: "" }
+    return state || { messages: "Welcome to the new maintenance portal!<br/><a href='/Survey'>Let us know what you think</a>" }
 };

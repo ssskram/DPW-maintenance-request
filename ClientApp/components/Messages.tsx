@@ -8,11 +8,15 @@ export default class Messages extends React.Component<any, {}> {
         window.scrollTo(0, 0)
     }
 
+    createMarkup() { 
+        return {__html: this.props.messages};
+    }
+
     public render() {
         return (
             this.props.messages ? (
                 <div role="alert" className="alert alert-success">
-                    <h3 className="message-body"  >{this.props.messages}</h3>
+                    <h3 className="message-body" dangerouslySetInnerHTML={this.createMarkup()}></h3>
                 </div>
             ) : null
         )
