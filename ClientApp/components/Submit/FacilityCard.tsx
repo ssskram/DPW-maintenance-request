@@ -3,7 +3,7 @@ import { RouteComponentProps } from 'react-router';
 import { Link, NavLink, Redirect } from 'react-router-dom';
 
 const imgStyle = {
-    maxHeight: '200px',
+    maxHeight: '150px',
     borderRadius: '10px',
     margin: '0 auto'
 }
@@ -23,8 +23,8 @@ export default class FacilityCard extends React.Component<any, any> {
                                 </div>
                                 <div className="col-md-6">
                                     <br/>
-                                    <h3>{this.props.name}</h3>
-                                    <h4>{this.props.neighborhood}</h4>
+                                    <h4>{this.props.name}</h4>
+                                    <h5>{this.props.neighborhood}</h5>
                                     <button onClick={select} id={this.props.oid} className="btn btn-success">Select</button>
                                 </div>
                             </div>

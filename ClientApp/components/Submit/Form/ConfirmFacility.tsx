@@ -2,7 +2,7 @@ import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 
 const imgStyle = {
-    maxHeight: '350px',
+    maxHeight: '250px',
     borderRadius: '10px',
     margin: '0 auto'
 }
@@ -18,12 +18,12 @@ export default class ConfirmFacility extends React.Component<any, any> {
 
         return (
             <div className="text-center">
-                <h1>Is this the one?</h1>
+                <h2>Is this the one?</h2>
                 <div className="text-center">
                     <img className="img-responsive" style={imgStyle} src={img} />
                 </div>
-                <h2>{name}</h2>
-                <h3>{neighborhood}</h3>
+                <h3>{name}</h3>
+                <h4>{neighborhood}</h4>
                 <div className="row col-md-12">
                     <div className="col-md-4 text-center">
                         <button value='exit' onClick={next.bind(this)} className="btn btn-danger">No</button>

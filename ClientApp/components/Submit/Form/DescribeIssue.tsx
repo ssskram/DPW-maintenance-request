@@ -27,7 +27,7 @@ export class DescribeIssue extends React.Component<any, any> {
     constructor(props) {
         super(props);
         this.state = {
-            options: [],
+            options: [{ "value": '...loading...', "label": '...loading...' }],
             building: this.props.name,
             issue: '',
             description: '',
@@ -44,12 +44,16 @@ export class DescribeIssue extends React.Component<any, any> {
 
     componentWillReceiveProps() {
         let self = this
-        // set select
+        // add options to select
+        var futureOptions : any[] = [];
         this.props.issues.forEach(function (element) {
             if (element.type == self.props.type) {
                 var json = { "value": element.name, "label": element.name };
-                self.state.options.push(json)
+                futureOptions.push(json)
             }
+        })
+        self.setState({
+            options: futureOptions
         })
     }
 
@@ -136,13 +140,13 @@ export class DescribeIssue extends React.Component<any, any> {
             <div className="form">
                 <div className="row">
                     <div className="col-md-12 text-center">
-                        <h2>{this.props.name}</h2>
-                        <h3 style={red}>{this.props.type}</h3>
+                        <h3>{this.props.name}</h3>
+                        <h4 style={red}>{this.props.type}</h4>
                     </div>
                 </div>
                 <div className="form-group">
                     <div className="col-md-12">
-                        <h3 className="form-h3">Select an issue</h3>
+                        <h4 className="form-h3">Select an issue</h4>
                         <Select
                             id="Issue"
                             name="issue"
@@ -157,19 +161,19 @@ export class DescribeIssue extends React.Component<any, any> {
                 <div id="formfields">
                     <div className="form-group">
                         <div className="col-md-12">
-                            <h3 className="form-h3">Describe the issue</h3>
+                            <h4 className="form-h3">Describe the issue</h4>
                             <textarea name="description" className="form-control" value={this.state.description} placeholder="Description" rows={3} onChange={this.handleChange.bind(this)}></textarea>
                         </div>
                     </div>
                     <div className="form-group">
                         <div className="col-md-12">
-                            <h3 className="form-h3">Describe the location</h3>
+                            <h4 className="form-h3">Describe the location</h4>
                             <textarea name="location" className="form-control" value={this.state.location} placeholder="Room, floor, etc." rows={3} onChange={this.handleChange.bind(this)}></textarea>
                         </div>
                     </div>
                     <div className="form-group">
                         <div className="col-md-12">
-                            <h3 className="form-h3">Enter your phone number</h3>
+                            <h4 className="form-h3">Enter your phone number</h4>
                             <input name="phone" className="form-control" value={this.state.phone} placeholder="Phone number" onChange={this.handleChange.bind(this)} />
                         </div>
                     </div>

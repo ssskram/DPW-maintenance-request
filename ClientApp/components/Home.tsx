@@ -119,7 +119,7 @@ export class Home extends React.Component<AllProps, any> {
                         <img src={String(door)}></img>
                     </div>
                     <div className="col-md-12">
-                        <h3><i>Doors, Locks, & Windows</i></h3>
+                        <h4><i>Doors, Locks, & Windows</i></h4>
                     </div>
                 </div>
                 <div style={padding} onClick={this.click.bind(this)} className="col-md-4">
@@ -127,7 +127,7 @@ export class Home extends React.Component<AllProps, any> {
                         <img src={String(electric)}></img>
                     </div>
                     <div className="col-md-12">
-                        <h3><i>Electrical & Lighting</i></h3>
+                        <h4><i>Electrical & Lighting</i></h4>
                     </div>
                 </div>
                 <div style={padding} onClick={this.click.bind(this)} className="col-md-4">
@@ -135,7 +135,7 @@ export class Home extends React.Component<AllProps, any> {
                         <img src={String(hvac)}></img>
                     </div>
                     <div className="col-md-12">
-                        <h3><i>Heating & Air Conditioning</i></h3>
+                        <h4><i>Heating & Air Conditioning</i></h4>
                     </div>
                 </div>
                 <div style={padding} onClick={this.click.bind(this)} className="col-md-4">
@@ -143,7 +143,7 @@ export class Home extends React.Component<AllProps, any> {
                         <img src={String(paint)}></img>
                     </div>
                     <div className="col-md-12">
-                        <h3><i>Carpentry & Painting</i></h3>
+                        <h4><i>Carpentry & Painting</i></h4>
                     </div>
                 </div>
                 <div style={padding} onClick={this.click.bind(this)} className="col-md-4">
@@ -151,7 +151,7 @@ export class Home extends React.Component<AllProps, any> {
                         <img src={String(plumbing)}></img>
                     </div>
                     <div className="col-md-12">
-                        <h3><i>Plumbing & Gas</i></h3>
+                        <h4><i>Plumbing & Gas</i></h4>
                     </div>
                 </div>
                 <div style={padding} onClick={this.click.bind(this)} className="col-md-4">
@@ -159,16 +159,16 @@ export class Home extends React.Component<AllProps, any> {
                         <img src={String(roofing)}></img>
                     </div>
                     <div className="col-md-12">
-                        <h3><i>Roofing</i></h3>
+                        <h4><i>Roofing</i></h4>
                     </div>
                 </div>
-                <div className="col-md-12"><h3>- or -</h3></div>
+                <div className="col-md-12"><h4>- or -</h4></div>
                 <div style={padding} onClick={this.click.bind(this)} className="col-md-12">
                     <div className="col-md-12">
                         <img src={String(misc)}></img>
                     </div>
                     <div className="col-md-12">
-                        <h3><i>Miscellaneous</i></h3>
+                        <h4><i>Miscellaneous</i></h4>
                     </div>
                 </div>
                 <Modal isOpen={this.state.modalIsOpen} style={modalStyles}>

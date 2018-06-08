@@ -57,7 +57,7 @@ export class RecentlySubmitted extends React.Component<any, any> {
 
         return (
             <div className="text-center">
-                <h1>Has your issue already been reported?</h1>
+                <h3>Has your issue already been reported?</h3>
                 <div className="text-center">
                     <img className="img-responsive" style={imgStyle} src={img} />
                 </div>

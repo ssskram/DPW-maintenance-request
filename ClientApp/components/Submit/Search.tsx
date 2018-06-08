@@ -102,7 +102,7 @@ export class Search extends React.Component<FacilitiesProps, any> {
           <div className="col-md-12">
             <div className="form-group">
               <div className="form-element">
-                <h2 className="form-h4">Search facilities</h2>
+                <h3 className="form-h4">Search facilities</h3>
                 <input name="filter" id="filter" className="selectpicker form-control" placeholder="Filter by name" onChange={this.filter.bind(this)} />
               </div>
             </div>

@@ -438,7 +438,7 @@ button.bs-placeholder[role='button']>span {
 .btn-big {
     /* font */
     color: #383838;
-    font-size: 22px;
+    font-size: 18px;
     font-family: 'Raleway', sans-serif;
     line-height: 2.1em;
     /* remove blue underline */
@@ -562,7 +562,7 @@ fieldset[disabled] .btn {
 
 .btn-success,
 .btn-danger {
-    padding: 10px 30px;
+    padding: 5px 20px;
     margin: 10px 5px;
     color: #fffcf5;
     font-size: 18px;

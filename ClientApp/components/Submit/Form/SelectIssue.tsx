@@ -28,7 +28,7 @@ export default class SelectIssue extends React.Component<any, any> {
         return (
             <div>
                 <div className="text-center">
-                    <h1>Select an issue type</h1>
+                    <h2>Select an issue type</h2>
                 </div>
                 <div>
                     <div className='col-md-4 text-center'>
