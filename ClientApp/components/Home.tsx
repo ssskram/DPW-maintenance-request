@@ -65,6 +65,19 @@ export class Home extends React.Component<AllProps, any> {
 
     componentDidMount() {
         window.scrollTo(0, 0)
+        // ping server
+        fetch('/api/ping/pong', {
+            credentials: 'same-origin',
+            headers: {
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+            },
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data == 0) {
+                    window.location.reload();
+                }
+            });
         this.props.requestAllFacilities()
         this.props.requestMyRequests()
         this.props.requestAllRequests()
