@@ -16,6 +16,10 @@ const red = {
     color: 'red'
 }
 
+const paddingLeft = {
+    paddingLeft: '5px'
+}
+
 type AllProps =
     MessagesStore.MessageState &
     IssuesStore.IssuesState &
@@ -146,7 +150,7 @@ export class DescribeIssue extends React.Component<any, any> {
                 </div>
                 <div className="form-group">
                     <div className="col-md-12">
-                        <h4 className="form-h3">Select an issue</h4>
+                        <h4 style={paddingLeft}>Select an issue</h4>
                         <Select
                             id="Issue"
                             name="issue"
@@ -161,19 +165,19 @@ export class DescribeIssue extends React.Component<any, any> {
                 <div id="formfields">
                     <div className="form-group">
                         <div className="col-md-12">
-                            <h4 className="form-h3">Describe the issue</h4>
+                            <h4 style={paddingLeft}>Describe the issue</h4>
                             <textarea name="description" className="form-control" value={this.state.description} placeholder="Description" rows={3} onChange={this.handleChange.bind(this)}></textarea>
                         </div>
                     </div>
                     <div className="form-group">
                         <div className="col-md-12">
-                            <h4 className="form-h3">Describe the location</h4>
+                            <h4 style={paddingLeft}>Describe the location</h4>
                             <textarea name="location" className="form-control" value={this.state.location} placeholder="Room, floor, etc." rows={3} onChange={this.handleChange.bind(this)}></textarea>
                         </div>
                     </div>
                     <div className="form-group">
                         <div className="col-md-12">
-                            <h4 className="form-h3">Enter your phone number</h4>
+                            <h4 style={paddingLeft}>Enter your phone number</h4>
                             <input name="phone" className="form-control" value={this.state.phone} placeholder="Phone number" onChange={this.handleChange.bind(this)} />
                         </div>
                     </div>

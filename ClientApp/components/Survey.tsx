@@ -75,25 +75,28 @@ export class Survey extends React.Component<any, any> {
                 <div id="formfields">
                     <div className="form-group">
                         <div className="col-md-12">
-                            <h4 className="form-h4">Name</h4>
+                            <h4 className="form-h">Name</h4>
                             <input name="name" className="form-control" placeholder="Enter your name" value={this.state.name} onChange={this.handleChange.bind(this)}></input>
                         </div>
                     </div>
+                    <br/>
                     <div className="form-group">
                         <div className="col-md-12">
-                            <h4 className="form-h4">Department</h4>
+                            <h4 className="form-h">Department</h4>
                             <input name="department" className="form-control" placeholder="Enter your department" value={this.state.department} onChange={this.handleChange.bind(this)}></input>
                         </div>
                     </div>
+                    <br/>
                     <div className="form-group">
                         <div className="col-md-12">
-                            <h4 className="form-h4">Comments</h4>
+                            <h4 className="form-h">Comments</h4>
                             <textarea name="body" className="form-control" placeholder="Thoughts, suggestions, etc." rows={4} value={this.state.body} onChange={this.handleChange.bind(this)} />
                         </div>
                     </div>
+                    <br/>
                     <div className="form-group">
                         <div className="col-md-12">
-                            <h4 className="form-h4">Would you be willing to participate in user testing for other applications?</h4>
+                            <h4 className="form-h">Would you be willing to participate in user testing for other applications?</h4>
                             <Select
                                 name="futureUserTesting"
                                 clearable={clearable}

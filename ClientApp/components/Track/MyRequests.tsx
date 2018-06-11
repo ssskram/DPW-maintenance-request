@@ -93,7 +93,7 @@ export class MyRequests extends React.Component<RequestsProps, any> {
                     <div className="col-md-12">
                         <div className="form-group">
                             <div className="form-element">
-                                <h3 className="form-h4">Search my requests</h3>
+                                <h3 className="form-h">Search my requests</h3>
                                 <input name="filter" id="filter" className="selectpicker form-control" placeholder="Filter by building or status" onChange={this.filter.bind(this)} />
                             </div>
                         </div>
