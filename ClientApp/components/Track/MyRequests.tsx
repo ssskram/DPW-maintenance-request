@@ -3,6 +3,7 @@ import ReactTable from "react-table";
 import { connect } from 'react-redux';
 import { ApplicationState } from '../../store';
 import * as RequestsStore from '../../store/myRequests';
+import * as Ping from '../../store/ping';
 
 const columns = [{
     Header: 'Request ID',
@@ -38,20 +39,12 @@ export class MyRequests extends React.Component<any, any> {
 
     componentDidMount() {
         window.scrollTo(0, 0)
-        this.props.requestMyRequests()
+
         // ping server
-        fetch('/api/ping/pong', {
-            credentials: 'same-origin',
-            headers: {
-                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
-            },
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data == 0) {
-                    window.location.reload();
-                }
-            });
+        this.props.ping()
+
+        // reload requests
+        this.props.requestMyRequests()
     }
 
     componentWillReceiveProps(props) {
@@ -113,7 +106,12 @@ export class MyRequests extends React.Component<any, any> {
 }
 
 export default connect(
-    (state: ApplicationState) =>
-        state.myRequests,
-    RequestsStore.actionCreators
+    (state: ApplicationState) => ({
+        ...state.myRequests,
+        ...state.ping
+    }),
+    ({
+        ...RequestsStore.actionCreators,
+        ...Ping.actionCreators
+    })
 )(MyRequests as any) as typeof MyRequests;

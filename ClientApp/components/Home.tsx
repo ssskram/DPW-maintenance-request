@@ -9,7 +9,6 @@ import * as AllRequestsStore from '../store/allRequests';
 import * as IssuesStore from '../store/issues';
 import * as MessagesStore from '../store/messages';
 import * as User from '../store/user';
-import * as Key from '../store/keys';
 import Messages from './Messages';
 import Modal from 'react-responsive-modal'
 
@@ -33,8 +32,10 @@ export class Home extends React.Component<any, any> {
     componentDidMount() {
         window.scrollTo(0, 0)
 
-        // hit stores
-        this.props.getGoogleKey()
+        // ping server
+        this.props.ping()
+
+        // load stores
         this.props.requestAllFacilities()
         this.props.requestMyRequests()
         this.props.requestAllRequests()
@@ -165,8 +166,7 @@ export default connect(
         ...state.facility,
         ...state.issues,
         ...state.user,
-        ...state.ping,
-        ...state.key
+        ...state.ping
     }),
     ({
         ...MessagesStore.actionCreators,
@@ -175,7 +175,6 @@ export default connect(
         ...FacilitiesStore.actionCreators,
         ...IssuesStore.actionCreators,
         ...User.actionCreators,
-        ...Ping.actionCreators,
-        ...Key.actionCreators
+        ...Ping.actionCreators
     })
 )(Home as any) as typeof Home;
