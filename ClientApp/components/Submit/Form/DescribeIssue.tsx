@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { RouteComponentProps } from 'react-router';
-import { Link, NavLink, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { ApplicationState } from '../../../store';
 import { connect } from 'react-redux';
 import * as MessagesStore from '../../../store/messages';
@@ -19,13 +18,6 @@ const red = {
 const paddingLeft = {
     paddingLeft: '5px'
 }
-
-type AllProps =
-    MessagesStore.MessageState &
-    IssuesStore.IssuesState &
-    typeof MessagesStore.actionCreators &
-    typeof IssuesStore.actionCreators &
-    RouteComponentProps<{}>;
 
 export class DescribeIssue extends React.Component<any, any> {
     constructor(props) {

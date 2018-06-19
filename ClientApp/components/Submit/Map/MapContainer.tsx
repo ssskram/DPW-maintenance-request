@@ -1,13 +1,10 @@
 import * as React from 'react';
-import { RouteComponentProps } from 'react-router';
 import { connect } from 'react-redux';
-import { ApplicationState } from '../../store';
-import * as FacilitiesStore from '../../store/facilities';
+import { ApplicationState } from '../../../store';
+import * as FacilitiesStore from '../../../store/facilities';
 import Map from './Map'
 
-type AllProps = FacilitiesStore.FacilitiesState & typeof FacilitiesStore.actionCreators & RouteComponentProps<{}>; 
-
-export class MapContainer extends React.Component<AllProps, any> {
+export class MapContainer extends React.Component<any, any> {
 
     componentDidMount() {
         this.props.requestAllFacilities()

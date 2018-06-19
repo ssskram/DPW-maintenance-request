@@ -1,10 +1,9 @@
 import * as React from 'react';
-import { RouteComponentProps } from 'react-router';
 import ReactTable from "react-table";
 import { connect } from 'react-redux';
 import { ApplicationState } from '../../../store';
 import * as RequestsStore from '../../../store/allRequests';
-import { Link, NavLink, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import * as MessagesStore from '../../../store/messages';
 declare var $: any;
 
@@ -35,13 +34,6 @@ const columns = [{
     Header: 'Description',
     accessor: 'description'
 }]
-
-type AllProps =
-    RequestsStore.AllRequestsState &
-    MessagesStore.MessageState &
-    typeof RequestsStore.actionCreators &
-    typeof MessagesStore.actionCreators &
-    RouteComponentProps<{}>;
 
 export class RecentlySubmitted extends React.Component<any, any> {
     constructor(props) {

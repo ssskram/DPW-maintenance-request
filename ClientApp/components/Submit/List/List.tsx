@@ -1,11 +1,9 @@
 import * as React from 'react';
-import { RouteComponentProps } from 'react-router';
-import { Link, NavLink, Redirect } from 'react-router-dom';
 import Modal from 'react-modal';
 import { connect } from 'react-redux';
-import { ApplicationState } from '../../store';
-import * as FacilitiesStore from '../../store/facilities';
-import Overlay from './Overlay';
+import { ApplicationState } from '../../../store';
+import * as FacilitiesStore from '../../../store/facilities';
+import Overlay from '../Form/Overlay';
 import FacilityCard from './FacilityCard'
 
 const modalStyles = {
@@ -26,12 +24,7 @@ const modalStyles = {
   }
 };
 
-type FacilitiesProps =
-  FacilitiesStore.FacilitiesState
-  & typeof FacilitiesStore.actionCreators
-  & RouteComponentProps<{}>;
-
-export class Search extends React.Component<FacilitiesProps, any> {
+export class Search extends React.Component<any, any> {
   constructor() {
     super();
     this.state = {

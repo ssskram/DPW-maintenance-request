@@ -1,17 +1,11 @@
 import * as React from 'react';
-import { RouteComponentProps } from 'react-router';
-import ConfirmFacility from './Form/ConfirmFacility';
-import SelectIssue from './Form/SelectIssue';
-import DescribeIssue from './Form/DescribeIssue';
-import RecentlySubmitted from './Form/RecentlySubmitted';
-import * as IssuesStore from '../../store/issues';
-import { ApplicationState } from '../../store';
+import ConfirmFacility from '../Form/ConfirmFacility';
+import SelectIssue from '../Form/SelectIssue';
+import DescribeIssue from '../Form/DescribeIssue';
+import RecentlySubmitted from '../Form/RecentlySubmitted';
+import * as IssuesStore from '../../../store/issues';
+import { ApplicationState } from '../../../store';
 import { connect } from 'react-redux';
-
-type AllProps =
-    IssuesStore.IssuesState &
-    typeof IssuesStore.actionCreators &
-    RouteComponentProps<{}>;
 
 export class Overlay extends React.Component<any, any> {
     constructor(props) {

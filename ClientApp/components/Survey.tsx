@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { RouteComponentProps } from 'react-router';
-import { Link, NavLink, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import * as MessagesStore from '../store/messages';
 import { connect } from 'react-redux';
 import { ApplicationState } from '../store';
@@ -9,11 +8,6 @@ import Select from 'react-select';
 const marginTop = {
     marginTop: '20px'
 }
-
-type AllProps =
-    MessagesStore.MessageState &
-    typeof MessagesStore.actionCreators &
-    RouteComponentProps<{}>;
 
 export class Survey extends React.Component<any, any> {
     constructor() {

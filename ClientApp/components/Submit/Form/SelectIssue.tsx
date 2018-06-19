@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { RouteComponentProps } from 'react-router';
 import * as ReactDOM from 'react-dom'
 
 const iconStyle = {

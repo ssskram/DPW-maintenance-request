@@ -3,8 +3,8 @@ import { Route } from 'react-router-dom';
 import { Layout } from './components/Layout';
 import Home from './components/Home';
 import Survey from './components/Survey';
-import MapContainer from './components/Submit/MapContainer';
-import Search from './components/Submit/Search';
+import MapContainer from './components/Submit/Map/MapContainer';
+import Search from './components/Submit/List/List';
 import MyRequests from './components/Track/MyRequests';
 import { Login } from './components/Account/Login';
 

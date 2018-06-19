@@ -1,9 +1,7 @@
 import * as React from 'react';
-import { RouteComponentProps } from 'react-router';
 import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
-import { Link, NavLink, Redirect } from 'react-router-dom';
 import Modal from 'react-modal';
-import Overlay from './Overlay';
+import Overlay from '../Form/Overlay';
 
 const modalStyles = {
     content: {
@@ -76,7 +74,7 @@ export class selectMap extends React.Component<any, any> {
 
     render() {
         const { modalIsOpen } = this.state;
-        const place = require('../../icons/place.png');
+        const place = require('../../../icons/place.png');
 
         return (
             <div id="map">
@@ -106,7 +104,7 @@ export class selectMap extends React.Component<any, any> {
                         />,
                     )}
                 </Map>
-                <Modal isOpen={this.state.modalIsOpen} style={modalStyles}>
+                <Modal isOpen={modalIsOpen} style={modalStyles}>
                     <Overlay
                         exit={this.closeModal.bind(this)}
                         img={this.state.selectedPlace.img}
