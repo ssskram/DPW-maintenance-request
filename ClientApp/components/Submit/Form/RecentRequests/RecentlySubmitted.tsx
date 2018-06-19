@@ -16,8 +16,9 @@ const imgStyle = {
 
 const babyTable = {
     maxWidth: '100vw',
-    padding: '5px'
+    padding: '5px',
 }
+
 const columns = [{
     Header: 'Submitted',
     accessor: 'submitted'
@@ -25,14 +26,8 @@ const columns = [{
     Header: 'Status',
     accessor: 'status',
 }, {
-    Header: 'Building',
-    accessor: 'building',
-}, {
     Header: 'Location',
     accessor: 'location'
-}, {
-    Header: 'Description',
-    accessor: 'description'
 }]
 
 export class RecentlySubmitted extends React.Component<any, any> {

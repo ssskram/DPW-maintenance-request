@@ -22,7 +22,7 @@ export default class SelectIssue extends React.Component<any, any> {
         return (
             <div>
                 <div className="text-center">
-                    <h2>Select an issue type</h2>
+                    <h2>Confirm the issue type</h2>
                 </div>
                 <div>
                     <div className='col-md-4 text-center'>
