@@ -41,7 +41,7 @@ export class DescribeIssue extends React.Component<any, any> {
     componentWillReceiveProps() {
         let self = this
         // add options to select
-        var futureOptions : any[] = [];
+        var futureOptions: any[] = [];
         this.props.issues.forEach(function (element) {
             if (element.type == self.props.type) {
                 var json = { "value": element.name, "label": element.name };
@@ -191,6 +191,12 @@ export class DescribeIssue extends React.Component<any, any> {
 }
 
 export default connect(
-    (state: ApplicationState) => ({ ...state.messages, ...state.issues }),
-    ({ ...MessagesStore.actionCreators, ...IssuesStore.actionCreators })
+    (state: ApplicationState) => ({
+        ...state.messages,
+        ...state.issues
+    }),
+    ({
+        ...MessagesStore.actionCreators,
+        ...IssuesStore.actionCreators
+    })
 )(DescribeIssue as any) as typeof DescribeIssue;

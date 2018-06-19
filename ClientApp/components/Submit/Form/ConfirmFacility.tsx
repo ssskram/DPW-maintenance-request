@@ -7,8 +7,8 @@ const imgStyle = {
 }
 
 export default class ConfirmFacility extends React.Component<any, any> {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
     }
 
     render() {

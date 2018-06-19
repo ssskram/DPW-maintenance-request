@@ -54,7 +54,7 @@ export class Overlay extends React.Component<any, any> {
     render() {
         return (
             <div>
-            <button className="topcorner btn-x" onClick={this.props.exit}>x</button>
+                <button className="topcorner btn-x" onClick={this.props.exit}>x</button>
                 {this.getComponent()}
             </div>
         );
@@ -62,6 +62,7 @@ export class Overlay extends React.Component<any, any> {
 }
 
 export default connect(
-    (state: ApplicationState) => state.issues,
+    (state: ApplicationState) =>
+        state.issues,
     IssuesStore.actionCreators
 )(Overlay as any) as typeof Overlay;

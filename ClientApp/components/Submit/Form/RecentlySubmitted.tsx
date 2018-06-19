@@ -36,8 +36,8 @@ const columns = [{
 }]
 
 export class RecentlySubmitted extends React.Component<any, any> {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
     }
 
     componentDidMount() {
@@ -55,7 +55,7 @@ export class RecentlySubmitted extends React.Component<any, any> {
                 </div>
                 <div className="row" style={babyTable}>
                     <ReactTable
-                        data={this.props.requests.filter(e => e.building === this.props.name && e.status == "Open")}
+                        data={this.props.requests.filter(e => e.building === name && e.status == "Open")}
                         columns={columns}
                         loading={false}
                         showPageSizeOptions={false}
@@ -88,6 +88,12 @@ export class RecentlySubmitted extends React.Component<any, any> {
 }
 
 export default connect(
-    (state: ApplicationState) => ({ ...state.messages, ...state.allRequests }),
-    ({ ...MessagesStore.actionCreators, ...RequestsStore.actionCreators })
+    (state: ApplicationState) => ({
+        ...state.messages,
+        ...state.allRequests
+    }),
+    ({
+        ...MessagesStore.actionCreators,
+        ...RequestsStore.actionCreators
+    })
 )(RecentlySubmitted as any) as typeof RecentlySubmitted;

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { RouteComponentProps } from 'react-router';
 import ReactTable from "react-table";
 import { connect } from 'react-redux';
 import { ApplicationState } from '../../store';
@@ -28,13 +27,8 @@ const columns = [{
     accessor: 'description'
 }]
 
-type RequestsProps =
-    RequestsStore.MyRequestsState
-    & typeof RequestsStore.actionCreators
-    & RouteComponentProps<{}>;
 
-
-export class MyRequests extends React.Component<RequestsProps, any> {
+export class MyRequests extends React.Component<any, any> {
     constructor(props) {
         super(props);
         this.state = {
@@ -60,14 +54,13 @@ export class MyRequests extends React.Component<RequestsProps, any> {
             });
     }
 
-    componentWillReceiveProps(nextProps: RequestsProps) {
-        if (nextProps.requests !== this.state.requests) {
-            this.setState({ requests: nextProps.requests });
+    componentWillReceiveProps(props) {
+        if (props.requests !== this.state.requests) {
+            this.setState({ requests: props.requests });
         }
     }
 
     filter(event) {
-        let self = this;
         if (event.target.value == '') {
             this.setState({
                 requests: this.props.requests
@@ -75,8 +68,8 @@ export class MyRequests extends React.Component<RequestsProps, any> {
         }
         else {
             var result = this.props.requests.filter(function (obj) {
-                return obj.building.toLowerCase().includes(event.target.value.toLowerCase()) || 
-                obj.status.toLowerCase().includes(event.target.value.toLowerCase());
+                return obj.building.toLowerCase().includes(event.target.value.toLowerCase()) ||
+                    obj.status.toLowerCase().includes(event.target.value.toLowerCase());
             });
             this.setState({
                 requests: result
@@ -120,6 +113,7 @@ export class MyRequests extends React.Component<RequestsProps, any> {
 }
 
 export default connect(
-    (state: ApplicationState) => state.myRequests,
+    (state: ApplicationState) =>
+        state.myRequests,
     RequestsStore.actionCreators
 )(MyRequests as any) as typeof MyRequests;

@@ -1,12 +1,6 @@
 import * as React from 'react';
-import { RouteComponentProps } from 'react-router';
-import { connect } from 'react-redux';
-import { ApplicationState } from '../store';
 
-export default class Messages extends React.Component<any, {}> {
-    componentDidMount() {
-        window.scrollTo(0, 0)
-    }
+export default class Messages extends React.Component<any, any> {
 
     createMarkup() { 
         return {__html: this.props.messages};

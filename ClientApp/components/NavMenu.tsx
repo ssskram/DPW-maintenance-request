@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link, NavLink, Redirect } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 export class NavMenu extends React.Component<any, any>  {
     constructor() {

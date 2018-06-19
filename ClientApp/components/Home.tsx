@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { RouteComponentProps } from 'react-router';
-import { Link, NavLink, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { ApplicationState } from '../store';
 import * as FacilitiesStore from '../store/facilities';
@@ -13,10 +12,6 @@ import Modal from 'react-modal';
 
 const padding = {
     padding: '15px'
-}
-
-const iconPadding = {
-    margin: '30px'
 }
 
 const iconSize = {
@@ -42,20 +37,7 @@ const modalStyles = {
     }
 };
 
-type AllProps =
-    MessagesStore.MessageState &
-    MyRequestsStore.MyRequestsState &
-    AllRequestsStore.AllRequestsState &
-    FacilitiesStore.FacilitiesState &
-    IssuesStore.IssuesState &
-    typeof MessagesStore.actionCreators &
-    typeof MyRequestsStore.actionCreators &
-    typeof AllRequestsStore.actionCreators &
-    typeof FacilitiesStore.actionCreators &
-    typeof IssuesStore.actionCreators
-    & RouteComponentProps<{}>;
-
-export class Home extends React.Component<AllProps, any> {
+export class Home extends React.Component<any, any> {
     constructor() {
         super();
         this.state = {
@@ -188,6 +170,18 @@ export class Home extends React.Component<AllProps, any> {
 }
 
 export default connect(
-    (state: ApplicationState) => ({ ...state.messages, ...state.myRequests, ...state.allRequests, ...state.facility, ...state.issues }),
-    ({ ...MessagesStore.actionCreators, ...MyRequestsStore.actionCreators, ...AllRequestsStore.actionCreators, ...FacilitiesStore.actionCreators, ...IssuesStore.actionCreators })
+    (state: ApplicationState) => ({
+        ...state.messages,
+        ...state.myRequests,
+        ...state.allRequests,
+        ...state.facility,
+        ...state.issues
+    }),
+    ({
+        ...MessagesStore.actionCreators,
+        ...MyRequestsStore.actionCreators,
+        ...AllRequestsStore.actionCreators,
+        ...FacilitiesStore.actionCreators,
+        ...IssuesStore.actionCreators
+    })
 )(Home as any) as typeof Home;

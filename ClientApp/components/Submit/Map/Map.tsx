@@ -33,8 +33,7 @@ export class selectMap extends React.Component<any, any> {
     }
 
     componentDidMount() {
-        window.scrollTo(0, 0)
-        
+    
         // ping server
         fetch('/api/ping/pong', {
             credentials: 'same-origin',

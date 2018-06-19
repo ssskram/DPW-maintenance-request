@@ -123,6 +123,7 @@ export class Search extends React.Component<any, any> {
 }
 
 export default connect(
-  (state: ApplicationState) => state.facility,
+  (state: ApplicationState) =>
+    state.facility,
   FacilitiesStore.actionCreators
 )(Search as any) as typeof Search;

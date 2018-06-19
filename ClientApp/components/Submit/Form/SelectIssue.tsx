@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom'
 
 const iconStyle = {
     height: '75px',
@@ -11,7 +10,7 @@ export default class SelectIssue extends React.Component<any, any> {
     }
 
     componentDidMount() {
-        ReactDOM.findDOMNode(this).scrollTop = 0
+        window.scrollTo(0, 0)
     }
 
     public render() {
