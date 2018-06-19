@@ -1,4 +1,5 @@
 import * as React from 'react';
+import LoadingImage from '../../LoadingImage'
 
 const imgStyle = {
     maxHeight: '150px',
@@ -17,7 +18,7 @@ export default class FacilityCard extends React.Component<any, any> {
                         <div className="panel">
                             <div className="panel-body text-center">
                                 <div className="col-md-6">
-                                    <img style={imgStyle} className="img-responsive" src={this.props.img} />
+                                    <LoadingImage style={imgStyle} src={this.props.img}/>
                                 </div>
                                 <div className="col-md-6">
                                     <br/>

@@ -5,6 +5,7 @@ import { ApplicationState } from '../../../../store';
 import * as RequestsStore from '../../../../store/allRequests';
 import { Link } from 'react-router-dom';
 import * as MessagesStore from '../../../../store/messages';
+import LoadingImage from '../../../LoadingImage'
 declare var $: any;
 
 const imgStyle = {
@@ -49,7 +50,7 @@ export class RecentlySubmitted extends React.Component<any, any> {
             <div className="text-center">
                 <h3>Has your issue already been reported?</h3>
                 <div className="text-center">
-                    <img className="img-responsive" style={imgStyle} src={img} />
+                    <LoadingImage style={imgStyle} src={img} />
                 </div>
                 <div className="row" style={babyTable}>
                     <ReactTable

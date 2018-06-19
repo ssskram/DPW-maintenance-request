@@ -1,4 +1,6 @@
 import * as React from 'react';
+import LoadingImage from '../../../LoadingImage'
+
 
 const imgStyle = {
     maxHeight: '250px',
@@ -19,7 +21,7 @@ export default class ConfirmFacility extends React.Component<any, any> {
             <div className="text-center">
                 <h2>Is this the one?</h2>
                 <div className="text-center">
-                    <img className="img-responsive" style={imgStyle} src={img} />
+                    <LoadingImage style={imgStyle} src={img}/>
                 </div>
                 <h3>{name}</h3>
                 <h4>{neighborhood}</h4>
