@@ -1,8 +1,8 @@
 import * as React from 'react';
-import ConfirmFacility from '../Form/ConfirmFacility';
-import SelectIssue from '../Form/SelectIssue';
-import DescribeIssue from '../Form/DescribeIssue';
-import RecentlySubmitted from '../Form/RecentlySubmitted';
+import ConfirmFacility from '../Form/ConfirmFacility/ConfirmFacility';
+import SelectIssue from '../Form/SelectIssue/SelectIssue';
+import DescribeIssue from '../Form/DescribeIssue/DescribeIssue';
+import RecentlySubmitted from '../Form/RecentRequests/RecentlySubmitted';
 import * as IssuesStore from '../../../store/issues';
 import { ApplicationState } from '../../../store';
 import { connect } from 'react-redux';

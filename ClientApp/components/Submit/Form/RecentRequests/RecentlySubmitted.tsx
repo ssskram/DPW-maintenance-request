@@ -1,10 +1,10 @@
 import * as React from 'react';
 import ReactTable from "react-table";
 import { connect } from 'react-redux';
-import { ApplicationState } from '../../../store';
-import * as RequestsStore from '../../../store/allRequests';
+import { ApplicationState } from '../../../../store';
+import * as RequestsStore from '../../../../store/allRequests';
 import { Link } from 'react-router-dom';
-import * as MessagesStore from '../../../store/messages';
+import * as MessagesStore from '../../../../store/messages';
 declare var $: any;
 
 const imgStyle = {

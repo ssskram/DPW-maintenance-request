@@ -10,17 +10,17 @@ export default class SelectIssue extends React.Component<any, any> {
     }
 
     public render() {
-        const door = require('../../../icons/door.png');
-        const electric = require('../../../icons/electric.png');
-        const hvac = require('../../../icons/hvac.png');
-        const misc = require('../../../icons/misc.png');
-        const paint = require('../../../icons/paint.png');
-        const plumbing = require('../../../icons/plumbing.png');
-        const roofing = require('../../../icons/roofing.png');
+        const door = require('../../../../icons/door.png');
+        const electric = require('../../../../icons/electric.png');
+        const hvac = require('../../../../icons/hvac.png');
+        const misc = require('../../../../icons/misc.png');
+        const paint = require('../../../../icons/paint.png');
+        const plumbing = require('../../../../icons/plumbing.png');
+        const roofing = require('../../../../icons/roofing.png');
         const { next } = this.props;
 
         return (
-            <div className='modal-long'>
+            <div>
                 <div className="text-center">
                     <h2>Select an issue type</h2>
                 </div>

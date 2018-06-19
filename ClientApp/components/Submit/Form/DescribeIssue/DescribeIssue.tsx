@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Redirect } from 'react-router-dom';
-import { ApplicationState } from '../../../store';
+import { ApplicationState } from '../../../../store';
 import { connect } from 'react-redux';
-import * as MessagesStore from '../../../store/messages';
-import * as IssuesStore from '../../../store/issues';
+import * as MessagesStore from '../../../../store/messages';
+import * as IssuesStore from '../../../../store/issues';
 import Select from 'react-select';
 declare var $: any;
 
@@ -134,7 +134,6 @@ export class DescribeIssue extends React.Component<any, any> {
 
         return (
             <div className="form">
-            <br/>
                 <div className="row">
                     <div className="col-md-12 text-center">
                         <h3>{this.props.name}</h3>
