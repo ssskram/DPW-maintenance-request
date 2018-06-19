@@ -4,10 +4,12 @@ import { connect } from 'react-redux';
 import { ApplicationState } from '../store';
 import * as FacilitiesStore from '../store/facilities';
 import * as MyRequestsStore from '../store/myRequests';
+import * as Ping from '../store/ping';
 import * as AllRequestsStore from '../store/allRequests';
 import * as IssuesStore from '../store/issues';
 import * as MessagesStore from '../store/messages';
 import * as User from '../store/user';
+import * as Key from '../store/keys';
 import Messages from './Messages';
 import Modal from 'react-responsive-modal'
 
@@ -31,18 +33,9 @@ export class Home extends React.Component<any, any> {
     componentDidMount() {
         window.scrollTo(0, 0)
         // ping server
-        fetch('/api/ping/pong', {
-            credentials: 'same-origin',
-            headers: {
-                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
-            },
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data == 0) {
-                    window.location.reload();
-                }
-            });
+        this.props.ping()
+        // hit stores
+        this.props.getGoogleKey()
         this.props.requestAllFacilities()
         this.props.requestMyRequests()
         this.props.requestAllRequests()
@@ -172,7 +165,9 @@ export default connect(
         ...state.allRequests,
         ...state.facility,
         ...state.issues,
-        ...state.user
+        ...state.user,
+        ...state.ping,
+        ...state.key
     }),
     ({
         ...MessagesStore.actionCreators,
@@ -180,6 +175,8 @@ export default connect(
         ...AllRequestsStore.actionCreators,
         ...FacilitiesStore.actionCreators,
         ...IssuesStore.actionCreators,
-        ...User.actionCreators
+        ...User.actionCreators,
+        ...Ping.actionCreators,
+        ...Key.actionCreators
     })
 )(Home as any) as typeof Home;
