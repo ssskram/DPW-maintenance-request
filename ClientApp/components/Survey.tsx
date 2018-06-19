@@ -3,11 +3,14 @@ import { Redirect } from 'react-router-dom';
 import * as MessagesStore from '../store/messages';
 import { connect } from 'react-redux';
 import { ApplicationState } from '../store';
-import Select from 'react-select';
+import TextArea from './Submit/Form/FormElements/textarea';
+import Select from './Submit/Form/FormElements/select';
+import Input from './Submit/Form/FormElements/input';
 
-const marginTop = {
-    marginTop: '20px'
-}
+const Options = [
+    { value: 'Yes', label: 'Yes', name: 'futureUserTesting' },
+    { value: 'No', label: 'No', name: 'futureUserTesting' },
+]
 
 export class Survey extends React.Component<any, any> {
     constructor() {
@@ -17,19 +20,16 @@ export class Survey extends React.Component<any, any> {
             department: '',
             body: '',
             futureUserTesting: '',
-            clearable: false,
             redirect: false
         }
     }
 
-    handleChange(event) {
+    handleChildChange(event) {
         this.setState({ [event.target.name]: event.target.value });
     }
 
-    handleSelect = (futureUserTesting) => {
-        if (futureUserTesting) {
-            this.setState({ futureUserTesting: futureUserTesting.value });
-        }
+    handleChildSelect(event) {
+        this.setState({ [event.name]: event.value });
     }
 
     post(event) {
@@ -51,7 +51,7 @@ export class Survey extends React.Component<any, any> {
     }
 
     public render() {
-        const { name, department, body, futureUserTesting, clearable, redirect } = this.state
+        const { name, department, body, futureUserTesting, redirect } = this.state
         const isEnabled =
             name.length > 0 &&
             department.length > 0 &&
@@ -62,59 +62,61 @@ export class Survey extends React.Component<any, any> {
             return <Redirect to='/' />;
         }
 
-        return (
-            <div className="form col-md-12">
-                <h3>Thanks for your time</h3>
-                <hr />
-                <div id="formfields">
-                    <div className="form-group">
-                        <div className="col-md-12">
-                            <h4 className="form-h">Name</h4>
-                            <input name="name" className="form-control" placeholder="Enter your name" value={this.state.name} onChange={this.handleChange.bind(this)}></input>
-                        </div>
-                    </div>
-                    <br/>
-                    <div className="form-group">
-                        <div className="col-md-12">
-                            <h4 className="form-h">Department</h4>
-                            <input name="department" className="form-control" placeholder="Enter your department" value={this.state.department} onChange={this.handleChange.bind(this)}></input>
-                        </div>
-                    </div>
-                    <br/>
-                    <div className="form-group">
-                        <div className="col-md-12">
-                            <h4 className="form-h">Comments</h4>
-                            <textarea name="body" className="form-control" placeholder="Thoughts, suggestions, etc." rows={4} value={this.state.body} onChange={this.handleChange.bind(this)} />
-                        </div>
-                    </div>
-                    <br/>
-                    <div className="form-group">
-                        <div className="col-md-12">
-                            <h4 className="form-h">Would you be willing to participate in user testing for other applications?</h4>
-                            <Select
-                                name="futureUserTesting"
-                                clearable={clearable}
-                                value={this.state.futureUserTesting}
-                                onChange={this.handleSelect}
-                                options={[
-                                    { value: 'Yes', label: 'Yes' },
-                                    { value: 'No', label: 'No' },
-                                ]}
-                            />
-                        </div>
-                    </div>
+        return <div className="centered">
+            <div className="row">
+                <div className="col-md-10">
+                    <h2>Thanks for your time</h2>
+                    <hr />
                 </div>
-                <div className="row col-md-12" style={marginTop}>
-                    <div className="col-md-12 text-center">
+            </div>
+            <div className="col-md-10">
+                <div className="form-group">
+
+                    <Input
+                        header="Name"
+                        placeholder="Enter your name"
+                        name="name"
+                        value={name}
+                        callback={this.handleChildChange.bind(this)}
+                    />
+
+                    <Input
+                        header="Department"
+                        placeholder="Enter your department"
+                        name="department"
+                        value={department}
+                        callback={this.handleChildChange.bind(this)}
+                    />
+
+                    <TextArea
+                        header="Comments"
+                        placeholder="Thoughts, suggestions, etc."
+                        name="body"
+                        value={body}
+                        callback={this.handleChildChange.bind(this)}
+                    />
+
+                    <Select
+                        value={futureUserTesting}
+                        name="futureUserTesting"
+                        header='Would you be willing to participate in user testing for other applications?'
+                        placeholder='Yes or no'
+                        onChange={this.handleChildSelect.bind(this)}
+                        multi={false}
+                        options={Options}
+                    />
+
+                    <div className="text-center">
                         <button disabled={!isEnabled} className="btn btn-success" onClick={this.post.bind(this)}>Submit</button>
                     </div>
                 </div>
             </div>
-        )
+        </div>;
     }
 }
 
 export default connect(
-    (state: ApplicationState) => state.messages,
-    MessagesStore.actionCreators
+    (state: ApplicationState) =>
+        state.messages,
+        MessagesStore.actionCreators
 )(Survey as any) as typeof Survey;

@@ -3,6 +3,7 @@ import Modal from 'react-responsive-modal';
 import { connect } from 'react-redux';
 import { ApplicationState } from '../../../store';
 import * as FacilitiesStore from '../../../store/facilities';
+import * as Ping from '../../../store/ping';
 import Overlay from '../Form/Overlay';
 import FacilityCard from './FacilityCard'
 
@@ -18,20 +19,11 @@ export class Search extends React.Component<any, any> {
 
   componentDidMount() {
     window.scrollTo(0, 0)
-    // ping server
-    fetch('/api/ping/pong', {
-      credentials: 'same-origin',
-      headers: {
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
-      },
-    })
-      .then(response => response.json())
-      .then(data => {
-        if (data == 0) {
-          window.location.reload();
-        }
-      });
 
+    // ping server
+    this.props.ping()
+
+    // load facilities into store
     this.props.requestAllFacilities()
 
     // set panels of faciliies to array, write to state
@@ -115,7 +107,12 @@ export class Search extends React.Component<any, any> {
 }
 
 export default connect(
-  (state: ApplicationState) =>
-    state.facility,
-  FacilitiesStore.actionCreators
+  (state: ApplicationState) => ({
+      ...state.facility,
+      ...state.ping
+  }),
+  ({
+      ...FacilitiesStore.actionCreators,
+      ...Ping.actionCreators
+  })
 )(Search as any) as typeof Search;

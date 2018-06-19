@@ -53,7 +53,7 @@ export class RecentlySubmitted extends React.Component<any, any> {
                 </div>
                 <div className="row" style={babyTable}>
                     <ReactTable
-                        data={this.props.requests.filter(e => e.building === name && e.status == "Open")}
+                        data={this.props.requests.filter(e => e.building === name)}
                         columns={columns}
                         loading={false}
                         showPageSizeOptions={false}
