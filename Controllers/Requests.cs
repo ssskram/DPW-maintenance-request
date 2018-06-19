@@ -65,7 +65,7 @@ namespace maintenance_reqsts.Controllers
             {
                 Request rqs = new Request()
                 {
-                    oid = item.Oid,
+                    oid = item.IDField,
                     building = item.cgAssetIDField,
                     location = item.LocationDescriptionField,
                     description = item.NotesField,

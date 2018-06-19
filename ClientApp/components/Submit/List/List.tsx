@@ -99,8 +99,6 @@ export class Search extends React.Component<any, any> {
           classNames={{
             transitionEnter: 'transition-enter',
             transitionEnterActive: 'transition-enter-active',
-            transitionExit: 'transition-exit-active',
-            transitionExitActive: 'transition-exit-active',
             overlay: 'custom-overlay',
             modal: 'custom-modal'
           }}

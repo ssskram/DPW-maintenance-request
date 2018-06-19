@@ -508,15 +508,6 @@ textarea {
     transition: transform 1000ms ease;
 }
 
-.transition-exit {
-    transform: scale(1);
-}
-
-.transition-exit-active {
-    transform: scale(0);
-    transition: transform 1000ms ease;
-}
-
 .custom-overlay {
     background: rgba(44, 62, 80, .8);
 }
