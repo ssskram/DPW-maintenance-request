@@ -7,8 +7,9 @@ import * as MyRequestsStore from '../store/myRequests';
 import * as AllRequestsStore from '../store/allRequests';
 import * as IssuesStore from '../store/issues';
 import * as MessagesStore from '../store/messages';
+import * as User from '../store/user';
 import Messages from './Messages';
-import Modal from 'react-modal';
+import Modal from 'react-responsive-modal'
 
 const padding = {
     padding: '15px'
@@ -18,24 +19,6 @@ const iconSize = {
     fontSize: '45pt',
     color: 'rgb(44, 62, 80)'
 }
-
-const modalStyles = {
-    content: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)',
-        backgroundColor: '#fffcf5',
-        border: 'solid 1px rgba(160, 160, 160, 0.3)',
-        boxShadow: '0 1px 4px 0 rgba(0, 0, 0, 0.1)',
-        overflow: 'visible',
-        maxWidth: '1300px',
-        maxHeight: '100vh',
-        overflowY: 'auto'
-    }
-};
 
 export class Home extends React.Component<any, any> {
     constructor() {
@@ -90,6 +73,8 @@ export class Home extends React.Component<any, any> {
         const paint = require('../icons/paint.png');
         const plumbing = require('../icons/plumbing.png');
         const roofing = require('../icons/roofing.png');
+
+        const { modalIsOpen } = this.state;
 
         return (
             <div className="text-center">
@@ -153,8 +138,19 @@ export class Home extends React.Component<any, any> {
                         <h4><i>Miscellaneous</i></h4>
                     </div>
                 </div>
-                <Modal isOpen={this.state.modalIsOpen} style={modalStyles}>
-                    <button className="topcorner btn-x" onClick={this.closeModal.bind(this)}>x</button>
+                <Modal
+                    open={modalIsOpen}
+                    onClose={this.closeModal.bind(this)}
+                    classNames={{
+                        transitionEnter: 'transition-enter',
+                        transitionEnterActive: 'transition-enter-active',
+                        transitionExit: 'transition-exit-active',
+                        transitionExitActive: 'transition-exit-active',
+                        overlay: 'custom-overlay',
+                        modal: 'custom-modal'
+                    }}
+                    animationDuration={1000}
+                    center>
                     <div className="row text-center">
                         <div className="col-md-6">
                             <Link style={padding} to={'/Map'} className="btn btn-big"><span style={iconSize} className='glyphicon glyphicon-map-marker'></span><br />Select facility from map</Link>
@@ -175,13 +171,15 @@ export default connect(
         ...state.myRequests,
         ...state.allRequests,
         ...state.facility,
-        ...state.issues
+        ...state.issues,
+        ...state.user
     }),
     ({
         ...MessagesStore.actionCreators,
         ...MyRequestsStore.actionCreators,
         ...AllRequestsStore.actionCreators,
         ...FacilitiesStore.actionCreators,
-        ...IssuesStore.actionCreators
+        ...IssuesStore.actionCreators,
+        ...User.actionCreators
     })
 )(Home as any) as typeof Home;

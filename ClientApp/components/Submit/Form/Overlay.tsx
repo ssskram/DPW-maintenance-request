@@ -24,6 +24,7 @@ export class Overlay extends React.Component<any, any> {
     }
 
     handleChange = event => {
+        window.scrollTo(0, 0)
         this.setState({ stage: event.currentTarget.value });
         if (event.currentTarget.name != null) {
             this.setIssueType(event);
@@ -54,7 +55,6 @@ export class Overlay extends React.Component<any, any> {
     render() {
         return (
             <div>
-                <button className="topcorner btn-x" onClick={this.props.exit}>x</button>
                 {this.getComponent()}
             </div>
         );

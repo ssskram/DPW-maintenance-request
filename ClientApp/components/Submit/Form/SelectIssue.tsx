@@ -9,10 +9,6 @@ export default class SelectIssue extends React.Component<any, any> {
         super(props);
     }
 
-    componentDidMount() {
-        window.scrollTo(0, 0)
-    }
-
     public render() {
         const door = require('../../../icons/door.png');
         const electric = require('../../../icons/electric.png');
@@ -24,7 +20,7 @@ export default class SelectIssue extends React.Component<any, any> {
         const { next } = this.props;
 
         return (
-            <div>
+            <div className='modal-long'>
                 <div className="text-center">
                     <h2>Select an issue type</h2>
                 </div>

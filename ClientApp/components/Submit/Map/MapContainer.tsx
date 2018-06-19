@@ -20,6 +20,7 @@ export class MapContainer extends React.Component<any, any> {
 }
 
 export default connect(
-    (state: ApplicationState) => state.facility, 
+    (state: ApplicationState) => 
+    state.facility, 
     FacilitiesStore.actionCreators    
   )(MapContainer as any) as typeof MapContainer;

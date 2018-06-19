@@ -1,27 +1,7 @@
 import * as React from 'react';
 import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
-import Modal from 'react-modal';
+import Modal from 'react-responsive-modal';
 import Overlay from '../Form/Overlay';
-
-const modalStyles = {
-    content: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)',
-        backgroundColor: '#fffcf5',
-        border: 'solid 1px rgba(160, 160, 160, 0.3)',
-        boxShadow: '0 1px 4px 0 rgba(0, 0, 0, 0.1)',
-        overflow: 'visible',
-        maxWidth: '1300px',
-        maxHeight: '100vh',
-        overflowY: 'auto'
-    }
-};
-
-Modal.setAppElement('#main');
 
 export class selectMap extends React.Component<any, any> {
     constructor(props) {
@@ -33,7 +13,7 @@ export class selectMap extends React.Component<any, any> {
     }
 
     componentDidMount() {
-    
+
         // ping server
         fetch('/api/ping/pong', {
             credentials: 'same-origin',
@@ -103,9 +83,20 @@ export class selectMap extends React.Component<any, any> {
                         />,
                     )}
                 </Map>
-                <Modal isOpen={modalIsOpen} style={modalStyles}>
+                <Modal
+                    open={modalIsOpen}
+                    onClose={this.closeModal.bind(this)}
+                    classNames={{
+                        transitionEnter: 'transition-enter',
+                        transitionEnterActive: 'transition-enter-active',
+                        transitionExit: 'transition-exit-active',
+                        transitionExitActive: 'transition-exit-active',
+                        overlay: 'custom-overlay',
+                        modal: 'custom-modal'
+                    }}
+                    animationDuration={1000}
+                    center>
                     <Overlay
-                        exit={this.closeModal.bind(this)}
                         img={this.state.selectedPlace.img}
                         name={this.state.selectedPlace.name}
                         neighborhood={this.state.selectedPlace.neighborhood} />

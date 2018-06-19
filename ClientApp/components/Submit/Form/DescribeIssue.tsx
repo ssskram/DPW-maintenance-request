@@ -134,6 +134,7 @@ export class DescribeIssue extends React.Component<any, any> {
 
         return (
             <div className="form">
+            <br/>
                 <div className="row">
                     <div className="col-md-12 text-center">
                         <h3>{this.props.name}</h3>
