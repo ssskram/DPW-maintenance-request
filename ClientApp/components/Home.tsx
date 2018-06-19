@@ -32,8 +32,7 @@ export class Home extends React.Component<any, any> {
 
     componentDidMount() {
         window.scrollTo(0, 0)
-        // ping server
-        this.props.ping()
+
         // hit stores
         this.props.getGoogleKey()
         this.props.requestAllFacilities()
