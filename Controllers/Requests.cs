@@ -44,7 +44,8 @@ namespace maintenance_reqsts.Controllers
                     location = item.LocationDescriptionField,
                     description = item.DescriptionField,
                     submitted = item.EntryDateField.ToString(datetimeformat),
-                    status = item.StatusField
+                    status = item.StatusField,
+                    issue = item.IssueField
                 };
                 Requests.Add(rqs);
             }
@@ -145,7 +146,7 @@ namespace maintenance_reqsts.Controllers
         public async Task<string> getAll() 
         {
             var key = Environment.GetEnvironmentVariable("CartegraphAPIkey");
-            var cartegraphUrl = "https://cgweb06.cartegraphoms.com/PittsburghPA/api/v1/Classes/cgRequestsClass?fields=Oid,BuildingNameField,LocationDescriptionField,DescriptionField,EntryDateField,StatusField&filter=([EnteredBy] is equal to \"APIAdmin\")";
+            var cartegraphUrl = "https://cgweb06.cartegraphoms.com/PittsburghPA/api/v1/Classes/cgRequestsClass?fields=Oid,BuildingNameField,LocationDescriptionField,DescriptionField,EntryDateField,StatusField,IssueField&filter=([EnteredBy] is equal to \"APIAdmin\")";
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Authorization =
             new AuthenticationHeaderValue("Basic", key);

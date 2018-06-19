@@ -26,6 +26,9 @@ const columns = [{
     Header: 'Status',
     accessor: 'status',
 }, {
+    Header: 'Issue',
+    accessor: 'issue'
+}, {
     Header: 'Location',
     accessor: 'location'
 }]

@@ -13,6 +13,7 @@ export interface AllRequests {
     description: any;
     submitted: any;
     status: any;
+    issue: any;
 }
 
 interface AllRequestRequestsAction {
