@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import * as MessagesStore from '../../../../store/messages';
 import * as IssuesStore from '../../../../store/issues';
 import Select from 'react-select';
-declare var $: any;
+import AlternativePrompt from './AlternativePrompt'
 
 const marginTop = {
     marginTop: '20px'
@@ -63,39 +63,8 @@ export class DescribeIssue extends React.Component<any, any> {
         }
     }
 
-    componentDidUpdate() {
-        var item = this.state.issue;
-        var prompt = document.getElementById('alternativeprompt');
-        if (prompt) {
-            if (item == "Pest Control" || item == "Elevators") {
-                prompt.innerHTML = "Please contact John Sibbet at <br><b>412-600-6106</b>"
-                $('#alternativeprompt').show();
-                $('#formfields').hide();
-            } else if (item == "Tree Issues") {
-                prompt.innerHTML = "Please contact DPW Forestry at <br><b>412-665-3625</b>"
-                $('#alternativeprompt').show();
-                $('#formfields').hide();
-            } else if (item == "Masonry/Concrete Work") {
-                prompt.innerHTML = "Please contact DPW Construction at <br><b>412-782-7631</b>"
-                $('#alternativeprompt').show();
-                $('#formfields').hide();
-            } else if (item == "Landscape Maintenance (Snow or Leaves)") {
-                prompt.innerHTML = "Please contact the DPW Parks division that services your area:<br><b><a href='http://pittsburghpa.gov/dpw/park-maintenance/index.html'>Maintenance Regions</a></b>"
-                $('#alternativeprompt').show();
-                $('#formfields').hide();
-            } else if (item == "Door Name Lettering") {
-                prompt.innerHTML = "Please contact DOMI Sign Shop at <br><b>412-255-2872</b>"
-                $('#alternativeprompt').show();
-                $('#formfields').hide();
-            } else if (item == "Office Renovation") {
-                prompt.innerHTML = "Please contact Chris Hornstein at <br><b>412-255-2498</b> or at<br>chirs.hornstein@pittsburghpa.gov"
-                $('#alternativeprompt').show();
-                $('#formfields').hide();
-            } else {
-                $('#alternativeprompt').hide();
-                $('#formfields').show();
-            }
-        }
+    clearIssue () {
+        this.setState({ issue: '' });
     }
 
     post(event) {
@@ -127,9 +96,21 @@ export class DescribeIssue extends React.Component<any, any> {
             description.length > 0 &&
             location.length > 0 &&
             phone.length > 0;
+        const alternativePrompt =
+            issue == 'Pest Control' ||
+            issue == 'Elevators' ||
+            issue == 'Tree Issues' ||
+            issue == 'Masonry/Concrete Work' ||
+            issue == 'Landscape Maintenance (Snow or Leaves)' ||
+            issue == 'Door Name Lettering' ||
+            issue == 'Office Renovation'
 
         if (redirect) {
             return <Redirect to='/' />;
+        }
+
+        if (alternativePrompt) {
+            return <AlternativePrompt issue={issue} clear={this.clearIssue.bind(this)}/>
         }
 
         return (
@@ -173,9 +154,6 @@ export class DescribeIssue extends React.Component<any, any> {
                             <input name="phone" className="form-control" value={this.state.phone} placeholder="Phone number" onChange={this.handleChange.bind(this)} />
                         </div>
                     </div>
-                </div>
-                <div className="row col-md-12">
-                    <div id="alternativeprompt" className="alternativeprompt" hidden></div>
                 </div>
                 <div className="row col-md-12" style={marginTop}>
                     <div className="col-md-6 text-center">
