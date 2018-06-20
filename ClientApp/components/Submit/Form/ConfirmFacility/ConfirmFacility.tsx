@@ -20,19 +20,13 @@ export default class ConfirmFacility extends React.Component<any, any> {
         return (
             <div className="text-center">
                 <h2>Is this the one?</h2>
-                <div className="text-center">
-                    <LoadingImage style={imgStyle} src={img}/>
+                <div>
+                    <LoadingImage style={imgStyle} src={img} />
                 </div>
                 <h3>{name}</h3>
                 <h4>{neighborhood}</h4>
                 <div className="row col-md-12">
-                    <div className="col-md-4 text-center">
-                        <button value='exit' onClick={next.bind(this)} className="btn btn-danger">No</button>
-                    </div>
-                    <div className="col-md-4" />
-                    <div className="col-md-4 text-center">
-                        <button value='recents' onClick={next.bind(this)} className="btn btn-success">Yes</button>
-                    </div>
+                    <button value='recents' onClick={next.bind(this)} className="btn btn-success">Yes</button>
                 </div>
             </div>
         );

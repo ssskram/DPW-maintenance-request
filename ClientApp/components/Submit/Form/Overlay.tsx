@@ -19,12 +19,8 @@ export class Overlay extends React.Component<any, any> {
     componentDidMount() {
         this.props.requestAllIssues()
     }
-    returnToFacilities() {
-        this.props.exit()
-    }
 
     handleChange = event => {
-        window.scrollTo(0, 0)
         this.setState({ stage: event.currentTarget.value });
         if (event.currentTarget.name != null) {
             this.setIssueType(event);
@@ -39,8 +35,6 @@ export class Overlay extends React.Component<any, any> {
         var stage = this.state.stage;
 
         switch (stage) {
-            case 'exit':
-                this.returnToFacilities();
             case 'confirm':
                 return (<ConfirmFacility next={this.handleChange} img={this.props.img} name={this.props.name} neighborhood={this.props.neighborhood} />);
             case 'recents':
