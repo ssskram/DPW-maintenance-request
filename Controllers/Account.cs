@@ -70,8 +70,8 @@ namespace maintenance_reqsts.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Home.Index), "Home");
-            }                
-            else 
+            }
+            else
             {
                 return View("AccessDenied");
             }

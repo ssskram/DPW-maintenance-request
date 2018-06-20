@@ -2,7 +2,6 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 
-
 namespace maintenance_reqsts.Controllers
 {
     public class Home : Controller

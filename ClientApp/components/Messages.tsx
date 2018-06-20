@@ -1,15 +1,21 @@
 import * as React from 'react';
 
-export default class Messages extends React.Component<any, any> {
+const margin = {
+    marginTop: '25px',
+    marginRight: '10px',
+    marginLeft: '10px'
+}
 
-    createMarkup() { 
-        return {__html: this.props.messages};
+export default class Messages extends React.Component<any, {}> {
+
+    createMarkup() {
+        return { __html: this.props.messages };
     }
 
     public render() {
         return (
             this.props.messages ? (
-                <div role="alert" className="alert alert-success">
+                <div style={margin} role="alert" className="alert alert-success">
                     <h3 className="message-body" dangerouslySetInnerHTML={this.createMarkup()}></h3>
                 </div>
             ) : null

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, RouteComponentProps } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { ApplicationState } from '../store';
 import * as FacilitiesStore from '../store/facilities';
@@ -21,7 +21,7 @@ const iconSize = {
     color: 'rgb(44, 62, 80)'
 }
 
-export class Home extends React.Component<any, any> {
+export class Home extends React.Component<any , any> {
     constructor() {
         super();
         this.state = {

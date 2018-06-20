@@ -17,7 +17,7 @@ namespace maintenance_reqsts.Controllers
         }
 
         [HttpGet("[action]")]
-        public IActionResult getuser() 
+        public IActionResult getuser()
         {
             var user = _userManager.GetUserName(HttpContext.User);
             return Json(user);

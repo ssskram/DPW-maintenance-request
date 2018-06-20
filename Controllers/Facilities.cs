@@ -44,7 +44,7 @@ namespace maintenance_reqsts.Controllers
                 };
                 Facilities.Add(fty);
             }
-            return(Facilities);
+            return (Facilities);
         }
 
         [HttpGet("[action]")]
@@ -63,11 +63,11 @@ namespace maintenance_reqsts.Controllers
                 };
                 Issues.Add(isu);
             }
-            List<Issue> sortedIssues = Issues.OrderBy(o=>o.name).ToList();
-            return(sortedIssues);
+            List<Issue> sortedIssues = Issues.OrderBy(o => o.name).ToList();
+            return (sortedIssues);
         }
 
-        public async Task<string> getFacilities() 
+        public async Task<string> getFacilities()
         {
             var key = Environment.GetEnvironmentVariable("CartegraphAPIkey");
             var cartegraphUrl = "https://cgweb06.cartegraphoms.com/PittsburghPA/api/v1/Classes/cgFacilitiesClass?fields=Oid,CgShape,IDField,NeighborhoodField,InactiveField&filter=(([Inactive] is equal to false))";
@@ -75,7 +75,7 @@ namespace maintenance_reqsts.Controllers
             client.DefaultRequestHeaders.Authorization =
             new AuthenticationHeaderValue("Basic", key);
             var content = await client.GetStringAsync(cartegraphUrl);
-            return(content);
+            return (content);
         }
 
         public async Task<string> getIssues()

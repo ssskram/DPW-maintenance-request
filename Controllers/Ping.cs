@@ -7,7 +7,7 @@ namespace maintenance_reqsts.Controllers
     public class ping : Controller
     {
         [HttpGet("[action]")]
-        public IActionResult pong() 
+        public IActionResult pong()
         {
             bool isAuthenticated = User.Identity.IsAuthenticated;
             return Ok(isAuthenticated);

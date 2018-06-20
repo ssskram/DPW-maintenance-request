@@ -38,7 +38,7 @@ namespace maintenance_reqsts.Controllers
             foreach (var item in requests)
             {
                 Request rqs = new Request()
-                {   
+                {
                     oid = item.Oid,
                     building = item.BuildingNameField,
                     location = item.LocationDescriptionField,
@@ -49,7 +49,7 @@ namespace maintenance_reqsts.Controllers
                 };
                 Requests.Add(rqs);
             }
-            return(Requests);
+            return (Requests);
         }
 
         [HttpGet("[action]")]
@@ -60,7 +60,7 @@ namespace maintenance_reqsts.Controllers
             dynamic requests = JObject.Parse(response)["cgTasksClass"];
             List<Request> Requests = new List<Request>();
             var datetimeformat = "MM/dd/yyyy HH:mm";
-                        var dateformat = "MM/dd/yyyy";
+            var dateformat = "MM/dd/yyyy";
             foreach (var item in requests)
             {
                 Request rqs = new Request()
@@ -75,7 +75,7 @@ namespace maintenance_reqsts.Controllers
                 };
                 Requests.Add(rqs);
             }
-            return(Requests);
+            return (Requests);
         }
 
         [HttpPost("[action]")]
@@ -143,7 +143,7 @@ namespace maintenance_reqsts.Controllers
             var response = await client.SendEmailAsync(msg);
         }
 
-        public async Task<string> getAll() 
+        public async Task<string> getAll()
         {
             var key = Environment.GetEnvironmentVariable("CartegraphAPIkey");
             var cartegraphUrl = "https://cgweb06.cartegraphoms.com/PittsburghPA/api/v1/Classes/cgRequestsClass?fields=Oid,BuildingNameField,LocationDescriptionField,DescriptionField,EntryDateField,StatusField,IssueField&filter=([EnteredBy] is equal to \"APIAdmin\")";
@@ -151,9 +151,9 @@ namespace maintenance_reqsts.Controllers
             client.DefaultRequestHeaders.Authorization =
             new AuthenticationHeaderValue("Basic", key);
             var content = await client.GetStringAsync(cartegraphUrl);
-            return(content);
+            return (content);
         }
-        public async Task<string> getMine() 
+        public async Task<string> getMine()
         {
             var user = _userManager.GetUserName(HttpContext.User);
             var key = Environment.GetEnvironmentVariable("CartegraphAPIkey");

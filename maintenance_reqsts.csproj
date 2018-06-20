@@ -37,7 +37,6 @@
       <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
     </Exec>
     <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
-
     <Message Importance="high" Text="Performing first-run Webpack build..." />
     <Exec Command="node node_modules/webpack/bin/webpack.js --config webpack.config.vendor.js" />
     <Exec Command="node node_modules/webpack/bin/webpack.js" />
