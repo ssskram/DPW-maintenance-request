@@ -4,7 +4,9 @@ import { ApplicationState } from '../../../../store';
 import { connect } from 'react-redux';
 import * as MessagesStore from '../../../../store/messages';
 import * as IssuesStore from '../../../../store/issues';
-import Select from 'react-select';
+import TextArea from '../../../FormElements/textarea';
+import Select from '../../../FormElements/select';
+import Input from '../../../FormElements/input';
 import AlternativePrompt from './AlternativePrompt'
 
 const marginTop = {
@@ -13,10 +15,6 @@ const marginTop = {
 
 const red = {
     color: 'red'
-}
-
-const paddingLeft = {
-    paddingLeft: '5px'
 }
 
 export class DescribeIssue extends React.Component<any, any> {
@@ -35,6 +33,7 @@ export class DescribeIssue extends React.Component<any, any> {
     }
 
     componentDidMount() {
+        window.scrollTo(0, 0)
         this.props.requestAllIssues()
     }
 
@@ -44,7 +43,7 @@ export class DescribeIssue extends React.Component<any, any> {
         var futureOptions: any[] = [];
         this.props.issues.forEach(function (element) {
             if (element.type == self.props.type) {
-                var json = { "value": element.name, "label": element.name };
+                var json = { "value": element.name, "label": element.name, "name": 'issue' };
                 futureOptions.push(json)
             }
         })
@@ -53,17 +52,15 @@ export class DescribeIssue extends React.Component<any, any> {
         })
     }
 
-    handleChange(event) {
+    handleChildChange(event) {
         this.setState({ [event.target.name]: event.target.value });
     }
 
-    handleSelect = (issue) => {
-        if (issue) {
-            this.setState({ issue: issue.value });
-        }
+    handleChildSelect(event) {
+        this.setState({ [event.name]: event.value });
     }
 
-    clearIssue () {
+    clearIssue() {
         this.setState({ issue: '' });
     }
 
@@ -89,7 +86,6 @@ export class DescribeIssue extends React.Component<any, any> {
         const { issue, description, location, phone } = this.state
         const { next } = this.props;
         const { redirect } = this.state;
-        const { clearable } = this.state;
         const { options } = this.state;
         const isEnabled =
             issue != '' &&
@@ -110,11 +106,11 @@ export class DescribeIssue extends React.Component<any, any> {
         }
 
         if (alternativePrompt) {
-            return <AlternativePrompt issue={issue} clear={this.clearIssue.bind(this)}/>
+            return <AlternativePrompt issue={issue} clear={this.clearIssue.bind(this)} />
         }
 
         return (
-            <div className="form">
+            <div>
                 <div className="row">
                     <div className="col-md-12 text-center">
                         <h3>{this.props.name}</h3>
@@ -122,39 +118,41 @@ export class DescribeIssue extends React.Component<any, any> {
                     </div>
                 </div>
                 <div className="form-group">
-                    <div className="col-md-12">
-                        <h4 style={paddingLeft}>Select an issue</h4>
-                        <Select
-                            id="Issue"
-                            name="issue"
-                            placeholder="Issue"
-                            clearable={clearable}
-                            value={this.state.issue}
-                            onChange={this.handleSelect}
-                            options={options}
-                        />
-                    </div>
+                    <Select
+                        value={issue}
+                        name="issue"
+                        header='Select an issue'
+                        placeholder='Select...'
+                        onChange={this.handleChildSelect.bind(this)}
+                        multi={false}
+                        options={options}
+                    />
+
+                    <TextArea
+                        value={description}
+                        name="description"
+                        header="Describe the issue"
+                        placeholder="Description"
+                        callback={this.handleChildChange.bind(this)}
+                    />
+
+                    <TextArea
+                        value={location}
+                        name="location"
+                        header="Describe the location"
+                        placeholder="Room, floor, etc."
+                        callback={this.handleChildChange.bind(this)}
+                    />
+
+                    <Input
+                        value={phone}
+                        name="phone"
+                        header="Enter your phone number"
+                        placeholder="Phone number"
+                        callback={this.handleChildChange.bind(this)}
+                    />
                 </div>
-                <div id="formfields">
-                    <div className="form-group">
-                        <div className="col-md-12">
-                            <h4 style={paddingLeft}>Describe the issue</h4>
-                            <textarea name="description" className="form-control" value={this.state.description} placeholder="Description" rows={3} onChange={this.handleChange.bind(this)}></textarea>
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        <div className="col-md-12">
-                            <h4 style={paddingLeft}>Describe the location</h4>
-                            <textarea name="location" className="form-control" value={this.state.location} placeholder="Room, floor, etc." rows={3} onChange={this.handleChange.bind(this)}></textarea>
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        <div className="col-md-12">
-                            <h4 style={paddingLeft}>Enter your phone number</h4>
-                            <input name="phone" className="form-control" value={this.state.phone} placeholder="Phone number" onChange={this.handleChange.bind(this)} />
-                        </div>
-                    </div>
-                </div>
+
                 <div className="row col-md-12" style={marginTop}>
                     <div className="col-md-6 text-center">
                         <button value='issue' onClick={next.bind(this)} className="btn btn-danger">Back</button>

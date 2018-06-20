@@ -9,6 +9,10 @@ export default class SelectIssue extends React.Component<any, any> {
         super(props);
     }
 
+    componentDidMount() {
+        window.scrollTo(0, 0)
+    }
+    
     public render() {
         const door = require('../../../../icons/door.png');
         const electric = require('../../../../icons/electric.png');

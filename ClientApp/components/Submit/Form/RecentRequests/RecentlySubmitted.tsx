@@ -6,7 +6,6 @@ import * as RequestsStore from '../../../../store/allRequests';
 import { Link } from 'react-router-dom';
 import * as MessagesStore from '../../../../store/messages';
 import LoadingImage from '../../../LoadingImage'
-declare var $: any;
 
 const imgStyle = {
     maxHeight: '150px',

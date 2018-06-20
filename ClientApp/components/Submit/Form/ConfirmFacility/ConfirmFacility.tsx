@@ -25,9 +25,7 @@ export default class ConfirmFacility extends React.Component<any, any> {
                 </div>
                 <h3>{name}</h3>
                 <h4>{neighborhood}</h4>
-                <div className="row col-md-12">
-                    <button value='recents' onClick={next.bind(this)} className="btn btn-success">Yes</button>
-                </div>
+                <button value='recents' onClick={next.bind(this)} className="btn btn-success">Yes</button>
             </div>
         );
     }

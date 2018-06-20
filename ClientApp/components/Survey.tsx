@@ -73,26 +73,26 @@ export class Survey extends React.Component<any, any> {
                 <div className="form-group">
 
                     <Input
+                        value={name}
+                        name="name"
                         header="Name"
                         placeholder="Enter your name"
-                        name="name"
-                        value={name}
                         callback={this.handleChildChange.bind(this)}
                     />
 
                     <Input
+                        value={department}
+                        name="department"
                         header="Department"
                         placeholder="Enter your department"
-                        name="department"
-                        value={department}
                         callback={this.handleChildChange.bind(this)}
                     />
 
                     <TextArea
+                        value={body}
+                        name="body"
                         header="Comments"
                         placeholder="Thoughts, suggestions, etc."
-                        name="body"
-                        value={body}
                         callback={this.handleChildChange.bind(this)}
                     />
 
