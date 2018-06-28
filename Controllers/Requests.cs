@@ -68,7 +68,7 @@ namespace maintenance_reqsts.Controllers
                     oid = item.IDField,
                     building = item.cgAssetIDField,
                     location = item.LocationDescriptionField,
-                    description = item.NotesField,
+                    description = item.TaskDescriptionField,
                     submitted = item.EntryDateField.ToString(datetimeformat),
                     status = item.StatusField,
                     lastModified = item.cgLastModifiedField.ToString(dateformat),

@@ -28,21 +28,25 @@ namespace maintenance_reqsts.Controllers
             List<Facility> Facilities = new List<Facility>();
             foreach (var item in facilities)
             {
-                var encodedName = item.IDField.ToString().Replace(" ", "_");
-                var link =
-                    String.Format
-                    ("https://tools.wprdc.org/images/pittsburgh/facilities/{0}.jpg",
-                        encodedName); // 0
-                Facility fty = new Facility()
+                // filter out station 16
+                if (item.Oid != "1438241139") 
                 {
-                    oid = item.Oid,
-                    lat = item.CgShape.Center.Lat,
-                    lng = item.CgShape.Center.Lng,
-                    name = item.IDField,
-                    neighborhood = item.NeighborhoodField,
-                    img = link
-                };
-                Facilities.Add(fty);
+                    var encodedName = item.IDField.ToString().Replace(" ", "_");
+                    var link =
+                        String.Format
+                        ("https://tools.wprdc.org/images/pittsburgh/facilities/{0}.jpg",
+                            encodedName); // 0
+                    Facility fty = new Facility()
+                    {
+                        oid = item.Oid,
+                        lat = item.CgShape.Center.Lat,
+                        lng = item.CgShape.Center.Lng,
+                        name = item.IDField,
+                        neighborhood = item.NeighborhoodField,
+                        img = link
+                    };
+                    Facilities.Add(fty);
+                }
             }
             return (Facilities);
         }
