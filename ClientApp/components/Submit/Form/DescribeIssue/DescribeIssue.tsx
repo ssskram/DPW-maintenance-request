@@ -68,10 +68,11 @@ export class DescribeIssue extends React.Component<any, any> {
         event.preventDefault()
         let self = this;
         let data = JSON.stringify({ issue: self.state.issue, building: self.state.building, description: self.state.description, location: self.state.location, phone: self.state.phone })
+        let cleaned_data = data.replace(/'/g, '');
         self.setState({ description: '' })
         fetch('/api/requests/post', {
             method: 'POST',
-            body: data,
+            body: cleaned_data,
             credentials: 'same-origin',
             headers: {
                 'Accept': 'application/json',
