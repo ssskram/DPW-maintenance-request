@@ -140,7 +140,6 @@ namespace maintenance_reqsts.Controllers
                     submittedby, // 4
                     model.location); // 5
             var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
-            msg.AddTo(new EmailAddress("paul.marks@pittsburghpa.gov", "Paul Marks"));
             var response = await client.SendEmailAsync(msg);
         }
 
