@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export default class AlternativePrompt extends React.Component<any, {}> {
+export default class AlternativePrompt extends React.Component<any, any> {
     public render() {
         const { issue, clear } = this.props
 

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import LoadingImage from '../../../LoadingImage'
 
-
 const imgStyle = {
     maxHeight: '250px',
     borderRadius: '10px',

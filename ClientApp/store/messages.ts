@@ -1,6 +1,4 @@
-import { fetch, addTask } from 'domain-task';
-import { Action, Reducer, ActionCreator } from 'redux';
-import { AppThunkAction } from './';
+import { Reducer } from 'redux';
 
 export interface MessageState {
     messages: string
