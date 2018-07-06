@@ -55,8 +55,8 @@ hr {
     }
     .home-image {
         opacity: 0.8;
-        max-height: 350px !important;
-        margin-top: 20px;
+        max-height: 250px !important;
+        margin-top: 45px;
     }
     .navbar-logout-btn {
         padding: 7px 5px 5px 5px !important;
