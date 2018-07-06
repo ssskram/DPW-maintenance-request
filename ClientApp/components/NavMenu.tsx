@@ -41,27 +41,27 @@ export class NavMenu extends React.Component<any, any>  {
                     <ul className='nav navbar-nav'>
                         <li className="sidenav-header">Submit</li>
                         <li>
-                            <NavLink to={'/Map'} activeClassName='active' data-toggle="collapse" data-target=".in">
+                            <NavLink to={'/Map'} data-toggle="collapse" data-target=".in">
                                 <span className='glyphicon glyphicon-map-marker'></span> Select facility from map
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to={'/Search'} activeClassName='active' data-toggle="collapse" data-target=".in">
+                            <NavLink to={'/Search'} data-toggle="collapse" data-target=".in">
                                 <span className='glyphicon glyphicon-list'></span> Select facility from list
                             </NavLink>
                         </li>
                         <li className="sidenav-header">Track</li>
                         <li>
-                            <NavLink to={'/MyRequests'} activeClassName='active' data-toggle="collapse" data-target=".in">
+                            <NavLink to={'/MyRequests'} data-toggle="collapse" data-target=".in">
                                 <span className='glyphicon glyphicon-chevron-right'></span> My requests
                             </NavLink>
                         </li>
                         <div className='accountcontainer'>
                             <li className="account">{user}</li>
                             <li className='logout'>
-                                <NavLink to={'/Account/Login'} activeClassName='active' id="logout" className='btn btn-link navbar-logout-btn navbar-link'>
+                                <a href='/Account/Login' id="logout" className='btn btn-link navbar-logout-btn navbar-link'>
                                     <span className='glyphicon glyphicon-user'></span>Logout
-                                </NavLink>
+                                </a>
                             </li>
                         </div>
                     </ul>
