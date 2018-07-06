@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
@@ -28,12 +25,11 @@ namespace maintenance_reqsts.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> Login(string returnUrl = null)
+        public async Task<IActionResult> Login()
         {
             // Clear the existing external cookie to ensure a clean login process
             await _signInManager.SignOutAsync();
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
-            ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
 
@@ -47,15 +43,12 @@ namespace maintenance_reqsts.Controllers
             return Challenge(properties, provider);
         }
 
-        [HttpPost]
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null, string remoteError = null)
         {
             var info = await _signInManager.GetExternalLoginInfoAsync();
             // create user account, and log user in.
-            ViewData["ReturnUrl"] = returnUrl;
-            ViewData["LoginProvider"] = info.LoginProvider;
             var email = info.Principal.FindFirstValue(ClaimTypes.Email);
             if (email.Contains("@pittsburghpa.gov"))
             {
@@ -85,26 +78,10 @@ namespace maintenance_reqsts.Controllers
             return RedirectToAction(nameof(Home.Index), "Home");
         }
 
-        public async Task<IActionResult> AccessDenied(string returnUrl = null)
+        public async Task<IActionResult> AccessDenied()
         {
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
             return View();
         }
-
-        #region Helpers
-
-        private IActionResult RedirectToLocal(string returnUrl)
-        {
-            if (Url.IsLocalUrl(returnUrl))
-            {
-                return Redirect(returnUrl);
-            }
-            else
-            {
-                return RedirectToAction(nameof(Home.Index), "Home");
-            }
-        }
-
-        #endregion
     }
 }

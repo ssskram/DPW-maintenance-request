@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
@@ -24,7 +22,7 @@ namespace maintenance_reqsts
         string _sendgrid = null;
         string _CartegraphAPIkey = null;
 
-        private readonly IHostingEnvironment _currentEnvironment;   
+        private readonly IHostingEnvironment _currentEnvironment;
         public IConfiguration HostingConfig { get; private set; }
         public IConfiguration Configuration { get; }
         public Startup(IConfiguration configuration, IHostingEnvironment env)
@@ -76,7 +74,7 @@ namespace maintenance_reqsts
                     })
                     .Services.ConfigureApplicationCookie(options =>
                     {
-                        options.Cookie.Name = ".PGH_SSO";    
+                        options.Cookie.Name = ".PGH_SSO";
                         options.Cookie.Domain = ".azurewebsites.us";
                     });
                 services.AddDataProtection()
@@ -124,7 +122,7 @@ namespace maintenance_reqsts
 
             app.UseAuthentication();
 
-            app.UseSession(); 
+            app.UseSession();
 
             app.UseMvc(routes =>
             {

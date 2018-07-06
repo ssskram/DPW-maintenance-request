@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
-using maintenance_reqsts.Models;
+﻿using Microsoft.AspNetCore.Identity;
 
 namespace maintenance_reqsts.Models
 {
