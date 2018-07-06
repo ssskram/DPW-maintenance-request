@@ -6,7 +6,7 @@ const margin = {
     marginLeft: '10px'
 }
 
-export default class Messages extends React.Component<any, {}> {
+export default class Messages extends React.Component<any, any> {
 
     createMarkup() {
         return { __html: this.props.messages };
