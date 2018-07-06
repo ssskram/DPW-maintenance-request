@@ -574,3 +574,11 @@ textarea {
     height: 100vh;
     margin-left: -15px;
 }
+
+a[href^="http://maps.google.com/maps"] {
+    display: none !important
+}
+
+a[href^="https://maps.google.com/maps"] {
+    display: none !important
+}
