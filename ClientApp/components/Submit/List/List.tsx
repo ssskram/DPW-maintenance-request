@@ -6,14 +6,17 @@ import * as FacilitiesStore from '../../../store/facilities';
 import * as Ping from '../../../store/ping';
 import Overlay from '../Form/Overlay';
 import FacilityCard from './FacilityCard'
+import Paging from '../../Paging'
 
 export class Search extends React.Component<any, any> {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      panels: [],
+      facilities: this.props.facilities,
       modalIsOpen: false,
-      selectedPlace: {}
+      selectedPlace: {},
+      currentPage: 1,
+      facilitiesPerPage: 15,
     }
   }
 
@@ -25,24 +28,28 @@ export class Search extends React.Component<any, any> {
 
     // load facilities into store
     this.props.requestAllFacilities()
+  }
 
-    // set panels of faciliies to array, write to state
-    var classname = document.getElementsByClassName('facility');
+  componentWillReceiveProps(props) {
     this.setState({
-      panels: classname
+      facilities: props.facilities,
+      itemCount: props.facilities.length,
     });
   }
 
   filter(event) {
-    let self = this;
-    Array.from(self.state.panels).forEach(function (element: any) {
-      if ((element.id.toLowerCase().indexOf(event.target.value.toLowerCase()) === -1)) {
-        element.style.display = "none";
+    let input = event.target.value.toLowerCase()
+    const filtered = this.props.facilities.filter(function (item) {
+      if (!item.name.toLowerCase().includes(input)) {
+        return false
       }
-      else {
-        element.style.display = "";
-      }
-    });
+      return true
+    })
+    this.setState({
+      currentPage: 1,
+      facilities: filtered,
+      itemCount: filtered.length
+    })
   }
 
   buttonClick = event => {
@@ -60,8 +67,47 @@ export class Search extends React.Component<any, any> {
     });
   }
 
+  handleNextClick() {
+    window.scrollTo(0, 0)
+    let current = this.state.currentPage
+    this.setState({
+      currentPage: current + 1
+    });
+  }
+
+  handlePreviousClick() {
+    window.scrollTo(0, 0)
+    let current = this.state.currentPage
+    this.setState({
+      currentPage: current - 1
+    });
+  }
   public render() {
-    const { modalIsOpen } = this.state;
+    const {
+      modalIsOpen,
+      facilities,
+      currentPage,
+      facilitiesPerPage } = this.state;
+
+    // Logic for paging
+    const indexOfLastFacility = currentPage * facilitiesPerPage;
+    const indexOfFirstFacility = indexOfLastFacility - facilitiesPerPage;
+    const currentFacilities = facilities.slice(indexOfFirstFacility, indexOfLastFacility);
+    const renderFacilities = currentFacilities.map((facility, index) => {
+      return <FacilityCard
+        key={facility.oid}
+        oid={facility.oid}
+        name={facility.name}
+        neighborhood={facility.neighborhood}
+        img={facility.img}
+        select={this.buttonClick.bind(this)} />
+    })
+
+    // Logic for displaying page numbers
+    const pageNumbers: any[] = []
+    for (let i = 1; i <= Math.ceil(facilities.length / facilitiesPerPage); i++) {
+      pageNumbers.push(i);
+    }
 
     return (
       <div className="container-fluid">
@@ -75,15 +121,8 @@ export class Search extends React.Component<any, any> {
             </div>
           </div>
         </div>
-        {this.props.facilities.map(facility =>
-          <FacilityCard
-            key={facility.oid}
-            oid={facility.oid}
-            name={facility.name}
-            neighborhood={facility.neighborhood}
-            img={facility.img}
-            select={this.buttonClick.bind(this)} />
-        )}
+        
+        {renderFacilities}
 
         <Modal
           open={modalIsOpen}
@@ -101,6 +140,9 @@ export class Search extends React.Component<any, any> {
             name={this.state.selectedPlace.name}
             neighborhood={this.state.selectedPlace.neighborhood} />
         </Modal>
+
+        <Paging count={facilities} currentPage={currentPage} totalPages={pageNumbers} next={this.handleNextClick.bind(this)} prev={this.handlePreviousClick.bind(this)} />
+
       </div>
     );
   }
@@ -108,11 +150,11 @@ export class Search extends React.Component<any, any> {
 
 export default connect(
   (state: ApplicationState) => ({
-      ...state.facility,
-      ...state.ping
+    ...state.facility,
+    ...state.ping
   }),
   ({
-      ...FacilitiesStore.actionCreators,
-      ...Ping.actionCreators
+    ...FacilitiesStore.actionCreators,
+    ...Ping.actionCreators
   })
 )(Search as any) as typeof Search;

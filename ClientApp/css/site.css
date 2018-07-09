@@ -359,6 +359,10 @@ textarea {
     width: 70%;
 }
 
+.btn-secondary {
+    margin: 10px;
+}
+
 .btn-submit:focus, .btn-submit:hover {
     background-color: rgb(44, 62, 80) !important;
     border: .5px rgb(44, 62, 80) !important;
@@ -390,23 +394,6 @@ textarea {
     margin-top: 40px;
     margin-bottom: 20px;
     width: 50%;
-}
-
-.btn.disabled, .btn[disabled], fieldset[disabled] .btn {
-    /* font */
-    color: #383838;
-    font-size: 18px;
-    font-family: 'Raleway', sans-serif;
-    /* remove blue underline */
-    text-decoration: none;
-    /* border */
-    border: 0px;
-    /* transitions */
-    transition: all .3s ease 0s;
-    /* other */
-    background-color: rgba(202, 205, 206, .35);
-    padding: 10px 30px;
-    margin: 7px;
 }
 
 .btn-success, .btn-danger {
