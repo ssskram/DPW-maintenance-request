@@ -117,7 +117,7 @@ export class Search extends React.Component<any, any> {
             <div className="form-group">
               <div className="form-element">
                 <h3 className="form-h">Search facilities</h3>
-                <input name="filter" id="filter" className="selectpicker form-control" placeholder="Filter by name" onChange={this.filter.bind(this)} />
+                <input name="filter" id="filter" type='search' className="selectpicker form-control" placeholder="Filter by name" onChange={this.filter.bind(this)} />
               </div>
             </div>
           </div>
@@ -148,7 +148,8 @@ export class Search extends React.Component<any, any> {
           totalPages={pageNumbers}
           next={this.handleNextClick.bind(this)}
           prev={this.handlePreviousClick.bind(this)} />
-
+          <br/>
+          <br/>
       </div>
     );
   }

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import ReactTable from "react-table";
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { ApplicationState } from '../../store';
 import * as RequestsStore from '../../store/myRequests';
@@ -33,10 +34,10 @@ export class MyRequests extends React.Component<any, any> {
         super(props);
         this.state = {
             format: 'cards',
-            requests: this.props.requests.sort(function (a, b) {
+            requests: props.requests.sort(function (a, b) {
                 return +new Date(b.submitted) - +new Date(a.submitted);
             }),
-            countRequests: this.props.requests.length,
+            countRequests: props.requests.length,
             currentPage: 1,
             requestsPerPage: 15
         }
@@ -54,7 +55,7 @@ export class MyRequests extends React.Component<any, any> {
 
     componentWillReceiveProps(props) {
         if (props.requests !== this.state.requests) {
-            this.setState({ 
+            this.setState({
                 requests: props.requests.sort(function (a, b) {
                     return +new Date(b.submitted) - +new Date(a.submitted);
                 }),
@@ -83,13 +84,13 @@ export class MyRequests extends React.Component<any, any> {
     toggleViewFormat() {
         window.scrollTo(0, 0)
         if (this.state.format == 'cards') {
-            this.setState ({
+            this.setState({
                 currentPage: 1,
                 format: 'table'
             })
         }
         if (this.state.format == 'table') {
-            this.setState ({
+            this.setState({
                 format: 'cards'
             })
         }
@@ -133,6 +134,18 @@ export class MyRequests extends React.Component<any, any> {
             pageNumbers.push(i);
         }
 
+        if (countRequests == 0) {
+            return <div className='text-center'>
+                <br/>
+                <h1>You haven't submitted any maintenance requests!</h1>
+                <br/>
+                <img src='./images/shocked-face.png' className="img-responsive home-image" />
+                <br/>
+                <h1><Link to={'/'}>Head here to get started</Link></h1>
+
+            </div>
+        }
+
         return (
             <div>
                 <div className="row">
@@ -144,15 +157,15 @@ export class MyRequests extends React.Component<any, any> {
                                         <h3 className="form-h">My requests - {countRequests} items</h3>
                                     </div>
                                     <div className='col-sm-6 col-xs-12'>
-                                    {format == 'cards' &&
-                                        <button className='btn btn-secondary text-center' onClick={this.toggleViewFormat.bind(this)}>Toggle table view</button>
-                                    }
-                                    {format == 'table' &&
-                                        <button className='btn btn-secondary text-center' onClick={this.toggleViewFormat.bind(this)}>Toggle card view</button>
-                                    }
+                                        {format == 'cards' &&
+                                            <button className='btn btn-secondary text-center' onClick={this.toggleViewFormat.bind(this)}>Toggle table view</button>
+                                        }
+                                        {format == 'table' &&
+                                            <button className='btn btn-secondary text-center' onClick={this.toggleViewFormat.bind(this)}>Toggle card view</button>
+                                        }
                                     </div>
                                 </div>
-                                <input name="filter" id="filter" className="selectpicker form-control" placeholder="Filter by building or status" onChange={this.filter.bind(this)} />
+                                <input name="filter" id="filter" type='search' className="selectpicker form-control" placeholder="Filter by building or status" onChange={this.filter.bind(this)} />
                             </div>
                         </div>
                     </div>
@@ -183,7 +196,8 @@ export class MyRequests extends React.Component<any, any> {
                             totalPages={pageNumbers}
                             next={this.handleNextClick.bind(this)}
                             prev={this.handlePreviousClick.bind(this)} />
-
+                    <br />
+                    <br />
                     </div>
                 }
             </div>

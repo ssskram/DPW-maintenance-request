@@ -1,7 +1,8 @@
 /* Core
 /* ------------------------- */
 
-html, body {
+html,
+body {
     height: 100% !important;
 }
 
@@ -11,7 +12,11 @@ body {
     letter-spacing: .5px;
 }
 
-h1, h2, h3, h4, h5 {
+h1,
+h2,
+h3,
+h4,
+h5 {
     color: #383838;
     font-family: 'Raleway', sans-serif;
 }
@@ -55,8 +60,8 @@ hr {
     }
     .home-image {
         opacity: 0.8;
-        max-height: 250px !important;
-        margin-top: 45px;
+        height: 150px !important;
+        margin: 0 auto;
     }
     .navbar-logout-btn {
         padding: 7px 5px 5px 5px !important;
@@ -104,8 +109,8 @@ hr {
     }
     .home-image {
         opacity: 0.8;
-        max-height: 350px !important;
-        margin-top: 45px;
+        max-height: 200px !important;
+        margin: 0 auto;
     }
 }
 
@@ -157,12 +162,14 @@ hr {
     text-overflow: ellipsis !important;
 }
 
-.navbar-inverse .navbar-brand:hover, .navbar-inverse .navbar-brand:focus {
+.navbar-inverse .navbar-brand:hover,
+.navbar-inverse .navbar-brand:focus {
     background: rgb(26, 36, 47) !important;
     color: #fffaee !important;
 }
 
-.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+.navbar-inverse .navbar-collapse,
+.navbar-inverse .navbar-form {
     border-color: rgba(202, 205, 206, .5) !important;
 }
 
@@ -170,7 +177,8 @@ hr {
     border-color: transparent !important;
 }
 
-.navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
+.navbar-inverse .navbar-toggle:hover,
+.navbar-inverse .navbar-toggle:focus {
     background-color: rgb(26, 36, 47) !important;
 }
 
@@ -209,6 +217,10 @@ hr {
 
 /* Forms
 /* ------------------------- */
+
+input[type=search]::-webkit-search-cancel-button {
+    -webkit-appearance: searchfield-cancel-button;
+}
 
 .form-h {
     margin-left: 15px;
@@ -310,7 +322,8 @@ textarea {
     height: auto;
 }
 
-.btn-big:active, .btn-big:focus {
+.btn-big:active,
+.btn-big:focus {
     background-color: transparent !important;
     color: #383838 !important;
     outline: none;
@@ -327,14 +340,16 @@ textarea {
     transition: all .2s ease 0s;
 }
 
-.btn-default:focus, .btn-default:hover {
+.btn-default:focus,
+.btn-default:hover {
     background-color: rgb(44, 62, 80) !important;
     border: .5px rgb(44, 62, 80) !important;
     color: white !important;
     outline: none;
 }
 
-.btn-default, .btn-default:active {
+.btn-default,
+.btn-default:active {
     /* font */
     color: #383838;
     font-size: 16px;
@@ -365,14 +380,16 @@ textarea {
     width: 100%;
 }
 
-.btn-submit:focus, .btn-submit:hover {
+.btn-submit:focus,
+.btn-submit:hover {
     background-color: rgb(44, 62, 80) !important;
     border: .5px rgb(44, 62, 80) !important;
     color: white !important;
     outline: none;
 }
 
-.btn-submit, .btn-submit:active {
+.btn-submit,
+.btn-submit:active {
     /* font */
     color: #383838;
     font-size: 22px;
@@ -398,7 +415,8 @@ textarea {
     width: 50%;
 }
 
-.btn-success, .btn-danger {
+.btn-success,
+.btn-danger {
     padding: 5px 20px;
     margin: 10px 5px;
     color: #fffcf5;
@@ -411,12 +429,19 @@ textarea {
     margin-top: 5px;
 }
 
-.btn-link:hover, .btn-link:focus, .btn-link:active {
+.btn-link:hover,
+.btn-link:focus,
+.btn-link:active {
     border: .5px solid #fffaee;
     background-color: transparent !important;
 }
 
-.btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus {
+.btn.active.focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn:active:focus,
+.btn:focus {
     outline: 0;
 }
 
@@ -489,11 +514,13 @@ textarea {
     border-radius: 10px;
 }
 
-.ReactTable .rt-thead .rt-th.-sort-asc, .ReactTable .rt-thead .rt-td.-sort-asc {
+.ReactTable .rt-thead .rt-th.-sort-asc,
+.ReactTable .rt-thead .rt-td.-sort-asc {
     box-shadow: inset 0 3px 0 0 rgba(0, 0, 0, 0.0) !important;
 }
 
-.ReactTable .rt-thead .rt-th.-sort-desc, .ReactTable .rt-thead .rt-td.-sort-desc {
+.ReactTable .rt-thead .rt-th.-sort-desc,
+.ReactTable .rt-thead .rt-td.-sort-desc {
     box-shadow: inset 0 3px 0 0 rgba(0, 0, 0, 0.0) !important;
 }
 
@@ -517,6 +544,7 @@ textarea {
     margin: 5px !important;
     background: #fffcf5;
     max-height: 100vh;
+    min-width: 30vw;
     overflow-x: hidden;
     overflow-y: scroll;
     margin-top: 25px !important;
