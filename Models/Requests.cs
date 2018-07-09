@@ -13,5 +13,7 @@ namespace maintenance_reqsts.Models
         public string type { get; set; }
         public string issue { get; set; }
         public string phone { get; set; }
+        public string img { get; set; }
+        public string notes { get; set; }
     }                   
 }

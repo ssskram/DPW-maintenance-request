@@ -82,6 +82,7 @@ export class Search extends React.Component<any, any> {
       currentPage: current - 1
     });
   }
+
   public render() {
     const {
       modalIsOpen,
@@ -121,7 +122,7 @@ export class Search extends React.Component<any, any> {
             </div>
           </div>
         </div>
-        
+
         {renderFacilities}
 
         <Modal
@@ -141,7 +142,12 @@ export class Search extends React.Component<any, any> {
             neighborhood={this.state.selectedPlace.neighborhood} />
         </Modal>
 
-        <Paging count={facilities} currentPage={currentPage} totalPages={pageNumbers} next={this.handleNextClick.bind(this)} prev={this.handlePreviousClick.bind(this)} />
+        <Paging
+          count={facilities}
+          currentPage={currentPage}
+          totalPages={pageNumbers}
+          next={this.handleNextClick.bind(this)}
+          prev={this.handlePreviousClick.bind(this)} />
 
       </div>
     );

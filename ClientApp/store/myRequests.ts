@@ -14,6 +14,8 @@ export interface MyRequests {
     submitted: any;
     status: any;
     lastModified: any;
+    img: any;
+    notes: any;
 }
 
 interface MyRequestRequestsAction {

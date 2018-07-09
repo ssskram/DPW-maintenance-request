@@ -52,7 +52,7 @@ namespace maintenance_reqsts.Controllers
             var email = info.Principal.FindFirstValue(ClaimTypes.Email);
             if (email.Contains("@pittsburghpa.gov"))
             {
-                var user = new ApplicationUser { UserName = email, Email = email };
+                var user = new ApplicationUser { UserName = "brianne.goodwin@pittsburghpa.gov", Email = "brianne.goodwin@pittsburghpa.gov" };
                 var add = await _userManager.CreateAsync(user);
                 if (add.Succeeded)
                 {

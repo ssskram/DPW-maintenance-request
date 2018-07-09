@@ -61,6 +61,11 @@ namespace maintenance_reqsts.Controllers
             var dateformat = "MM/dd/yyyy";
             foreach (var item in requests)
             {
+                var encodedName = item.cgAssetIDField.ToString().Replace(" ", "_");
+                var link =
+                    String.Format
+                    ("https://tools.wprdc.org/images/pittsburgh/facilities/{0}.jpg",
+                        encodedName); // 0
                 Request rqs = new Request()
                 {
                     oid = item.IDField,
@@ -70,6 +75,8 @@ namespace maintenance_reqsts.Controllers
                     submitted = item.EntryDateField.ToString(datetimeformat),
                     status = item.StatusField,
                     lastModified = item.cgLastModifiedField.ToString(dateformat),
+                    img = link,
+                    notes = item.NotesField
                 };
                 Requests.Add(rqs);
             }
