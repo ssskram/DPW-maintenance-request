@@ -12,6 +12,7 @@ export class Search extends React.Component<any, any> {
   constructor(props) {
     super(props);
     this.state = {
+      filter: '',
       facilities: this.props.facilities,
       modalIsOpen: false,
       selectedPlace: {},
@@ -38,6 +39,7 @@ export class Search extends React.Component<any, any> {
   }
 
   filter(event) {
+    this.setState({ [event.target.name]: event.target.value });
     let input = event.target.value.toLowerCase()
     const filtered = this.props.facilities.filter(function (item) {
       if (!item.name.toLowerCase().includes(input)) {
@@ -88,7 +90,8 @@ export class Search extends React.Component<any, any> {
       modalIsOpen,
       facilities,
       currentPage,
-      facilitiesPerPage } = this.state;
+      facilitiesPerPage,
+      filter } = this.state;
 
     // Logic for paging
     const indexOfLastFacility = currentPage * facilitiesPerPage;
@@ -117,11 +120,19 @@ export class Search extends React.Component<any, any> {
             <div className="form-group">
               <div className="form-element">
                 <h3 className="form-h">Search facilities</h3>
-                <input name="filter" id="filter" type='search' className="selectpicker form-control" placeholder="Filter by name" onChange={this.filter.bind(this)} />
+                <input name="filter" value={filter} type='search' className="selectpicker form-control" placeholder="Filter by name" onChange={this.filter.bind(this)} />
               </div>
             </div>
           </div>
         </div>
+
+        {facilities.length == 0 &&
+          <div className='text-center'>
+            <br />
+            <h2>Sorry, I can't find "{filter}"</h2>
+            <h2>Please try again</h2>
+          </div>
+        }
 
         {renderFacilities}
 
@@ -148,8 +159,8 @@ export class Search extends React.Component<any, any> {
           totalPages={pageNumbers}
           next={this.handleNextClick.bind(this)}
           prev={this.handlePreviousClick.bind(this)} />
-          <br/>
-          <br/>
+        <br />
+        <br />
       </div>
     );
   }
