@@ -140,12 +140,9 @@ export class Search extends React.Component<any, any> {
           open={modalIsOpen}
           onClose={this.closeModal.bind(this)}
           classNames={{
-            transitionEnter: 'transition-enter',
-            transitionEnterActive: 'transition-enter-active',
             overlay: 'custom-overlay',
             modal: 'custom-modal'
           }}
-          animationDuration={1000}
           center>
           <Overlay
             img={this.state.selectedPlace.img}

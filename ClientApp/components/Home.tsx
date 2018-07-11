@@ -135,14 +135,9 @@ export class Home extends React.Component<any , any> {
                     open={modalIsOpen}
                     onClose={this.closeModal.bind(this)}
                     classNames={{
-                        transitionEnter: 'transition-enter',
-                        transitionEnterActive: 'transition-enter-active',
-                        transitionExit: 'transition-exit-active',
-                        transitionExitActive: 'transition-exit-active',
                         overlay: 'custom-overlay',
                         modal: 'custom-modal'
                     }}
-                    animationDuration={1000}
                     center>
                     <div className="row text-center">
                         <div className="col-md-6">
