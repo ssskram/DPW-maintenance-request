@@ -59,7 +59,7 @@ export class NavMenu extends React.Component<any, any>  {
                         <div className='accountcontainer'>
                             <li className="account">{user}</li>
                             <li className='logout'>
-                                <a href='/Account/Login' id="logout" className='btn btn-link navbar-logout-btn navbar-link'>
+                                <a href='/Account/Login' id="logout" className='btn btn-link navbar-logout-btn'>
                                     <span className='glyphicon glyphicon-user'></span>Logout
                                 </a>
                             </li>

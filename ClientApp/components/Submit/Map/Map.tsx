@@ -1,7 +1,9 @@
-import * as React from 'react';
-import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
-import Modal from 'react-responsive-modal';
-import Overlay from '../Form/Overlay';
+import * as React from 'react'
+import { Map, Marker, GoogleApiWrapper } from 'google-maps-react'
+import Modal from 'react-responsive-modal'
+import Overlay from '../Form/Overlay'
+import { Helmet } from "react-helmet"
+
 
 export class selectMap extends React.Component<any, any> {
     constructor(props) {
@@ -10,14 +12,6 @@ export class selectMap extends React.Component<any, any> {
             modalIsOpen: false,
             selectedPlace: {}
         }
-    }
-
-    componentWillMount() {
-        document.body.style.backgroundColor = "rgb(44, 62, 80)";
-    }
-
-    componentWillUnmount() {
-        document.body.style.backgroundColor = null;
     }
 
     markerClick(props) {
@@ -40,6 +34,9 @@ export class selectMap extends React.Component<any, any> {
 
         return (
             <div id="map">
+                <Helmet>
+                    <style>{'body { background-color: rgb(44, 62, 80); }'}</style>
+                </Helmet>
                 <Map
                     className="map"
                     google={this.props.google}
