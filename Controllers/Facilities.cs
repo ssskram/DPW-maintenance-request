@@ -51,8 +51,8 @@ namespace maintenance_reqsts.Controllers {
             foreach (var i in iss) {
                 if (i.InactiveField == "false") {
                     Issue isu = new Issue () {
-                        type = i.InternalRequestCategoryField,
-                        name = i.IssueField
+                    type = i.InternalRequestCategoryField,
+                    name = i.IssueField
                     };
                     Issues.Add (isu);
                 };

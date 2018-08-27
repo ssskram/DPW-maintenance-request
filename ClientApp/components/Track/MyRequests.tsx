@@ -28,7 +28,6 @@ const columns = [{
     accessor: 'description'
 }]
 
-
 export class MyRequests extends React.Component<any, any> {
     constructor(props) {
         super(props);
