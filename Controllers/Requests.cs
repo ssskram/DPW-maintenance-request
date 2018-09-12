@@ -96,13 +96,14 @@ namespace maintenance_reqsts.Controllers
                 new AuthenticationHeaderValue("Basic", key);
             var json =
                 String.Format
-                ("{{ 'cgRequestsClass' : [ {{ 'BuildingNameField' : '{0}' , 'IssueField' : '{1}' , 'DescriptionField' : '{2}', 'SubmitterPhoneNumberField' : '{3}', 'SubmittedByField' : '{4}', 'LocationDescriptionField' : '{5}'  }} ] }}",
+                ("{{ 'cgRequestsClass' : [ {{ 'BuildingNameField' : '{0}' , 'IssueField' : '{1}' , 'DescriptionField' : '{2}', 'SubmitterPhoneNumberField' : '{3}', 'SubmittedByField' : '{4}', 'LocationDescriptionField' : '{5}', 'InternalRequestDepartmentField' : '{6}' }} ] }}",
                     model.building, // 0
                     model.issue, // 1
                     model.description, // 2
                     model.phone, // 3
                     submittedby, // 4
-                    model.location); // 5
+                    model.location, // 5
+                    model.department); // 6
             client.DefaultRequestHeaders.Add("ContentLength", json.Length.ToString());
             try
             {
@@ -115,6 +116,7 @@ namespace maintenance_reqsts.Controllers
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine(ex.Message);
+                Console.WriteLine(ex);
             }
         }
 
