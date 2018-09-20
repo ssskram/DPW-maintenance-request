@@ -9,11 +9,11 @@ export default class input extends React.Component<any, any> {
         }
     }
     public render() {
-        
+
         return (
             <div className="form-group">
                 <div className="col-md-12 form-element">
-                    <h4 className="form-h4">{this.props.header}</h4>
+                    <h4 className="form-h4">{this.props.header}{this.props.required == true && <span style={{ color: 'red', fontSize: '20' }}>*</span>}</h4>
                     <Select
                         autoFocus={this.state.autoFocus}
                         placeholder={this.props.placeholder}
@@ -21,8 +21,6 @@ export default class input extends React.Component<any, any> {
                         value={this.props.value}
                         onChange={this.props.onChange.bind(this)}
                         options={this.props.options}
-
-
                         closeOnSelect={!this.props.multi}
                         simpleValue={this.props.multi}
                         removeSelected={this.props.multi}

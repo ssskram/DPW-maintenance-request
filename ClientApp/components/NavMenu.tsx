@@ -3,11 +3,20 @@ import { Link, NavLink } from 'react-router-dom';
 import * as User from '../store/user';
 import { connect } from 'react-redux';
 import { ApplicationState } from '../store';
+import Modal from 'react-responsive-modal'
+import OfficeMoveForm from './Submit/Form/OfficeMove'
+
+const btnWidth = {
+    width: '93%',
+    margin: '15px 0px',
+    padding: '15px 0px'
+}
 
 export class NavMenu extends React.Component<any, any>  {
     constructor(props) {
         super(props);
         this.state = {
+            modalIsOpen: false,
             user: this.props.user
         }
     }
@@ -21,9 +30,21 @@ export class NavMenu extends React.Component<any, any>  {
         let self = this;
         self.setState({ user: props.user })
     }
-    
+
+    closeModal() {
+        this.setState({
+            modalIsOpen: false
+        });
+    }
+
+    openModal() {
+        this.setState ({
+            modalIsOpen: true
+        })
+    }
+
     public render() {
-        const { user } = this.state
+        const { user, modalIsOpen } = this.state
 
         return <div className='main-nav'>
             <div className='navbar navbar-inverse'>
@@ -56,6 +77,11 @@ export class NavMenu extends React.Component<any, any>  {
                                 <span className='glyphicon glyphicon-chevron-right'></span> My requests
                             </NavLink>
                         </li>
+                        <div className='text-center'>
+                            <NavLink to={'/'} style={btnWidth} onClick={this.openModal.bind(this)} className='btn btn-primary'>
+                                <span style={{ fontSize: '25px' }}>Request an office move</span>
+                            </NavLink>
+                        </div>
                         <div className='accountcontainer'>
                             <li className="account">{user}</li>
                             <li className='logout'>
@@ -67,12 +93,22 @@ export class NavMenu extends React.Component<any, any>  {
                     </ul>
                 </div>
             </div>
+            <Modal
+                open={modalIsOpen}
+                onClose={this.closeModal.bind(this)}
+                classNames={{
+                    overlay: 'custom-overlay',
+                    modal: 'custom-modal'
+                }}
+                center>
+                <OfficeMoveForm closeModal={this.closeModal.bind(this)}/>
+            </Modal>
         </div>;
     }
 }
 
 export default connect(
-    (state: ApplicationState) => 
-    state.user,
+    (state: ApplicationState) =>
+        state.user,
     User.actionCreators
 )(NavMenu as any) as typeof NavMenu;
