@@ -24,7 +24,7 @@ namespace maintenance_reqsts.Controllers {
         HttpClient client = new HttpClient ();
         [HttpPost ("[action]")]
         public async Task post ([FromBody] Request model) {
-            await Task.Delay(1);
+            await Task.Delay (1);
         }
     }
 }
