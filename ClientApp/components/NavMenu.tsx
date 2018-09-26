@@ -55,25 +55,25 @@ export class NavMenu extends React.Component<any, any>  {
                         <span className='icon-bar'></span>
                         <span className='icon-bar'></span>
                     </button>
-                    <Link className='navbar-brand' to={'/'} data-toggle="collapse" data-target=".in">DPW<strong> Maintenance</strong></Link>
+                    <Link className='navbar-brand' to={'/'}>DPW<strong> Maintenance</strong></Link>
                 </div>
                 <div className='clearfix'></div>
                 <div className='navbar-collapse collapse'>
                     <ul className='nav navbar-nav'>
                         <li className="sidenav-header">Submit</li>
                         <li>
-                            <NavLink to={'/Map'} data-toggle="collapse" data-target=".in">
+                            <NavLink to={'/Map'}>
                                 <span className='glyphicon glyphicon-map-marker'></span> Select facility from map
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to={'/Search'} data-toggle="collapse" data-target=".in">
+                            <NavLink to={'/Search'}>
                                 <span className='glyphicon glyphicon-list'></span> Select facility from list
                             </NavLink>
                         </li>
                         <li className="sidenav-header">Track</li>
                         <li>
-                            <NavLink to={'/MyRequests'} data-toggle="collapse" data-target=".in">
+                            <NavLink to={'/MyRequests'}>
                                 <span className='glyphicon glyphicon-chevron-right'></span> My requests
                             </NavLink>
                         </li>
