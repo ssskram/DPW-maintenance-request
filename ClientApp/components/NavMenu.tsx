@@ -77,12 +77,11 @@ export class NavMenu extends React.Component<any, any>  {
                                 <span className='glyphicon glyphicon-chevron-right'></span> My requests
                             </NavLink>
                         </li>
-                        {/* OFFICE MOVE MODULE */}
-                        {/* <div className='text-center'>
+                        <div className='text-center'>
                             <NavLink to={'/'} style={btnWidth} onClick={this.openModal.bind(this)} className='btn btn-primary'>
                                 <span style={{ fontSize: '25px' }}>Request an office move</span>
                             </NavLink>
-                        </div> */}
+                        </div>
                         <div className='accountcontainer'>
                             <li className="account">{user}</li>
                             <li className='logout'>
