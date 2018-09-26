@@ -37,12 +37,6 @@ export default class AlternativePrompt extends React.Component<any, any> {
                             Maintenance Regions</a></b>
                     </div>
                 }
-                {issue == 'Door Name Lettering' &&
-                    <div>
-                        Please contact DOMI Sign Shop at <br />
-                        <b>412-255-2872</b>
-                    </div>
-                }
                 {issue == 'Office Renovation' &&
                     <div>
                         Please contact Chris Hornstein at <br />

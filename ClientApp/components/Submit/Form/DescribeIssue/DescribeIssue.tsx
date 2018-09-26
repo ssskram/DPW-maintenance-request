@@ -151,7 +151,6 @@ export class DescribeIssue extends React.Component<any, any> {
             issue == 'Tree Issues' ||
             issue == 'Masonry/Concrete Work' ||
             issue == 'Landscape Maintenance (Snow or Leaves)' ||
-            issue == 'Door Name Lettering' ||
             issue == 'Office Renovation'
 
         if (redirect) {
