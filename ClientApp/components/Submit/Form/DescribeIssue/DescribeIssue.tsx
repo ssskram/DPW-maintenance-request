@@ -7,6 +7,7 @@ import * as IssuesStore from '../../../../store/issues';
 import TextArea from '../../../FormElements/textarea';
 import Select from '../../../FormElements/select';
 import Input from '../../../FormElements/input';
+import Phone from '../../../FormElements/phone';
 import AlternativePrompt from './AlternativePrompt'
 
 const marginTop = {
@@ -93,6 +94,12 @@ export class DescribeIssue extends React.Component<any, any> {
         this.setState({ [event.name]: event.value });
     }
 
+    handlePhone(number) {
+        this.setState ({
+            phone: number
+        })
+    }
+
     clearIssue() {
         this.setState({ issue: '' });
     }
@@ -108,7 +115,6 @@ export class DescribeIssue extends React.Component<any, any> {
             location: self.state.location,
             phone: self.state.phone
         })
-        console.log(data)
         let cleaned_data = data.replace(/'/g, '');
         self.setState({ description: '' })
         fetch('/api/requests/post', {
@@ -141,9 +147,9 @@ export class DescribeIssue extends React.Component<any, any> {
 
         const isEnabled =
             issue != '' &&
-            description.length > 0 &&
-            location.length > 0 &&
-            phone.length > 0;
+            description != '' &&
+            location != '' &&
+            phone != ''
 
         const alternativePrompt =
             issue == 'Pest Control' ||
@@ -180,13 +186,14 @@ export class DescribeIssue extends React.Component<any, any> {
                         options={Departments}
                     />
 
-                    <Input
+                    <Phone
                         value={phone}
                         name="phone"
                         header="Enter your phone number"
                         placeholder="Phone number"
-                        callback={this.handleChildChange.bind(this)}
+                        callback={this.handlePhone.bind(this)}
                     />
+
                     <Select
                         value={issue}
                         name="issue"

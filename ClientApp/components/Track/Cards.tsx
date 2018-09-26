@@ -16,10 +16,6 @@ const feedback = {
 
 export default class RequestCard extends React.Component<any, any> {
 
-    componentDidMount() {
-        console.log(this.props)
-    }
-
     public render() {
         const { request } = this.props
 
