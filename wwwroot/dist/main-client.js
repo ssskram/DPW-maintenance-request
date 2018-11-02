@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "547a37e25b8ca0b29d02"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "be84f72f8f3474e42ad5"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -29967,9 +29967,6 @@ var NavMenu = (function (_super) {
                             __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["NavLink"], { to: '/MyRequests' },
                                 __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("span", { className: 'glyphicon glyphicon-chevron-right' }),
                                 " My requests")),
-                        __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("div", { className: 'text-center' },
-                            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["NavLink"], { to: '/', style: btnWidth, onClick: this.openModal.bind(this), className: 'btn btn-primary' },
-                                __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("span", { style: { fontSize: '25px' } }, "Request an office move"))),
                         __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("div", { className: 'accountcontainer' },
                             __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("li", { className: "account" }, user),
                             __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("li", { className: 'logout' },
