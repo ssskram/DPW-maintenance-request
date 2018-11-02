@@ -1,8 +1,5 @@
-
-namespace maintenance_reqsts.Models
-{
-    public class Request
-    {
+namespace maintenance_reqsts.Models {
+    public class Request {
         public string oid { get; set; }
         public string building { get; set; }
         public string location { get; set; }
@@ -16,5 +13,5 @@ namespace maintenance_reqsts.Models
         public string department { get; set; }
         public string img { get; set; }
         public string notes { get; set; }
-    }                   
+    }
 }

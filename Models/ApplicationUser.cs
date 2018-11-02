@@ -1,8 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
 
-namespace maintenance_reqsts.Models
-{
-    public class ApplicationUser : IdentityUser
-    {
-    }
+namespace maintenance_reqsts.Models {
+    public class ApplicationUser : IdentityUser { }
 }
