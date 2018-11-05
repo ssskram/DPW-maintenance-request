@@ -8,10 +8,10 @@ export default class menu extends React.Component {
         return (
             <Nav>
                 <LinkContainer to={'/'} exact>
-                    <NavItem>Home</NavItem>
+                    <NavItem>Submit</NavItem>
                 </LinkContainer>
-                <LinkContainer to={'/map'}>
-                    <NavItem>Map</NavItem>
+                <LinkContainer to={'/track'}>
+                    <NavItem>Track</NavItem>
                 </LinkContainer>
             </Nav>
         )

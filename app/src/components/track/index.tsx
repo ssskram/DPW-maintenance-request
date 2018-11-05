@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-export default class home extends React.Component {
+export default class track extends React.Component {
 
     render() {
         return (
