@@ -17,6 +17,19 @@ export default class map extends React.Component<any, any> {
         }
     }
 
+    componentDidMount() {
+        fetch("https://cartegraphapi.azurewebsites.us/facilities/allFacilities", {
+            method: 'get',
+            headers: new Headers({
+              'Authorization': 'Bearer ' + process.env.REACT_APP_CART_API
+            })
+          })
+          .then(res => res.json())
+          .then(data => {
+            console.log(data)
+          })
+    }
+
     render() {
         const {
             zoom,
