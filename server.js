@@ -92,7 +92,7 @@ app.get('/logout', function (req, res) {
   res.redirect('/login')
 })
 
-// 403 page
+// 401 page
 app.get('/accessDenied', function (req, res) {
   req.logout()
   res.render('401')
