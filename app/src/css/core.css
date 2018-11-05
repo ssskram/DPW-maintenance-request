@@ -1,0 +1,38 @@
+/* Core
+/* ------------------------- */
+
+
+html {
+    height: 100% !important;
+    width: 100% !important;
+}
+
+body {
+    background-color: rgba(255, 250, 238, .5);
+    font-family: 'Raleway', sans-serif;
+    letter-spacing: .5px;
+    padding: 30px 12px 30px 0px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    color: #383838;
+    font-family: 'Raleway', sans-serif;
+}
+
+hr {
+    overflow: visible;
+    height: 2px;
+    border-top: 1px solid #383838;
+    margin: 1.8em 0;
+}
+
+@media (max-width: 767px) {
+
+    body {
+        padding: 65px 5px;
+    }
+}
