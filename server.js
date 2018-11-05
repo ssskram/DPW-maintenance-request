@@ -22,7 +22,7 @@ passport.deserializeUser(function (obj, done) {
 passport.use(new OutlookStrategy({
     clientID: OUTLOOK_CLIENT_ID,
     clientSecret: OUTLOOK_CLIENT_SECRET,
-    callbackURL: '/auth/outlook/callback',
+    callbackURL: 'signin-microsoft',
     proxy: true
   },
   function (accessToken, refreshToken, profile, done) {
@@ -110,7 +110,7 @@ app.get('/auth',
   })
 )
 // ...and return
-app.get('/auth/outlook/callback',
+app.get('/signin-microsoft',
   passport.authenticate('windowslive', {
     failureRedirect: '/login'
   }),
