@@ -1,7 +1,7 @@
-import * as React from 'react';
-import Select from 'react-select';
+import * as React from 'react'
+import Select from 'react-select'
 
-export default class input extends React.Component<any, any> {
+export default class Select extends React.Component<any, any> {
     public render() { 
         return (
             <div className="form-group">

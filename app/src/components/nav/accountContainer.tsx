@@ -11,7 +11,7 @@ interface actionProps {
 
 type props = types.user & actionProps
 
-export class accountContainer extends React.Component<props, {}> {
+export class AccountContainer extends React.Component<props, {}> {
     constructor(props) {
         super(props)
     }
@@ -45,4 +45,4 @@ export default connect(
     ({
         ...user.actionCreators
     })
-)(accountContainer);
+)(AccountContainer);

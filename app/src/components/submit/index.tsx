@@ -14,7 +14,7 @@ import SubmitRequest from './submitRequest/form'
 
 type props = types.facilities & types.allRequests & types.openRequest
 
-export class submit extends React.Component<props, any> {
+export class Submit extends React.Component<props, any> {
     constructor(props) {
         super(props)
     }
@@ -59,4 +59,4 @@ export default connect(
         ...openRequest.actionCreators,
         ...allRequests.actionCreators
     })
-)(submit)
+)(Submit)

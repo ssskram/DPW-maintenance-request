@@ -2,7 +2,7 @@ import * as React from 'react';
 import CurrencyInput from 'react-currency-input';
 import classNames from 'classnames'
 
-export default class currency extends React.Component<any, any> {
+export default class Numbers extends React.Component<any, any> {
 
     public render() {
         const conditionalClass = classNames({

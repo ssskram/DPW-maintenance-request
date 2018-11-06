@@ -1,7 +1,7 @@
 import * as React from 'react'
 import PhoneInput from 'react-phone-number-input/basic-input'
 
-export default class phone extends React.Component<any, any> {
+export default class Phone extends React.Component<any, any> {
 
     public render() {
         return (

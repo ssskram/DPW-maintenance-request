@@ -12,6 +12,8 @@ import * as openRequest from '../../../../store/openRequest'
 import setCenter from '../../../../functions/setCenter'
 import * as types from '../../../../store/types'
 import LoadingImage from '../../../utilities/loadingImage'
+import Modal from 'react-responsive-modal'
+import VerifyUnique from './../verifyUnique'
 
 const mapStyle = require('./featurelessLight.json')
 const imgStyle = {
@@ -30,17 +32,19 @@ type state = {
     zoom: number,
     center: any,
     selectedFacility: types.facility,
-    showInfowindow: boolean
+    showInfowindow: boolean,
+    modalIsOpen: boolean
 }
 
-export class map extends React.Component<props, state> {
+export class SelectFacility extends React.Component<props, state> {
     constructor(props) {
         super(props)
         this.state = {
             zoom: 13,
             center: { lat: 40.437470539681442, lng: -79.987124601795273 },
             selectedFacility: {} as any,
-            showInfowindow: false
+            showInfowindow: false,
+            modalIsOpen: false
         }
     }
 
@@ -73,12 +77,24 @@ export class map extends React.Component<props, state> {
         })
     }
 
+    openModal() {
+        this.setState({
+            modalIsOpen: true
+        })
+    }
+    closeModal() {
+        this.setState({
+            modalIsOpen: false
+        })
+    }
+
     render() {
         const {
             zoom,
             center,
             selectedFacility,
-            showInfowindow
+            showInfowindow,
+            modalIsOpen
         } = this.state
 
         const {
@@ -124,7 +140,7 @@ export class map extends React.Component<props, state> {
                         <div className='col-md-12 text-center' style={{ maxWidth: '250px' }}>
                             <LoadingImage style={imgStyle} src={"https://tools.wprdc.org/images/pittsburgh/facilities/" + selectedFacility.name.replace(/ /g, "_") + ".jpg"} />
                             <h4>{selectedFacility.name}</h4>
-                            <button onClick={this.setBuilding.bind(this)} className='btn btn-success'>Select</button>
+                            <button onClick={this.openModal.bind(this)} className='btn btn-success'>Select</button>
                         </div>
                     </InfoWindow>
                 }
@@ -136,6 +152,16 @@ export class map extends React.Component<props, state> {
             <div id='home-map'>
                 <Helmet><style>{'.col-sm-9,body{padding:0!important}.col-sm-9{width:100%!important}body{overflow:hidden}'}</style></Helmet>
                 <MapComponent />
+                <Modal
+                    open={modalIsOpen}
+                    onClose={this.closeModal.bind(this)}
+                    classNames={{
+                        overlay: 'custom-overlay',
+                        modal: 'custom-modal'
+                    }}
+                    center>
+                    <VerifyUnique />
+                </Modal>
             </div>
         )
     }
@@ -148,4 +174,4 @@ export default connect(
     ({
         ...openRequest.actionCreators
     })
-)(map)
+)(SelectFacility)

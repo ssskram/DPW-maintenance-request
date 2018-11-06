@@ -2,7 +2,7 @@ import * as React from 'react'
 import classNames from 'classnames'
 import DatePicker from 'react-datepicker'
 
-export default class timepicker extends React.Component<any, any> {
+export default class Timepicker extends React.Component<any, any> {
     constructor(props) {
         super(props)
         this.state = {

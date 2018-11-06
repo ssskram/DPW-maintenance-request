@@ -4,7 +4,7 @@ import DatePicker from 'react-datepicker'
 import * as moment from 'moment'
 import Moment from 'react-moment'
 
-export default class datepicker extends React.Component<any, any> {
+export default class Datepicker extends React.Component<any, any> {
     constructor(props) {
         super(props)
         this.state = {

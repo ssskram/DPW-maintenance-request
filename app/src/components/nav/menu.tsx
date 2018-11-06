@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Nav, NavItem } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 
-export default class menu extends React.Component {
+export default class Menu extends React.Component {
 
     public render() {
         return (

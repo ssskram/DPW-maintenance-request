@@ -1,7 +1,7 @@
 
 import * as React from "react";
 
-export default class verifyUnique extends React.Component<any, any> {
+export default class Search extends React.Component<any, any> {
     constructor(props) {
         super(props)
     }
@@ -9,7 +9,7 @@ export default class verifyUnique extends React.Component<any, any> {
 
     render() {
         return (
-            <div>Verify unique here</div>
+            <div>Search here</div>
         )
     }
 }

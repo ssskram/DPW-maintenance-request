@@ -2,7 +2,7 @@ import * as React from 'react'
 
 const placeholder = require('./../../images/image-placeholder.png')
 
-export default class loadingImage extends React.Component<any, any> {
+export default class LoadingImage extends React.Component<any, any> {
     constructor(props) {
         super(props);
         this.state = {

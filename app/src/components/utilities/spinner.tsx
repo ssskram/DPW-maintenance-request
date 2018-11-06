@@ -5,7 +5,7 @@ type props = {
     notice: string
 }
 
-export default class spinner extends React.Component<props, {}> {
+export default class Spinner extends React.Component<props, {}> {
     public render() {
         return <div>
             <Modal
