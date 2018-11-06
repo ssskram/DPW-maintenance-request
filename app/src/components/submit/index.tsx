@@ -4,8 +4,11 @@ import { connect } from 'react-redux'
 import { ApplicationState } from '../../store'
 import * as types from './../../store/types'
 import * as facilities from '../../store/facilities'
+import * as issues from '../../store/issues'
+import * as myRequests from '../../store/myRequests'
 import Map from './map'
 import Spinner from './../utilities/spinner'
+import HydrateStore from './../utilities/hydrateStore'
 
 interface actionProps {
     loadFacilities: () => void
@@ -19,7 +22,11 @@ export class map extends React.Component<props, any> {
     }
 
     componentDidMount() {
-        this.props.loadFacilities()
+        console.log(this.props)
+    }
+
+    componentWillReceiveProps(nextProps) {
+        console.log(nextProps)
     }
 
     render() {
@@ -29,6 +36,7 @@ export class map extends React.Component<props, any> {
 
         return (
             <div>
+                <HydrateStore />
                 {facilities.length == 0 &&
                     <Spinner notice='...loading the facilities...' />
                 }
@@ -40,9 +48,13 @@ export class map extends React.Component<props, any> {
 
 export default connect(
     (state: ApplicationState) => ({
-        ...state.facilities
+        ...state.facilities,
+        ...state.issues,
+        ...state.myRequests
     }),
     ({
-        ...facilities.actionCreators
+        ...facilities.actionCreators,
+        ...issues.actionCreators,
+        ...myRequests.actionCreators
     })
-)(map);
+)(map)

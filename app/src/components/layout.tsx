@@ -13,4 +13,4 @@ export default props => (
       </Col>
     </Row>
   </Grid>
-);
+)
