@@ -6,18 +6,26 @@ import { Helmet } from "react-helmet"
 import { compose, withProps } from "recompose"
 import { withScriptjs, withGoogleMap, GoogleMap, Polygon, InfoWindow } from "react-google-maps"
 import randomcolor from 'randomcolor'
+import { connect } from 'react-redux'
+import { ApplicationState } from '../../../../store'
+import * as openRequest from '../../../../store/openRequest'
 import setCenter from '../../../../functions/setCenter'
 import * as types from '../../../../store/types'
 import LoadingImage from '../../../utilities/loadingImage'
 
 const mapStyle = require('./featurelessLight.json')
 const imgStyle = {
-    maxHeight: '200px',
+    maxHeight: '150px',
     borderRadius: '10px',
     margin: '0 auto'
 }
 
-type props = types.facilities & types.openRequest
+interface actionProps {
+    updateRequest: (newRequest: types.newRequest) => void
+}
+
+type props = types.facilities & types.openRequest & actionProps
+
 type state = {
     zoom: number,
     center: any,
@@ -25,7 +33,7 @@ type state = {
     showInfowindow: boolean
 }
 
-export default class map extends React.Component<props, state> {
+export class map extends React.Component<props, state> {
     constructor(props) {
         super(props)
         this.state = {
@@ -43,6 +51,18 @@ export default class map extends React.Component<props, state> {
             selectedFacility: facility,
             showInfowindow: true
         })
+    }
+
+    setBuilding() {
+        const newRequest = {
+            building: this.state.selectedFacility.name,
+            department: this.props.openRequest.department,
+            description: this.props.openRequest.description,
+            issue: this.props.openRequest.issue,
+            location: this.props.openRequest.location,
+            phone: this.props.openRequest.phone
+        }
+        this.props.updateRequest(newRequest)
     }
 
     closeWindow() {
@@ -104,7 +124,7 @@ export default class map extends React.Component<props, state> {
                         <div className='col-md-12 text-center' style={{ maxWidth: '250px' }}>
                             <LoadingImage style={imgStyle} src={"https://tools.wprdc.org/images/pittsburgh/facilities/" + selectedFacility.name.replace(/ /g, "_") + ".jpg"} />
                             <h4>{selectedFacility.name}</h4>
-                            <button className='btn btn-success'>Select</button>
+                            <button onClick={this.setBuilding.bind(this)} className='btn btn-success'>Select</button>
                         </div>
                     </InfoWindow>
                 }
@@ -120,3 +140,12 @@ export default class map extends React.Component<props, state> {
         )
     }
 }
+
+export default connect(
+    (state: ApplicationState) => ({
+        ...state.openRequest
+    }),
+    ({
+        ...openRequest.actionCreators
+    })
+)(map)

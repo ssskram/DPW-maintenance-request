@@ -21,10 +21,9 @@ export interface points {
     lng: number
 }
 
-
-// maintenance requests
-export interface requests {
-    requests: myRequest[]
+// my requests
+export interface myRequests {
+    myRequests: myRequest[]
 }
 export interface myRequest {
     cartegraphID: string
@@ -37,6 +36,21 @@ export interface myRequest {
     notes: string
 }
 
+// all requests
+export interface allRequests {
+    allRequests: allRequest[]
+}
+export interface allRequest {
+    cartegraphID: string
+    building: string
+    location: string
+    description: string
+    submitted: string
+    status: string
+    issue: string
+}
+
+// active request
 export interface openRequest {
     openRequest: newRequest
 }
@@ -53,7 +67,6 @@ export interface newRequest {
 export interface issues { 
     issues: issue[]
 }
-
 export interface issue {
     cartegraphID: string
     name: string

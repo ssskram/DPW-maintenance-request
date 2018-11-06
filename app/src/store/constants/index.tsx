@@ -7,7 +7,10 @@ export const loadFacilities = 'loadFacilities'
 
 // my requests
 export const addRequest = 'addRequest'
-export const loadRequests = 'loadRequests'
+export const loadMyRequests = 'loadMyRequests'
+
+// all requests
+export const loadAllRequests = 'loadAllRequests'
 
 // active request
 export const updateRequest = 'updateRequest'

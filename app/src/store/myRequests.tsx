@@ -4,8 +4,8 @@ import { AppThunkAction } from '.'
 import * as constants from './constants'
 import * as types from './types'
 
-const unloadedState: types.requests = {
-    requests: []
+const unloadedState: types.myRequests = {
+    myRequests: []
 }
 
 export const actionCreators = {
@@ -18,7 +18,7 @@ export const actionCreators = {
         })
             .then(res => res.json())
             .then(data => {
-                dispatch({ type: constants.loadRequests, requests: data })
+                dispatch({ type: constants.loadMyRequests, myRequests: data })
             })
     },
     addRequest: (request): AppThunkAction<any> => (dispatch) => {
@@ -26,11 +26,11 @@ export const actionCreators = {
     }
 }
 
-export const reducer: Reducer<types.requests> = (state: types.requests, incomingAction: Action) => {
+export const reducer: Reducer<types.myRequests> = (state: types.myRequests, incomingAction: Action) => {
     const action = incomingAction as any
     switch (action.type) {
-        case constants.loadRequests:
-            return { ...state, requests: action.requests }
+        case constants.loadMyRequests:
+            return { ...state, myRequests: action.myRequests }
         case constants.addRequest:
             return { ...state } // concat request to store here
     }

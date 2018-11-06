@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import { ApplicationState } from '../../store'
 import * as facilities from '../../store/facilities'
 import * as myRequests from '../../store/myRequests'
+import * as allRequests from '../../store/allRequests'
 import * as issues from '../../store/issues'
 import * as user from '../../store/user'
 
@@ -15,6 +16,7 @@ class Hydrate extends React.Component<any, {}> {
         this.props.loadUser()
         this.props.loadFacilities()
         this.props.loadIssues()
+        this.props.loadAllRequests()
     }
 
     componentWillReceiveProps(nextProps) {
@@ -26,7 +28,6 @@ class Hydrate extends React.Component<any, {}> {
     public render() {
         return null
     }
-
 }
 
 export default connect(
@@ -34,12 +35,14 @@ export default connect(
         ...state.facilities,
         ...state.issues,
         ...state.myRequests,
-        ...state.user
+        ...state.user,
+        ...state.allRequests
     }),
     ({
         ...facilities.actionCreators,
         ...issues.actionCreators,
         ...myRequests.actionCreators,
-        ...user.actionCreators
+        ...user.actionCreators,
+        ...allRequests.actionCreators
     })
 )(Hydrate)
