@@ -18,8 +18,7 @@ export const actionCreators = {
           })
           .then(res => res.json())
           .then(data => {
-              console.log(data)
-            dispatch({ type: constants.loadFacilities, facilities: data });
+            dispatch({ type: constants.loadFacilities, facilities: data as types.facilities });
         })
     }
 }
