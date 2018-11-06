@@ -4,27 +4,61 @@
 import * as React from "react"
 import { Helmet } from "react-helmet"
 import { compose, withProps } from "recompose"
-import { withScriptjs, withGoogleMap, GoogleMap, Polygon } from "react-google-maps"
+import { withScriptjs, withGoogleMap, GoogleMap, Polygon, InfoWindow } from "react-google-maps"
 import randomcolor from 'randomcolor'
+import setCenter from './../../../functions/setCenter'
 import * as types from '../../../store/types'
+import LoadingImage from '../../utilities/loadingImage'
 
 const mapStyle = require('./featurelessLight.json')
+const imgStyle = {
+    maxHeight: '200px',
+    borderRadius: '10px',
+    margin: '0 auto'
+}
 
 type props = types.facilities
+type state = {
+    zoom: number,
+    center: any,
+    selectedFacility: types.facility,
+    showInfowindow: boolean
+}
 
-export default class map extends React.Component<props, any> {
+export default class map extends React.Component<props, state> {
     constructor(props) {
         super(props)
         this.state = {
             zoom: 13,
-            center: { lat: 40.449801, lng: -79.994935 },
+            center: { lat: 40.437470539681442, lng: -79.987124601795273 },
+            selectedFacility: {} as any,
+            showInfowindow: false
         }
+    }
+
+    polygonSelection(facility) {
+        this.setState({
+            center: setCenter(facility.shape),
+            zoom: 16,
+            selectedFacility: facility,
+            showInfowindow: true
+        })
+    }
+
+    closeWindow() {
+        this.setState({
+            showInfowindow: false,
+            zoom: 13,
+            center: { lat: 40.437470539681442, lng: -79.987124601795273 }
+        })
     }
 
     render() {
         const {
             zoom,
-            center
+            center,
+            selectedFacility,
+            showInfowindow
         } = this.state
 
         const {
@@ -55,13 +89,24 @@ export default class map extends React.Component<props, any> {
                                 <div key={index}>
                                     <Polygon
                                         options={{ fillColor: color, strokeColor: color, strokeWeight: 3, fillOpacity: 0.4 }}
-                                        paths={[facility.shape]}>
+                                        paths={[facility.shape]}
+                                        onClick={() => this.polygonSelection(facility)}>
                                     </Polygon>
                                 </div>
 
                             )
                         } else return
                     })
+                }
+
+                {showInfowindow == true &&
+                    <InfoWindow position={center} onCloseClick={this.closeWindow.bind(this)}>
+                        <div className='col-md-12 text-center' style={{ maxWidth: '250px' }}>
+                            <LoadingImage style={imgStyle} src={"https://tools.wprdc.org/images/pittsburgh/facilities/" + selectedFacility.name.replace(/ /g, "_") + ".jpg"} />
+                            <h4>{selectedFacility.name}</h4>
+                            <button className='btn btn-success'>Select</button>
+                        </div>
+                    </InfoWindow>
                 }
 
 
