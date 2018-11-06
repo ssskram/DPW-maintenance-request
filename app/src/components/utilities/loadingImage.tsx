@@ -22,7 +22,6 @@ export default class LoadingImage extends React.Component<any, any> {
         return (
             <div>
                 <img style={this.props.style} className="img-responsive" src={imagePath} />
-
                 <div className="hidden">
                     <img src={this.props.src} onLoad={this.onLoad.bind(this)} />
                 </div>
