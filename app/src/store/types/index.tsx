@@ -26,7 +26,6 @@ export interface points {
 export interface requests {
     requests: myRequest[]
 }
-
 export interface myRequest {
     cartegraphID: string
     building: string
@@ -38,6 +37,9 @@ export interface myRequest {
     notes: string
 }
 
+export interface openRequest {
+    openRequest: newRequest
+}
 export interface newRequest {
     building: string
     issue: string

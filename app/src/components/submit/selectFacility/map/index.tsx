@@ -6,9 +6,9 @@ import { Helmet } from "react-helmet"
 import { compose, withProps } from "recompose"
 import { withScriptjs, withGoogleMap, GoogleMap, Polygon, InfoWindow } from "react-google-maps"
 import randomcolor from 'randomcolor'
-import setCenter from './../../../functions/setCenter'
-import * as types from '../../../store/types'
-import LoadingImage from '../../utilities/loadingImage'
+import setCenter from '../../../../functions/setCenter'
+import * as types from '../../../../store/types'
+import LoadingImage from '../../../utilities/loadingImage'
 
 const mapStyle = require('./featurelessLight.json')
 const imgStyle = {
@@ -17,7 +17,7 @@ const imgStyle = {
     margin: '0 auto'
 }
 
-type props = types.facilities
+type props = types.facilities & types.openRequest
 type state = {
     zoom: number,
     center: any,
