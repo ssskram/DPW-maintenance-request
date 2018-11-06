@@ -6,7 +6,7 @@ import { Helmet } from "react-helmet"
 import { compose, withProps } from "recompose"
 import { withScriptjs, withGoogleMap, GoogleMap, Polygon } from "react-google-maps"
 import randomcolor from 'randomcolor'
-import * as types from './../../store/types'
+import * as types from '../../../store/types'
 
 const mapStyle = require('./featurelessLight.json')
 
