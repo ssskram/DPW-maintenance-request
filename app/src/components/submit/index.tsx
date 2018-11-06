@@ -9,7 +9,6 @@ import * as allRequests from '../../store/allRequests'
 import * as openRequest from '../../store/openRequest'
 import SelectFacility from './selectFacility/map'
 import Spinner from './../utilities/spinner'
-import HydrateStore from './../utilities/hydrateStore'
 import SubmitRequest from './submitRequest/form'
 
 type props = types.facilities & types.allRequests & types.openRequest
@@ -18,11 +17,7 @@ export class Submit extends React.Component<props, any> {
     constructor(props) {
         super(props)
     }
-
-    componentWillReceiveProps(props) {
-        console.log(props)
-    }
-
+    
     render() {
         const {
             facilities,
@@ -31,7 +26,6 @@ export class Submit extends React.Component<props, any> {
 
         return (
             <div>
-                <HydrateStore />
                 {openRequest.building == '' &&
                     <SelectFacility facilities={facilities} />
                 }
