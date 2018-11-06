@@ -5,10 +5,20 @@ import * as React from "react";
 import { compose, withProps } from "recompose"
 import { withScriptjs, withGoogleMap, GoogleMap } from "react-google-maps"
 import { Helmet } from "react-helmet"
+import { connect } from 'react-redux'
+import { ApplicationState } from '../../store'
+import * as types from './../../store/types'
+import * as facilities from '../../store/facilities'
 
 const mapStyle = require('./featurelessLight.json')
 
-export default class map extends React.Component<any, any> {
+interface actionProps {
+    loadFacilities: () => void
+}
+
+type props = types.facilities & actionProps
+
+export class map extends React.Component<props, any> {
     constructor(props) {
         super(props)
         this.state = {
@@ -18,16 +28,7 @@ export default class map extends React.Component<any, any> {
     }
 
     componentDidMount() {
-        fetch("https://cartegraphapi.azurewebsites.us/facilities/allFacilities", {
-            method: 'get',
-            headers: new Headers({
-              'Authorization': 'Bearer ' + process.env.REACT_APP_CART_API
-            })
-          })
-          .then(res => res.json())
-          .then(data => {
-            console.log(data)
-          })
+        this.props.loadFacilities()
     }
 
     render() {
@@ -62,3 +63,12 @@ export default class map extends React.Component<any, any> {
         )
     }
 }
+
+export default connect(
+    (state: ApplicationState) => ({
+        ...state.facilities
+    }),
+    ({
+        ...facilities.actionCreators
+    })
+)(map);
