@@ -5,6 +5,7 @@ import { ApplicationState } from '../../store'
 import * as types from './../../store/types'
 import * as facilities from '../../store/facilities'
 import Map from './map'
+import Spinner from './../utilities/spinner'
 
 interface actionProps {
     loadFacilities: () => void
@@ -28,6 +29,9 @@ export class map extends React.Component<props, any> {
 
         return (
             <div>
+                {facilities.length == 0 &&
+                    <Spinner notice='...loading the facilities...' />
+                }
                 <Map facilities={facilities} />
             </div>
         )

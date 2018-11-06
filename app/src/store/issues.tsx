@@ -4,13 +4,13 @@ import { AppThunkAction } from '.'
 import * as constants from './constants'
 import * as types from './types'
 
-const unloadedState: types.facilities = {
-    facilities: []
+const unloadedState: types.issues = {
+    issues: []
 }
 
 export const actionCreators = {
-    loadFacilities: (): AppThunkAction<any> => (dispatch) => {
-        fetch("https://cartegraphapi.azurewebsites.us/facilities/allFacilities", {
+    loadIssues: (): AppThunkAction<any> => (dispatch) => {
+        fetch("https://cartegraphapi.azurewebsites.us/maintenanceRequests/allIssues", {
             method: 'get',
             headers: new Headers({
                 'Authorization': 'Bearer ' + process.env.REACT_APP_CART_API
@@ -18,16 +18,16 @@ export const actionCreators = {
         })
             .then(res => res.json())
             .then(data => {
-                dispatch({ type: constants.loadFacilities, facilities: data });
+                dispatch({ type: constants.loadIssues, issues: data });
             })
     }
 }
 
-export const reducer: Reducer<types.facilities> = (state: types.facilities, incomingAction: Action) => {
+export const reducer: Reducer<types.issues> = (state: types.issues, incomingAction: Action) => {
     const action = incomingAction as any
     switch (action.type) {
-        case constants.loadFacilities:
-            return { ...state, facilities: action.facilities }
+        case constants.loadIssues:
+            return { ...state, issues: action.issues }
     }
     return state || unloadedState
 }
