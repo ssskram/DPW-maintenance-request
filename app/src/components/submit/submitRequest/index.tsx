@@ -17,9 +17,14 @@ interface actionProps {
     updateRequest: (newRequest: types.newRequest) => void
 }
 
+interface issueType {
+    issueType: string
+}
+
 type props =
     types.openRequest &
     types.issues &
+    issueType &
     actionProps
 
 export class Form extends React.Component<props, any> {
