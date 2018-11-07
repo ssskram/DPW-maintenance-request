@@ -34,7 +34,7 @@ export default class verifyUnique extends React.Component<any, any> {
         } = this.props
 
         const recentlySubmitted = relevantRequests.map((request) => {
-            return <div className="container-fluid" key={request.oid}>
+            return <div className="container-fluid" key={request.cartegraphID}>
                 <div className="col-md-12">
                     <div className="panel">
                         <div className="panel-body text-center">

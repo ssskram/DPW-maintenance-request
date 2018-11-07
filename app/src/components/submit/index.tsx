@@ -9,7 +9,7 @@ import * as allRequests from '../../store/allRequests'
 import * as openRequest from '../../store/openRequest'
 import SelectFacility from './selectFacility/map'
 import Spinner from './../utilities/spinner'
-import SubmitRequest from './submitRequest/form'
+import SubmitRequest from './submitRequest'
 
 type props = types.facilities & types.allRequests & types.openRequest
 
@@ -30,7 +30,7 @@ export class Submit extends React.Component<props, any> {
                     <SelectFacility facilities={facilities} />
                 }
                 {openRequest.building != '' &&
-                    <SubmitRequest openRequest={openRequest} />
+                    <SubmitRequest />
                 }
                 {facilities.length == 0 &&
                     <Spinner notice='...loading the facilities...' />
