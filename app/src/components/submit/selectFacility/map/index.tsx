@@ -8,7 +8,8 @@ import { withScriptjs, withGoogleMap, GoogleMap, Polygon, InfoWindow } from "rea
 import randomcolor from 'randomcolor'
 import { connect } from 'react-redux'
 import { ApplicationState } from '../../../../store'
-import * as openRequest from '../../../../store/openRequest'
+import * as OpenRequest from '../../../../store/openRequest'
+import * as AllRequests from '../../../../store/allRequests'
 import setCenter from '../../../../functions/setCenter'
 import * as types from '../../../../store/types'
 import LoadingImage from '../../../utilities/loadingImage'
@@ -26,7 +27,11 @@ interface actionProps {
     updateRequest: (newRequest: types.newRequest) => void
 }
 
-type props = types.facilities & types.openRequest & actionProps
+type props =
+    types.facilities &
+    types.openRequest &
+    types.allRequests &
+    actionProps
 
 type state = {
     zoom: number,
@@ -99,7 +104,8 @@ export class SelectFacility extends React.Component<props, state> {
         } = this.state
 
         const {
-            facilities
+            facilities,
+            allRequests
         } = this.props
 
         const key = process.env.REACT_APP_GOOGLE_API
@@ -146,7 +152,6 @@ export class SelectFacility extends React.Component<props, state> {
                     </InfoWindow>
                 }
 
-
             </GoogleMap>
         )
         return (
@@ -161,7 +166,10 @@ export class SelectFacility extends React.Component<props, state> {
                         modal: 'custom-modal'
                     }}
                     center>
-                    <VerifyUnique />
+                    <VerifyUnique
+                        facility={selectedFacility}
+                        confirm={this.setBuilding.bind(this)}
+                        allRequests={allRequests} />
                 </Modal>
             </div>
         )
@@ -170,9 +178,11 @@ export class SelectFacility extends React.Component<props, state> {
 
 export default connect(
     (state: ApplicationState) => ({
-        ...state.openRequest
+        ...state.openRequest,
+        ...state.allRequests
     }),
     ({
-        ...openRequest.actionCreators
+        ...OpenRequest.actionCreators,
+        ...AllRequests.actionCreators
     })
 )(SelectFacility)
