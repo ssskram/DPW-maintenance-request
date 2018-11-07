@@ -21,7 +21,3 @@ a[href^="https://maps.google.com/maps"] {
 #GMapsID div div a div img {
     display: none;
 }
-
-.gm-style-iw {
-    width: 600px !important;
-}
