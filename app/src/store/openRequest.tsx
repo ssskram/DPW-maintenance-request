@@ -7,6 +7,7 @@ import * as types from './types'
 const unloadedState = {
     openRequest: {
         building: '',
+        issueType: '',
         issue: '',
         description: '',
         department: '',

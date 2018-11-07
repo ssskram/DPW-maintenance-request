@@ -67,6 +67,7 @@ export class SelectFacility extends React.Component<props, state> {
             building: this.state.selectedFacility.name,
             department: this.props.openRequest.department,
             description: this.props.openRequest.description,
+            issueType: this.props.openRequest.issueType,
             issue: this.props.openRequest.issue,
             location: this.props.openRequest.location,
             phone: this.props.openRequest.phone
@@ -143,8 +144,8 @@ export class SelectFacility extends React.Component<props, state> {
                 }
 
                 {showInfowindow == true &&
-                    <InfoWindow position={center} onCloseClick={this.closeWindow.bind(this)}>
-                        <div className='col-md-12 text-center'>
+                    <InfoWindow position={center} options={{maxWidth: 1000}} onCloseClick={this.closeWindow.bind(this)}>
+                        <div className='text-center'>
                             <LoadingImage style={imgStyle} src={"https://tools.wprdc.org/images/pittsburgh/facilities/" + selectedFacility.name.replace(/ /g, "_") + ".jpg"} />
                             <h4>{selectedFacility.name}</h4>
                             <button onClick={this.openModal.bind(this)} className='btn btn-success'>Select</button>

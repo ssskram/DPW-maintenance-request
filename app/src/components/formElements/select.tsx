@@ -1,14 +1,15 @@
 import * as React from 'react'
 import Select from 'react-select'
 
-export default class Select extends React.Component<any, any> {
-    public render() { 
+export default class input extends React.Component<any, any> {
+
+    public render() {
+
         return (
             <div className="form-group">
                 <div className="col-md-12 form-element">
-                    <h4 className="form-h4">{this.props.header}{this.props.required == true && <span style={{color: 'red', fontSize: '20'}}>*</span>}</h4>
+                    <h4 className="form-h4">{this.props.header}{this.props.required == true && <span style={{ color: 'red', fontSize: '20' }}>*</span>}</h4>
                     <Select
-                        autoFocus={false}
                         placeholder={this.props.placeholder}
                         name={this.props.name}
                         value={this.props.value}
@@ -19,7 +20,7 @@ export default class Select extends React.Component<any, any> {
                         removeSelected={this.props.multi}
                         multi={this.props.multi}
                         clearable={this.props.multi}
-                        delimiter={this.props.delimiter ? this.props.delimiter : ', '}
+                        className='Select-control'
                     />
                 </div>
             </div>

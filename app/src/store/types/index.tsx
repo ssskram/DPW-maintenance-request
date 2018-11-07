@@ -56,6 +56,7 @@ export interface openRequest {
 }
 export interface newRequest {
     building: string
+    issueType: string
     issue: string
     description: string
     department: string

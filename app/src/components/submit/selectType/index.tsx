@@ -32,49 +32,77 @@ export default class SelectIssueType extends React.Component<props, {}> {
         return (
             <div>
                 <div className="text-center">
-                    <h2>Confirm the issue type</h2>
+                    <h2>Select the issue type</h2>
                 </div>
                 <div>
-                    <div className='col-md-4 text-center'>
+                    <div className='row text-center'>
                         <button className="btn btn-big" onClick={() => setType('Doors, Locks, and Windows')}>
-                            <img src={String(door)} style={iconStyle} /><br />
-                            <div>Doors, Locks, & Windows</div>
+                            <div className='col-md-12'>
+                                <img src={String(door)} style={iconStyle} />
+                            </div>
+                            <div className='col-md-12'>
+                                <div>Doors, Locks, & Windows</div>
+                            </div>
                         </button>
                     </div>
-                    <div className='col-md-4 text-center'>
+                    <div className='row text-center'>
                         <button className="btn btn-big" onClick={() => setType('Electrical and Lighting')}>
-                            <img src={String(electric)} style={iconStyle} /><br />
-                            <div>Electrical & Lighting</div>
+                            <div className='col-md-12'>
+                                <img src={String(electric)} style={iconStyle} />
+                            </div>
+                            <div className='col-md-12'>
+                                <div>Electrical & Lighting</div>
+                            </div>
                         </button>
                     </div>
-                    <div className='col-md-4 text-center'>
+                    <div className='row text-center'>
                         <button className="btn btn-big" onClick={() => setType('Heating and Air Conditioning')}>
-                            <img src={String(hvac)} style={iconStyle} /><br />
-                            <div>Heating & Air Conditioning</div>
+                            <div className='col-md-12'>
+                                <img src={String(hvac)} style={iconStyle} />
+                            </div>
+                            <div className='col-md-12'>
+                                <div>Heating & Air Conditioning</div>
+                            </div>
                         </button>
                     </div>
-                    <div className='col-md-4 text-center'>
+                    <div className='row text-center'>
                         <button className="btn btn-big" onClick={() => setType('Carpentry and Painting')}>
-                            <img src={String(paint)} style={iconStyle} /><br />
-                            <div>Carpentry & Painting</div>
+                            <div className='col-md-12'>
+                                <img src={String(paint)} style={iconStyle} />
+                            </div>
+                            <div className='col-md-12'>
+                                <div>Carpentry & Painting</div>
+                            </div>
                         </button>
                     </div>
-                    <div className='col-md-4 text-center'>
+                    <div className='row text-center'>
                         <button className="btn btn-big" onClick={() => setType('Plumbing and Gas')}>
-                            <img src={String(plumbing)} style={iconStyle} /><br />
-                            <div>Plumbing & Gas</div>
+                            <div className='col-md-12'>
+                                <img src={String(plumbing)} style={iconStyle} />
+                            </div>
+                            <div className='col-md-12'>
+                                <div>Plumbing & Gas</div>
+                            </div>
                         </button>
                     </div>
-                    <div className='col-md-4 text-center'>
-                        <button value='describe' name='Roofing' className="btn btn-big" onClick={() => setType('Roofing')}>
-                            <img src={String(roofing)} style={iconStyle} /><br />
-                            <div>Roofing</div>
+                    <div className='row text-center'>
+                        <button className="btn btn-big" onClick={() => setType('Roofing')}>
+                            <div className='col-md-12'>
+                                <img src={String(roofing)} style={iconStyle} />
+                            </div>
+                            <div className='col-md-12'>
+                                <div>Roofing</div>
+                            </div>
                         </button>
                     </div>
-                    <div className='col-md-12 text-center'>
-                        <button value='describe' name='Miscellaneous' className="btn btn-big" onClick={() => setType('Miscellaneous')}>
-                            <img src={String(misc)} style={iconStyle} /><br />
-                            <div>Miscellaneous</div>
+                    <div className='row text-center'>
+                        <button className="btn btn-big" onClick={() => setType('Miscellaneous')}>
+                            <div className='col-md-12'>
+                                <img src={String(misc)} style={iconStyle} />
+                            </div>
+                            <div className='col-md-12'>
+                                <div>Miscellaneous</div>
+                            </div>
                         </button>
                     </div>
                 </div>

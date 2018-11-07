@@ -18,14 +18,6 @@
     letter-spacing: 2px !important;
 }
 
-.btn-big {
-    font-size: 18px;
-    padding: 15px 40px !important;
-    width: 80%;
-    line-height: 1.5em;
-    margin: 20px 0px !important;
-}
-
 .btn.disabled,
 .btn[disabled],
 fieldset[disabled] .btn {
