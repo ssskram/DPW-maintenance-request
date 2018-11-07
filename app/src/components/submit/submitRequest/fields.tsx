@@ -7,29 +7,17 @@ import Departments from './departments'
 
 export default class Fields extends React.Component<any, any> {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
-            options: [],
+            options: [
+                { value: 'Test', label: 'Test', name: 'issue' }
+            ],
             issue: '',
             description: '',
             location: '',
             phone: '',
             department: '',
         }
-    }
-
-    handleChildChange(event) {
-        this.setState({ [event.target.name]: event.target.value });
-    }
-
-    handleChildSelect(event) {
-        this.setState({ [event.name]: event.value });
-    }
-
-    handlePhone(number) {
-        this.setState({
-            phone: number
-        })
     }
 
     public render() {
@@ -47,10 +35,9 @@ export default class Fields extends React.Component<any, any> {
                 <div className="form-group">
                     <Select
                         value={department}
-                        name="department"
                         header="Select your department"
                         placeholder='Select department'
-                        onChange={this.handleChildSelect.bind(this)}
+                        onChange={(department) => { this.setState({ department }) }}
                         multi={false}
                         options={Departments.Departments}
                     />
@@ -60,15 +47,14 @@ export default class Fields extends React.Component<any, any> {
                         name="phone"
                         header="Enter your phone number"
                         placeholder="Phone number"
-                        callback={this.handlePhone.bind(this)}
+                        callback={(phone) => { this.setState({ phone }) }}
                     />
 
                     <Select
                         value={issue}
-                        name="issue"
                         header='Select an issue'
                         placeholder='Select...'
-                        onChange={this.handleChildSelect.bind(this)}
+                        onChange={(issue) => { this.setState({ issue }) }}
                         multi={false}
                         options={options}
                     />
@@ -78,7 +64,7 @@ export default class Fields extends React.Component<any, any> {
                         name="description"
                         header="Describe the issue"
                         placeholder="Description"
-                        callback={this.handleChildChange.bind(this)}
+                        callback={(e) => { this.setState({ description: e.value }) }}
                     />
 
                     <TextArea
@@ -86,8 +72,13 @@ export default class Fields extends React.Component<any, any> {
                         name="location"
                         header="Describe the location"
                         placeholder="Room, floor, etc."
-                        callback={this.handleChildChange.bind(this)}
+                        callback={(e) => { this.setState({ location: e.value }) }}
                     />
+                </div>
+                <div className='col-md-12 text-center'>
+                    <button className='btn btn-success'>Submit</button>
+                    <br />
+                    <br />
                 </div>
             </div>
         );

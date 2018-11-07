@@ -1,8 +1,8 @@
 import * as React from 'react'
 import Select from 'react-select'
 
-export default class input extends React.Component<any, any> {
-
+export default class SelectElement extends React.Component<any, any> {
+    
     public render() {
 
         return (
@@ -11,16 +11,14 @@ export default class input extends React.Component<any, any> {
                     <h4 className="form-h4">{this.props.header}{this.props.required == true && <span style={{ color: 'red', fontSize: '20' }}>*</span>}</h4>
                     <Select
                         placeholder={this.props.placeholder}
-                        name={this.props.name}
                         value={this.props.value}
-                        onChange={this.props.onChange.bind(this)}
+                        onChange={this.props.onChange}
                         options={this.props.options}
                         closeOnSelect={!this.props.multi}
                         simpleValue={this.props.multi}
                         removeSelected={this.props.multi}
                         multi={this.props.multi}
                         clearable={this.props.multi}
-                        className='Select-control'
                     />
                 </div>
             </div>
