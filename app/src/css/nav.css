@@ -26,7 +26,7 @@
 }
 
 .navbar-nav>li>a {
-    color: #fffaee !important;
+    color: #FAF7F2 !important;
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
@@ -43,7 +43,7 @@
 }
 
 .navbar-brand {
-    color: #fffaee !important;
+    color: #FAF7F2 !important;
     letter-spacing: 2px;
     white-space: nowrap !important;
     overflow: hidden !important;
@@ -76,7 +76,7 @@
 }
 
 .account {
-    color: #fffaee;
+    color: #FAF7F2;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

@@ -49,7 +49,7 @@ h1,h2 {
 }
 
 .loader {
-    border: 16px solid #fffaee;
+    border: 16px solid #FAF7F2;
     border-top: 16px solid rgba(202, 205, 206, .35);
     border-radius: 50%;
     width: 150px;
