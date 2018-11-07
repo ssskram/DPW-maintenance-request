@@ -82,11 +82,10 @@ export class SelectFacility extends React.Component<props, state> {
             modalIsOpen: true
         })
     }
+
     closeModal() {
         this.setState({
             modalIsOpen: false
-        }, function (this) {
-            this.closeWindow()
         })
     }
 

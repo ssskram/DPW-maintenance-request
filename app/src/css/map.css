@@ -14,11 +14,14 @@ a[href^="https://maps.google.com/maps"] {
     display: none !important
 }
 
-.gmnoprint a,
-.gmnoprint span {
+.gmnoprint a, .gmnoprint span {
     display: none;
 }
 
 #GMapsID div div a div img {
     display: none;
+}
+
+.gm-style-iw {
+    width: 600px !important;
 }
