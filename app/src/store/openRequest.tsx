@@ -4,18 +4,16 @@ import { AppThunkAction } from '.'
 import * as constants from './constants'
 import * as types from './types'
 
-const openRequest = {
-    building: '',
-    issueType: '',
-    issue: '',
-    description: '',
-    department: '',
-    location: '',
-    phone: ''
-}
-
 const unloadedState = {
-    openRequest: openRequest
+    openRequest: {
+        building: '',
+        issueType: '',
+        issue: '',
+        description: '',
+        department: '',
+        location: '',
+        phone: ''
+    }
 } as types.openRequest
 
 export const actionCreators = {
@@ -33,7 +31,7 @@ export const reducer: Reducer<types.openRequest> = (state: types.openRequest, in
         case constants.updateRequest:
             return { ...state, openRequest: action.openRequest }
         case constants.clearRequest:
-            return { ...state, openRequest: openRequest }
+            return unloadedState
     }
     return state || unloadedState
 }
