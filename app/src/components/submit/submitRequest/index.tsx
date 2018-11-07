@@ -16,7 +16,8 @@ const imgStyle = {
 }
 
 interface actionProps {
-    updateRequest: (newRequest: types.newRequest) => void
+    updateRequest: (newRequest: types.newRequest) => void,
+    clearRequest: () => void
 }
 
 type props =
@@ -43,7 +44,8 @@ export class Form extends React.Component<props, {}> {
         const {
             openRequest,
             issues,
-            updateRequest
+            updateRequest,
+            clearRequest
         } = this.props
 
         return (
@@ -56,6 +58,7 @@ export class Form extends React.Component<props, {}> {
                     <div className='col-md-12 text-center'>
                         <h2>{openRequest.building}</h2>
                         <h3><i>{openRequest.issueType}</i></h3>
+                        <button onClick={clearRequest} className='btn btn-warning'>Back</button>
                     </div>
                     <div className='col-md-6 col-md-offset-3'>
                         <br />

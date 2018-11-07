@@ -15,6 +15,10 @@ type props =
 
 export class Submit extends React.Component<props, {}> {
 
+    componentWillReceiveProps(nextProps) {
+        console.log(nextProps.openRequest)
+    }
+
     render() {
         const {
             facilities,
