@@ -53,6 +53,12 @@ export class Map extends React.Component<props, state> {
         }
     }
 
+    shouldComponentUpdate(props, state) {
+        if (state == this.state && props.facilities == this.props.facilities) {
+            return false
+        } else return true
+    }
+
     polygonSelection(facility) {
         this.setState({
             center: setCenter(facility.shape),

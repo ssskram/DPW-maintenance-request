@@ -31,10 +31,6 @@ export default class Fields extends React.Component<props, any> {
         }
     }
 
-    componentWillUpdate(props, state) {
-        console.log(state)
-    }
-
     componentWillReceiveProps(props) {
         // if issueType is cleared, wipe all fields
         if (props.openRequest.issueType == '') {
