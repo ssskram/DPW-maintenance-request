@@ -36,26 +36,26 @@ export class Track extends React.Component<props, any> {
 
     setRequests(myRequests) {
         this.setState({
-            myRequests: myRequests.sort(function (a, b) {
-                return +new Date(b.submitted) - +new Date(a.submitted);
-            })
+            myRequests: myRequests
+                .sort((a, b) => +new Date(b.submitted) - +new Date(a.submitted))
+        })
+    }
+
+    filterRequests(filteredRequests) {
+        this.setState({
+            myRequests: filteredRequests
+                .sort((a, b) => +new Date(b.submitted) - +new Date(a.submitted))
         })
     }
 
     handleNextClick() {
         window.scrollTo(0, 0)
-        let current = this.state.currentPage
-        this.setState({
-            currentPage: current + 1
-        });
+        this.setState({ currentPage: this.state.currentPage + 1 })
     }
 
     handlePreviousClick() {
         window.scrollTo(0, 0)
-        let current = this.state.currentPage
-        this.setState({
-            currentPage: current - 1
-        });
+        this.setState({ currentPage: this.state.currentPage - 1 })
     }
 
     render() {

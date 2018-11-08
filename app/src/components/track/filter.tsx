@@ -31,32 +31,12 @@ export default class Filter extends React.Component<any, any> {
         }
     }
 
-    closeModal() {
-        this.setState({
-            modalIsOpen: false
-        })
-    }
-
-    openModal() {
-        this.setState({
-            modalIsOpen: true
-        })
-    }
-
-    handleChildChange(event) {
-        this.setState({ [event.target.name]: event.target.value })
-    }
-
-    handleChildSelect(event) {
-        this.setState({ [event.name]: event.value });
-    }
-
     filter() {
         const filterLoad = {
             assetName: this.state.assetName,
             assetType: this.state.assetType
         }
-        this.props.returnFiltered(filter(this.props.assets, filterLoad))
+        this.props.returnFiltered(filter(this.props.myRequests, filterLoad))
         this.setState({
             modalIsOpen: false,
             onFilter: true
@@ -83,7 +63,7 @@ export default class Filter extends React.Component<any, any> {
         return (
             <div>
                 {onFilter == false &&
-                    <button onClick={this.openModal.bind(this)} className='btn  btn-primary'>
+                    <button onClick={() => this.setState({ modalIsOpen: true })} className='btn  btn-primary'>
                         <span style={{ padding: '3px' }} className='hidden-md hidden-lg hidden-xl glyphicon glyphicon-search'></span>
                         <span className='hidden-sm hidden-xs'>Filter</span>
                     </button>
@@ -96,7 +76,7 @@ export default class Filter extends React.Component<any, any> {
                 }
                 <Modal
                     open={modalIsOpen}
-                    onClose={this.closeModal.bind(this)}
+                    onClose={() => this.setState({modalIsOpen:false})}
                     classNames={{
                         overlay: 'custom-overlay',
                         modal: 'custom-modal'
@@ -109,7 +89,7 @@ export default class Filter extends React.Component<any, any> {
                                 name="assetName"
                                 header="Asset name"
                                 placeholder="Enter a name"
-                                callback={this.handleChildChange.bind(this)}
+                                callback={(e) => { this.setState({ description: e.value }) }}
                             />
                         </div>
 
@@ -119,7 +99,7 @@ export default class Filter extends React.Component<any, any> {
                                 name="assetType"
                                 header='Asset type'
                                 placeholder='Select type'
-                                onChange={this.handleChildSelect.bind(this)}
+                                onChange={(assetType) => { this.setState({ assetType }) }}
                                 multi={false}
                                 options={types}
                             />
