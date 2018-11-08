@@ -3,21 +3,57 @@ import TextArea from '../../formElements/textarea'
 import Select from '../../formElements/select'
 import Phone from '../../formElements/phone'
 import AlternativePrompt from './alternativePrompts'
+import * as types from '../../../store/types'
 import Departments from './departments'
 
-export default class Fields extends React.Component<any, any> {
+interface actionProps {
+    updateRequest: (newRequest: types.newRequest) => void,
+    clearRequest: () => void
+}
+
+type props =
+    types.openRequest &
+    types.issues &
+    actionProps
+
+export default class Fields extends React.Component<props, any> {
     constructor(props) {
         super(props)
         this.state = {
-            options: [
-                { value: 'Test', label: 'Test', name: 'issue' }
-            ],
+            options: [{ "value": '...loading...', "label": '...loading...' }],
             issue: '',
             description: '',
             location: '',
             phone: '',
             department: '',
         }
+    }
+
+    componentWillReceiveProps(props) {
+        
+        // if issueType is cleared, wipe all fields
+        if (props.openRequest.issueType == '') {
+            this.setState({
+                options: [{ "value": '...loading...', "label": '...loading...' }],
+                issue: '',
+                description: '',
+                location: '',
+                phone: '',
+                department: '',
+            })
+        }
+
+        // add options to select
+        var futureOptions: any[] = [];
+        props.issues.forEach(element => {
+            if (element.type == props.openRequest.issueType) {
+                var json = { "value": element.name, "label": element.name }
+                futureOptions.push(json)
+            }
+        })
+        this.setState({
+            options: futureOptions
+        })
     }
 
     public render() {
@@ -31,8 +67,28 @@ export default class Fields extends React.Component<any, any> {
         } = this.state
 
         const {
-            clear
+            clearRequest
         } = this.props
+
+        const isEnabled =
+            issue != '' &&
+            description != '' &&
+            location != '' &&
+            phone != ''
+
+        console.log(issue)
+
+        const alternativePrompt =
+            issue.value == 'Pest Control' ||
+            issue.value == 'Elevators' ||
+            issue.value == 'Tree Issues' ||
+            issue.value == 'Masonry/Concrete Work' ||
+            issue.value == 'Landscape Maintenance (Snow or Leaves)' ||
+            issue.value == 'Office Renovation'
+
+        if (alternativePrompt) {
+            return <AlternativePrompt issue={issue.value} clear={clearRequest} />
+        }
 
         return (
             <div>
@@ -80,8 +136,8 @@ export default class Fields extends React.Component<any, any> {
                     />
                 </div>
                 <div className='col-md-12 text-center'>
-                    <button onClick={() => clear()} className='btn btn-warning pull-left'>Back</button>
-                    <button className='btn btn-success pull-right'>Submit</button>
+                    <button onClick={() => clearRequest()} className='btn btn-warning pull-left'>Back</button>
+                    <button disabled={!isEnabled} className='btn btn-success pull-right'>Submit</button>
                     <br />
                     <br />
                 </div>

@@ -3,10 +3,11 @@ import * as React from 'react';
 export default class AlternativePrompt extends React.Component<any, any> {
     
     public render() {
-        const { issue } = this.props
+        const { issue, clear } = this.props
 
         return (
             <div className="row col-md-12 alternativeprompt">
+                <h2>{issue}</h2>
                 {issue == 'Elevators' &&
                     <div>
                         Please contact John Sibbet at <br />
@@ -45,7 +46,7 @@ export default class AlternativePrompt extends React.Component<any, any> {
                         chirs.hornstein@pittsburghpa.gov
                     </div>
                 }
-                <button value='issue' className="btn btn-danger">Back</button>
+                <button onClick={() => clear()} value='issue' className="btn btn-danger">Back</button>
             </div>
         )
     }
