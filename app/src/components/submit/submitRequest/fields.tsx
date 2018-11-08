@@ -30,7 +30,6 @@ export default class Fields extends React.Component<props, any> {
     }
 
     componentWillReceiveProps(props) {
-        
         // if issueType is cleared, wipe all fields
         if (props.openRequest.issueType == '') {
             this.setState({
@@ -41,19 +40,19 @@ export default class Fields extends React.Component<props, any> {
                 phone: '',
                 department: '',
             })
+        } else {
+            // add options to select
+            var futureOptions: any[] = [];
+            props.issues.forEach(element => {
+                if (element.type == props.openRequest.issueType) {
+                    var json = { "value": element.name, "label": element.name }
+                    futureOptions.push(json)
+                }
+            })
+            this.setState({
+                options: futureOptions
+            })
         }
-
-        // add options to select
-        var futureOptions: any[] = [];
-        props.issues.forEach(element => {
-            if (element.type == props.openRequest.issueType) {
-                var json = { "value": element.name, "label": element.name }
-                futureOptions.push(json)
-            }
-        })
-        this.setState({
-            options: futureOptions
-        })
     }
 
     public render() {
@@ -75,8 +74,6 @@ export default class Fields extends React.Component<props, any> {
             description != '' &&
             location != '' &&
             phone != ''
-
-        console.log(issue)
 
         const alternativePrompt =
             issue.value == 'Pest Control' ||

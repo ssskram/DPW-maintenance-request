@@ -5,7 +5,7 @@ import { ApplicationState } from '../../store'
 import * as types from './../../store/types'
 import * as facilities from '../../store/facilities'
 import * as openRequest from '../../store/openRequest'
-import SelectFacility from './selectFacility/map'
+import SelectFacility from './selectFacility'
 import Spinner from './../utilities/spinner'
 import SubmitRequest from './submitRequest'
 
@@ -14,10 +14,6 @@ type props =
     types.openRequest
 
 export class Submit extends React.Component<props, {}> {
-
-    componentWillReceiveProps(nextProps) {
-        console.log(nextProps.openRequest)
-    }
 
     render() {
         const {

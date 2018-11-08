@@ -6,7 +6,7 @@ export default class AlternativePrompt extends React.Component<any, any> {
         const { issue, clear } = this.props
 
         return (
-            <div className="row col-md-12 alternativeprompt">
+            <div className="row col-md-12">
                 <h2>{issue}</h2>
                 {issue == 'Elevators' &&
                     <div>

@@ -14,7 +14,7 @@ import setCenter from '../../../../functions/setCenter'
 import * as types from '../../../../store/types'
 import LoadingImage from '../../../utilities/loadingImage'
 import Modal from 'react-responsive-modal'
-import VerifyUnique from './../verifyUnique'
+import VerifyUnique from '../verifyUnique'
 
 const mapStyle = require('./featurelessLight.json')
 const imgStyle = {
@@ -41,7 +41,7 @@ type state = {
     modalIsOpen: boolean
 }
 
-export class SelectFacility extends React.Component<props, state> {
+export class Map extends React.Component<props, state> {
     constructor(props) {
         super(props)
         this.state = {
@@ -186,4 +186,4 @@ export default connect(
         ...OpenRequest.actionCreators,
         ...AllRequests.actionCreators
     })
-)(SelectFacility)
+)(Map)
