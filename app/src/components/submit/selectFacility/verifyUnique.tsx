@@ -18,9 +18,10 @@ export default class verifyUnique extends React.Component<any, any> {
 
     componentDidMount() {
         this.setState({
-            relevantRequests: this.props.allRequests.filter(request => {
-                return request.building == this.props.facility.name
-            })
+            relevantRequests: this.props.allRequests
+                .filter(request => request.building == this.props.facility.name)
+                .sort((a,b) => +new Date(b.submitted) - +new Date(a.submitted))
+                .slice(0, 20)
         })
     }
 
@@ -57,7 +58,7 @@ export default class verifyUnique extends React.Component<any, any> {
                 <div className="text-center">
                     <LoadingImage style={imgStyle} src={"https://tools.wprdc.org/images/pittsburgh/facilities/" + facility.name.replace(/ /g, "_") + ".jpg"} />
                 </div>
-                <button style={{margin: '20px 0px'}} onClick={this.props.confirm} className="btn btn-success">Continue</button>
+                <button style={{ margin: '20px 0px' }} onClick={this.props.confirm} className="btn btn-success">Continue</button>
                 {relevantRequests.length > 0 &&
                     <div className="row">
                         {recentlySubmitted}
