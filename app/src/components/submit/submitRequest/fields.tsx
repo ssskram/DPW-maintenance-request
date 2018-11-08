@@ -30,6 +30,10 @@ export default class Fields extends React.Component<any, any> {
             department
         } = this.state
 
+        const {
+            clear
+        } = this.props
+
         return (
             <div>
                 <div className="form-group">
@@ -76,7 +80,8 @@ export default class Fields extends React.Component<any, any> {
                     />
                 </div>
                 <div className='col-md-12 text-center'>
-                    <button className='btn btn-success'>Submit</button>
+                    <button onClick={() => clear()} className='btn btn-warning pull-left'>Back</button>
+                    <button className='btn btn-success pull-right'>Submit</button>
                     <br />
                     <br />
                 </div>

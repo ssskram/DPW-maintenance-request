@@ -10,7 +10,7 @@ import Modal from 'react-responsive-modal'
 import SelectType from '../selectType'
 
 const imgStyle = {
-    maxHeight: '400px',
+    maxHeight: '350px',
     borderRadius: '10px',
     margin: '0 auto'
 }
@@ -52,13 +52,14 @@ export class Form extends React.Component<props, {}> {
             <div>
                 <div className='row'>
                     <div className='col-md-12 text-center'>
+                        <h1>Maintenance request</h1>
+                        <hr/>
                         <br />
                         <LoadingImage style={imgStyle} src={"https://tools.wprdc.org/images/pittsburgh/facilities/" + openRequest.building.replace(/ /g, "_") + ".jpg"} />
                     </div>
                     <div className='col-md-12 text-center'>
                         <h2>{openRequest.building}</h2>
                         <h3><i>{openRequest.issueType}</i></h3>
-                        <button onClick={clearRequest} className='btn btn-warning'>Back</button>
                     </div>
                     <div className='col-md-6 col-md-offset-3'>
                         <br />
@@ -66,13 +67,14 @@ export class Form extends React.Component<props, {}> {
                             openRequest={openRequest}
                             issues={issues}
                             updateRequest={updateRequest}
+                            clear={clearRequest}
                         />
                     </div>
                 </div>
                 {openRequest.issueType == '' &&
                     <Modal
                         open={true}
-                        onClose={() => { }}
+                        onClose={() => clearRequest()}
                         classNames={{
                             overlay: 'custom-overlay',
                             modal: 'custom-modal'

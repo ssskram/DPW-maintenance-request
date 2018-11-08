@@ -35,7 +35,7 @@ export default class SelectIssueType extends React.Component<props, {}> {
                     <h2>Select the issue type</h2>
                 </div>
                 <div>
-                    <div className='row text-center'>
+                    <div className='col-md-6 text-center'>
                         <button className="btn btn-big" onClick={() => setType('Doors, Locks, and Windows')}>
                             <div className='col-md-12'>
                                 <img src={String(door)} style={iconStyle} />
@@ -45,7 +45,7 @@ export default class SelectIssueType extends React.Component<props, {}> {
                             </div>
                         </button>
                     </div>
-                    <div className='row text-center'>
+                    <div className='col-md-6 text-center'>
                         <button className="btn btn-big" onClick={() => setType('Electrical and Lighting')}>
                             <div className='col-md-12'>
                                 <img src={String(electric)} style={iconStyle} />
@@ -55,7 +55,7 @@ export default class SelectIssueType extends React.Component<props, {}> {
                             </div>
                         </button>
                     </div>
-                    <div className='row text-center'>
+                    <div className='col-md-6 text-center'>
                         <button className="btn btn-big" onClick={() => setType('Heating and Air Conditioning')}>
                             <div className='col-md-12'>
                                 <img src={String(hvac)} style={iconStyle} />
@@ -65,7 +65,7 @@ export default class SelectIssueType extends React.Component<props, {}> {
                             </div>
                         </button>
                     </div>
-                    <div className='row text-center'>
+                    <div className='col-md-6 text-center'>
                         <button className="btn btn-big" onClick={() => setType('Carpentry and Painting')}>
                             <div className='col-md-12'>
                                 <img src={String(paint)} style={iconStyle} />
@@ -75,7 +75,7 @@ export default class SelectIssueType extends React.Component<props, {}> {
                             </div>
                         </button>
                     </div>
-                    <div className='row text-center'>
+                    <div className='col-md-6 text-center'>
                         <button className="btn btn-big" onClick={() => setType('Plumbing and Gas')}>
                             <div className='col-md-12'>
                                 <img src={String(plumbing)} style={iconStyle} />
@@ -85,7 +85,7 @@ export default class SelectIssueType extends React.Component<props, {}> {
                             </div>
                         </button>
                     </div>
-                    <div className='row text-center'>
+                    <div className='col-md-6 text-center'>
                         <button className="btn btn-big" onClick={() => setType('Roofing')}>
                             <div className='col-md-12'>
                                 <img src={String(roofing)} style={iconStyle} />
@@ -95,7 +95,7 @@ export default class SelectIssueType extends React.Component<props, {}> {
                             </div>
                         </button>
                     </div>
-                    <div className='row text-center'>
+                    <div className='col-md-6 text-center'>
                         <button className="btn btn-big" onClick={() => setType('Miscellaneous')}>
                             <div className='col-md-12'>
                                 <img src={String(misc)} style={iconStyle} />
