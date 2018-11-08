@@ -5,6 +5,7 @@ import Phone from '../../formElements/phone'
 import AlternativePrompt from './alternativePrompts'
 import * as types from '../../../store/types'
 import Departments from './departments'
+import ImageUploader from 'react-images-upload'
 
 interface actionProps {
     updateRequest: (newRequest: types.newRequest) => void,
@@ -26,7 +27,12 @@ export default class Fields extends React.Component<props, any> {
             location: '',
             phone: '',
             department: '',
+            image: {}
         }
+    }
+
+    componentWillUpdate(props, state) {
+        console.log(state)
     }
 
     componentWillReceiveProps(props) {
@@ -39,6 +45,7 @@ export default class Fields extends React.Component<props, any> {
                 location: '',
                 phone: '',
                 department: '',
+                images: []
             })
         } else {
             // add options to select
@@ -62,7 +69,8 @@ export default class Fields extends React.Component<props, any> {
             description,
             location,
             phone,
-            department
+            department,
+            images
         } = this.state
 
         const {
@@ -131,6 +139,17 @@ export default class Fields extends React.Component<props, any> {
                         placeholder="Room, floor, etc."
                         callback={(e) => { this.setState({ location: e.value }) }}
                     />
+                    <div className='col-md-12'>
+                        <ImageUploader
+                            withIcon={true}
+                            buttonText='Attach images'
+                            onChange={(image) => this.setState({ images: image })}
+                            imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                            withLabel={false}
+                            maxFileSize={5242880}
+                            withPreview={true}
+                        />
+                    </div>
                 </div>
                 <div className='col-md-12 text-center'>
                     <button onClick={() => clearRequest()} className='btn btn-warning pull-left'>Back</button>
