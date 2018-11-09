@@ -45,10 +45,10 @@ export default class Fields extends React.Component<props, any> {
             })
         } else {
             // add options to select
-            var futureOptions: any[] = [];
+            let futureOptions: any[] = [];
             props.issues.forEach(element => {
                 if (element.type == props.openRequest.issueType) {
-                    var json = { "value": element.name, "label": element.name }
+                    const json = { "value": element.name, "label": element.name }
                     futureOptions.push(json)
                 }
             })
@@ -65,8 +65,7 @@ export default class Fields extends React.Component<props, any> {
             description,
             location,
             phone,
-            department,
-            images
+            department
         } = this.state
 
         const {
@@ -98,7 +97,7 @@ export default class Fields extends React.Component<props, any> {
                         value={department}
                         header="Select your department"
                         placeholder='Select department'
-                        onChange={(department) => { this.setState({ department }) }}
+                        onChange={department => this.setState({ department })}
                         multi={false}
                         options={Departments.Departments}
                     />
@@ -108,14 +107,14 @@ export default class Fields extends React.Component<props, any> {
                         name="phone"
                         header="Enter your phone number"
                         placeholder="Phone number"
-                        callback={(phone) => { this.setState({ phone }) }}
+                        callback={e => this.setState({ phone: e.value })}
                     />
 
                     <Select
                         value={issue}
                         header='Select an issue'
                         placeholder='Select...'
-                        onChange={(issue) => { this.setState({ issue }) }}
+                        onChange={issue => this.setState({ issue })}
                         multi={false}
                         options={options}
                     />
@@ -125,7 +124,7 @@ export default class Fields extends React.Component<props, any> {
                         name="description"
                         header="Describe the issue"
                         placeholder="Description"
-                        callback={(e) => { this.setState({ description: e.value }) }}
+                        callback={e => this.setState({ description: e.value })}
                     />
 
                     <TextArea
@@ -133,19 +132,21 @@ export default class Fields extends React.Component<props, any> {
                         name="location"
                         header="Describe the location"
                         placeholder="Room, floor, etc."
-                        callback={(e) => { this.setState({ location: e.value }) }}
+                        callback={e => this.setState({ location: e.value })}
                     />
+
                     <div className='col-md-12'>
                         <ImageUploader
                             withIcon={true}
                             buttonText='Attach images'
-                            onChange={(image) => this.setState({ images: image })}
+                            onChange={image => this.setState({ images: image })}
                             imgExtension={['.jpg', '.gif', '.png', '.gif']}
                             withLabel={false}
                             maxFileSize={5242880}
                             withPreview={true}
                         />
                     </div>
+
                 </div>
                 <div className='col-md-12 text-center'>
                     <button onClick={() => clearRequest()} className='btn btn-warning pull-left'>Back</button>

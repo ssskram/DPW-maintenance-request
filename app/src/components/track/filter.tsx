@@ -1,24 +1,9 @@
 
 import * as React from 'react'
-import Input from '../formElements/input'
 import Select from '../formElements/select'
 import Modal from 'react-responsive-modal'
 import filter from '../../functions/filter'
-
-const types = [
-    { value: 'Facility', label: 'Facility', name: 'assetType' },
-    { value: 'Project', label: 'Project', name: 'assetType' },
-    { value: 'Steps', label: 'Steps', name: 'assetType' },
-    { value: 'Retaining Wall', label: 'Retaining Wall', name: 'assetType' },
-    { value: 'Pool', label: 'Pool', name: 'assetType' },
-    { value: 'Playground', label: 'Playground', name: 'assetType' },
-    { value: 'Intersection', label: 'Intersection', name: 'assetType' },
-    { value: 'Bridge', label: 'Bridge', name: 'assetType' },
-    { value: 'Court', label: 'Court', name: 'assetType' },
-    { value: 'Playing Field', label: 'Playing Field', name: 'assetType' },
-    { value: 'Park', label: 'Park', name: 'assetType' },
-    { value: 'Street', label: 'Street', name: 'assetType' }
-]
+import removeDuplicates from '../../functions/removeDuplicates'
 
 export default class Filter extends React.Component<any, any> {
     constructor(props) {
@@ -26,15 +11,42 @@ export default class Filter extends React.Component<any, any> {
         this.state = {
             onFilter: false,
             modalIsOpen: false,
-            assetName: '',
-            assetType: ''
+            facilities: [],
+            facility: '',
+            statuses: [],
+            status: ''
         }
+    }
+
+    componentDidMount() {
+        this.setDropdowns(this.props.myRequests)
+    }
+
+    componentWillReceiveProps(props) {
+        console.log(props)
+        this.setDropdowns(props.myRequests)
+    }
+
+    setDropdowns(myRequests) {
+        let facilities = [] as any
+        let statuses = [] as any
+        myRequests.forEach(request => {
+            const facility = { "value": request.building, "label": request.building }
+            const status = { "value": request.status, "label": request.status }
+            facilities.push(facility)
+            statuses.push(status)
+        })
+        // take unique, set to state
+        this.setState ({
+            facilities: removeDuplicates(facilities, "value"),
+            statuses: removeDuplicates(statuses, "value")
+        })
     }
 
     filter() {
         const filterLoad = {
-            assetName: this.state.assetName,
-            assetType: this.state.assetType
+            facility: this.state.facility.value,
+            status: this.state.status.value
         }
         this.props.returnFiltered(filter(this.props.myRequests, filterLoad))
         this.setState({
@@ -44,11 +56,11 @@ export default class Filter extends React.Component<any, any> {
     }
 
     clearFilter() {
-        this.props.returnFiltered(this.props.assets)
+        this.props.returnFiltered(this.props.myRequests)
         this.setState({
             onFilter: false,
-            assetName: '',
-            assetType: ''
+            facility: '',
+            status: ''
         })
     }
 
@@ -56,8 +68,10 @@ export default class Filter extends React.Component<any, any> {
         const {
             onFilter,
             modalIsOpen,
-            assetName,
-            assetType,
+            facilities,
+            facility,
+            statuses, 
+            status
         } = this.state
 
         return (
@@ -83,25 +97,25 @@ export default class Filter extends React.Component<any, any> {
                     }}
                     center>
                     <div>
-                        <div className='col-md-12'>
-                            <Input
-                                value={assetName}
-                                name="assetName"
-                                header="Asset name"
-                                placeholder="Enter a name"
-                                callback={(e) => { this.setState({ description: e.value }) }}
+                    <div className='col-md-12'>
+                            <Select
+                                value={facility}
+                                header='Facilities'
+                                placeholder='Select facility'
+                                onChange={facility => this.setState({ facility })}
+                                multi={false}
+                                options={facilities}
                             />
                         </div>
 
                         <div className='col-md-12'>
                             <Select
-                                value={assetType}
-                                name="assetType"
-                                header='Asset type'
-                                placeholder='Select type'
-                                onChange={(assetType) => { this.setState({ assetType }) }}
+                                value={status}
+                                header='Status'
+                                placeholder='Select status'
+                                onChange={status => this.setState({ status }) }
                                 multi={false}
-                                options={types}
+                                options={statuses}
                             />
                         </div>
 

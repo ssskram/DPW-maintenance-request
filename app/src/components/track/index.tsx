@@ -70,7 +70,7 @@ export class Track extends React.Component<props, any> {
         const indexOfFirstRequest = indexOfLastRequest - requestsPerPage;
         const currentRequests = myRequests.slice(indexOfFirstRequest, indexOfLastRequest);
         const renderRequests = currentRequests.map((request) => {
-            return <Cards myRequest={request} />
+            return <Cards myRequest={request} key={request.cartegraphID}/>
         })
 
         // Logic for displaying page numbers
@@ -88,7 +88,7 @@ export class Track extends React.Component<props, any> {
                 <h1>
                     Your requests
                     <span style={{ marginTop: '-8px' }} className='pull-right'>
-                        <Filter />
+                        <Filter myRequests={myRequests} returnFiltered={this.filterRequests.bind(this)}/>
                     </span>
                 </h1>
                 <hr />

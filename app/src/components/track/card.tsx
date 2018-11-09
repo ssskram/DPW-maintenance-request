@@ -22,7 +22,7 @@ export default class RequestCard extends React.Component<any, any> {
         } = this.props
 
         return (
-            <div className="container-fluid" key={myRequest.cartegraphID}>
+            <div className="container-fluid">
                 <div className="row">
                     <div className="panel">
                         <div className="panel-body text-center">
