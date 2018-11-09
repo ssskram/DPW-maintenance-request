@@ -70,7 +70,7 @@ export class Track extends React.Component<props, any> {
         const indexOfFirstRequest = indexOfLastRequest - requestsPerPage;
         const currentRequests = myRequests.slice(indexOfFirstRequest, indexOfLastRequest);
         const renderRequests = currentRequests.map((request) => {
-            return <Cards myRequest={request} key={request.cartegraphID}/>
+            return <Cards myRequest={request} key={request.cartegraphID} />
         })
 
         // Logic for displaying page numbers
@@ -88,15 +88,18 @@ export class Track extends React.Component<props, any> {
                 <h1>
                     Your requests
                     <span style={{ marginTop: '-8px' }} className='pull-right'>
-                        <Filter myRequests={this.props.myRequests} returnFiltered={this.filterRequests.bind(this)}/>
+                        <Filter myRequests={this.props.myRequests} returnFiltered={this.filterRequests.bind(this)} />
                     </span>
                 </h1>
                 <hr />
-                {myRequests.length == 0 &&
-                    <div>
-                        <div className='text-center alert alert-info'>
-                            <h2>You haven't submitted any maintenance requests!</h2>
-                        </div>
+                {this.props.myRequests.length == 0 &&
+                    <div className='text-center alert alert-info'>
+                        <h2>You haven't submitted any maintenance requests!</h2>
+                    </div>
+                }
+                {this.props.myRequests.length > 0 && myRequests.length == 0 &&
+                    <div className='text-center alert alert-info'>
+                        <h2>Nothing matches those search criteria</h2>
                     </div>
                 }
                 {myRequests.length > 0 &&
