@@ -36,7 +36,7 @@ export default class Filter extends React.Component<any, any> {
             statuses.push(status)
         })
         // take unique, set to state
-        this.setState ({
+        this.setState({
             facilities: removeDuplicates(facilities, "value"),
             statuses: removeDuplicates(statuses, "value")
         })
@@ -69,7 +69,7 @@ export default class Filter extends React.Component<any, any> {
             modalIsOpen,
             facilities,
             facility,
-            statuses, 
+            statuses,
             status
         } = this.state
 
@@ -89,14 +89,14 @@ export default class Filter extends React.Component<any, any> {
                 }
                 <Modal
                     open={modalIsOpen}
-                    onClose={() => this.setState({modalIsOpen:false})}
+                    onClose={() => this.setState({ modalIsOpen: false })}
                     classNames={{
                         overlay: 'custom-overlay',
                         modal: 'custom-modal'
                     }}
                     center>
                     <div>
-                    <div className='col-md-12'>
+                        <div className='col-md-12'>
                             <Select
                                 value={facility}
                                 header='Facilities'
@@ -112,7 +112,7 @@ export default class Filter extends React.Component<any, any> {
                                 value={status}
                                 header='Status'
                                 placeholder='Select status'
-                                onChange={status => this.setState({ status }) }
+                                onChange={status => this.setState({ status })}
                                 multi={false}
                                 options={statuses}
                             />

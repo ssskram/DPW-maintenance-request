@@ -15,6 +15,7 @@ import * as types from '../../../../store/types'
 import LoadingImage from '../../../utilities/loadingImage'
 import Modal from 'react-responsive-modal'
 import VerifyUnique from '../verifyUnique'
+import Search from '../search'
 
 const mapStyle = require('./featurelessLight.json')
 const imgStyle = {
@@ -33,21 +34,13 @@ type props =
     types.allRequests &
     actionProps
 
-type state = {
-    zoom: number,
-    center: any,
-    selectedFacility: types.facility,
-    showInfowindow: boolean,
-    modalIsOpen: boolean
-}
-
-export class Map extends React.Component<props, state> {
+export class Map extends React.Component<props, any> {
     constructor(props) {
         super(props)
         this.state = {
             zoom: 13,
             center: { lat: 40.437470539681442, lng: -79.987124601795273 },
-            selectedFacility: {} as any,
+            selectedFacility: {},
             showInfowindow: false,
             modalIsOpen: false
         }
@@ -89,30 +82,18 @@ export class Map extends React.Component<props, state> {
         })
     }
 
-    openModal() {
-        this.setState({
-            modalIsOpen: true
-        })
-    }
-
-    closeModal() {
-        this.setState({
-            modalIsOpen: false
-        })
-    }
-
     render() {
         const {
             zoom,
             center,
             selectedFacility,
             showInfowindow,
-            modalIsOpen
+            modalIsOpen,
         } = this.state
 
         const {
-            facilities,
-            allRequests
+            allRequests,
+            facilities
         } = this.props
 
         const key = process.env.REACT_APP_GOOGLE_API
@@ -150,15 +131,17 @@ export class Map extends React.Component<props, state> {
                 }
 
                 {showInfowindow == true &&
-                    <InfoWindow position={center} options={{maxWidth: 1000}} onCloseClick={this.closeWindow.bind(this)}>
+                    <InfoWindow position={center} options={{ maxWidth: 1000 }} onCloseClick={this.closeWindow.bind(this)}>
                         <div className='text-center'>
                             <LoadingImage style={imgStyle} src={"https://tools.wprdc.org/images/pittsburgh/facilities/" + selectedFacility.name.replace(/ /g, "_") + ".jpg"} />
                             <h4>{selectedFacility.name}</h4>
-                            <button onClick={this.openModal.bind(this)} className='btn btn-success'>Select</button>
+                            <button onClick={() => this.setState({ modalIsOpen: true })} className='btn btn-success'>Select</button>
                         </div>
                     </InfoWindow>
                 }
-
+                <Search
+                    facilities={facilities}
+                    filter={this.polygonSelection.bind(this)}/>
             </GoogleMap>
         )
         return (
@@ -167,7 +150,7 @@ export class Map extends React.Component<props, state> {
                 <MapComponent />
                 <Modal
                     open={modalIsOpen}
-                    onClose={this.closeModal.bind(this)}
+                    onClose={() => this.setState({ modalIsOpen: false })}
                     classNames={{
                         overlay: 'custom-overlay',
                         modal: 'custom-modal'

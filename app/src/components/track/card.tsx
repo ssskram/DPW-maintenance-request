@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from 'react'
 import LoadingImage from '../utilities/loadingImage'
 
 const imgStyle = {
