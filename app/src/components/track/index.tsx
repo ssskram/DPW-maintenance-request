@@ -88,7 +88,7 @@ export class Track extends React.Component<props, any> {
                 <h1>
                     Your requests
                     <span style={{ marginTop: '-8px' }} className='pull-right'>
-                        <Filter myRequests={myRequests} returnFiltered={this.filterRequests.bind(this)}/>
+                        <Filter myRequests={this.props.myRequests} returnFiltered={this.filterRequests.bind(this)}/>
                     </span>
                 </h1>
                 <hr />

@@ -23,7 +23,6 @@ export default class Filter extends React.Component<any, any> {
     }
 
     componentWillReceiveProps(props) {
-        console.log(props)
         this.setDropdowns(props.myRequests)
     }
 
