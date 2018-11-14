@@ -5,7 +5,7 @@ import * as allRequests from '../../store/allRequests'
 import * as Department from '../../store/department'
 import * as types from './../../store/types'
 import Paging from '../utilities/paging'
-import Cards from './card'
+import Cards from '../card'
 import HydrateStore from '../utilities/hydrateStore'
 import Filter from '../filter'
 import { Helmet } from "react-helmet"
@@ -83,7 +83,7 @@ export class AllRequests extends React.Component<props, any> {
         const indexOfFirstRequest = indexOfLastRequest - requestsPerPage;
         const currentRequests = allRequests.slice(indexOfFirstRequest, indexOfLastRequest);
         const renderRequests = currentRequests.map((request) => {
-            return <Cards myRequest={request} key={request.cartegraphID} />
+            return <Cards request={request} key={request.cartegraphID} />
         })
 
         // Logic for displaying page numbers

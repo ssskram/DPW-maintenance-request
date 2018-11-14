@@ -5,7 +5,7 @@ import * as allRequests from '../../store/allRequests'
 import * as user from '../../store/user'
 import * as types from './../../store/types'
 import Paging from '../utilities/paging'
-import Cards from './card'
+import Cards from '../card'
 import HydrateStore from '../utilities/hydrateStore'
 import Filter from '../filter'
 import { Helmet } from "react-helmet"
@@ -72,7 +72,7 @@ export class Track extends React.Component<props, any> {
         const indexOfFirstRequest = indexOfLastRequest - requestsPerPage;
         const currentRequests = myRequests.slice(indexOfFirstRequest, indexOfLastRequest);
         const renderRequests = currentRequests.map((request) => {
-            return <Cards myRequest={request} key={request.cartegraphID} />
+            return <Cards request={request} key={request.cartegraphID} />
         })
 
         // Logic for displaying page numbers
@@ -94,14 +94,9 @@ export class Track extends React.Component<props, any> {
                     </span>
                 </h1>
                 <hr />
-                {this.props.allRequests.length == 0 &&
+                {myRequests.length == 0 &&
                     <div className='text-center alert alert-info'>
-                        <h2>You haven't submitted any maintenance requests!</h2>
-                    </div>
-                }
-                {this.props.allRequests.length > 0 && myRequests.length == 0 &&
-                    <div className='text-center alert alert-info'>
-                        <h2>Nothing matches those search criteria</h2>
+                        <h2>Nothing to see here</h2>
                     </div>
                 }
                 {myRequests.length > 0 &&

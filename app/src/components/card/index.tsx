@@ -18,7 +18,7 @@ export default class RequestCard extends React.Component<any, any> {
 
     public render() {
         const {
-            myRequest
+            request
         } = this.props
 
         return (
@@ -27,21 +27,22 @@ export default class RequestCard extends React.Component<any, any> {
                     <div className="panel">
                         <div className="panel-body text-center">
                             <div className="col-md-6">
-                                <h3><b>{myRequest.building}</b></h3>
+                                <h3><b>{request.building}</b></h3>
+                                <h5>{request.location}</h5>
                                 <div style={{ margin: '10px' }} className='hidden-xs'>
-                                    <LoadingImage style={imgStyle} src={"https://tools.wprdc.org/images/pittsburgh/facilities/" + myRequest.building.replace(/ /g, "_") + ".jpg"} />
+                                    <LoadingImage style={imgStyle} src={"https://tools.wprdc.org/images/pittsburgh/facilities/" + request.building.replace(/ /g, "_") + ".jpg"} />
                                 </div>
-                                <h4><b>{myRequest.submitted}</b></h4>
-
+                                <p>Request ID: {request.cartegraphID}</p>
                             </div>
                             <div className="col-md-6" style={{ marginTop: '20px' }}>
-                                <p>Request ID: {myRequest.cartegraphID}</p>
-                                <h4>"{myRequest.description}"</h4>
+                                <h4><b>Submitted {request.submitted}</b></h4>
+                                <h5><b>{request.issue}</b></h5>
+                                <h5>"{request.description}"</h5>
                                 <div style={feedback}>
                                     <h5><b>DPW Feedback</b></h5>
-                                    <h5>Status: {myRequest.status}</h5>
-                                    <h5>Last activity: {myRequest.lastModified}</h5>
-                                    <h5><i>{myRequest.notes}</i></h5>
+                                    <h5>Status: {request.status}</h5>
+                                    <h5>Last activity: {request.lastModified}</h5>
+                                    <h5><i>{request.notes}</i></h5>
                                 </div>
                             </div>
                         </div>
