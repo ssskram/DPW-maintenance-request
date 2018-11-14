@@ -8,7 +8,7 @@ export default class NavMenu extends React.Component<any, any> {
 
   public render() {
     return (
-      <Navbar inverse fixedTop fluid collapseOnSelect>
+      <Navbar inverse fixedTop fluid collapseOnSelect style={{zIndex: 100000000000 as any}}>
         <Navbar.Header>
           <Navbar.Brand>
             <Link to={'/'}>DPW Maintenance</Link>

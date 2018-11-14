@@ -3,13 +3,22 @@ import Select from '../../formElements/select'
 
 const floatingPanelBig = {
     position: 'absolute' as any,
-    top: '0px',
-    left: '50%',
+    top: '0',
+    right: '0',
     zIndex: 99,
-    padding: '10px 20px',
     backgroundColor: 'rgb(44, 62, 80)',
-    borderRadius: '0px 0px 15px 15px',
+    borderRadius: '0px 0px 0px 5px',
     width: '350px'
+}
+
+const floatingPanelSmall = {
+    position: 'absolute' as any,
+    top: '0',
+    right: '0',
+    zIndex: 99,
+    marginTop: '50px',
+    backgroundColor: 'rgb(44, 62, 80)',
+    width: '100%'
 }
 
 export default class Search extends React.Component<any, any> {
@@ -56,17 +65,27 @@ export default class Search extends React.Component<any, any> {
             facilities
         } = this.state
 
-        return (
-            <div style={floatingPanelBig} className="container-fluid text-center">
-                <h3 style={{ color: '#FAF7F2' }}>Select facility</h3>
+        const select =
+            <div>
+                <h3 style={{ color: '#FAF7F2' }}>Select facility from map</h3>
                 <div className='col-md-12'>
                     <Select
                         value={facility}
-                        placeholder='Search for facility'
+                        placeholder='or, search for facility'
                         onChange={facility => this.returnFilter(facility)}
                         multi={false}
                         options={facilities}
                     />
+                </div>
+            </div>
+
+        return (
+            <div className='container-fluid text-center '>
+                <div style={floatingPanelBig} className="hidden-xs">
+                    {select}
+                </div>
+                <div style={floatingPanelSmall} className="hidden-sm hidden-md hidden-lg hidden-xl">
+                    {select}
                 </div>
             </div>
         );
