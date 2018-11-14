@@ -39,7 +39,7 @@ export class SelectDepartment extends React.Component<props, any> {
                 }
             })
             this.setState({
-                departments: removeDuplicates(departments, "value")
+                departments: removeDuplicates(departments, "value").sort((a, b) => a.value.localeCompare(b.value))
             })
         }
     }
@@ -60,7 +60,7 @@ export class SelectDepartment extends React.Component<props, any> {
                         placeholder='Select department'
                         onChange={department => setDepartment(department.value)}
                         multi={false}
-                        options={this.state.departments.sort()}
+                        options={this.state.departments}
                     />
                 </div>
             </div>
