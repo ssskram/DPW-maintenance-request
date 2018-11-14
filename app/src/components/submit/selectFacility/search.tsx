@@ -16,7 +16,6 @@ const floatingPanelSmall = {
     position: 'absolute' as any,
     top: '0',
     right: '0',
-    marginTop: '-110px',
     zIndex: 99,
     backgroundColor: 'rgb(44, 62, 80)',
     width: '100%'
@@ -72,7 +71,7 @@ export default class Search extends React.Component<any, any> {
                 <div className='col-md-12'>
                     <Select
                         value={facility}
-                        placeholder='or, search for facility'
+                        placeholder='Search for facility'
                         onChange={facility => this.returnFilter(facility)}
                         multi={false}
                         options={facilities}
