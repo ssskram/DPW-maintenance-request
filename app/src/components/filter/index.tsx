@@ -14,7 +14,10 @@ export default class Filter extends React.Component<any, any> {
             facilities: [],
             facility: '',
             statuses: [],
-            status: ''
+            status: '',
+            issues: [],
+            issue: ''
+
         }
     }
 
@@ -29,17 +32,21 @@ export default class Filter extends React.Component<any, any> {
     setDropdowns(requests) {
         let facilities = [] as any
         let statuses = [] as any
+        let issues = [] as any
         if (requests) {
             requests.forEach(request => {
                 const facility = { "value": request.building, "label": request.building }
                 const status = { "value": request.status, "label": request.status }
+                const issue = { "value": request.issue, "label": request.issue }
                 facilities.push(facility)
                 statuses.push(status)
+                issues.push(issue)
             })
             // take unique, set to state
             this.setState({
                 facilities: removeDuplicates(facilities, "value"),
-                statuses: removeDuplicates(statuses, "value")
+                statuses: removeDuplicates(statuses, "value"),
+                issues: removeDuplicates(issues, "value"),
             })
         }
     }
@@ -47,7 +54,8 @@ export default class Filter extends React.Component<any, any> {
     filter() {
         const filterLoad = {
             facility: this.state.facility.value,
-            status: this.state.status.value
+            status: this.state.status.value,
+            issue: this.state.issue.value
         }
         this.props.returnFiltered(filter(this.props.requests, filterLoad))
         this.setState({
@@ -61,7 +69,8 @@ export default class Filter extends React.Component<any, any> {
         this.setState({
             onFilter: false,
             facility: '',
-            status: ''
+            status: '',
+            issue: ''
         })
     }
 
@@ -72,7 +81,9 @@ export default class Filter extends React.Component<any, any> {
             facilities,
             facility,
             statuses,
-            status
+            status,
+            issues,
+            issue
         } = this.state
 
         return (
@@ -117,6 +128,17 @@ export default class Filter extends React.Component<any, any> {
                                 onChange={status => this.setState({ status })}
                                 multi={false}
                                 options={statuses}
+                            />
+                        </div>
+
+                        <div className='col-md-12'>
+                            <Select
+                                value={issue}
+                                header='Issue'
+                                placeholder='Select issue'
+                                onChange={issue => this.setState({ issue })}
+                                multi={false}
+                                options={issues}
                             />
                         </div>
 

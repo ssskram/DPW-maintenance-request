@@ -13,6 +13,11 @@ export default function filter(myRequests, filters) {
                 return false
             }
         }
+        if (filters.issue) {
+            if (!request.issue.includes(filters.issue)) {
+                return false
+            }
+        }
         return true
     })
     return filteredRequests
