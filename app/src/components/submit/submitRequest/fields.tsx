@@ -140,7 +140,7 @@ export default class Fields extends React.Component<props, any> {
                             withIcon={true}
                             buttonText='Attach images'
                             onChange={image => this.setState({ images: image })}
-                            imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                            imgExtension={['.jpg', '.gif', '.png', '.gif', '.jpeg']}
                             withLabel={false}
                             maxFileSize={5242880}
                             withPreview={true}
