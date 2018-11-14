@@ -107,7 +107,7 @@ export default class Fields extends React.Component<props, any> {
                         name="phone"
                         header="Enter your phone number"
                         placeholder="Phone number"
-                        callback={e => this.setState({ phone: e.value })}
+                        callback={e => this.setState({ phone: e })}
                     />
 
                     <Select
