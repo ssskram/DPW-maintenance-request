@@ -4,19 +4,20 @@ import Select from '../../formElements/select'
 const floatingPanelBig = {
     position: 'absolute' as any,
     top: '0',
-    right: '0',
+    right: '15%',
     zIndex: 99,
     backgroundColor: 'rgb(44, 62, 80)',
-    borderRadius: '0px 0px 0px 5px',
-    width: '350px'
+    borderRadius: '0px 0px 5px 5px',
+    boxShadow: '0 1px 4px 0 rgba(0, 0, 0, 0.4)',
+    width: '45%'
 }
 
 const floatingPanelSmall = {
     position: 'absolute' as any,
     top: '0',
     right: '0',
+    marginTop: '-110px',
     zIndex: 99,
-    marginTop: '50px',
     backgroundColor: 'rgb(44, 62, 80)',
     width: '100%'
 }

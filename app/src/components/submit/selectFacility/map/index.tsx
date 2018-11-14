@@ -110,7 +110,16 @@ export class Map extends React.Component<props, any> {
             <GoogleMap
                 defaultZoom={zoom}
                 defaultCenter={center}
-                defaultOptions={{ styles: mapStyle as any }}
+                defaultOptions={{ 
+                    styles: mapStyle as any,
+                    streetViewControl: false,
+                    scaleControl: false,
+                    mapTypeControl: false,
+                    panControl: false,
+                    zoomControl: false,
+                    rotateControl: false,
+                    fullscreenControl: false 
+                }}
             >
                 {facilities &&
                     facilities.map((facility, index) => {
@@ -139,15 +148,18 @@ export class Map extends React.Component<props, any> {
                         </div>
                     </InfoWindow>
                 }
-                <Search
-                    facilities={facilities}
-                    filter={this.polygonSelection.bind(this)}/>
             </GoogleMap>
         )
         return (
-            <div id='home-map'>
+            <div>
                 <Helmet><style>{'.col-sm-9,body{padding:0!important}.col-sm-9{width:100%!important}body{overflow:hidden}'}</style></Helmet>
-                <MapComponent />
+                <div className='home-map-full hidden-xs'>
+                    <MapComponent />
+
+                </div>
+                <div className='home-map-short hidden-sm hidden-md hidden-lg hidden-xl'>
+                    <MapComponent />
+                </div>
                 <Modal
                     open={modalIsOpen}
                     onClose={() => this.setState({ modalIsOpen: false })}
@@ -161,6 +173,9 @@ export class Map extends React.Component<props, any> {
                         confirm={this.setBuilding.bind(this)}
                         allRequests={allRequests} />
                 </Modal>
+                <Search
+                    facilities={facilities}
+                    filter={this.polygonSelection.bind(this)} />
             </div>
         )
     }
