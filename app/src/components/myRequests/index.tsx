@@ -1,19 +1,20 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { ApplicationState } from '../../store'
-import * as myRequests from '../../store/myRequests'
+import * as allRequests from '../../store/allRequests'
+import * as user from '../../store/user'
 import * as types from './../../store/types'
 import Paging from '../utilities/paging'
 import Cards from './card'
 import HydrateStore from '../utilities/hydrateStore'
-import Filter from './filter'
+import Filter from '../filter'
 import { Helmet } from "react-helmet"
 
 const dropdownStyle = '.custom-modal { overflow: visible; } .Select-menu-outer { overflow: visible}'
 
 type props =
-    types.myRequests &
-    types.myRequest
+    types.allRequests &
+    types.user
 
 export class Track extends React.Component<props, any> {
     constructor(props) {
@@ -27,16 +28,17 @@ export class Track extends React.Component<props, any> {
 
     componentDidMount() {
         window.scrollTo(0, 0)
-        this.setRequests(this.props.myRequests)
+        this.setRequests(this.props.allRequests)
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setRequests(nextProps.myRequests)
+        this.setRequests(nextProps.allRequests)
     }
 
-    setRequests(myRequests) {
+    setRequests(allRequests) {
         this.setState({
-            myRequests: myRequests
+            myRequests: allRequests
+                .filter(request => request.submittedBy == this.props.user)
                 .sort((a, b) => +new Date(b.submitted) - +new Date(a.submitted))
         })
     }
@@ -88,16 +90,16 @@ export class Track extends React.Component<props, any> {
                 <h1>
                     Your requests
                     <span style={{ marginTop: '-8px' }} className='pull-right'>
-                        <Filter myRequests={this.props.myRequests} returnFiltered={this.filterRequests.bind(this)} />
+                        <Filter myRequests={this.props.allRequests.filter(request => request.submittedBy == this.props.user)} returnFiltered={this.filterRequests.bind(this)} />
                     </span>
                 </h1>
                 <hr />
-                {this.props.myRequests.length == 0 &&
+                {this.props.allRequests.length == 0 &&
                     <div className='text-center alert alert-info'>
                         <h2>You haven't submitted any maintenance requests!</h2>
                     </div>
                 }
-                {this.props.myRequests.length > 0 && myRequests.length == 0 &&
+                {this.props.allRequests.length > 0 && myRequests.length == 0 &&
                     <div className='text-center alert alert-info'>
                         <h2>Nothing matches those search criteria</h2>
                     </div>
@@ -122,9 +124,11 @@ export class Track extends React.Component<props, any> {
 
 export default connect(
     (state: ApplicationState) => ({
-        ...state.myRequests
+        ...state.allRequests,
+        ...state.user
     }),
     ({
-        ...myRequests.actionCreators
+        ...allRequests.actionCreators,
+        ...user.actionCreators
     })
 )(Track)

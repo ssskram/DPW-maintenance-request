@@ -10,8 +10,11 @@ export default class Menu extends React.Component {
                 <LinkContainer to={'/'} exact>
                     <NavItem>Submit</NavItem>
                 </LinkContainer>
-                <LinkContainer to={'/track'}>
-                    <NavItem>Track</NavItem>
+                <LinkContainer to={'/MyRequests'}>
+                    <NavItem>My Requests</NavItem>
+                </LinkContainer>
+                <LinkContainer to={'/AllRequests'}>
+                    <NavItem>All Requests</NavItem>
                 </LinkContainer>
             </Nav>
         )

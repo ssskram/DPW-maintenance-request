@@ -20,6 +20,9 @@ export const actionCreators = {
             .then(data => {
                 dispatch({ type: constants.loadAllRequests, allRequests: data })
             })
+    },
+    addRequest: (request): AppThunkAction<any> => (dispatch) => {
+        dispatch({ type: constants.addRequest, request: request })
     }
 }
 
@@ -28,6 +31,8 @@ export const reducer: Reducer<types.allRequests> = (state: types.allRequests, in
     switch (action.type) {
         case constants.loadAllRequests:
             return { ...state, allRequests: action.allRequests }
+        case constants.addRequest:
+            return { ...state } // concat request to store here
     }
 
     return state || unloadedState
