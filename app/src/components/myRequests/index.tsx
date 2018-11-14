@@ -96,7 +96,7 @@ export class Track extends React.Component<props, any> {
                 <hr />
                 {myRequests.length == 0 &&
                     <div className='text-center alert alert-info'>
-                        <h2>Nothing to see here</h2>
+                        <h2>Nothing to show here</h2>
                     </div>
                 }
                 {myRequests.length > 0 &&
