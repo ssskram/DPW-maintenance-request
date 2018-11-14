@@ -1,13 +1,7 @@
 /* Google map
 /* ------------------------- */
 
-.home-map-full {
-    height: 100vh;
-    width: 100%;
-}
-
-.home-map-short {
-    margin-top: 160px;
+.home-map {
     height: 100vh;
     width: 100%;
 }

@@ -153,11 +153,7 @@ export class Map extends React.Component<props, any> {
         return (
             <div>
                 <Helmet><style>{'.col-sm-9,body{padding:0!important}.col-sm-9{width:100%!important}body{overflow:hidden}'}</style></Helmet>
-                <div className='home-map-full hidden-xs'>
-                    <MapComponent />
-
-                </div>
-                <div className='home-map-short hidden-sm hidden-md hidden-lg hidden-xl'>
+                <div className='home-map'>
                     <MapComponent />
                 </div>
                 <Modal
