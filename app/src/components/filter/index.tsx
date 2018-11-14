@@ -19,27 +19,29 @@ export default class Filter extends React.Component<any, any> {
     }
 
     componentDidMount() {
-        this.setDropdowns(this.props.myRequests)
+        this.setDropdowns(this.props.requests)
     }
 
     componentWillReceiveProps(props) {
-        this.setDropdowns(props.myRequests)
+        this.setDropdowns(props.requests)
     }
 
-    setDropdowns(myRequests) {
+    setDropdowns(requests) {
         let facilities = [] as any
         let statuses = [] as any
-        myRequests.forEach(request => {
-            const facility = { "value": request.building, "label": request.building }
-            const status = { "value": request.status, "label": request.status }
-            facilities.push(facility)
-            statuses.push(status)
-        })
-        // take unique, set to state
-        this.setState({
-            facilities: removeDuplicates(facilities, "value"),
-            statuses: removeDuplicates(statuses, "value")
-        })
+        if (requests) {
+            requests.forEach(request => {
+                const facility = { "value": request.building, "label": request.building }
+                const status = { "value": request.status, "label": request.status }
+                facilities.push(facility)
+                statuses.push(status)
+            })
+            // take unique, set to state
+            this.setState({
+                facilities: removeDuplicates(facilities, "value"),
+                statuses: removeDuplicates(statuses, "value")
+            })
+        }
     }
 
     filter() {
@@ -47,7 +49,7 @@ export default class Filter extends React.Component<any, any> {
             facility: this.state.facility.value,
             status: this.state.status.value
         }
-        this.props.returnFiltered(filter(this.props.myRequests, filterLoad))
+        this.props.returnFiltered(filter(this.props.requests, filterLoad))
         this.setState({
             modalIsOpen: false,
             onFilter: true
@@ -55,7 +57,7 @@ export default class Filter extends React.Component<any, any> {
     }
 
     clearFilter() {
-        this.props.returnFiltered(this.props.myRequests)
+        this.props.returnFiltered(this.props.requests)
         this.setState({
             onFilter: false,
             facility: '',

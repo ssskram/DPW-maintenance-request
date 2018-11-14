@@ -16,5 +16,9 @@ export const loadAllRequests = 'loadAllRequests'
 export const updateRequest = 'updateRequest'
 export const clearRequest = 'clearRequest'
 
-// issue tyoes
+// issue types
 export const loadIssues = 'loadIssues'
+
+// department
+export const loadDepartment = 'loadDepartment'
+export const setDepartment = 'setDepartment'

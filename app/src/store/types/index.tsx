@@ -62,3 +62,8 @@ export interface issue {
     name: string
     type: string
 }
+
+// department
+export interface department {
+    department: string
+}

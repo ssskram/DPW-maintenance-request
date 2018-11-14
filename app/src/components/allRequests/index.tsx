@@ -2,48 +2,61 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { ApplicationState } from '../../store'
 import * as allRequests from '../../store/allRequests'
+import * as Department from '../../store/department'
 import * as types from './../../store/types'
 import Paging from '../utilities/paging'
 import Cards from './card'
 import HydrateStore from '../utilities/hydrateStore'
 import Filter from '../filter'
 import { Helmet } from "react-helmet"
+import Modal from 'react-responsive-modal'
+import SelectDepartment from './selectDepartment'
 
 const dropdownStyle = '.custom-modal { overflow: visible; } .Select-menu-outer { overflow: visible}'
 
-type props =
-    types.allRequests
+interface actionProps {
+    setDepartment: (type: string) => void
+}
 
-export class Track extends React.Component<props, any> {
+type props =
+    types.allRequests &
+    types.department &
+    actionProps
+
+export class AllRequests extends React.Component<props, any> {
     constructor(props) {
         super(props);
         this.state = {
             currentPage: 1,
             requestsPerPage: 25,
-            myRequests: [],
-            department: ''
+            allRequests: []
         }
     }
 
     componentDidMount() {
         window.scrollTo(0, 0)
-        this.setRequests(this.props.allRequests)
+        this.setRequests(this.props)
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setRequests(nextProps.allRequests)
+        this.setRequests(nextProps)
     }
 
-    setRequests(allRequests) {
-        this.setState({
-            myRequests: allRequests
-                .sort((a, b) => +new Date(b.submitted) - +new Date(a.submitted))
-        })
+    setRequests(props) {
+        if (props.department != ''){
+            console.log(props.department)
+            this.setState({
+                allRequests: props.allRequests
+                    .filter(request => request.department == props.department)
+                    .sort((a, b) => +new Date(b.submitted) - +new Date(a.submitted))
+            })
+        }
     }
 
     filterRequests(filteredRequests) {
         this.setState({
-            myRequests: filteredRequests
+            allRequests: filteredRequests
+                .filter(request => request.department == this.props.department)
                 .sort((a, b) => +new Date(b.submitted) - +new Date(a.submitted))
         })
     }
@@ -62,21 +75,20 @@ export class Track extends React.Component<props, any> {
         const {
             currentPage,
             requestsPerPage,
-            myRequests,
-            department
+            allRequests
         } = this.state
 
         // Logic for paging
         const indexOfLastRequest = currentPage * requestsPerPage;
         const indexOfFirstRequest = indexOfLastRequest - requestsPerPage;
-        const currentRequests = myRequests.slice(indexOfFirstRequest, indexOfLastRequest);
+        const currentRequests = allRequests.slice(indexOfFirstRequest, indexOfLastRequest);
         const renderRequests = currentRequests.map((request) => {
             return <Cards myRequest={request} key={request.cartegraphID} />
         })
 
         // Logic for displaying page numbers
         const pageNumbers: any[] = []
-        for (let i = 1; i <= Math.ceil(myRequests.length / requestsPerPage); i++) {
+        for (let i = 1; i <= Math.ceil(allRequests.length / requestsPerPage); i++) {
             pageNumbers.push(i);
         }
 
@@ -87,27 +99,22 @@ export class Track extends React.Component<props, any> {
                 </Helmet>
                 <HydrateStore />
                 <h1>
-                    {department} requests
+                    {this.props.department} Requests
                     <span style={{ marginTop: '-8px' }} className='pull-right'>
-                        <Filter myRequests={this.props.allRequests} returnFiltered={this.filterRequests.bind(this)} />
+                        <Filter requests={this.props.allRequests.filter(request => request.department == this.props.department)} returnFiltered={this.filterRequests.bind(this)} />
                     </span>
                 </h1>
                 <hr />
-                {this.props.allRequests.length == 0 &&
+                {allRequests.length == 0 &&
                     <div className='text-center alert alert-info'>
-                        <h2>You haven't submitted any maintenance requests!</h2>
+                        <h2>Nothing to show here</h2>
                     </div>
                 }
-                {this.props.allRequests.length > 0 && myRequests.length == 0 &&
-                    <div className='text-center alert alert-info'>
-                        <h2>Nothing matches those search criteria</h2>
-                    </div>
-                }
-                {myRequests.length > 0 &&
+                {allRequests.length > 0 &&
                     <div className="col-md-12">
                         {renderRequests}
                         <Paging
-                            count={myRequests}
+                            count={allRequests}
                             currentPage={currentPage}
                             totalPages={pageNumbers}
                             next={this.handleNextClick.bind(this)}
@@ -116,6 +123,18 @@ export class Track extends React.Component<props, any> {
                         <br />
                     </div>
                 }
+                <Modal
+                    open={this.props.department == ''}
+                    onClose={() => { }}
+                    classNames={{
+                        overlay: 'custom-overlay',
+                        modal: 'custom-modal'
+                    }}
+                    showCloseIcon={false}
+                    center>
+                    <SelectDepartment
+                        allRequests={this.props.allRequests}/>
+                </Modal>
             </div>
         )
     }
@@ -123,9 +142,11 @@ export class Track extends React.Component<props, any> {
 
 export default connect(
     (state: ApplicationState) => ({
-        ...state.allRequests
+        ...state.allRequests,
+        ...state.department
     }),
     ({
-        ...allRequests.actionCreators
+        ...allRequests.actionCreators,
+        ...Department.actionCreators
     })
-)(Track)
+)(AllRequests)

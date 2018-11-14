@@ -88,9 +88,9 @@ export class Track extends React.Component<props, any> {
                 </Helmet>
                 <HydrateStore />
                 <h1>
-                    Your requests
+                    My Requests
                     <span style={{ marginTop: '-8px' }} className='pull-right'>
-                        <Filter myRequests={this.props.allRequests.filter(request => request.submittedBy == this.props.user)} returnFiltered={this.filterRequests.bind(this)} />
+                        <Filter requests={this.props.allRequests.filter(request => request.submittedBy == this.props.user)} returnFiltered={this.filterRequests.bind(this)} />
                     </span>
                 </h1>
                 <hr />
