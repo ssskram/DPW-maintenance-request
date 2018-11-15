@@ -70,12 +70,12 @@ export class Form extends React.Component<props, any> {
     }
     
     postRequest(request, images) {
-        PostRequest(request, images)
+        PostRequest(request, images, this.props.user)
         // add to store
         this.props.successMessage()
         const storeLoad = {
             cartegraphID: '...loading...',
-            building: this.props.openRequest.building,
+            building: request.building,
             location: request.location,
             description: request.description,
             department: request.department,
@@ -111,7 +111,7 @@ export class Form extends React.Component<props, any> {
             <div>
                 <div className='row'>
                     <div className='col-md-12 text-center'>
-                        <h1>Maintenance request</h1>
+                        <h2>Maintenance request</h2>
                         <hr />
                         <br />
                         <LoadingImage style={imgStyle} src={"https://tools.wprdc.org/images/pittsburgh/facilities/" + openRequest.building.replace(/ /g, "_") + ".jpg"} />

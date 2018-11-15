@@ -57,7 +57,7 @@ export class Track extends React.Component<props, any> {
             myRequests: allRequests
                 .filter(request => request.submittedBy == this.props.user)
                 .sort((a, b) => +new Date(b.submitted) - +new Date(a.submitted))
-        })
+        }, function(this) {console.log(this.state)})
     }
 
     filterRequests(filteredRequests) {

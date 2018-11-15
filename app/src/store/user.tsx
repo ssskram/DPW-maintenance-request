@@ -18,7 +18,7 @@ export const actionCreators = {
                     })
                 })
         } else {
-            dispatch({ type: constants.loadUser, user: 'jessica.shimp@pittsburghpa.gov' });
+            dispatch({ type: constants.loadUser, user: 'paul.marks@pittsburghpa.gov' });
         }
     }
 }

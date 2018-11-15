@@ -60,6 +60,7 @@ export default class Fields extends React.Component<props, any> {
 
     post() {
         const load = {
+            building: this.props.openRequest.building,
             department: this.state.department.value,
             description: this.state.description,
             issue: this.state.issue.value,
