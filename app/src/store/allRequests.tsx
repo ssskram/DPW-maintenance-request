@@ -32,7 +32,7 @@ export const reducer: Reducer<types.allRequests> = (state: types.allRequests, in
         case constants.loadAllRequests:
             return { ...state, allRequests: action.allRequests }
         case constants.addRequest:
-            return { ...state } // concat request to store here
+            return { ...state, allRequests: state.allRequests.concat(action.request) }
     }
 
     return state || unloadedState

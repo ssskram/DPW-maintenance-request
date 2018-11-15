@@ -67,3 +67,8 @@ export interface issue {
 export interface department {
     department: string
 }
+
+// message
+export interface messsage { 
+    message: string
+}

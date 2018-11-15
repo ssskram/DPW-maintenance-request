@@ -1,13 +1,19 @@
 import * as React from 'react'
+import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { ApplicationState } from '../../../store'
 import * as OpenRequest from '../../../store/openRequest'
+import * as AllRequests from '../../../store/allRequests'
 import * as Issues from '../../../store/issues'
+import * as User from '../../../store/user'
+import * as Messages from '../../../store/messages'
 import * as types from '../../../store/types'
 import Fields from './fields'
 import LoadingImage from '../../utilities/loadingImage'
 import Modal from 'react-responsive-modal'
 import SelectType from '../selectType'
+import PostRequest from '../../../functions/postRequest'
+import * as moment from 'moment'
 
 const imgStyle = {
     maxHeight: '350px',
@@ -16,16 +22,26 @@ const imgStyle = {
 }
 
 interface actionProps {
+    successMessage: () => void,
+    errorMessage: () => void,
     updateRequest: (newRequest: types.newRequest) => void,
-    clearRequest: () => void
+    clearRequest: () => void,
+    addRequest: (request: types.allRequest) => void
 }
 
 type props =
     types.openRequest &
     types.issues &
+    types.user &
     actionProps
 
-export class Form extends React.Component<props, {}> {
+export class Form extends React.Component<props, any> {
+    constructor(props) {
+        super(props)
+        this.state = {
+            redirect: false
+        }
+    }
 
     setType(type) {
         const newRequest = {
@@ -53,13 +69,43 @@ export class Form extends React.Component<props, {}> {
         this.props.updateRequest(newRequest)
     }
     
+    postRequest(request, images) {
+        PostRequest(request, images)
+        // add to store
+        this.props.successMessage()
+        const storeLoad = {
+            cartegraphID: '...loading...',
+            building: this.props.openRequest.building,
+            location: request.location,
+            description: request.description,
+            department: request.department,
+            submitted: moment().format('MM/DD/YYYY'),
+            submittedBy: this.props.user,
+            status: 'Planned',
+            issue: request.issue,
+            lastModified: moment().format('MM/DD/YYYY'),
+            notes: ''
+        }
+        this.props.addRequest(storeLoad)
+        this.setState({
+            redirect: true
+        })
+    }
+
     render() {
         const {
             openRequest,
             issues,
-            updateRequest,
             clearRequest
         } = this.props
+
+        const { 
+            redirect
+        } = this.state
+
+        if (redirect) {
+            return <Redirect push to={'/MyRequests'} />
+        }
 
         return (
             <div>
@@ -81,8 +127,8 @@ export class Form extends React.Component<props, {}> {
                         <Fields
                             openRequest={openRequest}
                             issues={issues}
-                            updateRequest={updateRequest}
                             clearRequest={clearRequest}
+                            postRequest={this.postRequest.bind(this)}
                         />
                     </div>
                 </div>
@@ -106,10 +152,16 @@ export class Form extends React.Component<props, {}> {
 export default connect(
     (state: ApplicationState) => ({
         ...state.openRequest,
-        ...state.issues
+        ...state.issues,
+        ...state.allRequests,
+        ...state.user,
+        ...state.messages
     }),
     ({
         ...OpenRequest.actionCreators,
-        ...Issues.actionCreators
+        ...Issues.actionCreators,
+        ...AllRequests.actionCreators,
+        ...User.actionCreators,
+        ...Messages.actionCreators
     })
 )(Form)

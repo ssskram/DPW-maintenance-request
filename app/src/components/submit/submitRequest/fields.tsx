@@ -8,8 +8,8 @@ import Departments from './departments'
 import ImageUploader from 'react-images-upload'
 
 interface actionProps {
-    updateRequest: (newRequest: types.newRequest) => void,
-    clearRequest: () => void
+    clearRequest: () => void,
+    postRequest: (request: any, images: any) => void
 }
 
 type props =
@@ -27,7 +27,7 @@ export default class Fields extends React.Component<props, any> {
             location: '',
             phone: '',
             department: '',
-            image: {}
+            images: []
         }
     }
 
@@ -56,6 +56,17 @@ export default class Fields extends React.Component<props, any> {
                 options: futureOptions
             })
         }
+    }
+
+    post() {
+        const load = {
+            department: this.state.department.value,
+            description: this.state.description,
+            issue: this.state.issue.value,
+            location: this.state.location,
+            phone: this.state.phone
+        }
+        this.props.postRequest(load, this.state.images)
     }
 
     public render() {
@@ -104,7 +115,6 @@ export default class Fields extends React.Component<props, any> {
 
                     <Phone
                         value={phone}
-                        name="phone"
                         header="Enter your phone number"
                         placeholder="Phone number"
                         callback={e => this.setState({ phone: e })}
@@ -121,18 +131,16 @@ export default class Fields extends React.Component<props, any> {
 
                     <TextArea
                         value={description}
-                        name="description"
                         header="Describe the issue"
                         placeholder="Description"
-                        callback={e => this.setState({ description: e.value })}
+                        callback={e => this.setState({ description: e.target.value })}
                     />
 
                     <TextArea
                         value={location}
-                        name="location"
                         header="Describe the location"
                         placeholder="Room, floor, etc."
-                        callback={e => this.setState({ location: e.value })}
+                        callback={e => this.setState({ location: e.target.value })}
                     />
 
                     <div className='col-md-12'>
@@ -150,7 +158,7 @@ export default class Fields extends React.Component<props, any> {
                 </div>
                 <div className='col-md-12 text-center'>
                     <button onClick={() => clearRequest()} className='btn btn-warning pull-left'>Back</button>
-                    <button disabled={!isEnabled} className='btn btn-success pull-right'>Submit</button>
+                    <button onClick={this.post.bind(this)} disabled={!isEnabled} className='btn btn-success pull-right'>Submit</button>
                     <br />
                     <br />
                 </div>

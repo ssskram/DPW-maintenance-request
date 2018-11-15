@@ -5,6 +5,7 @@ import * as allRequests from './allRequests'
 import * as openRequest from './openRequest'
 import * as issues from './issues'
 import * as department from './department'
+import * as messages from './messages'
 
 export interface ApplicationState {
     user: types.user,
@@ -13,6 +14,7 @@ export interface ApplicationState {
     openRequest: types.openRequest,
     issues: types.issues,
     department: types.department
+    messages: types.messsage
 }
 
 export const reducers = {
@@ -21,7 +23,8 @@ export const reducers = {
     allRequests: allRequests.reducer,
     openRequest: openRequest.reducer,
     issues: issues.reducer,
-    department: department.reducer
+    department: department.reducer,
+    messages: messages.reducer
 }
 
 export interface AppThunkAction<TAction> {

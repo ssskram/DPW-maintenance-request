@@ -3,8 +3,10 @@ import { connect } from 'react-redux'
 import { ApplicationState } from '../../store'
 import * as allRequests from '../../store/allRequests'
 import * as user from '../../store/user'
+import * as messages from '../../store/messages'
 import * as types from './../../store/types'
 import Paging from '../utilities/paging'
+import Message from '../utilities/messages'
 import Cards from '../card'
 import HydrateStore from '../utilities/hydrateStore'
 import Filter from '../filter'
@@ -12,9 +14,16 @@ import { Helmet } from "react-helmet"
 
 const dropdownStyle = '.custom-modal { overflow: visible; } .Select-menu-outer { overflow: visible}'
 
+interface actionProps {
+    clearMessage: () => void,
+    clearRequest: () => void
+}
+
 type props =
     types.allRequests &
-    types.user
+    types.messsage &
+    types.user &
+    actionProps
 
 export class Track extends React.Component<props, any> {
     constructor(props) {
@@ -29,6 +38,10 @@ export class Track extends React.Component<props, any> {
     componentDidMount() {
         window.scrollTo(0, 0)
         this.setRequests(this.props.allRequests)
+    }
+
+    componentWillUnmount() {
+        this.props.clearMessage()
     }
 
     componentWillReceiveProps(nextProps) {
@@ -94,6 +107,9 @@ export class Track extends React.Component<props, any> {
                     </span>
                 </h1>
                 <hr />
+                <div className='text-center'>
+                    <Message message={this.props.message} />
+                </div>
                 {myRequests.length == 0 &&
                     <div className='text-center alert alert-info'>
                         <h2>Nothing to show here</h2>
@@ -120,10 +136,12 @@ export class Track extends React.Component<props, any> {
 export default connect(
     (state: ApplicationState) => ({
         ...state.allRequests,
-        ...state.user
+        ...state.user,
+        ...state.messages
     }),
     ({
         ...allRequests.actionCreators,
-        ...user.actionCreators
+        ...user.actionCreators,
+        ...messages.actionCreators
     })
 )(Track)

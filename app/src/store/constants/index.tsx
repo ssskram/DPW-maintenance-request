@@ -22,3 +22,8 @@ export const loadIssues = 'loadIssues'
 // department
 export const loadDepartment = 'loadDepartment'
 export const setDepartment = 'setDepartment'
+
+// messages
+export const success = 'successMessage'
+export const failure = 'failureMessage'
+export const clear = 'clearMessage'
