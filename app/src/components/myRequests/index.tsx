@@ -2,6 +2,7 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { ApplicationState } from '../../store'
 import * as allRequests from '../../store/allRequests'
+import * as openRequest from '../../store/openRequest'
 import * as user from '../../store/user'
 import * as messages from '../../store/messages'
 import * as types from './../../store/types'
@@ -38,6 +39,9 @@ export class Track extends React.Component<props, any> {
     componentDidMount() {
         window.scrollTo(0, 0)
         this.setRequests(this.props.allRequests)
+        if (this.props.message != '') {
+            this.props.clearRequest()
+        }
     }
 
     componentWillUnmount() {
@@ -137,11 +141,13 @@ export default connect(
     (state: ApplicationState) => ({
         ...state.allRequests,
         ...state.user,
-        ...state.messages
+        ...state.messages,
+        ...state.openRequest
     }),
     ({
         ...allRequests.actionCreators,
         ...user.actionCreators,
-        ...messages.actionCreators
+        ...messages.actionCreators,
+        ...openRequest.actionCreators
     })
 )(Track)
