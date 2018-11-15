@@ -6,6 +6,7 @@ import AlternativePrompt from './alternativePrompts'
 import * as types from '../../../store/types'
 import Departments from './departments'
 import ImageUploader from 'react-images-upload'
+import Spinner from '../../utilities/spinner'
 
 interface actionProps {
     clearRequest: () => void,
@@ -27,7 +28,8 @@ export default class Fields extends React.Component<props, any> {
             location: '',
             phone: '',
             department: '',
-            images: []
+            images: [],
+            spinner: false
         }
     }
 
@@ -59,6 +61,9 @@ export default class Fields extends React.Component<props, any> {
     }
 
     post() {
+        this.setState ({
+            spinner: true
+        })
         const load = {
             building: this.props.openRequest.building,
             department: this.state.department.value,
@@ -77,7 +82,8 @@ export default class Fields extends React.Component<props, any> {
             description,
             location,
             phone,
-            department
+            department,
+            spinner
         } = this.state
 
         const {
@@ -163,6 +169,9 @@ export default class Fields extends React.Component<props, any> {
                     <br />
                     <br />
                 </div>
+                {spinner == true &&
+                    <Spinner notice='...submitting your request...' />
+                }
             </div>
         );
     }

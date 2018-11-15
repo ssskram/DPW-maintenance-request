@@ -68,28 +68,35 @@ export class Form extends React.Component<props, any> {
         }
         this.props.updateRequest(newRequest)
     }
-    
+
     postRequest(request, images) {
-        PostRequest(request, images, this.props.user)
-        // add to store
-        this.props.successMessage()
-        const storeLoad = {
-            cartegraphID: '...loading...',
-            building: request.building,
-            location: request.location,
-            description: request.description,
-            department: request.department,
-            submitted: moment().format('MM/DD/YYYY'),
-            submittedBy: this.props.user,
-            status: 'Planned',
-            issue: request.issue,
-            lastModified: moment().format('MM/DD/YYYY'),
-            notes: ''
+        const success = PostRequest(request, images, this.props.user)
+        if (success == true) {
+            this.props.successMessage()
+            // add to store
+            const storeLoad = {
+                cartegraphID: '...loading...',
+                building: request.building,
+                location: request.location,
+                description: request.description,
+                department: request.department,
+                submitted: moment().format('MM/DD/YYYY'),
+                submittedBy: this.props.user,
+                status: 'Planned',
+                issue: request.issue,
+                lastModified: moment().format('MM/DD/YYYY'),
+                notes: ''
+            }
+            this.props.addRequest(storeLoad)
+            this.setState({
+                redirect: true
+            })
+        } else {
+            this.props.errorMessage()
+            this.setState({
+                redirect: true
+            })
         }
-        this.props.addRequest(storeLoad)
-        this.setState({
-            redirect: true
-        })
     }
 
     render() {
@@ -99,7 +106,7 @@ export class Form extends React.Component<props, any> {
             clearRequest
         } = this.props
 
-        const { 
+        const {
             redirect
         } = this.state
 

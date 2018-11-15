@@ -44,7 +44,6 @@ export class AllRequests extends React.Component<props, any> {
 
     setRequests(props) {
         if (props.department != ''){
-            console.log(props.department)
             this.setState({
                 allRequests: props.allRequests
                     .filter(request => request.department == props.department)

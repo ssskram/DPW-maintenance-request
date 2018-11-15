@@ -2,8 +2,10 @@
 
 export default function postRequest(request, images, user) {
 
-    console.log(request, images)
+    var requestSuccess
+    var Oid
 
+    // first, post request
     let data = JSON.stringify({
         ActivityField: "Investigate",
         DepartmentField: "Facilities",
@@ -20,8 +22,7 @@ export default function postRequest(request, images, user) {
     })
     let cleanedData = data.replace(/'/g, '')
     const body = '{ "cgTasksClass" : [ ' + cleanedData + ' ] }'
-    console.log(body)
-    fetch('http://localhost:3000/maintenanceRequests/newRequest', {
+    fetch('https://cartegraphapi.azurewebsites.us/maintenanceRequests/newRequest', {
         method: 'POST',
         body: body,
         headers: new Headers({
@@ -29,7 +30,29 @@ export default function postRequest(request, images, user) {
             'Content-Type': 'application/json'
         })
     })
-        .then(function (response) {
-            console.log(response)
+        .then(response => response.json())
+        .then(data => {
+            if (data.Oid) {
+                requestSuccess = true
+                Oid = data.Oid
+            } else {
+                requestSuccess = false
+            }
         })
+
+    // then, post all of the images
+    if (requestSuccess == true) {
+        images.forEach(image => {
+            fetch('https://cartegraphapi.azurewebsites.us/maintenanceRequests/addImage?oid=' + Oid + '&filename=' + image.filename, {
+                method: 'POST',
+                body: body,
+                headers: new Headers({
+                    'Authorization': 'Bearer ' + process.env.REACT_APP_CART_API,
+                    'Content-Type': 'application/json'
+                })
+            })
+        })
+    }
+
+    return requestSuccess
 }
