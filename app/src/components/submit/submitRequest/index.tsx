@@ -142,7 +142,8 @@ export class Form extends React.Component<props, any> {
                 {openRequest.issueType == '' &&
                     <Modal
                         open={true}
-                        onClose={() => clearRequest()}
+                        onClose={() => {}}
+                        showCloseIcon={false}
                         classNames={{
                             overlay: 'custom-overlay',
                             modal: 'custom-modal'
