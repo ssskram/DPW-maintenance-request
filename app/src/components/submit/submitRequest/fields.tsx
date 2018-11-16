@@ -28,7 +28,7 @@ export default class Fields extends React.Component<props, any> {
             location: '',
             phone: '',
             department: '',
-            images: [],
+            image: [],
             spinner: false
         }
     }
@@ -43,7 +43,7 @@ export default class Fields extends React.Component<props, any> {
                 location: '',
                 phone: '',
                 department: '',
-                images: []
+                image: []
             })
         } else {
             // add options to select
@@ -61,7 +61,7 @@ export default class Fields extends React.Component<props, any> {
     }
 
     post() {
-        this.setState ({
+        this.setState({
             spinner: true
         })
         const load = {
@@ -72,7 +72,7 @@ export default class Fields extends React.Component<props, any> {
             location: this.state.location,
             phone: this.state.phone
         }
-        this.props.postRequest(load, this.state.images)
+        this.props.postRequest(load, this.state.image)
     }
 
     public render() {
@@ -83,7 +83,8 @@ export default class Fields extends React.Component<props, any> {
             location,
             phone,
             department,
-            spinner
+            spinner,
+            image
         } = this.state
 
         const {
@@ -106,6 +107,13 @@ export default class Fields extends React.Component<props, any> {
 
         if (alternativePrompt) {
             return <AlternativePrompt issue={issue.value} clear={clearRequest} />
+        }
+
+        let imgButton
+        if (image.length == 0) {
+            imgButton = { display: 'block' }
+        } else {
+            imgButton = { display: 'none' }
         }
 
         return (
@@ -152,13 +160,15 @@ export default class Fields extends React.Component<props, any> {
 
                     <div className='col-md-12'>
                         <ImageUploader
+                            buttonStyles={imgButton}
                             withIcon={true}
-                            buttonText='Attach images'
-                            onChange={image => this.setState({ images: image })}
+                            buttonText='Attach an image'
+                            onChange={image => this.setState({ image })}
                             imgExtension={['.jpg', '.gif', '.png', '.gif', '.jpeg']}
                             withLabel={false}
                             maxFileSize={5242880}
                             withPreview={true}
+                            singleImage={false}
                         />
                     </div>
 

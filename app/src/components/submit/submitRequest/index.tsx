@@ -69,8 +69,8 @@ export class Form extends React.Component<props, any> {
         this.props.updateRequest(newRequest)
     }
 
-    postRequest(request, images) {
-        const success = PostRequest(request, images, this.props.user)
+    async postRequest(request, image) {
+        const success = await PostRequest(request, image, this.props.user)
         if (success == true) {
             this.props.successMessage()
             // add to store
