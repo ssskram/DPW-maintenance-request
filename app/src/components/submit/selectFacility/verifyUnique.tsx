@@ -20,7 +20,7 @@ export default class verifyUnique extends React.Component<any, any> {
         this.setState({
             relevantRequests: this.props.allRequests
                 .filter(request => request.building == this.props.facility.name)
-                .sort((a,b) => +new Date(b.submitted) - +new Date(a.submitted))
+                .sort((a, b) => +new Date(b.submitted) - +new Date(a.submitted))
                 .slice(0, 20)
         })
     }
@@ -36,16 +36,14 @@ export default class verifyUnique extends React.Component<any, any> {
 
         const recentlySubmitted = relevantRequests.map((request) => {
             return <div className="container-fluid" key={request.cartegraphID}>
-                <div className="col-md-12">
-                    <div className="panel">
-                        <div className="panel-body text-center">
-                            <div className="col-md-12">
-                                <h5>{request.submitted}</h5>
-                                <h5><b>{request.issue}</b></h5>
-                                <h5>Status: {request.status}</h5>
-                                <h5>Location: {request.location}</h5>
-                                <h5><i>"{request.description}"</i></h5>
-                            </div>
+                <div className="panel">
+                    <div className="panel-body text-center">
+                        <div className="col-md-12">
+                            <h5>{request.submitted}</h5>
+                            <h5><b>{request.issue}</b></h5>
+                            <h5>Status: {request.status}</h5>
+                            <h5>Location: {request.location}</h5>
+                            <h5><i>"{request.description}"</i></h5>
                         </div>
                     </div>
                 </div>
