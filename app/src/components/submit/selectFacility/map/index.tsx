@@ -49,7 +49,7 @@ export class Map extends React.Component<props, any> {
     componentWillMount() {
         if (window.innerWidth < 1000) {
             this.setState({ zoom: 12 })
-        } else { this.setState({ zoom: 13 }) }
+        }
     }
 
     shouldComponentUpdate(props, state) {
