@@ -120,7 +120,7 @@ export class Track extends React.Component<props, any> {
                     </div>
                 }
                 {myRequests.length > 0 &&
-                    <div className="col-md-12">
+                    <div className="row">
                         {renderRequests}
                         <Paging
                             count={myRequests}
