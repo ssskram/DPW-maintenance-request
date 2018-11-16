@@ -32,7 +32,8 @@ export default function postRequest(request, images, user) {
     })
         .then(response => response.json())
         .then(data => {
-            if (data.Oid) {
+            console.log(data.Oid)
+            if (data.Oid != '') {
                 requestSuccess = true
                 Oid = data.Oid
             } else {
@@ -43,9 +44,9 @@ export default function postRequest(request, images, user) {
     // then, post all of the images
     if (requestSuccess == true) {
         images.forEach(image => {
-            fetch('https://cartegraphapi.azurewebsites.us/maintenanceRequests/addImage?oid=' + Oid + '&filename=' + image.filename, {
+            fetch('http://localhost:3000/maintenanceRequests/addImage?oid=' + Oid + '&filename=' + image.name, {
                 method: 'POST',
-                body: body,
+                body: image,
                 headers: new Headers({
                     'Authorization': 'Bearer ' + process.env.REACT_APP_CART_API,
                     'Content-Type': 'application/json'
