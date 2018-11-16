@@ -46,6 +46,12 @@ export class Map extends React.Component<props, any> {
         }
     }
 
+    componentWillMount() {
+        if (window.innerWidth < 1000) {
+            this.setState({ zoom: 12 })
+        } else { this.setState({ zoom: 13 }) }
+    }
+
     shouldComponentUpdate(props, state) {
         if (state == this.state && props.facilities == this.props.facilities) {
             return false
@@ -110,7 +116,7 @@ export class Map extends React.Component<props, any> {
             <GoogleMap
                 defaultZoom={zoom}
                 defaultCenter={center}
-                defaultOptions={{ 
+                defaultOptions={{
                     styles: mapStyle as any,
                     streetViewControl: false,
                     scaleControl: false,
@@ -118,7 +124,7 @@ export class Map extends React.Component<props, any> {
                     panControl: false,
                     zoomControl: false,
                     rotateControl: false,
-                    fullscreenControl: false 
+                    fullscreenControl: false
                 }}
             >
                 {facilities &&
