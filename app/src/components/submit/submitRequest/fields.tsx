@@ -168,7 +168,7 @@ export default class Fields extends React.Component<props, any> {
                             withLabel={false}
                             maxFileSize={5242880}
                             withPreview={true}
-                            singleImage={false}
+                            singleImage={true}
                         />
                     </div>
 
