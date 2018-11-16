@@ -52,7 +52,7 @@ app.use(express.static(__dirname + '/auth/assets'))
 
 /*
 Endpoints!!
-Only a couple for access control
+Only one to retrieve email
 */
 
 // returns user's email address
@@ -60,13 +60,6 @@ app.use('/getUser', function (req, res) {
   res.status(200).send({
     "user": req.user.emails[0].value
   })
-})
-
-// validates user is still logged in
-app.use('/validateUser', function (req, res) {
-  if (req.isAuthenticated()) {
-    res.status(200).send('true')
-  } else res.status(200).send('false') // if false is received, /logout is called from client
 })
 
 /*
