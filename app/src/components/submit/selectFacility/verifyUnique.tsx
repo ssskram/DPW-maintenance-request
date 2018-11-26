@@ -17,12 +17,18 @@ export default class verifyUnique extends React.Component<any, any> {
     }
 
     componentDidMount() {
-        this.setState({
-            relevantRequests: this.props.allRequests
-                .filter(request => request.building == this.props.facility.name)
-                .sort((a, b) => +new Date(b.submitted) - +new Date(a.submitted))
-                .slice(0, 20)
-        })
+        const relevantRequests = this.props.allRequests
+            .filter(request => request.building == this.props.facility.name)
+            .sort((a, b) => +new Date(b.submitted) - +new Date(a.submitted))
+            .slice(0, 20)
+
+        if (relevantRequests.length == 0) {
+            this.props.confirm()
+        } else {
+            this.setState({
+                relevantRequests: relevantRequests
+            })
+        }
     }
 
     render() {
