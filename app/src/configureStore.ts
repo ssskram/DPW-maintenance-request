@@ -11,7 +11,7 @@ export default function configureStore(history: History, initialState?: Applicat
     // combine all reducers and instantiate the store
     const allReducers = buildRootReducer(reducers);
     const store = createStoreWithMiddleware(allReducers, initialState) as Store<ApplicationState>;
-    return store;
+    return store
 }
 
 function buildRootReducer(allReducers: ReducersMapObject) {
