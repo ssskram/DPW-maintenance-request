@@ -16,7 +16,7 @@ export default async function postRequest(request, image, user) {
         RequestIssueField: request.issue,
         TaskDescriptionField: request.description,
         RequestDepartmentField: request.department,
-        LocationDescriptionField: request.location,
+        NotesField: request.location,
         RequestorPhoneNumberField: request.phone,
         RequesterEmailField: user
     })
@@ -24,7 +24,7 @@ export default async function postRequest(request, image, user) {
     const body = '{ "cgTasksClass" : [ ' + cleanedData + ' ] }'
 
     // await post response
-    const dataResponse = await fetch('https://cartegraphapi.azurewebsites.us/maintenanceRequests/newRequest', {
+    const dataResponse = await fetch('http://localhost:3000/maintenanceRequests/newRequest', {
         method: 'POST',
         body: body,
         headers: new Headers({
@@ -41,19 +41,19 @@ export default async function postRequest(request, image, user) {
         postSuccess = false
     }
 
-    // if post succeeded, post the image
-    if (postSuccess == true) {
-        if (image.length > 0) {
-            const cleanedName = image[0].name.replace(/[,"+/()'\s]/g, '')
-            await fetch('https://cartegraphapi.azurewebsites.us/maintenanceRequests/addImage?oid=' + Oid + '&filename=' + cleanedName, {
-                method: 'POST',
-                body: image,
-                headers: new Headers({
-                    'Authorization': 'Bearer ' + process.env.REACT_APP_CART_API
-                })
-            })
-        }
-    }
+    // // if post succeeded, post the image
+    // if (postSuccess == true) {
+    //     if (image.length > 0) {
+    //         const cleanedName = image[0].name.replace(/[,"+/()'\s]/g, '')
+    //         await fetch('https://cartegraphapi.azurewebsites.us/maintenanceRequests/addImage?oid=' + Oid + '&filename=' + cleanedName, {
+    //             method: 'POST',
+    //             body: image,
+    //             headers: new Headers({
+    //                 'Authorization': 'Bearer ' + process.env.REACT_APP_CART_API
+    //             })
+    //         })
+    //     }
+    // }
 
     return postSuccess
 }
