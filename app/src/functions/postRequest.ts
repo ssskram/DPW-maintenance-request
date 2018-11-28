@@ -41,19 +41,19 @@ export default async function postRequest(request, image, user) {
         postSuccess = false
     }
 
-    // // if post succeeded, post the image
-    // if (postSuccess == true) {
-    //     if (image.length > 0) {
-    //         const cleanedName = image[0].name.replace(/[,"+/()'\s]/g, '')
-    //         await fetch('https://cartegraphapi.azurewebsites.us/maintenanceRequests/addImage?oid=' + Oid + '&filename=' + cleanedName, {
-    //             method: 'POST',
-    //             body: image,
-    //             headers: new Headers({
-    //                 'Authorization': 'Bearer ' + process.env.REACT_APP_CART_API
-    //             })
-    //         })
-    //     }
-    // }
+    // if post succeeded, post the image
+    if (postSuccess == true) {
+        if (image.length > 0) {
+            const cleanedName = image[0].name.replace(/[,"+/()'\s]/g, '')
+            await fetch('https://cartegraphapi.azurewebsites.us/maintenanceRequests/addImage?oid=' + Oid + '&filename=' + cleanedName, {
+                method: 'POST',
+                body: image,
+                headers: new Headers({
+                    'Authorization': 'Bearer ' + process.env.REACT_APP_CART_API
+                })
+            })
+        }
+    }
 
     return postSuccess
 }
