@@ -24,7 +24,7 @@ export default async function postRequest(request, image, user) {
     const body = '{ "cgTasksClass" : [ ' + cleanedData + ' ] }'
 
     // await post response
-    const dataResponse = await fetch('http://localhost:3000/maintenanceRequests/newRequest', {
+    const dataResponse = await fetch('https://cartegraphapi.azurewebsites.us/maintenanceRequests/newRequest', {
         method: 'POST',
         body: body,
         headers: new Headers({
