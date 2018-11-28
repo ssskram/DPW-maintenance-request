@@ -158,7 +158,7 @@ export default class Fields extends React.Component<props, any> {
                         callback={e => this.setState({ location: e.target.value })}
                     />
 
-                    {/* <div className='col-md-12'>
+                    <div className='col-md-12'>
                         <ImageUploader
                             buttonStyles={imgButton}
                             withIcon={true}
@@ -170,7 +170,7 @@ export default class Fields extends React.Component<props, any> {
                             withPreview={true}
                             singleImage={true}
                         />
-                    </div> */}
+                    </div>
 
                 </div>
                 <div className='col-md-12 text-center'>

@@ -4,7 +4,7 @@ export default async function postRequest(request, image, user) {
 
     var postSuccess
     var Oid
-
+    
     // format data
     let data = JSON.stringify({
         ActivityField: "Investigate",
@@ -23,7 +23,7 @@ export default async function postRequest(request, image, user) {
     let cleanedData = data.replace(/'/g, '')
     const body = '{ "cgTasksClass" : [ ' + cleanedData + ' ] }'
 
-    // await post response
+    // // await post response
     const dataResponse = await fetch('https://cartegraphapi.azurewebsites.us/maintenanceRequests/newRequest', {
         method: 'POST',
         body: body,
@@ -47,7 +47,7 @@ export default async function postRequest(request, image, user) {
             const cleanedName = image[0].name.replace(/[,"+/()'\s]/g, '')
             await fetch('https://cartegraphapi.azurewebsites.us/maintenanceRequests/addImage?oid=' + Oid + '&filename=' + cleanedName, {
                 method: 'POST',
-                body: image,
+                body: image[0],
                 headers: new Headers({
                     'Authorization': 'Bearer ' + process.env.REACT_APP_CART_API
                 })
