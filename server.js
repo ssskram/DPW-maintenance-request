@@ -95,9 +95,6 @@ app.get('/accessDenied', function (req, res) {
 app.get('/auth',
   passport.authenticate('windowslive', {
     scope: [
-      'openid',
-      'profile',
-      'offline_access',
       'https://outlook.office.com/Mail.Read'
     ]
   })
