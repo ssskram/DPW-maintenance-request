@@ -1,4 +1,3 @@
-import strFormat from 'string-format'
 
 export default async function postRequest(request, image, user) {
 
@@ -91,6 +90,7 @@ export default async function postRequest(request, image, user) {
     return postSuccess
 }
 
+// string formatting 
 declare module String {
     export var format: any;
 }
