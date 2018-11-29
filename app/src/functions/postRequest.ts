@@ -15,7 +15,7 @@ export default async function postRequest(request, image, user) {
         RequestIssueField: request.issue,
         TaskDescriptionField: request.description,
         RequestDepartmentField: request.department,
-        NotesField: request.location,
+        RequestLocationField: request.location,
         RequestorPhoneNumberField: request.phone,
         RequesterEmailField: user
     })
