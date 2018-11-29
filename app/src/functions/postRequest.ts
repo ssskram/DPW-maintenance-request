@@ -76,6 +76,8 @@ export default async function postRequest(request, image, user) {
             await reader.readAsDataURL(image[0])
             reader.onload = () => {
                 // once complete, add attachments to email, and post
+                console.log(reader.result)
+                const fullString = reader.result as string
                 sendgridLoad = JSON.stringify({
                     to: user,
                     from: {
@@ -84,14 +86,14 @@ export default async function postRequest(request, image, user) {
                     },
                     subject: 'Your maintenance request has been received',
                     html: emailBody,
-                    // attachments: [
-                    //     {
-                    //         content: reader.result,
-                    //         filename: image[0].name,
-                    //         type: 'image/png',
-                    //         disposition: 'attachment'
-                    //     }
-                    // ]
+                    attachments: [
+                        {
+                            content: fullString.split(',')[1],
+                            filename: image[0].name,
+                            type: 'image/png',
+                            disposition: 'attachment'
+                        }
+                    ]
                 })
                 // send load to sendgrid for email
                 fetch('http://localhost:3000/sendMail/single', {
