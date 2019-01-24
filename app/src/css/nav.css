@@ -101,6 +101,10 @@
     margin-right: 10px;
 }
 
+.nav-button {
+    width: 98%;
+}
+
 @media (min-width: 768px) {
     .navbar {
         height: 100%;

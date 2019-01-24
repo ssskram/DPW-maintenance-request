@@ -1,5 +1,5 @@
 import * as React from 'react'
-import Submit from './components/submit/index'
+import MaintenanceRequest from './components/maintenanceRequest/index'
 import HydrateStore from './components/utilities/hydrateStore'
 
 export default class Init extends React.Component<any, any> {
@@ -8,7 +8,7 @@ export default class Init extends React.Component<any, any> {
         return (
             <div>
                 <HydrateStore />
-                <Submit />
+                <MaintenanceRequest />
             </div>
         )
     }
