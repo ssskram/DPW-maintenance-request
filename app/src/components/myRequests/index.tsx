@@ -104,19 +104,19 @@ export class Track extends React.Component<props, any> {
                     <style>{dropdownStyle}</style>
                 </Helmet>
                 <HydrateStore />
-                <h1>
+                <h2>
                     My Requests
                     <span style={{ marginTop: '-8px' }} className='pull-right'>
                         <Filter requests={this.props.allRequests.filter(request => request.submittedBy == this.props.user)} returnFiltered={this.filterRequests.bind(this)} />
                     </span>
-                </h1>
+                </h2>
                 <hr />
                 <div className='text-center'>
                     <Message message={this.props.message} />
                 </div>
                 {myRequests.length == 0 &&
                     <div className='text-center alert alert-info'>
-                        <h2>Nothing to show here</h2>
+                        <h3>Nothing to show here</h3>
                     </div>
                 }
                 {myRequests.length > 0 &&

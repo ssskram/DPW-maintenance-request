@@ -74,7 +74,7 @@ export class Form extends React.Component<props, any> {
             <div>
                 <div className='row'>
                     <div className='col-md-12 text-center'>
-                        <h2>Office Move</h2>
+                        <h2>Request an Office Move</h2>
                         <hr />
                     </div>
                     <div className='col-md-12'>

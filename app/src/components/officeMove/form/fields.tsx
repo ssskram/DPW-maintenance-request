@@ -33,6 +33,7 @@ export default class Fields extends React.Component<props, any> {
     }
 
     componentDidMount() {
+        window.scrollTo(0,0)
         if (this.props.facilities) {
             this.setDropdown(this.props.facilities)
         }
@@ -109,7 +110,7 @@ export default class Fields extends React.Component<props, any> {
         return (
             <div>
                 <div className='col-lg-6 col-lg-offset-3 panel'>
-                    <div className='sectionHeader'>Employee information</div>
+                    <div className='sectionHeader'>Employee information<span className='glyphicon glyphicon-user pull-right'></span></div>
                     <div className='panel-body'>
                         <Input
                             value={name}
@@ -136,7 +137,7 @@ export default class Fields extends React.Component<props, any> {
                     </div>
                 </div>
                 <div className="col-lg-6 col-lg-offset-3 panel">
-                    <div className='sectionHeader'>Move origin</div>
+                    <div className='sectionHeader'>Move origin<span className='glyphicon glyphicon-arrow-right pull-right'></span><span style={{marginRight: '5px'}} className='glyphicon glyphicon-home pull-right'></span></div>
                     <div className='panel-body'>
                         <Select
                             value={originFacility}
@@ -156,7 +157,7 @@ export default class Fields extends React.Component<props, any> {
                     </div>
                 </div>
                 <div className='col-lg-6 col-lg-offset-3 panel'>
-                    <div className='sectionHeader'>Move destination</div>
+                    <div className='sectionHeader'>Move destination<span className='glyphicon glyphicon-home pull-right'></span><span style={{marginRight: '5px'}} className='glyphicon glyphicon-arrow-right pull-right'></span></div>
                     <div className='panel-body'>
                         <Select
                             value={destinationFacility}
@@ -176,7 +177,7 @@ export default class Fields extends React.Component<props, any> {
                     </div>
                 </div>
                 <div className='col-lg-6 col-lg-offset-3 panel'>
-                    <div className='sectionHeader'>Additional Information</div>
+                    <div className='sectionHeader'>Additional Information<span className='glyphicon glyphicon-info-sign pull-right'></span></div>
                     <div className='panel-body'>
                         <TextArea
                             value={description}
