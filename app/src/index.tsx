@@ -19,11 +19,11 @@ import { ApplicationState }  from './store'
 import { createBrowserHistory } from 'history'
 import configureStore from './configureStore'
 
-const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href')!;
-const history = createBrowserHistory({ basename: baseUrl });
+const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href')!
+const history = createBrowserHistory({ basename: baseUrl })
 
-const initialState = (window as any).initialReduxState as ApplicationState;
-const store = configureStore(history, initialState);
+const initialState = (window as any).initialReduxState as ApplicationState
+const store = configureStore(history, initialState)
 
 ReactDOM.render(
   <BrowserRouter>

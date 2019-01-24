@@ -9,7 +9,8 @@ const floatingPanelBig = {
     backgroundColor: 'rgb(44, 62, 80)',
     borderRadius: '0px 0px 5px 5px',
     boxShadow: '0 1px 4px 0 rgba(0, 0, 0, 0.4)',
-    width: '45%'
+    width: '45%',
+    paddingTop: '10px'
 }
 
 const floatingPanelSmall = {
@@ -18,7 +19,8 @@ const floatingPanelSmall = {
     right: '0',
     zIndex: 99,
     backgroundColor: 'rgb(44, 62, 80)',
-    width: '100%'
+    width: '100%',
+    paddingTop: '45px'
 }
 
 export default class Search extends React.Component<any, any> {
@@ -67,7 +69,8 @@ export default class Search extends React.Component<any, any> {
 
         const select =
             <div>
-                <h3 style={{ color: '#FAF7F2' }}>Select facility from map</h3>
+                <h5 style={{ color: '#FAF7F2', textTransform: 'uppercase', fontWeight: 'bold' }}>{this.props.mainHeader}</h5>
+                <h4 style={{ color: '#FAF7F2' }}>{this.props.subHeader}</h4>
                 <div className='col-md-12'>
                     <Select
                         value={facility}

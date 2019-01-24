@@ -9,11 +9,20 @@ import SelectFacility from './selectFacility'
 import Spinner from './../utilities/spinner'
 import SubmitRequest from './submitRequest'
 
+interface actionProps {
+    clearRequest: () => void
+}
+
 type props =
     types.facilities &
-    types.openRequest
+    types.openRequest &
+    actionProps
 
-export class Submit extends React.Component<props, {}> {
+export class MaintenanceRequest extends React.Component<props, {}> {
+
+    componentDidMount() {
+        this.props.clearRequest()
+    }
 
     render() {
         const {
@@ -46,4 +55,4 @@ export default connect(
         ...facilities.actionCreators,
         ...openRequest.actionCreators
     })
-)(Submit)
+)(MaintenanceRequest)

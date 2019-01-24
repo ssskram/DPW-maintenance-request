@@ -176,6 +176,8 @@ export class Map extends React.Component<props, any> {
                         allRequests={allRequests} />
                 </Modal>
                 <Search
+                    mainHeader='Maintenance Request'
+                    subHeader='Select facility from map'
                     facilities={facilities}
                     filter={this.polygonSelection.bind(this)} />
             </div>
