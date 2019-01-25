@@ -81,7 +81,7 @@ export default class Fields extends React.Component<props, any> {
             location: this.buildLocation(),
             phone: this.state.phone
         }
-        this.props.postRequest(load, null)
+        this.props.postRequest(load, [])
     }
 
     public render() {
