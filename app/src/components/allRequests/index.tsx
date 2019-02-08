@@ -97,12 +97,12 @@ export class AllRequests extends React.Component<props, any> {
                     <style>{dropdownStyle}</style>
                 </Helmet>
                 <HydrateStore />
-                <h2>
+                <div style={{ fontSize: '2em' }}>
                     {this.props.department} Requests
                     <span style={{ marginTop: '-8px' }} className='pull-right'>
                         <Filter requests={this.props.allRequests.filter(request => request.department == this.props.department)} returnFiltered={this.filterRequests.bind(this)} />
                     </span>
-                </h2>
+                </div>
                 <hr />
                 {allRequests.length == 0 &&
                     <div className='text-center alert alert-info'>

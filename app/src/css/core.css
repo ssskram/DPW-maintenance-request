@@ -27,7 +27,7 @@ hr {
     overflow: visible;
     height: 2px;
     border-top: 1px solid #383838;
-    margin: 1.8em 0;
+    margin: 1em 0;
 }
 
 @media (max-width: 767px) {
