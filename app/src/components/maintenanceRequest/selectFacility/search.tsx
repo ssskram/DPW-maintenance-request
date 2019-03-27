@@ -69,7 +69,7 @@ export default class Search extends React.Component<any, any> {
 
         const select =
             <div>
-                <h4 style={{ color: '#FAF7F2', textTransform: 'uppercase', fontWeight: 'bold' }}>Maintenance Request</h4>
+                <h4 className='oswald-header' style={{color: '#fff'}}>New Maintenance Request</h4>
                 <div className='col-md-12'>
                     <Select
                         value={facility}

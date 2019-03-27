@@ -4,6 +4,7 @@
 .btn {
     z-index: 0 !important;
     white-space: normal;
+    opacity: .85;
 }
 
 .btn:hover,
@@ -12,9 +13,9 @@
 }
 
 .btn-secondary {
-    color: #ffffff;
-    background-color: #777;
-    border-color: #555;
+    color: black;
+    background-color: #D0CFCF;
+    border-color: #D0CFCF;
 }
 
 .btn-secondary,

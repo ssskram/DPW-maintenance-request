@@ -32,7 +32,7 @@ export default class SelectIssueType extends React.Component<props, {}> {
         return (
             <div>
                 <div className="text-center">
-                    <h2>Select the issue type</h2>
+                    <h3 className='ubuntu'>Select the issue type</h3>
                 </div>
                 <div>
                     <div className='col-md-6 text-center'>

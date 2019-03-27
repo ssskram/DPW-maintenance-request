@@ -46,7 +46,7 @@ export default class verifyUnique extends React.Component<any, any> {
                     <div className="panel-body text-center">
                         <div className="col-md-12">
                             <h5>{request.submitted}</h5>
-                            <h5><b>{request.issue}</b></h5>
+                            <h5 className='ubuntu'><b>{request.issue}</b></h5>
                             <h5>Status: {request.status}</h5>
                             <h5>Location: {request.location}</h5>
                             <h5><i>"{request.description}"</i></h5>
@@ -58,7 +58,7 @@ export default class verifyUnique extends React.Component<any, any> {
 
         return (
             <div className="text-center">
-                <h3>Has your issue already been reported?</h3>
+                <h3 className='ubuntu'>Has your issue already been reported?</h3>
                 <div className="text-center">
                     <LoadingImage style={imgStyle} src={"https://tools.wprdc.org/images/pittsburgh/facilities/" + facility.name.replace(/ /g, "_") + ".jpg"} />
                 </div>

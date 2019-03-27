@@ -12,8 +12,7 @@
     "method-override": "^2.3.6",
     "morgan": "^1.9.1",
     "passport": ">= 0.0.0",
-    "passport-outlook": ">= 0.0.0",
-    "shelljs": "^0.8.3"
+    "passport-outlook": ">= 0.0.0"
   },
   "engines": {
     "node": "8.11.1"

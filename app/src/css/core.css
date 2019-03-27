@@ -30,6 +30,24 @@ hr {
     margin: 1em 0;
 }
 
+.oswald {
+    font-family: 'Oswald', sans-serif;
+}
+
+.oswald-header {
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    color: black;
+}
+
+.ubuntu {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.script {
+    font-family: 'Indie Flower', cursive;
+}
+
 @media (max-width: 767px) {
 
     body {

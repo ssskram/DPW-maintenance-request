@@ -118,14 +118,14 @@ export class Form extends React.Component<props, any> {
             <div>
                 <div className='row'>
                     <div className='col-md-12 text-center'>
-                        <h2>Maintenance request</h2>
+                        <h2 className='oswald-header'>Maintenance request</h2>
                         <hr />
                         <br />
                         <LoadingImage style={imgStyle} src={"https://tools.wprdc.org/images/pittsburgh/facilities/" + openRequest.building.replace(/ /g, "_") + ".jpg"} />
                     </div>
                     <div className='col-md-12 text-center'>
-                        <h2>{openRequest.building}</h2>
-                        <button className='btn' style={{ fontSize: '18px' }} onClick={this.clearType.bind(this)}>
+                        <h3>{openRequest.building}</h3>
+                        <button className='btn btn-secondary' style={{ fontSize: '18px', color: 'black' }} onClick={this.clearType.bind(this)}>
                             <i>{openRequest.issueType}</i>
                         </button>
                     </div>
