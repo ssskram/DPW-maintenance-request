@@ -21,6 +21,7 @@ export default class Filter extends React.Component<any, any> {
         }
     }
 
+    
     componentDidMount() {
         this.setDropdowns(this.props.requests)
     }
