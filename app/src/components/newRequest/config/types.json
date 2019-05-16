@@ -1,0 +1,10 @@
+[
+  {
+    "type": "Maintenance Request",
+    "issueTypes": ["1", "2"]
+  },
+  {
+    "type": "Office Move",
+    "issueTypes": ["1", "2"]
+  }
+]
