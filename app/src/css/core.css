@@ -1,0 +1,74 @@
+/* Core
+/* ------------------------- */
+
+html {
+    height: 100% !important;
+    width: 100% !important;
+}
+
+body {
+    background-color: black;
+    font-family: 'Raleway', sans-serif;
+    letter-spacing: .5px;
+    margin: 0 auto;
+    margin-top: 50px;
+    padding: 30px 5px 0px 0px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-family: 'Raleway', sans-serif;
+}
+
+hr {
+    overflow: visible;
+    height: 2px;
+    border-top: 1px solid black;
+    margin: 1em 0;
+}
+
+.oswald {
+    font-family: 'Oswald', sans-serif;
+}
+
+.oswald-header {
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    color: black;
+}
+
+.ubuntu {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.script {
+    font-family: 'Indie Flower', cursive;
+}
+
+/* Scroll bar
+/* ------------------------- */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+@media (max-width: 767px) {
+    body {
+        padding-top: 50px;
+    }
+}

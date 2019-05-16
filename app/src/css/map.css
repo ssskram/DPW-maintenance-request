@@ -1,0 +1,28 @@
+/* Google map
+/* ------------------------- */
+
+.home-map {
+    height: 80vh !important;
+    width: 100vw !important;
+    overflow-x: hidden !important;
+}
+
+a[href^="http://maps.google.com/maps"] {
+    display: none !important
+}
+
+a[href^="https://maps.google.com/maps"] {
+    display: none !important
+}
+
+.gmnoprint {
+    margin-left: -10px;
+}
+
+.gmnoprint a, .gmnoprint span {
+    display: none;
+}
+
+#GMapsID div div a div img {
+    display: none;
+}

@@ -1,0 +1,52 @@
+th {
+    font-weight: normal;
+}
+
+td {
+    font-weight: bold;
+}
+
+.ReactTable {
+    background-color: #fff;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.ReactTable .rt-tbody {
+    overflow-x: hidden !important;
+}
+
+.rt-td {
+    text-align: center !important;
+    white-space: pre-wrap !important;
+    overflow: visible !important;
+    text-overflow: inherit !important;
+    padding: 8px !important;
+}
+
+.rt-thead {
+    font-weight: bold;
+}
+
+.table-container {
+    padding: 8px;
+    margin-bottom: 20px;
+}
+
+.rt-noData {
+    display: none !important;
+}
+
+.ReactTable .rt-thead .rt-th.-sort-asc, .ReactTable .rt-thead .rt-td.-sort-asc {
+    box-shadow: inset 0 3px 0 0 rgba(0, 0, 0, 0.0) !important;
+}
+
+.ReactTable .rt-thead .rt-th.-sort-desc, .ReactTable .rt-thead .rt-td.-sort-desc {
+    box-shadow: inset 0 3px 0 0 rgba(0, 0, 0, 0.0) !important;
+}
+
+.ReactTable .-pagination {
+    padding: 5px !important;
+    box-shadow: 0 0 0px 0 rgba(0, 0, 0, 0.1) !important;
+    border-top: 0px solid rgba(0, 0, 0, 0.1) !important;
+}

@@ -1,0 +1,36 @@
+/* Buttons
+/* ------------------------- */
+
+.btn {
+    z-index: 0 !important;
+    white-space: normal;
+}
+
+.btn-secondary,
+.btn-success,
+.btn-danger,
+.btn-primary,
+.btn-info,
+.btn-warning {
+    margin: 5px 5px;
+    font-size: 16px;
+    color: #fffcf5;
+    font-family: 'Raleway', sans-serif;
+}
+
+.btn-secondary {
+    color: black;
+    background-color: #D0CFCF;
+    border-color: #D0CFCF;
+}
+
+.btn-success {
+    opacity: 0.8;
+}
+
+.btn-deploy {
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    letter-spacing: 1px;
+}
