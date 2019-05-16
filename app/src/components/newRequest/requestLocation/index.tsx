@@ -10,8 +10,10 @@ export default class RequestLocation extends React.Component<props, {}> {
 
   render() {
     return (
-      <div>
-
+      <div className='panel'>
+        <div className='panel-body'>
+          <h3>Next, where do you it?</h3>
+        </div>
       </div>
     );
   }

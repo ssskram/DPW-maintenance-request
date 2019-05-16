@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Col, Grid, Row } from "react-bootstrap";
+import { Grid, Row } from "react-bootstrap";
 import NavMenu from "./nav";
 
 export default props => (
@@ -8,7 +8,7 @@ export default props => (
       <NavMenu />
     </Row>
     <Row>
-      <Col sm={12}>{props.children}</Col>
+      <div className="col-md-8 col-md-offset-2">{props.children}</div>
     </Row>
   </Grid>
 );

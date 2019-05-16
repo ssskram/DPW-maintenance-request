@@ -9,6 +9,12 @@ export default class RequestDescription extends React.Component<props, {}> {
   }
 
   render() {
-    return <div />;
+    return (
+      <div className='panel'>
+        <div className='panel-body'>
+          <h3>Please provide some additional details</h3>
+        </div>
+      </div>
+    );
   }
 }

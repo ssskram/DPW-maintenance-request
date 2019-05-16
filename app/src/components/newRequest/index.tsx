@@ -4,6 +4,9 @@ import { ApplicationState } from "../../store";
 import HydrateStore from "../utilities/hydrateStore";
 import * as types from "../../store/types";
 import Spinner from "../utilities/spinner";
+import RequestType from "./requestType";
+import RequestLocation from "./requestLocation";
+import RequestDescription from "./requestDescription";
 
 type props = {};
 
@@ -16,6 +19,9 @@ export class Home extends React.Component<props, {}> {
     return (
       <div>
         <HydrateStore />
+        <RequestType />
+        <RequestLocation />
+        <RequestDescription />
       </div>
     );
   }

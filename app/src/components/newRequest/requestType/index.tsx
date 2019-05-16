@@ -10,8 +10,10 @@ export default class RequestType extends React.Component<props, {}> {
 
   render() {
     return (
-      <div>
-
+      <div className='panel'>
+        <div className='panel-body'>
+          <h3>First, tell us what you need</h3>
+        </div>
       </div>
     );
   }
