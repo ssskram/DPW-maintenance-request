@@ -1,10 +1,9 @@
-import * as React from 'react'
-import { Link } from 'react-router-dom'
-import { Navbar } from 'react-bootstrap'
-import AccountContainer from './accountContainer'
+import * as React from "react";
+import { Link } from "react-router-dom";
+import { Navbar } from "react-bootstrap";
+import AccountContainer from "./accountContainer";
 
 export default class NavMenu extends React.Component<{}, {}> {
-
   public render() {
     return (
       <Navbar
@@ -16,14 +15,14 @@ export default class NavMenu extends React.Component<{}, {}> {
       >
         <Navbar.Header>
           <Navbar.Brand>
-            <Link to={'/'}>boilerplate</Link>
+            <Link to={"/"}>boilerplate</Link>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
-        <Navbar.Collapse className='text-xs-center'>
+        <Navbar.Collapse className="text-xs-center">
           <AccountContainer />
         </Navbar.Collapse>
       </Navbar>
-    )
+    );
   }
 }

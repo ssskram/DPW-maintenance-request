@@ -1,6 +1,8 @@
 // user
 export interface user {
-  user: string;
+  email: string
+  organization: string
+  name: string
 }
 
 // facilities
