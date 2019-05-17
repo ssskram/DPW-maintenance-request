@@ -1,9 +1,9 @@
 import * as React from "react";
 import * as types from "./../../store/types";
 import Paging from "../utilities/paging";
-import Cards from "../shared/requestCard";
+import Cards from "./requestCard";
 import HydrateStore from "../utilities/hydrateStore";
-import Filter from "../shared/filter";
+import Filter from "./filter";
 import { Helmet } from "react-helmet";
 import { Cat } from "react-kawaii";
 import Spinner from "../utilities/spinner";

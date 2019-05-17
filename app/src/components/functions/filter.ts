@@ -17,6 +17,11 @@ export default function filter(myRequests, filters) {
         return false;
       }
     }
+    if (filters.department) {
+      if (!request.department.includes(filters.department)) {
+        return false;
+      }
+    }
     return true;
   });
   return filteredRequests;

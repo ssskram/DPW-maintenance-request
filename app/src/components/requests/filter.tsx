@@ -15,7 +15,9 @@ export default class Filter extends React.Component<any, any> {
       statuses: [],
       status: "",
       issues: [],
-      issue: ""
+      issue: "",
+      departments: [],
+      department: ""
     };
   }
 
@@ -31,6 +33,7 @@ export default class Filter extends React.Component<any, any> {
     let facilities = [] as any;
     let statuses = [] as any;
     let issues = [] as any;
+    let departments = [] as any;
     if (requests) {
       requests.forEach(request => {
         const facility = { value: request.building, label: request.building };
@@ -39,18 +42,27 @@ export default class Filter extends React.Component<any, any> {
         facilities.push(facility);
         statuses.push(status);
         issues.push(issue);
+        if (request.department) {
+          const department = {
+            value: request.department,
+            label: request.department
+          };
+          departments.push(department);
+        }
       });
       // take unique, set to state
       this.setState({
         facilities: removeDuplicates(facilities, "value"),
         statuses: removeDuplicates(statuses, "value"),
-        issues: removeDuplicates(issues, "value")
+        issues: removeDuplicates(issues, "value"),
+        departments: removeDuplicates(departments, "value")
       });
     }
   }
 
   filter() {
     const filterLoad = {
+      department: this.state.department.value,
       facility: this.state.facility.value,
       status: this.state.status.value,
       issue: this.state.issue.value
@@ -66,6 +78,7 @@ export default class Filter extends React.Component<any, any> {
     this.props.returnFiltered(this.props.requests);
     this.setState({
       onFilter: false,
+      department: "",
       facility: "",
       status: "",
       issue: ""
@@ -81,7 +94,9 @@ export default class Filter extends React.Component<any, any> {
       statuses,
       status,
       issues,
-      issue
+      issue,
+      departments,
+      department
     } = this.state;
 
     return (
@@ -119,6 +134,17 @@ export default class Filter extends React.Component<any, any> {
           <div>
             <div className="col-md-12">
               <Select
+                value={department}
+                header="Department"
+                placeholder="Select department"
+                onChange={department => this.setState({ department })}
+                multi={false}
+                options={departments}
+                required={false}
+              />
+            </div>
+            <div className="col-md-12">
+              <Select
                 value={facility}
                 header="Facilities"
                 placeholder="Select facility"
@@ -128,7 +154,6 @@ export default class Filter extends React.Component<any, any> {
                 required={false}
               />
             </div>
-
             <div className="col-md-12">
               <Select
                 value={status}
@@ -140,7 +165,6 @@ export default class Filter extends React.Component<any, any> {
                 required={false}
               />
             </div>
-
             <div className="col-md-12">
               <Select
                 value={issue}
@@ -152,7 +176,6 @@ export default class Filter extends React.Component<any, any> {
                 required={false}
               />
             </div>
-
             <div className="col-md-12 text-center">
               <button
                 onClick={this.filter.bind(this)}
