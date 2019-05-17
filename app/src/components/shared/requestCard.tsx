@@ -1,6 +1,7 @@
 import * as React from "react";
 import LoadingImage from "../utilities/loadingImage";
 import pngOrJpg from "../functions/facilityIsPng";
+import * as types from "../../store/types";
 
 const imgStyle = {
   width: "150px",
@@ -15,7 +16,11 @@ const feedback = {
   borderRadius: "10px"
 };
 
-export default class RequestCard extends React.Component<any, any> {
+type props = {
+  request: types.request;
+};
+
+export default class RequestCard extends React.Component<props, {}> {
   public render() {
     const { request } = this.props;
 

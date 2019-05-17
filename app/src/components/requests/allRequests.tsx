@@ -8,7 +8,8 @@ import Cards from "../shared/requestCard";
 import HydrateStore from "../utilities/hydrateStore";
 import Filter from "../shared/filter";
 import { Helmet } from "react-helmet";
-import Modal from "react-responsive-modal";
+import { Cat } from "react-kawaii";
+import Spinner from "../utilities/spinner";
 
 const dropdownStyle =
   ".custom-modal { overflow: visible; } .Select-menu-outer { overflow: visible}";
@@ -23,7 +24,7 @@ export class AllRequests extends React.Component<props, any> {
     this.state = {
       currentPage: 1,
       requestsPerPage: 25,
-      allRequests: []
+      allRequests: undefined
     };
   }
 
@@ -38,9 +39,12 @@ export class AllRequests extends React.Component<props, any> {
 
   setRequests(props: props) {
     this.setState({
-      allRequests: props.allRequests.sort(
-        (a, b) => +new Date(b.submitted) - +new Date(a.submitted)
-      )
+      allRequests:
+        props.allRequests.length > 0
+          ? props.allRequests.sort(
+              (a, b) => +new Date(b.submitted) - +new Date(a.submitted)
+            )
+          : undefined
     });
   }
 
@@ -68,18 +72,23 @@ export class AllRequests extends React.Component<props, any> {
     // Logic for paging
     const indexOfLastRequest = currentPage * requestsPerPage;
     const indexOfFirstRequest = indexOfLastRequest - requestsPerPage;
-    const currentRequests = allRequests.slice(
-      indexOfFirstRequest,
-      indexOfLastRequest
-    );
+    const currentRequests = allRequests
+      ? allRequests.slice(indexOfFirstRequest, indexOfLastRequest)
+      : [];
     const renderRequests = currentRequests.map(request => {
       return <Cards request={request} key={request.cartegraphID} />;
     });
 
     // Logic for displaying page numbers
     const pageNumbers: any[] = [];
-    for (let i = 1; i <= Math.ceil(allRequests.length / requestsPerPage); i++) {
-      pageNumbers.push(i);
+    if (allRequests) {
+      for (
+        let i = 1;
+        i <= Math.ceil(allRequests.length / requestsPerPage);
+        i++
+      ) {
+        pageNumbers.push(i);
+      }
     }
 
     return (
@@ -97,23 +106,37 @@ export class AllRequests extends React.Component<props, any> {
             />
           </span>
         </div>
-        {allRequests.length == 0 && (
-          <div className="text-center alert alert-info">
-            <h3>Nothing to show here</h3>
-          </div>
+        <hr />
+        {allRequests == undefined && (
+          <Spinner notice="...loading requests..." />
         )}
-        {allRequests.length > 0 && (
-          <div className="row">
-            {renderRequests}
-            <Paging
-              countItems={allRequests}
-              currentPage={currentPage}
-              totalPages={pageNumbers}
-              next={this.handleNextClick.bind(this)}
-              prev={this.handlePreviousClick.bind(this)}
-            />
-            <br />
-            <br />
+        {allRequests && (
+          <div>
+            {allRequests.length == 0 && (
+              <div className="text-center" style={{ margin: "60px 0px" }}>
+                <Cat size={200} mood="shocked" color="#AED3E5" />
+                <div
+                  className="alert alert-info"
+                  style={{ maxWidth: "650px", margin: "0 auto" }}
+                >
+                  <h3>Nothing to show here</h3>
+                </div>
+              </div>
+            )}
+            {allRequests.length > 0 && (
+              <div className="row">
+                {renderRequests}
+                <Paging
+                  countItems={allRequests}
+                  currentPage={currentPage}
+                  totalPages={pageNumbers}
+                  next={this.handleNextClick.bind(this)}
+                  prev={this.handlePreviousClick.bind(this)}
+                />
+                <br />
+                <br />
+              </div>
+            )}
           </div>
         )}
       </div>
