@@ -1,32 +1,35 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { ApplicationState } from "../../store";
-import HydrateStore from "../utilities/hydrateStore";
-import * as types from "../../store/types";
-import Spinner from "../utilities/spinner";
+import * as allRequests from "../../store/allRequests";
+import * as types from "./../../store/types";
+import * as user from "../../store/user";
+import Requests from "./requests";
 
-type props = {};
+type props = {
+  allRequests: types.request[];
+  user: types.user;
+};
 
 export class MyRequests extends React.Component<props, {}> {
-  componentDidMount() {
-    window.scrollTo(0, 0);
-  }
-
   render() {
     return (
-      <div>
-        <HydrateStore />
-        <div className="panel">
-          <div className="panel-body">
-            <h1>My Requests here</h1>
-          </div>
-        </div>
-      </div>
+      <Requests
+        collection="My"
+        allRequests={this.props.allRequests}
+        user={this.props.user}
+      />
     );
   }
 }
 
 export default connect(
-  (state: ApplicationState) => ({}),
-  {}
-)(MyRequests as any);
+  (state: ApplicationState) => ({
+    ...state.allRequests,
+    ...state.user
+  }),
+  {
+    ...allRequests.actionCreators,
+    ...user.actionCreators
+  }
+)(MyRequests);

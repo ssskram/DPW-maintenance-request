@@ -3,152 +3,33 @@ import { connect } from "react-redux";
 import { ApplicationState } from "../../store";
 import * as allRequests from "../../store/allRequests";
 import * as types from "./../../store/types";
-import Paging from "../utilities/paging";
-import Cards from "../shared/requestCard";
-import HydrateStore from "../utilities/hydrateStore";
-import Filter from "../shared/filter";
-import { Helmet } from "react-helmet";
-import { Cat } from "react-kawaii";
-import Spinner from "../utilities/spinner";
-
-const dropdownStyle =
-  ".custom-modal { overflow: visible; } .Select-menu-outer { overflow: visible}";
+import * as user from "../../store/user";
+import Requests from "./requests";
 
 type props = {
   allRequests: types.request[];
+  user: types.user;
 };
 
-export class AllRequests extends React.Component<props, any> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      currentPage: 1,
-      requestsPerPage: 25,
-      allRequests: undefined
-    };
-  }
-
-  componentDidMount() {
-    window.scrollTo(0, 0);
-    this.setRequests(this.props);
-  }
-
-  componentWillReceiveProps(nextProps: props) {
-    this.setRequests(nextProps);
-  }
-
-  setRequests(props: props) {
-    this.setState({
-      allRequests:
-        props.allRequests.length > 0
-          ? props.allRequests.sort(
-              (a, b) => +new Date(b.submitted) - +new Date(a.submitted)
-            )
-          : undefined
-    });
-  }
-
-  filterRequests(filteredRequests) {
-    this.setState({
-      allRequests: filteredRequests.sort(
-        (a, b) => +new Date(b.submitted) - +new Date(a.submitted)
-      )
-    });
-  }
-
-  handleNextClick() {
-    window.scrollTo(0, 0);
-    this.setState({ currentPage: this.state.currentPage + 1 });
-  }
-
-  handlePreviousClick() {
-    window.scrollTo(0, 0);
-    this.setState({ currentPage: this.state.currentPage - 1 });
-  }
-
+export class AllRequests extends React.Component<props, {}> {
   render() {
-    const { currentPage, requestsPerPage, allRequests } = this.state;
-
-    // Logic for paging
-    const indexOfLastRequest = currentPage * requestsPerPage;
-    const indexOfFirstRequest = indexOfLastRequest - requestsPerPage;
-    const currentRequests = allRequests
-      ? allRequests.slice(indexOfFirstRequest, indexOfLastRequest)
-      : [];
-    const renderRequests = currentRequests.map(request => {
-      return <Cards request={request} key={request.cartegraphID} />;
-    });
-
-    // Logic for displaying page numbers
-    const pageNumbers: any[] = [];
-    if (allRequests) {
-      for (
-        let i = 1;
-        i <= Math.ceil(allRequests.length / requestsPerPage);
-        i++
-      ) {
-        pageNumbers.push(i);
-      }
-    }
-
     return (
-      <div>
-        <Helmet>
-          <style>{dropdownStyle}</style>
-        </Helmet>
-        <HydrateStore />
-        <div style={{ fontSize: "2em", color: "#fff" }}>
-          All Requests
-          <span style={{ marginTop: "-8px" }} className="pull-right">
-            <Filter
-              requests={this.props.allRequests}
-              returnFiltered={this.filterRequests.bind(this)}
-            />
-          </span>
-        </div>
-        <hr />
-        {allRequests == undefined && (
-          <Spinner notice="...loading requests..." />
-        )}
-        {allRequests && (
-          <div>
-            {allRequests.length == 0 && (
-              <div className="text-center" style={{ margin: "60px 0px" }}>
-                <Cat size={200} mood="shocked" color="#AED3E5" />
-                <div
-                  className="alert alert-info"
-                  style={{ maxWidth: "650px", margin: "0 auto" }}
-                >
-                  <h3>Nothing to show here</h3>
-                </div>
-              </div>
-            )}
-            {allRequests.length > 0 && (
-              <div className="row">
-                {renderRequests}
-                <Paging
-                  countItems={allRequests}
-                  currentPage={currentPage}
-                  totalPages={pageNumbers}
-                  next={this.handleNextClick.bind(this)}
-                  prev={this.handlePreviousClick.bind(this)}
-                />
-                <br />
-                <br />
-              </div>
-            )}
-          </div>
-        )}
-      </div>
+      <Requests
+        collection="All"
+        allRequests={this.props.allRequests}
+        user={this.props.user}
+      />
     );
   }
 }
 
 export default connect(
   (state: ApplicationState) => ({
-    ...state.allRequests
+    ...state.allRequests,
+    ...state.user
   }),
   {
-    ...allRequests.actionCreators
+    ...allRequests.actionCreators,
+    ...user.actionCreators
   }
 )(AllRequests);
