@@ -24,9 +24,9 @@ export interface points {
 
 // all requests
 export interface allRequests {
-  allRequests: allRequest[];
+  allRequests: request[];
 }
-export interface allRequest {
+export interface request {
   cartegraphID: string;
   building: string;
   location: string;
@@ -62,11 +62,6 @@ export interface issue {
   cartegraphID: string;
   name: string;
   type: string;
-}
-
-// department
-export interface department {
-  department: string;
 }
 
 // message

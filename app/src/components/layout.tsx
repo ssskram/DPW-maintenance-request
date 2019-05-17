@@ -8,7 +8,7 @@ export default props => (
       <NavMenu />
     </Row>
     <Row>
-      <div className="col-md-8 col-md-offset-2">{props.children}</div>
+      <div className="col-md-8 col-md-offset-2" style={{paddingTop: '25px'}}>{props.children}</div>
     </Row>
   </Grid>
 );
