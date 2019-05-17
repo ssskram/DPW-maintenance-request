@@ -1,10 +1,14 @@
 [
   {
     "type": "Maintenance Request",
-    "issueTypes": ["1", "2"]
+    "issueSelection": true,
+    "facilitySelection": true,
+    "geoLocate": false
   },
   {
     "type": "Office Move",
-    "issueTypes": ["1", "2"]
+    "issueSelection": false,
+    "facilitySelection": false,
+    "geoLocate": false
   }
 ]
