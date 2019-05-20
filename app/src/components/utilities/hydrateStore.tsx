@@ -7,7 +7,6 @@ import * as facilities from "../../store/facilities";
 import * as allRequests from "../../store/allRequests";
 import * as issues from "../../store/issues";
 import * as user from "../../store/user";
-import { loadAllRequests } from "src/store/constants";
 
 type props = {
   loadUser: () => void;

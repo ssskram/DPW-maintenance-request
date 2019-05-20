@@ -1,23 +1,28 @@
 import * as React from "react";
 import * as types from "../../../store/types";
-import Types from "./selectType";
-import Issues from "./selectIssue";
+import RequestTypes from "./requestType";
+import MaintenanceTypes from "./maintenanceType";
 
-type props = {};
+type props = {
+  newRequest: types.newRequest;
+  updateRequest: (newData: object) => void;
+};
 
 export default class RequestType extends React.Component<props, {}> {
-  componentDidMount() {
-    window.scrollTo(0, 0);
-  }
-
   render() {
     return (
       <div>
         <h1 className="text-center" style={{ color: "#fff" }}>
           What can we help you with?
         </h1>
-        <Types />
-        <Issues />
+        <RequestTypes
+          newRequest={this.props.newRequest}
+          updateRequest={this.props.updateRequest.bind(this)}
+        />
+        <MaintenanceTypes
+          newRequest={this.props.newRequest}
+          updateRequest={this.props.updateRequest.bind(this)}
+        />
       </div>
     );
   }

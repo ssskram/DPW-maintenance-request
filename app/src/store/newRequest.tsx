@@ -4,34 +4,38 @@ import * as constants from "./constants";
 import * as types from "./types";
 
 const unloadedState = {
-  openRequest: {
+  newRequest: {
+    requestType: "",
+    maintenanceType: "",
+    maintenanceIssue: "",
     building: "",
-    issueType: "",
-    issue: "",
     description: "",
     department: "",
     location: "",
     phone: ""
   }
-} as types.openRequest;
+};
 
 export const actionCreators = {
-  updateRequest: (request): AppThunkAction<any> => dispatch => {
-    dispatch({ type: constants.updateRequest, openRequest: request });
+  updateRequest: (
+    request: types.newRequest
+  ): AppThunkAction<any> => dispatch => {
+    console.log(request);
+    dispatch({ type: constants.updateRequest, newRequest: request });
   },
   clearRequest: (): AppThunkAction<any> => dispatch => {
     dispatch({ type: constants.clearRequest });
   }
 };
 
-export const reducer: Reducer<types.openRequest> = (
-  state: types.openRequest,
+export const reducer: Reducer<types.newRequest> = (
+  state: any,
   incomingAction: Action
 ) => {
   const action = incomingAction as any;
   switch (action.type) {
     case constants.updateRequest:
-      return { ...state, openRequest: action.openRequest };
+      return { ...state, newRequest: action.newRequest };
     case constants.clearRequest:
       return unloadedState;
   }
