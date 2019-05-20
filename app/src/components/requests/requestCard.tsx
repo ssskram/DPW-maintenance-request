@@ -1,6 +1,6 @@
 import * as React from "react";
 import LoadingImage from "../utilities/loadingImage";
-import pngOrJpg from "../functions/facilityIsPng";
+import pngOrJpg from "../../functions/facilityIsPng";
 import * as types from "../../store/types";
 
 const imgStyle = {

@@ -1,8 +1,8 @@
 import * as React from "react";
 import Select from "../formElements/select";
 import Modal from "react-responsive-modal";
-import filter from "../functions/filter";
-import removeDuplicates from "../functions/removeDuplicates";
+import filter from "../../functions/filter";
+import removeDuplicates from "../../functions/removeDuplicates";
 
 export default class Filter extends React.Component<any, any> {
   constructor(props) {

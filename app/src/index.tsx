@@ -10,6 +10,7 @@ import "./css/nav.css";
 import "./css/panels.css";
 import "./css/table.css";
 import "./css/siteSpecific.css";
+import 'react-table/react-table.css'
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";

@@ -4,6 +4,8 @@ import { ApplicationState } from "../../store";
 import HydrateStore from "../utilities/hydrateStore";
 import * as types from "../../store/types";
 import * as newRequest from "../../store/newRequest";
+import * as facilities from "../../store/facilities";
+import * as allRequests from "../../store/allRequests";
 import RequestType from "./requestType";
 import RequestLocation from "./requestLocation";
 import RequestDescription from "./requestDescription";
@@ -11,7 +13,10 @@ import displayComponent from "./config/displayComponent";
 
 type props = {
   newRequest: types.newRequest;
+  facilities: types.facility[];
+  allRequests: types.request[];
   updateRequest: (updatedOrder: types.newRequest) => void;
+  clearRequest: () => void;
 };
 
 export class Request extends React.Component<props, {}> {
@@ -39,7 +44,10 @@ export class Request extends React.Component<props, {}> {
         {displayComponent(this.props.newRequest, "location") && (
           <RequestLocation
             newRequest={this.props.newRequest}
+            facilities={this.props.facilities}
+            requests={this.props.allRequests}
             updateRequest={this.handleUpdate.bind(this)}
+            clearRequest={this.props.clearRequest.bind(this)}
           />
         )}
         {displayComponent(this.props.newRequest, "dataFields") && (
@@ -55,9 +63,13 @@ export class Request extends React.Component<props, {}> {
 
 export default connect(
   (state: ApplicationState) => ({
-    ...state.newRequest
+    ...state.newRequest,
+    ...state.facilities,
+    ...state.allRequests
   }),
   {
-    ...newRequest.actionCreators
+    ...newRequest.actionCreators,
+    ...facilities.actionCreators,
+    ...allRequests.actionCreators
   }
 )(Request as any);

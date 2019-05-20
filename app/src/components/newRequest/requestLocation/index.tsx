@@ -5,36 +5,58 @@ import LocationSelectionOptions from "./locationSelectionOptions";
 import FacilityTable from "./facilityTable";
 import FacilityMap from "./facilityMap";
 import PinMap from "./pinMap";
+import ConfirmFacility from "./confirmFacility";
 
 type props = {
   newRequest: types.newRequest;
+  facilities: types.facility[];
+  requests: types.request[];
   updateRequest: (newData: object) => void;
+  clearRequest: () => void;
 };
 
 type state = {
   selectionType: "facilityTable" | "facilityMap" | "pin" | undefined;
+  selectedLocation: types.facility;
+  locationConfirmed: boolean;
 };
 
 export default class RequestLocation extends React.Component<props, state> {
   constructor(props) {
     super(props);
     this.state = {
-      selectionType: undefined
+      selectionType: undefined,
+      selectedLocation: undefined,
+      locationConfirmed: false
     };
   }
 
   render() {
+    const { selectionType, selectedLocation, locationConfirmed } = this.state;
     return (
       <div>
         <SectionHeader header="Where is the problem located?" />
         <LocationSelectionOptions
-          selectedType={this.state.selectionType}
+          selectedType={selectionType}
           newRequest={this.props.newRequest}
           setState={this.setState.bind(this)}
         />
-        {this.state.selectionType == "facilityTable" && <FacilityTable />}
-        {this.state.selectionType == "facilityMap" && <FacilityMap />}
-        {this.state.selectionType == "pin" && <PinMap />}
+        {selectionType == "facilityTable" && (
+          <FacilityTable
+            facilities={this.props.facilities}
+            setParentState={this.setState.bind(this)}
+          />
+        )}
+        {selectionType == "facilityMap" && <FacilityMap />}
+        {selectionType == "pin" && <PinMap />}
+        {selectedLocation != undefined && locationConfirmed == false && (
+          <ConfirmFacility
+            facility={selectedLocation}
+            requests={this.props.requests}
+            clearRequest={this.props.clearRequest.bind(this)}
+            setParentState={this.setState.bind(this)}
+          />
+        )}
       </div>
     );
   }
