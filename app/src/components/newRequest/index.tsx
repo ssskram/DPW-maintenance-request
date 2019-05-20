@@ -4,7 +4,6 @@ import { ApplicationState } from "../../store";
 import HydrateStore from "../utilities/hydrateStore";
 import * as types from "../../store/types";
 import * as newRequest from "../../store/newRequest";
-import Spinner from "../utilities/spinner";
 import RequestType from "./requestType";
 import RequestLocation from "./requestLocation";
 import RequestDescription from "./requestDescription";
@@ -14,27 +13,18 @@ type props = {
   updateRequest: (updatedOrder: types.newRequest) => void;
 };
 
-export class NewRequest extends React.Component<any, {}> {
-  componentWillMount() {
-    console.log(this.props)
-  }
-  componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
-  }
-
+export class Request extends React.Component<props, {}> {
   componentDidMount() {
     window.scrollTo(0, 0);
   }
 
   handleUpdate(data) {
     // first, make a copy of the current store
-    let requestState: types.newRequest = this.props.newRequest;
-    // get the key of the data being modified
-    const key = Object.keys(data);
-    // mutate as necessary
-    requestState[key[0]] = data[key[0]];
+    let state: types.newRequest = Object.assign({}, this.props.newRequest);
+    // mutate with new data
+    Object.assign(state, data)
     // update store
-    this.props.updateRequest(requestState);
+    this.props.updateRequest(state);
   }
 
   render() {
@@ -59,4 +49,4 @@ export default connect(
   {
     ...newRequest.actionCreators
   }
-)(NewRequest as any);
+)(Request as any);

@@ -28,8 +28,8 @@ export const actionCreators = {
   }
 };
 
-export const reducer: Reducer<types.newRequest> = (
-  state: any,
+export const reducer: Reducer<any> = (
+  state: types.newRequest,
   incomingAction: Action
 ) => {
   const action = incomingAction as any;

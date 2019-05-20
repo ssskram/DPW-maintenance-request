@@ -12,17 +12,21 @@ export default class MaintenanceTypes extends React.Component<props, {}> {
     return (
       <div className="panel">
         <div className="panel-body">
-          {constants.maintenanceTypes.map(issue => {
+          {constants.maintenanceTypes.map(type => {
             return (
               <div className="col-md-4">
                 <button
                   className="btn btn-secondary"
-                  style={constants.buttonWidth}
+                  style={
+                    type == this.props.newRequest.maintenanceType
+                      ? constants.buttonClicked
+                      : constants.buttonWidth
+                  }
                   onClick={() =>
-                    this.props.updateRequest({ maintenanceType: issue })
+                    this.props.updateRequest({ maintenanceType: type })
                   }
                 >
-                  <div style={{ fontSize: "1.2em" }}>{issue}</div>
+                  <div style={{ fontSize: "1.2em" }}>{type}</div>
                 </button>
               </div>
             );

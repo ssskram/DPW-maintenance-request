@@ -19,10 +19,12 @@ export default class RequestType extends React.Component<props, {}> {
           newRequest={this.props.newRequest}
           updateRequest={this.props.updateRequest.bind(this)}
         />
-        <MaintenanceTypes
-          newRequest={this.props.newRequest}
-          updateRequest={this.props.updateRequest.bind(this)}
-        />
+        {this.props.newRequest.requestType == "Maintenance Request" && (
+          <MaintenanceTypes
+            newRequest={this.props.newRequest}
+            updateRequest={this.props.updateRequest.bind(this)}
+          />
+        )}
       </div>
     );
   }
