@@ -1,14 +1,12 @@
-[
-  {
-    "type": "Maintenance Request",
+{
+  "Maintenance Request": {
     "issueSelection": true,
     "facilitySelection": true,
     "geoLocate": false
   },
-  {
-    "type": "Office Move",
+  "Office Move": {
     "issueSelection": false,
     "facilitySelection": false,
     "geoLocate": false
   }
-]
+}
