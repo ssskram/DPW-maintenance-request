@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
 import { Nav, NavItem } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 
@@ -12,22 +11,18 @@ export default class NavButtons extends React.Component<{}, {}> {
   render() {
     return (
       <Nav>
-        <LinkContainer to={"/policy"}>
+        <LinkContainer to={"/MyRequests"}>
           <NavItem>
-            <Link to="/MyRequests">
-              <button className="btn btn-secondary" style={btnStyle}>
-                My Requests
-              </button>
-            </Link>
+            <button className="btn btn-secondary" style={btnStyle}>
+              My Requests
+            </button>
           </NavItem>
         </LinkContainer>
-        <LinkContainer to={"/faq"}>
+        <LinkContainer to={"/AllRequests"}>
           <NavItem>
-            <Link to="/AllRequests">
-              <button className="btn btn-secondary" style={btnStyle}>
-                All Requests
-              </button>
-            </Link>
+            <button className="btn btn-secondary" style={btnStyle}>
+              All Requests
+            </button>
           </NavItem>
         </LinkContainer>
       </Nav>

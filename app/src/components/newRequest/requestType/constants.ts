@@ -13,7 +13,7 @@ export const buttonClicked = {
 export const requestTypes = [
   {
     value: "Maintenance Request",
-    label: "Request maintenance"
+    label: "Submit a maintenance request"
   },
   {
     value: "Office Move",

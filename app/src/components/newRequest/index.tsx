@@ -7,6 +7,7 @@ import * as newRequest from "../../store/newRequest";
 import RequestType from "./requestType";
 import RequestLocation from "./requestLocation";
 import RequestDescription from "./requestDescription";
+import displayComponent from "./config/displayComponent";
 
 type props = {
   newRequest: types.newRequest;
@@ -22,7 +23,7 @@ export class Request extends React.Component<props, {}> {
     // first, make a copy of the current store
     let state: types.newRequest = Object.assign({}, this.props.newRequest);
     // mutate with new data
-    Object.assign(state, data)
+    Object.assign(state, data);
     // update store
     this.props.updateRequest(state);
   }
@@ -35,8 +36,12 @@ export class Request extends React.Component<props, {}> {
           newRequest={this.props.newRequest}
           updateRequest={this.handleUpdate.bind(this)}
         />
-        <RequestLocation />
-        <RequestDescription />
+        {displayComponent(this.props.newRequest, "location") && (
+          <RequestLocation />
+        )}
+        {displayComponent(this.props.newRequest, "dataFields") && (
+          <RequestDescription />
+        )}
       </div>
     );
   }

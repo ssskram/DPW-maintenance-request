@@ -12,9 +12,9 @@ export default class RequestTypes extends React.Component<props, {}> {
     return (
       <div className="panel">
         <div className="panel-body">
-          {constants.requestTypes.map(type => {
+          {constants.requestTypes.map((type, index) => {
             return (
-              <div className="col-md-6">
+              <div className="col-md-6" key={index}>
                 <button
                   className="btn btn-secondary"
                   style={
@@ -26,7 +26,7 @@ export default class RequestTypes extends React.Component<props, {}> {
                     this.props.updateRequest({ requestType: type.value })
                   }
                 >
-                  <h2 className="oswald">{type.label}</h2>
+                  <h3 className="oswald">{type.label}</h3>
                 </button>
               </div>
             );
