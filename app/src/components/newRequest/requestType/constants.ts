@@ -10,7 +10,16 @@ export const buttonClicked = {
 };
 
 // top level request types
-export const requestTypes = ["Maintenance Request", "Office Move"];
+export const requestTypes = [
+  {
+    value: "Maintenance Request",
+    label: "Request maintenance"
+  },
+  {
+    value: "Office Move",
+    label: "Request an office move"
+  }
+];
 
 // maintenance request types
 export const maintenanceTypes = [
