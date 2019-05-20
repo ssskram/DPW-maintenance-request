@@ -2,7 +2,11 @@ import * as React from "react";
 import * as types from "../../../store/types";
 import SectionHeader from "../shared/sectionHeader";
 
-type props = {};
+type props = {
+  newRequest: types.newRequest;
+  updateRequest: (newData: object) => void;
+};
+
 
 export default class RequestDescription extends React.Component<props, {}> {
   render() {

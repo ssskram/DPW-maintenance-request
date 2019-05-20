@@ -37,10 +37,16 @@ export class Request extends React.Component<props, {}> {
           updateRequest={this.handleUpdate.bind(this)}
         />
         {displayComponent(this.props.newRequest, "location") && (
-          <RequestLocation />
+          <RequestLocation
+            newRequest={this.props.newRequest}
+            updateRequest={this.handleUpdate.bind(this)}
+          />
         )}
         {displayComponent(this.props.newRequest, "dataFields") && (
-          <RequestDescription />
+          <RequestDescription
+            newRequest={this.props.newRequest}
+            updateRequest={this.handleUpdate.bind(this)}
+          />
         )}
       </div>
     );
