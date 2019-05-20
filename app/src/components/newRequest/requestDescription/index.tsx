@@ -1,12 +1,13 @@
 import * as React from "react";
 import * as types from "../../../store/types";
 import SectionHeader from "../shared/sectionHeader";
+import MaintenanceRequest from "./maintenanceRequest";
+import OfficeMove from "./officeMoves";
 
 type props = {
   newRequest: types.newRequest;
   updateRequest: (newData: object) => void;
 };
-
 
 export default class RequestDescription extends React.Component<props, {}> {
   render() {
@@ -15,7 +16,18 @@ export default class RequestDescription extends React.Component<props, {}> {
         <SectionHeader header="Please provide additional information" />
         <div className="panel">
           <div className="panel-body">
-            <h3>Please provide some additional details</h3>
+            {this.props.newRequest.requestType == "Maintenance Request" && (
+              <MaintenanceRequest
+                newRequest={this.props.newRequest}
+                updateRequest={this.props.updateRequest}
+              />
+            )}
+            {this.props.newRequest.requestType == "Office Move" && (
+              <OfficeMove
+                newRequest={this.props.newRequest}
+                updateRequest={this.props.updateRequest}
+              />
+            )}
           </div>
         </div>
       </div>
