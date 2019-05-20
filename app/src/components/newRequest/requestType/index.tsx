@@ -3,6 +3,7 @@ import * as types from "../../../store/types";
 import RequestTypes from "./requestType";
 import MaintenanceTypes from "./maintenanceType";
 import displayComponent from "../config/displayComponent";
+import { SpeechBubble } from "react-kawaii";
 
 type props = {
   newRequest: types.newRequest;
@@ -14,7 +15,8 @@ export default class RequestType extends React.Component<props, {}> {
     return (
       <div>
         <h1 className="text-center" style={{ color: "#fff" }}>
-          What can we help you with?
+        <SpeechBubble size={170} mood="happy" color="#fff" />
+          How can we help?
         </h1>
         <RequestTypes
           newRequest={this.props.newRequest}

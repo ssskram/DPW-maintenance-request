@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as constants from "./constants";
 import * as types from "../../../store/types";
+import SectionHeader from "../shared/sectionHeader";
 
 type props = {
   newRequest: types.newRequest;
@@ -11,9 +12,7 @@ export default class MaintenanceTypes extends React.Component<props, {}> {
   render() {
     return (
       <div style={{ margin: "60px 0px" }}>
-        <h3 className="text-center" style={{ color: "#fff" }}>
-          What's giving you problems?
-        </h3>
+        <SectionHeader header="What's giving you problems?" />
         <div className="panel">
           <div className="panel-body">
             {constants.maintenanceTypes.map((type, index) => {

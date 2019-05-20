@@ -1,19 +1,26 @@
 import * as React from "react";
 import * as types from "../../../store/types";
+import SectionHeader from "../shared/sectionHeader";
+import LocationSelectionOptions from "./locationSelectionOptions";
 
 type props = {};
+type state = {
+  selectionType: "facilityTable" | "facilityMap" | "pin" | undefined;
+};
 
-export default class RequestLocation extends React.Component<props, {}> {
-  componentDidMount() {
-    window.scrollTo(0, 0);
+export default class RequestLocation extends React.Component<props, state> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectionType: undefined
+    };
   }
 
   render() {
     return (
-      <div className='panel'>
-        <div className='panel-body'>
-          <h3>Next, where do you it?</h3>
-        </div>
+      <div>
+        <SectionHeader header="Where is the problem located?" />
+        <LocationSelectionOptions setState={this.setState.bind(this)}/>
       </div>
     );
   }
