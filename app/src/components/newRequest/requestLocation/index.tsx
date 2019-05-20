@@ -2,9 +2,9 @@ import * as React from "react";
 import * as types from "../../../store/types";
 import SectionHeader from "../shared/sectionHeader";
 import LocationSelectionOptions from "./locationSelectionOptions";
-import FacilityTable from "./facilityTable";
-import FacilityMap from "./facilityMap";
-import PinMap from "./pinMap";
+import FacilityTable from "./table/facilityTable";
+import FacilityMap from "./maps/facilityMap";
+import PinMap from "./maps/pinMap";
 import ConfirmFacility from "./confirmFacility";
 import SelectedFacility from "./selectedFacility";
 
@@ -18,7 +18,7 @@ type props = {
 
 type state = {
   selectionType: "facilityTable" | "facilityMap" | "pin";
-  selectedLocation: types.facility;
+  selectedFacility: types.facility;
   locationConfirmed: boolean;
 };
 
@@ -27,19 +27,19 @@ export default class RequestLocation extends React.Component<props, state> {
     super(props);
     this.state = {
       selectionType: undefined,
-      selectedLocation: undefined,
+      selectedFacility: undefined,
       locationConfirmed: false
     };
   }
 
   render() {
-    const { selectionType, selectedLocation, locationConfirmed } = this.state;
+    const { selectionType, selectedFacility, locationConfirmed } = this.state;
     if (locationConfirmed) {
       return (
         <div>
           <SectionHeader header="Where is the problem located?" />
           <SelectedFacility
-            facility={selectedLocation}
+            facility={selectedFacility}
             setParentState={this.setState.bind(this)}
           />
         </div>
@@ -59,11 +59,16 @@ export default class RequestLocation extends React.Component<props, state> {
               setParentState={this.setState.bind(this)}
             />
           )}
-          {selectionType == "facilityMap" && <FacilityMap />}
+          {selectionType == "facilityMap" && (
+            <FacilityMap
+              facilities={this.props.facilities}
+              setParentState={this.setState.bind(this)}
+            />
+          )}
           {selectionType == "pin" && <PinMap />}
-          {selectedLocation != undefined && locationConfirmed == false && (
+          {selectedFacility != undefined && locationConfirmed == false && (
             <ConfirmFacility
-              facility={selectedLocation}
+              facility={selectedFacility}
               requests={this.props.requests}
               clearRequest={this.props.clearRequest.bind(this)}
               setParentState={this.setState.bind(this)}

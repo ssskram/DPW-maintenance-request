@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as types from "../../../store/types";
+import * as types from "../../../../store/types";
 
 type props = {};
 

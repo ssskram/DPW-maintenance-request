@@ -1,13 +1,13 @@
 import * as React from "react";
 import Table from "react-table";
-import * as types from "../../../store/types";
-import LoadingImage from "../../utilities/loadingImage";
-import pngOrJpg from "../../../functions/facilityIsPng";
+import * as types from "../../../../store/types";
+import LoadingImage from "../../../utilities/loadingImage";
+import pngOrJpg from "../../../../functions/facilityIsPng";
 import Filter from "./facilityFilter";
 
 type props = {
   facilities: types.facility[];
-  setParentState: (parentState: object) => void;
+  setParentState: (selectedFacility: object) => void;
 };
 
 type state = {
@@ -31,7 +31,7 @@ export default class FacilityTable extends React.Component<props, state> {
           <button
             className="btn btn-secondary"
             onClick={() =>
-              this.props.setParentState({ selectedLocation: props.original })
+              this.props.setParentState({ selectedFacility: props.original })
             }
           >
             Select

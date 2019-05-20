@@ -3,8 +3,9 @@
 
 .home-map {
     height: 80vh !important;
-    width: 100vw !important;
+    width: 100% !important;
     overflow-x: hidden !important;
+    border-radius: 10px;
 }
 
 a[href^="http://maps.google.com/maps"] {
