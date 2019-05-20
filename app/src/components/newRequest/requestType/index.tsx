@@ -2,6 +2,7 @@ import * as React from "react";
 import * as types from "../../../store/types";
 import RequestTypes from "./requestType";
 import MaintenanceTypes from "./maintenanceType";
+import displayComponent from "../config/displayComponent";
 
 type props = {
   newRequest: types.newRequest;
@@ -19,7 +20,7 @@ export default class RequestType extends React.Component<props, {}> {
           newRequest={this.props.newRequest}
           updateRequest={this.props.updateRequest.bind(this)}
         />
-        {this.props.newRequest.requestType == "Maintenance Request" && (
+        {displayComponent(this.props.newRequest, "maintenanceTypes") && (
           <MaintenanceTypes
             newRequest={this.props.newRequest}
             updateRequest={this.props.updateRequest.bind(this)}
