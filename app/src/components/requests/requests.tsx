@@ -22,7 +22,7 @@ export default class Requests extends React.Component<props, any> {
     super(props);
     this.state = {
       currentPage: 1,
-      requestsPerPage: 25,
+      requestsPerPage: 20,
       requests: undefined
     };
   }

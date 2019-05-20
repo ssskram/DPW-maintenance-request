@@ -6,6 +6,7 @@ import FacilityTable from "./facilityTable";
 import FacilityMap from "./facilityMap";
 import PinMap from "./pinMap";
 import ConfirmFacility from "./confirmFacility";
+import SelectedFacility from "./selectedFacility";
 
 type props = {
   newRequest: types.newRequest;
@@ -16,7 +17,7 @@ type props = {
 };
 
 type state = {
-  selectionType: "facilityTable" | "facilityMap" | "pin" | undefined;
+  selectionType: "facilityTable" | "facilityMap" | "pin";
   selectedLocation: types.facility;
   locationConfirmed: boolean;
 };
@@ -33,31 +34,43 @@ export default class RequestLocation extends React.Component<props, state> {
 
   render() {
     const { selectionType, selectedLocation, locationConfirmed } = this.state;
-    return (
-      <div>
-        <SectionHeader header="Where is the problem located?" />
-        <LocationSelectionOptions
-          selectedType={selectionType}
-          newRequest={this.props.newRequest}
-          setState={this.setState.bind(this)}
-        />
-        {selectionType == "facilityTable" && (
-          <FacilityTable
-            facilities={this.props.facilities}
-            setParentState={this.setState.bind(this)}
-          />
-        )}
-        {selectionType == "facilityMap" && <FacilityMap />}
-        {selectionType == "pin" && <PinMap />}
-        {selectedLocation != undefined && locationConfirmed == false && (
-          <ConfirmFacility
+    if (locationConfirmed) {
+      return (
+        <div>
+          <SectionHeader header="Where is the problem located?" />
+          <SelectedFacility
             facility={selectedLocation}
-            requests={this.props.requests}
-            clearRequest={this.props.clearRequest.bind(this)}
             setParentState={this.setState.bind(this)}
           />
-        )}
-      </div>
-    );
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <SectionHeader header="Where is the problem located?" />
+          <LocationSelectionOptions
+            selectedType={selectionType}
+            newRequest={this.props.newRequest}
+            setState={this.setState.bind(this)}
+          />
+          {selectionType == "facilityTable" && (
+            <FacilityTable
+              facilities={this.props.facilities}
+              setParentState={this.setState.bind(this)}
+            />
+          )}
+          {selectionType == "facilityMap" && <FacilityMap />}
+          {selectionType == "pin" && <PinMap />}
+          {selectedLocation != undefined && locationConfirmed == false && (
+            <ConfirmFacility
+              facility={selectedLocation}
+              requests={this.props.requests}
+              clearRequest={this.props.clearRequest.bind(this)}
+              setParentState={this.setState.bind(this)}
+            />
+          )}
+        </div>
+      );
+    }
   }
 }
