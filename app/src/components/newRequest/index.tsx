@@ -96,7 +96,9 @@ export class Request extends React.Component<props, {}> {
             updateRequest={this.handleUpdate.bind(this)}
           />
         )}
-        {this.props.newRequest.requestType != "" && <Submit />}
+        {this.props.newRequest.requestType != "" && (
+          <Submit newRequest={this.props.newRequest} />
+        )}
       </div>
     );
   }

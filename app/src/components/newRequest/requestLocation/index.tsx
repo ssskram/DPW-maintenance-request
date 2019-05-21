@@ -32,6 +32,16 @@ export default class RequestLocation extends React.Component<props, state> {
     };
   }
 
+  componentDidUpdate(nextProps: props) {
+    if (this.props.newRequest.requestType != nextProps.newRequest.requestType) {
+      this.setState({
+        selectionType: undefined,
+        selectedFacility: undefined,
+        locationConfirmed: undefined
+      });
+    }
+  }
+
   render() {
     const { selectionType, selectedFacility, locationConfirmed } = this.state;
     if (locationConfirmed) {
