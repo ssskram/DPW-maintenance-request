@@ -7,7 +7,14 @@ export default async function postRequest(request, image, user) {
 
     // format data for cartegraph
     let data = JSON.stringify({
-        ActivityField: "Investigate",
+        ActivityField: "Investigate", 
+        // if carpentry & painting, activity == Carpentry
+        // if roofing, activity == Carpentry
+        // if Doors, Lock, and Windows, activity == Carpentry
+        // if plumbing and gas, activity == Plumbing
+        // if electrical and lighting, activity == Electrical
+        // if heating and air conditioning, activity == HVAC
+        // else, activity == Investigate
         DepartmentField: "Facilities",
         cgAssetTypeField: "Facility",
         cgAssetAndIdField: "Facility " + request.building,
