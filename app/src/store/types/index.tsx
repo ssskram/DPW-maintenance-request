@@ -58,6 +58,7 @@ export interface newRequest {
   department: string;
   location: string;
   phone: string;
+  image: Array<any>;
 }
 
 // message

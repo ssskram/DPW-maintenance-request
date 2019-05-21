@@ -12,8 +12,9 @@ const unloadedState = {
     description: "",
     department: "",
     location: "",
-    phone: ""
-  }
+    phone: "",
+    image: []
+  } as types.newRequest
 };
 
 export const actionCreators = {
