@@ -7,6 +7,10 @@ export const requestTypes = [
   {
     value: "Office Move",
     label: "Request an office move"
+  },
+  {
+    value: "Construction",
+    label: "Request construction work"
   }
 ];
 
@@ -23,6 +27,13 @@ export const config = {
     location: false,
     facilitySelection: false,
     geoLocate: false,
+    dataFields: true
+  },
+  "Construction": {
+    maintenanceTypes: false,
+    location: true,
+    facilitySelection: false,
+    geoLocate: true,
     dataFields: true
   }
 };

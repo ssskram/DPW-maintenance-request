@@ -3,6 +3,7 @@ import * as types from "../../../store/types";
 import SectionHeader from "../shared/sectionHeader";
 import MaintenanceRequest from "./maintenanceRequest";
 import OfficeMove from "./officeMoves";
+import ConstructionRequest from "./constructionRequest";
 
 type props = {
   newRequest: types.newRequest;
@@ -28,6 +29,12 @@ export default class RequestDescription extends React.Component<props, {}> {
             {this.props.newRequest.requestType == "Office Move" && (
               <OfficeMove
                 facilities={this.props.facilities}
+                newRequest={this.props.newRequest}
+                updateRequest={this.props.updateRequest}
+              />
+            )}
+            {this.props.newRequest.requestType == "Construction" && (
+              <ConstructionRequest
                 newRequest={this.props.newRequest}
                 updateRequest={this.props.updateRequest}
               />

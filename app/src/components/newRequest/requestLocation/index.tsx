@@ -65,7 +65,11 @@ export default class RequestLocation extends React.Component<props, state> {
               setParentState={this.setState.bind(this)}
             />
           )}
-          {selectionType == "pin" && <PinMap />}
+          {selectionType == "pin" && (
+            <PinMap
+              setParentState={this.setState.bind(this)}
+            />
+          )}
           {selectedFacility != undefined && locationConfirmed == false && (
             <ConfirmFacility
               facility={selectedFacility}

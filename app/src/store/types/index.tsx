@@ -50,7 +50,7 @@ export interface issue {
 
 // active request
 export interface newRequest {
-  requestType: "Maintenance Request" | "Office Move" | "";
+  requestType: "Maintenance Request" | "Office Move" | "Construction" | "";
   description: string;
   department: string;
   phone: string;

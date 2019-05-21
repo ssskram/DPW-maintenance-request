@@ -19,5 +19,7 @@ export default function displayComponent(
       return app.config["Maintenance Request"][component];
     case "Office Move":
       return app.config["Office Move"][component];
+    case "Construction":
+      return app.config["Construction"][component];
   }
 }

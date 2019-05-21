@@ -6,15 +6,19 @@ type props = {};
 export default class Submit extends React.Component<props, {}> {
   render() {
     return (
-      <div
-        style={{ margin: "40px 0px" }}
-        className="text-center"
-      >
+      <div style={{ margin: "40px 0px" }} className="text-center">
         <button
+          disabled={true}
+          title="Please provide all required data"
           className="btn btn-success"
           style={{ width: "80%", fontSize: "2em" }}
         >
-          Submit
+          <span
+            className="oswald-header"
+            style={{ color: "#383838", letterSpacing: "2px" }}
+          >
+            Submit
+          </span>
         </button>
       </div>
     );
