@@ -7,6 +7,7 @@ import { SpeechBubble } from "react-kawaii";
 
 type props = {
   newRequest: types.newRequest;
+  issues: types.issue[]
   updateRequest: (newData: object) => void;
 };
 
@@ -25,6 +26,7 @@ export default class RequestType extends React.Component<props, {}> {
         {displayComponent(this.props.newRequest, "maintenanceTypes") && (
           <MaintenanceTypes
             newRequest={this.props.newRequest}
+            issues={this.props.issues}
             updateRequest={this.props.updateRequest.bind(this)}
           />
         )}

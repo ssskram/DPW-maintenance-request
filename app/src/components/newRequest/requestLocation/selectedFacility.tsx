@@ -39,7 +39,7 @@ export default class SelectedFacility extends React.Component<props, {}> {
             onClick={() =>
               this.props.setParentState({
                 selectionType: undefined,
-                selectedLocation: undefined,
+                selectedFacility: undefined,
                 locationConfirmed: false
               })
             }

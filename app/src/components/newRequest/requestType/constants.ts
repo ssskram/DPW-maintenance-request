@@ -20,14 +20,3 @@ export const requestTypes = [
     label: "Request an office move"
   }
 ];
-
-// maintenance request types
-export const maintenanceTypes = [
-  "Doors, Locks, & Windows",
-  "Electrical & Lighting",
-  "Heating & Air Conditioning",
-  "Carpentry & Painting",
-  "Plumbing & Gas",
-  "Roofing",
-  "Miscellaneous"
-];

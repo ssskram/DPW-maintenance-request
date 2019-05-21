@@ -6,6 +6,7 @@ import * as types from "../../store/types";
 import * as newRequest from "../../store/newRequest";
 import * as facilities from "../../store/facilities";
 import * as allRequests from "../../store/allRequests";
+import * as issues from "../../store/issues";
 import RequestType from "./requestType";
 import RequestLocation from "./requestLocation";
 import RequestDescription from "./requestDescription";
@@ -15,11 +16,18 @@ type props = {
   newRequest: types.newRequest;
   facilities: types.facility[];
   allRequests: types.request[];
+  issues: types.issue[];
   updateRequest: (updatedOrder: types.newRequest) => void;
   clearRequest: () => void;
 };
 
 export class Request extends React.Component<props, {}> {
+
+  // reset data here when certain fields change
+  componentWillReceiveProps(nextProps: props) {
+
+  }
+
   componentDidMount() {
     window.scrollTo(0, 0);
   }
@@ -39,6 +47,7 @@ export class Request extends React.Component<props, {}> {
         <HydrateStore />
         <RequestType
           newRequest={this.props.newRequest}
+          issues={this.props.issues}
           updateRequest={this.handleUpdate.bind(this)}
         />
         {displayComponent(this.props.newRequest, "location") && (
@@ -53,6 +62,7 @@ export class Request extends React.Component<props, {}> {
         {displayComponent(this.props.newRequest, "dataFields") && (
           <RequestDescription
             newRequest={this.props.newRequest}
+            issues={this.props.issues}
             updateRequest={this.handleUpdate.bind(this)}
           />
         )}
@@ -65,11 +75,13 @@ export default connect(
   (state: ApplicationState) => ({
     ...state.newRequest,
     ...state.facilities,
-    ...state.allRequests
+    ...state.allRequests,
+    ...state.issues
   }),
   {
     ...newRequest.actionCreators,
     ...facilities.actionCreators,
-    ...allRequests.actionCreators
+    ...allRequests.actionCreators,
+    ...issues.actionCreators
   }
 )(Request as any);

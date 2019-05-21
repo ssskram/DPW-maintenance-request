@@ -8,17 +8,36 @@ import constants from "./constants";
 
 type props = {
   newRequest: types.newRequest;
+  issues: types.issue[];
   updateRequest: (newData: object) => void;
 };
 
 export default class MaintenanceRequest extends React.Component<props, {}> {
+  setIssues() {
+    const issues = this.props.issues.filter(
+      i => i.type == this.props.newRequest.maintenanceType
+    );
+    return issues.map(i => {
+      return { value: i.name, label: i.name };
+    });
+  }
+
   render() {
-    let imgButton
+    let imgButton;
     if (this.props.newRequest.image.length == 0) {
-        imgButton = { display: 'block' }
+      imgButton = { display: "block" };
     } else {
-        imgButton = { display: 'none' }
+      imgButton = { display: "none" };
     }
+    console.log(this.props.issues);
+    console.log(this.props.newRequest);
+    const issues = this.props.issues
+      .filter(i => i.type != "" && i.type == this.props.newRequest.maintenanceType)
+      .map(i => {
+        return { value: i.name, label: i.name };
+      });
+    console.log(issues);
+
     return (
       <div>
         <Select
@@ -30,7 +49,7 @@ export default class MaintenanceRequest extends React.Component<props, {}> {
           }
           multi={false}
           required={false}
-          options={[]}
+          options={issues}
         />
         <Select
           value={this.props.newRequest.department}

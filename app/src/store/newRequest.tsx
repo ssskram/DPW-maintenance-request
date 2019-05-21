@@ -21,7 +21,6 @@ export const actionCreators = {
   updateRequest: (
     request: types.newRequest
   ): AppThunkAction<any> => dispatch => {
-    console.log(request);
     dispatch({ type: constants.updateRequest, newRequest: request });
   },
   clearRequest: (): AppThunkAction<any> => dispatch => {

@@ -74,8 +74,6 @@ export default class Requests extends React.Component<props, any> {
   }
 
   render() {
-    console.log(this.props);
-
     const { currentPage, requestsPerPage, allRequests } = this.state;
 
     // Logic for paging
