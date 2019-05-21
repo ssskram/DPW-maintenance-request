@@ -29,15 +29,11 @@ export default class MaintenanceRequest extends React.Component<props, {}> {
     } else {
       imgButton = { display: "none" };
     }
-    console.log(this.props.issues);
-    console.log(this.props.newRequest);
     const issues = this.props.issues
       .filter(i => i.type != "" && i.type == this.props.newRequest.maintenanceType)
       .map(i => {
         return { value: i.name, label: i.name };
       });
-    console.log(issues);
-
     return (
       <div>
         <Select

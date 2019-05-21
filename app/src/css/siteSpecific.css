@@ -1,0 +1,11 @@
+/* section headers for form panels */
+
+.sectionHeader {
+    letter-spacing: 1px;
+    font-size: 1.3em;
+    padding: 10px 25px 5px 25px;
+    color: black;
+    margin-left: -16px;
+    margin-right: -16px;
+    border-bottom: 1px solid #383838;
+}

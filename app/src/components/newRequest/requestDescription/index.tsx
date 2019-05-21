@@ -6,14 +6,15 @@ import OfficeMove from "./officeMoves";
 
 type props = {
   newRequest: types.newRequest;
-  issues: types.issue[]
+  issues: types.issue[];
+  facilities: types.facility[];
   updateRequest: (newData: object) => void;
 };
 
 export default class RequestDescription extends React.Component<props, {}> {
   render() {
     return (
-      <div style={{ margin: "60px 0px" }}>
+      <div style={{ marginTop: "60px" }}>
         <SectionHeader header="Please provide additional information" />
         <div className="panel">
           <div className="panel-body">
@@ -26,6 +27,7 @@ export default class RequestDescription extends React.Component<props, {}> {
             )}
             {this.props.newRequest.requestType == "Office Move" && (
               <OfficeMove
+                facilities={this.props.facilities}
                 newRequest={this.props.newRequest}
                 updateRequest={this.props.updateRequest}
               />

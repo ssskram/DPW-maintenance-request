@@ -6,14 +6,21 @@ import * as types from "./types";
 const unloadedState = {
   newRequest: {
     requestType: "",
+    description: "",
+    department: "",
+    phone: "",
+    // maint request
     maintenanceType: "",
     maintenanceIssue: "",
     building: "",
-    description: "",
-    department: "",
     location: "",
-    phone: "",
-    image: []
+    image: [],
+    // office move
+    originFacility: "",
+    originLocation: "",
+    destinationFacility: "",
+    destinationLocation: "",
+    name: ""
   } as types.newRequest
 };
 

@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as types from "../../../store/types";
 import * as constants from "./constants";
+import * as config from "../config/settings"
 
 type props = {
   newRequest: types.newRequest;
@@ -12,7 +13,7 @@ export default class RequestTypes extends React.Component<props, {}> {
     return (
       <div className="panel">
         <div className="panel-body">
-          {constants.requestTypes.map((type, index) => {
+          {config.requestTypes.map((type, index) => {
             return (
               <div className="col-md-6" key={index}>
                 <button

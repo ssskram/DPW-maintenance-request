@@ -51,14 +51,24 @@ export interface issue {
 // active request
 export interface newRequest {
   requestType: "Maintenance Request" | "Office Move" | "";
+  description: string;
+  department: string;
+  phone: string;
+
+  // maintenance requests
   maintenanceType: string;
   maintenanceIssue: string;
   building: string;
-  description: string;
-  department: string;
-  location: string;
-  phone: string;
   image: Array<any>;
+  location: string;
+
+  // office moves
+  originFacility: string
+  originLocation: string
+  destinationFacility: string
+  destinationLocation: string
+  name: string
+
 }
 
 // message

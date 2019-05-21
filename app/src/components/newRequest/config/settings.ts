@@ -1,3 +1,15 @@
+// top level request types
+export const requestTypes = [
+  {
+    value: "Maintenance Request",
+    label: "Submit a maintenance request"
+  },
+  {
+    value: "Office Move",
+    label: "Request an office move"
+  }
+];
+
 export const config = {
   "Maintenance Request": {
     maintenanceTypes: true,

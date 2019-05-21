@@ -11,6 +11,7 @@ import RequestType from "./requestType";
 import RequestLocation from "./requestLocation";
 import RequestDescription from "./requestDescription";
 import displayComponent from "./config/displayComponent";
+import Submit from "./submit";
 
 type props = {
   newRequest: types.newRequest;
@@ -22,14 +23,42 @@ type props = {
 };
 
 export class Request extends React.Component<props, {}> {
-
-  // reset data here when certain fields change
-  componentWillReceiveProps(nextProps: props) {
-
-  }
-
   componentDidMount() {
     window.scrollTo(0, 0);
+  }
+
+  // reset data here when certain fields change
+  componentDidUpdate(nextProps: props) {
+    const prevReq = this.props.newRequest;
+    const newReq = nextProps.newRequest;
+    // clear maintenance issue when maintenance type changes
+    if (
+      prevReq.maintenanceType != "" &&
+      prevReq.maintenanceType != newReq.maintenanceType
+    ) {
+      this.handleUpdate({ maintenanceIssue: "" });
+    }
+    // clear state when request type changes
+    if (
+      prevReq.requestType != "" &&
+      prevReq.requestType != newReq.requestType
+    ) {
+      this.handleUpdate({
+        maintenanceType: "",
+        maintenanceIssue: "",
+        building: "",
+        description: "",
+        department: "",
+        location: "",
+        phone: "",
+        image: [],
+        originFacility: "",
+        originLocation: "",
+        destinationFacility: "",
+        destinationLocation: "",
+        name: ""
+      });
+    }
   }
 
   handleUpdate(data) {
@@ -43,7 +72,7 @@ export class Request extends React.Component<props, {}> {
 
   render() {
     return (
-      <div>
+      <div style={{ marginBottom: "100px" }}>
         <HydrateStore />
         <RequestType
           newRequest={this.props.newRequest}
@@ -63,9 +92,11 @@ export class Request extends React.Component<props, {}> {
           <RequestDescription
             newRequest={this.props.newRequest}
             issues={this.props.issues}
+            facilities={this.props.facilities}
             updateRequest={this.handleUpdate.bind(this)}
           />
         )}
+        {this.props.newRequest.requestType != "" && <Submit />}
       </div>
     );
   }
