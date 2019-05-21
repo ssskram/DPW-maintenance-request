@@ -1,15 +1,22 @@
 import * as React from "react";
 import * as types from "../../../../store/types";
 import { compose, withProps } from "recompose";
-import { withScriptjs, withGoogleMap, GoogleMap } from "react-google-maps";
+import {
+  withScriptjs,
+  withGoogleMap,
+  GoogleMap,
+  Marker
+} from "react-google-maps";
 const {
   DrawingManager
 } = require("react-google-maps/lib/components/drawing/DrawingManager");
-import setCenter from "../../../../functions/setCenter";
+
 const mapStyle = require("./featurelessLight.json");
+const pin = require("../../../../images/colorfulPin.png");
 
 type props = {
-  setParentState: (parentState: object) => void;
+  newRequest: types.newRequest;
+  updateRequest: (newData: object) => void;
 };
 
 type state = {
@@ -32,9 +39,19 @@ export default class PinMap extends React.Component<props, state> {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.newRequest.latLng) {
+      this.setState({
+        center: nextProps.newRequest.latLng,
+        zoom: 16
+      });
+    }
+  }
+
   setLatLng(point) {
-    console.log(point.lat());
-    console.log(point.lng());
+    this.props.updateRequest({
+      latLng: { lat: point.lat(), lng: point.lng() }
+    });
   }
 
   render() {
@@ -67,6 +84,7 @@ export default class PinMap extends React.Component<props, state> {
           fullscreenControl: false
         }}
       >
+        <Marker position={this.props.newRequest.latLng} defaultIcon={pin} />
         <DrawingManager
           defaultDrawingMode={google.maps.drawing.OverlayType.MARKER}
           defaultOptions={{
@@ -76,7 +94,7 @@ export default class PinMap extends React.Component<props, state> {
               drawingModes: [google.maps.drawing.OverlayType.MARKER]
             }
           }}
-          onMarkerComplete={props => this.setLatLng(props.map.center)}
+          onMarkerComplete={props => this.setLatLng(props.position)}
         />
       </GoogleMap>
     ));

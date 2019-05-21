@@ -25,7 +25,6 @@
 }
 
 .btn-success {
-    opacity: 0.8;
     background-color: #74D8D8!important;
     border-color: #74D8D8 !important;
     background-image: linear-gradient(to bottom, #74D8D8 0%, #74D8D8 100%);

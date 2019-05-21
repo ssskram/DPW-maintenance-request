@@ -1,5 +1,6 @@
 import * as React from "react";
 import * as types from "../../../store/types";
+import validate from './validate';
 
 type props = {};
 
@@ -8,7 +9,7 @@ export default class Submit extends React.Component<props, {}> {
     return (
       <div style={{ margin: "40px 0px" }} className="text-center">
         <button
-          disabled={true}
+          disabled={validate()}
           title="Please provide all required data"
           className="btn btn-success"
           style={{ width: "80%", fontSize: "2em" }}

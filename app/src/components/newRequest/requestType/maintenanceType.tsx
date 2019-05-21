@@ -13,7 +13,7 @@ export default class MaintenanceTypes extends React.Component<props, {}> {
   render() {
     const unique = [...new Set(this.props.issues.map(item => item.type))];
     return (
-      <div style={{ margin: "60px 0px" }}>
+      <div style={{ marginBottom: "60px" }}>
         <SectionHeader header="What's giving you problems?" />
         <div className="panel">
           <div className="panel-body">

@@ -54,21 +54,23 @@ export interface newRequest {
   description: string;
   department: string;
   phone: string;
-
+  image: Array<any>;
+  location: string;
+  
   // maintenance requests
   maintenanceType: string;
   maintenanceIssue: string;
   building: string;
-  image: Array<any>;
-  location: string;
 
   // office moves
-  originFacility: string
-  originLocation: string
-  destinationFacility: string
-  destinationLocation: string
-  name: string
+  originFacility: string;
+  originLocation: string;
+  destinationFacility: string;
+  destinationLocation: string;
+  name: string;
 
+  // construction request
+  latLng: { lat: number; lng: number };
 }
 
 // message
