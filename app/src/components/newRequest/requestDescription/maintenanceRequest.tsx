@@ -4,6 +4,7 @@ import TextArea from "../../formElements/textarea";
 import Select from "../../formElements/select";
 import Phone from "../../formElements/phone";
 import ImageUploader from "react-images-upload";
+import AlternativePrompt from "./alternativePrompts";
 import constants from "./constants";
 
 type props = {
@@ -30,10 +31,31 @@ export default class MaintenanceRequest extends React.Component<props, {}> {
       imgButton = { display: "none" };
     }
     const issues = this.props.issues
-      .filter(i => i.type != "" && i.type == this.props.newRequest.maintenanceType)
+      .filter(
+        i => i.type != "" && i.type == this.props.newRequest.maintenanceType
+      )
       .map(i => {
         return { value: i.name, label: i.name };
       });
+
+    const alternativePrompt =
+      this.props.newRequest.maintenanceIssue.value == "Pest Control" ||
+      this.props.newRequest.maintenanceIssue.value == "Elevators" ||
+      this.props.newRequest.maintenanceIssue.value == "Tree Issues" ||
+      this.props.newRequest.maintenanceIssue.value == "Masonry/Concrete Work" ||
+      this.props.newRequest.maintenanceIssue.value ==
+        "Landscape Maintenance (Snow or Leaves)" ||
+      this.props.newRequest.maintenanceIssue.value == "Office Renovation";
+
+    if (alternativePrompt) {
+      return (
+        <AlternativePrompt
+          issue={this.props.newRequest.maintenanceIssue.value}
+          updateRequest={this.props.updateRequest.bind(this)}
+        />
+      );
+    }
+
     return (
       <div>
         <Select

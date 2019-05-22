@@ -59,7 +59,7 @@ export interface newRequest {
   
   // maintenance requests
   maintenanceType: string;
-  maintenanceIssue: string;
+  maintenanceIssue: any;
   building: string;
 
   // office moves
