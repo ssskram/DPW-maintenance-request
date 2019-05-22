@@ -11,7 +11,7 @@ export default class Submit extends React.Component<props, {}> {
     return (
       <div style={{ margin: "40px 0px" }} className="text-center">
         <button
-          disabled={validate(this.props.newRequest)}
+          disabled={!validate(this.props.newRequest)}
           title="Please provide all required data"
           className="btn btn-success"
           style={{ width: "80%", fontSize: "2em" }}
