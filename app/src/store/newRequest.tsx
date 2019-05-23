@@ -7,18 +7,18 @@ const unloadedState = {
   newRequest: {
     requestType: "",
     description: "",
-    department: "",
+    department: undefined,
     phone: "",
     location: "",
     image: [],
     // maint request
     maintenanceType: "",
-    maintenanceIssue: "",
+    maintenanceIssue: undefined,
     building: "",
     // office move
-    originFacility: "",
+    originFacility: undefined,
     originLocation: "",
-    destinationFacility: "",
+    destinationFacility: undefined,
     destinationLocation: "",
     name: "",
     // construction request

@@ -1,8 +1,9 @@
 import * as React from "react";
 import Select from "react-select";
+import * as types from "../../store/types";
 
 type props = {
-  value: string;
+  value: types.select;
   placeholder: string;
   header: string;
   required: boolean;

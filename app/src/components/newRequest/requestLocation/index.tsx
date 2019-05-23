@@ -49,7 +49,6 @@ export default class RequestLocation extends React.Component<props, state> {
   }
 
   componentWillUpdate(nextProps: props, nextState: state) {
-    console.log(nextState);
     // clear location when requestType changes
     if (this.props.newRequest.requestType != nextProps.newRequest.requestType) {
       this.setState({

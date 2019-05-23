@@ -124,7 +124,9 @@ export default class OfficeMoveDescription extends React.Component<props, {}> {
             value={this.props.newRequest.description}
             header=""
             placeholder="Anything else we need to know?"
-            callback={e => this.setState({ description: e.target.value })}
+            callback={e =>
+              this.props.updateRequest({ description: e.target.value })
+            }
             required={false}
           />
         </div>

@@ -38,22 +38,25 @@ export default class MaintenanceRequest extends React.Component<props, {}> {
         return { value: i.name, label: i.name };
       });
 
-    const alternativePrompt =
-      this.props.newRequest.maintenanceIssue.value == "Pest Control" ||
-      this.props.newRequest.maintenanceIssue.value == "Elevators" ||
-      this.props.newRequest.maintenanceIssue.value == "Tree Issues" ||
-      this.props.newRequest.maintenanceIssue.value == "Masonry/Concrete Work" ||
-      this.props.newRequest.maintenanceIssue.value ==
-        "Landscape Maintenance (Snow or Leaves)" ||
-      this.props.newRequest.maintenanceIssue.value == "Office Renovation";
+    if (this.props.newRequest.maintenanceIssue) {
+      const alternativePrompt =
+        this.props.newRequest.maintenanceIssue.value == "Pest Control" ||
+        this.props.newRequest.maintenanceIssue.value == "Elevators" ||
+        this.props.newRequest.maintenanceIssue.value == "Tree Issues" ||
+        this.props.newRequest.maintenanceIssue.value ==
+          "Masonry/Concrete Work" ||
+        this.props.newRequest.maintenanceIssue.value ==
+          "Landscape Maintenance (Snow or Leaves)" ||
+        this.props.newRequest.maintenanceIssue.value == "Office Renovation";
 
-    if (alternativePrompt) {
-      return (
-        <AlternativePrompt
-          issue={this.props.newRequest.maintenanceIssue.value}
-          updateRequest={this.props.updateRequest.bind(this)}
-        />
-      );
+      if (alternativePrompt) {
+        return (
+          <AlternativePrompt
+            issue={this.props.newRequest.maintenanceIssue.value}
+            updateRequest={this.props.updateRequest.bind(this)}
+          />
+        );
+      }
     }
 
     return (

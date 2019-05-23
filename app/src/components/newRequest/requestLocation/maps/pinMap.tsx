@@ -33,6 +33,12 @@ export default class PinMap extends React.Component<props, state> {
     };
   }
 
+  shouldComponentUpdate(nextProps: props) {
+    if (nextProps.newRequest.latLng == this.state.center) {
+      return false;
+    } else return true;
+  }
+
   componentWillMount() {
     if (window.innerWidth < 1000) {
       this.setState({ zoom: 12 });

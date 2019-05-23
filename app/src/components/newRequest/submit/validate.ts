@@ -6,29 +6,41 @@ export default function validate(request: types.newRequest) {
       return false;
     case "Maintenance Request":
       // disable for issues that throw contact prompts
-      const alternativePrompt =
-        request.maintenanceIssue.value == "Pest Control" ||
-        request.maintenanceIssue.value == "Elevators" ||
-        request.maintenanceIssue.value == "Tree Issues" ||
-        request.maintenanceIssue.value == "Masonry/Concrete Work" ||
-        request.maintenanceIssue.value ==
-          "Landscape Maintenance (Snow or Leaves)" ||
-        request.maintenanceIssue.value == "Office Renovation";
+      if (request.maintenanceIssue) {
+        const alternativePrompt =
+          request.maintenanceIssue.value == "Pest Control" ||
+          request.maintenanceIssue.value == "Elevators" ||
+          request.maintenanceIssue.value == "Tree Issues" ||
+          request.maintenanceIssue.value == "Masonry/Concrete Work" ||
+          request.maintenanceIssue.value ==
+            "Landscape Maintenance (Snow or Leaves)" ||
+          request.maintenanceIssue.value == "Office Renovation";
+        if (alternativePrompt) {
+          return false;
+        }
+      }
 
-      const valid =
+      const maintValid =
         request.description != "" &&
-        request.department != "" &&
+        request.department != undefined &&
         request.phone != "" &&
         request.location != "" &&
-        request.maintenanceIssue != "" &&
+        request.maintenanceIssue != undefined &&
         request.building != "";
 
-      if (alternativePrompt) {
-        return false;
-      } else return valid;
+      return maintValid;
 
     case "Office Move":
-      return false;
+      const officeValid =
+        request.description != "" &&
+        request.department != undefined &&
+        request.name != "" &&
+        request.originFacility != undefined &&
+        request.originLocation != "" &&
+        request.destinationFacility != undefined &&
+        request.destinationLocation != "";
+
+      return officeValid;
     case "Construction":
       return true;
   }

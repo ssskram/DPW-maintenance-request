@@ -52,26 +52,32 @@ export interface issue {
 export interface newRequest {
   requestType: "Maintenance Request" | "Office Move" | "Construction" | "";
   description: string;
-  department: string;
+  department: select;
   phone: string;
   image: Array<any>;
   location: string;
-  
+
   // maintenance requests
   maintenanceType: string;
-  maintenanceIssue: any;
+  maintenanceIssue: select;
   building: string;
 
   // office moves
-  originFacility: string;
+  originFacility: select;
   originLocation: string;
-  destinationFacility: string;
+  destinationFacility: select;
   destinationLocation: string;
   name: string;
 
   // construction request
   latLng: { lat: number; lng: number };
 }
+
+// select
+export type select = {
+  value: string;
+  label: string;
+};
 
 // message
 export interface messsage {

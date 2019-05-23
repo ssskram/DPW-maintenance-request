@@ -43,6 +43,12 @@ export default class FacilityMap extends React.Component<props, state> {
     };
   }
 
+  shouldComponentUpdate(nextProps: props, nextState: state) {
+    if (this.state == nextState) {
+      return false;
+    } else return true;
+  }
+
   componentWillMount() {
     if (window.innerWidth < 1000) {
       this.setState({ zoom: 12 });
