@@ -7,6 +7,7 @@ import storeLoad from "./storeLoad";
 
 type props = {
   newRequest: types.newRequest;
+  user: types.user;
   addRequest: (storeLoad: types.request) => void;
   clearRequest: () => void;
   success: () => void;
@@ -27,10 +28,10 @@ export default class Submit extends React.Component<props, state> {
 
   submit(): void {
     this.setState({ spinner: true }, async () => {
-      const success = await post(this.props.newRequest);
+      const success = await post(this.props.newRequest, this.props.user);
       if (success == true) {
-        const newReq = await storeLoad(this.props.newRequest);
-        // await this.props.addRequest(newReq);
+        const newReq: types.request = await storeLoad(this.props.newRequest, this.props.user);
+        await this.props.addRequest(newReq);
         this.props.clearRequest();
         this.props.success();
         window.scrollTo(0, 0);

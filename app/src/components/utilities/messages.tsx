@@ -14,11 +14,14 @@ export class Messages extends React.Component<any, {}> {
 
   public render() {
     return this.props.message ? (
-      <div className="alert alert-success text-center">
+      <div
+        className="alert alert-success text-center"
+        style={{ marginTop: "10px" }}
+      >
         <button
           className="close"
           onClick={this.clearMessage.bind(this)}
-          style={{ marginTop: "-15px", marginRight: "-5px", fontSize: "1em" }}
+          style={{ marginTop: "-15px", marginRight: "-5px", fontSize: "2em" }}
         >
           <span>&times;</span>
         </button>

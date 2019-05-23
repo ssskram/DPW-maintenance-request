@@ -8,6 +8,7 @@ import * as facilities from "../../store/facilities";
 import * as allRequests from "../../store/allRequests";
 import * as issues from "../../store/issues";
 import * as messages from "../../store/messages";
+import * as user from "../../store/user";
 import RequestType from "./requestType";
 import RequestLocation from "./requestLocation";
 import RequestDescription from "./requestDescription";
@@ -20,6 +21,7 @@ type props = {
   allRequests: types.request[];
   issues: types.issue[];
   message: types.message;
+  user: types.user;
   updateRequest: (updatedOrder: types.newRequest) => void;
   addRequest: (storeLoad: types.request) => void;
   clearRequest: () => void;
@@ -110,6 +112,7 @@ export class Request extends React.Component<props, {}> {
         {this.props.newRequest.requestType != "" && (
           <Submit
             newRequest={this.props.newRequest}
+            user={this.props.user}
             addRequest={this.props.addRequest.bind(this)}
             success={this.props.successMessage.bind(this)}
             failure={this.props.errorMessage.bind(this)}
@@ -127,13 +130,15 @@ export default connect(
     ...state.facilities,
     ...state.allRequests,
     ...state.issues,
-    ...state.messages
+    ...state.messages,
+    ...state.user
   }),
   {
     ...newRequest.actionCreators,
     ...facilities.actionCreators,
     ...allRequests.actionCreators,
     ...issues.actionCreators,
-    ...messages.actionCreators
+    ...messages.actionCreators,
+    ...user.actionCreators
   }
 )(Request as any);

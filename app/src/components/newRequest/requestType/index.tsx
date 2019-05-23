@@ -28,10 +28,16 @@ export default class RequestType extends React.Component<props, {}> {
   render() {
     return (
       <div>
-        <h1 className="text-center" style={{ color: "#fff" }}>
+        <div className="text-center">
           <SpeechBubble size={170} mood={this.mood()} color="#fff" />
-          {this.props.message ? <Messages /> : <div>How can we help?</div>}
-        </h1>
+          {this.props.message ? (
+            <Messages />
+          ) : (
+            <div style={{ color: "#fff", fontSize: "2.5em" }}>
+              How can we help?
+            </div>
+          )}
+        </div>
         <RequestTypes
           newRequest={this.props.newRequest}
           updateRequest={this.props.updateRequest.bind(this)}
