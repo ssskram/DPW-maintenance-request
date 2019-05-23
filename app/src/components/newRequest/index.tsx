@@ -7,6 +7,7 @@ import * as newRequest from "../../store/newRequest";
 import * as facilities from "../../store/facilities";
 import * as allRequests from "../../store/allRequests";
 import * as issues from "../../store/issues";
+import * as messages from "../../store/messages";
 import RequestType from "./requestType";
 import RequestLocation from "./requestLocation";
 import RequestDescription from "./requestDescription";
@@ -18,8 +19,13 @@ type props = {
   facilities: types.facility[];
   allRequests: types.request[];
   issues: types.issue[];
+  message: types.message;
   updateRequest: (updatedOrder: types.newRequest) => void;
+  addRequest: (storeLoad: types.request) => void;
   clearRequest: () => void;
+  successMessage: () => void;
+  errorMessage: () => void;
+  clearMessage: () => void;
 };
 
 export class Request extends React.Component<props, {}> {
@@ -82,6 +88,7 @@ export class Request extends React.Component<props, {}> {
           newRequest={this.props.newRequest}
           issues={this.props.issues}
           updateRequest={this.handleUpdate.bind(this)}
+          message={this.props.message}
         />
         {displayComponent(this.props.newRequest, "location") && (
           <RequestLocation
@@ -101,7 +108,13 @@ export class Request extends React.Component<props, {}> {
           />
         )}
         {this.props.newRequest.requestType != "" && (
-          <Submit newRequest={this.props.newRequest} />
+          <Submit
+            newRequest={this.props.newRequest}
+            addRequest={this.props.addRequest.bind(this)}
+            success={this.props.successMessage.bind(this)}
+            failure={this.props.errorMessage.bind(this)}
+            clearRequest={this.props.clearRequest.bind(this)}
+          />
         )}
       </div>
     );
@@ -113,12 +126,14 @@ export default connect(
     ...state.newRequest,
     ...state.facilities,
     ...state.allRequests,
-    ...state.issues
+    ...state.issues,
+    ...state.messages
   }),
   {
     ...newRequest.actionCreators,
     ...facilities.actionCreators,
     ...allRequests.actionCreators,
-    ...issues.actionCreators
+    ...issues.actionCreators,
+    ...messages.actionCreators
   }
 )(Request as any);

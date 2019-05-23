@@ -3,7 +3,7 @@ import { AppThunkAction } from ".";
 import * as constants from "./constants";
 import * as types from "./types";
 
-const unloadedState: types.messsage = {
+const unloadedState: types.messages = {
   message: ""
 };
 
@@ -19,8 +19,8 @@ export const actionCreators = {
   }
 };
 
-export const reducer: Reducer<types.messsage> = (
-  state: types.messsage,
+export const reducer: Reducer<types.messages> = (
+  state: types.messages,
   incomingAction: Action
 ) => {
   const action = incomingAction as any;

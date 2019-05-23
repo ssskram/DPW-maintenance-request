@@ -80,6 +80,7 @@ export type select = {
 };
 
 // message
-export interface messsage {
-  message: string;
+export interface messages {
+  message: message;
 }
+export type message = string

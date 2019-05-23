@@ -12,7 +12,7 @@ export interface ApplicationState {
   allRequests: types.allRequests;
   newRequest: types.newRequest;
   issues: types.issues;
-  messages: types.messsage;
+  messages: types.messages;
 }
 
 export const reducers = {

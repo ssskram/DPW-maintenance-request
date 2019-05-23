@@ -4,21 +4,28 @@ import { ApplicationState } from "../../store";
 import * as allRequests from "../../store/allRequests";
 import * as types from "./../../store/types";
 import * as user from "../../store/user";
+import * as messages from "../../store/messages";
 import Requests from "./requests";
+import Messages from "../utilities/messages";
 
 type props = {
   allRequests: types.request[];
   user: types.user;
+  clearMessage: () => void;
 };
 
 export class MyRequests extends React.Component<props, {}> {
+
   render() {
     return (
-      <Requests
-        collection="My"
-        allRequests={this.props.allRequests}
-        user={this.props.user}
-      />
+      <div>
+        <Messages />
+        <Requests
+          collection="My"
+          allRequests={this.props.allRequests}
+          user={this.props.user}
+        />
+      </div>
     );
   }
 }
@@ -26,10 +33,12 @@ export class MyRequests extends React.Component<props, {}> {
 export default connect(
   (state: ApplicationState) => ({
     ...state.allRequests,
-    ...state.user
+    ...state.user,
+    ...state.messages
   }),
   {
     ...allRequests.actionCreators,
-    ...user.actionCreators
+    ...user.actionCreators,
+    ...messages.actionCreators
   }
 )(MyRequests);
