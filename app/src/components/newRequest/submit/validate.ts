@@ -42,6 +42,13 @@ export default function validate(request: types.newRequest) {
 
       return officeValid;
     case "Construction":
-      return true;
+      const constructionValid =
+        request.latLng != undefined &&
+        request.department != undefined &&
+        request.phone != "" &&
+        request.description != "" &&
+        request.location != "";
+
+      return constructionValid;
   }
 }
