@@ -44,19 +44,23 @@ export class Request extends React.Component<props, {}> {
       prevReq.requestType != newReq.requestType
     ) {
       this.handleUpdate({
+        description: "",
+        department: "",
+        phone: "",
+        location: "",
+        image: [],
+        // maint request
         maintenanceType: "",
         maintenanceIssue: "",
         building: "",
-        description: "",
-        department: "",
-        location: "",
-        phone: "",
-        image: [],
+        // office move
         originFacility: "",
         originLocation: "",
         destinationFacility: "",
         destinationLocation: "",
-        name: ""
+        name: "",
+        // construction request
+        latLng: undefined
       });
     }
   }

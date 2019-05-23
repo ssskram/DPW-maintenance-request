@@ -9,18 +9,20 @@ const unloadedState = {
     description: "",
     department: "",
     phone: "",
+    location: "",
+    image: [],
     // maint request
     maintenanceType: "",
     maintenanceIssue: "",
     building: "",
-    location: "",
-    image: [],
     // office move
     originFacility: "",
     originLocation: "",
     destinationFacility: "",
     destinationLocation: "",
-    name: ""
+    name: "",
+    // construction request
+    latLng: undefined
   } as types.newRequest
 };
 

@@ -6,6 +6,7 @@ import pngOrJpg from "../../../functions/facilityIsPng";
 type props = {
   facility: types.facility;
   setParentState: (parentState: object) => void;
+  updateRequest: (newData: object) => void;
 };
 
 const imgStyle = {
@@ -36,13 +37,16 @@ export default class SelectedFacility extends React.Component<props, {}> {
               fontSize: ".9em",
               marginTop: "20px"
             }}
-            onClick={() =>
+            onClick={() => {
               this.props.setParentState({
                 selectionType: undefined,
                 selectedFacility: undefined,
                 locationConfirmed: false
-              })
-            }
+              });
+              this.props.updateRequest({
+                building: ""
+              });
+            }}
           >
             <span
               style={{ marginRight: "5px" }}

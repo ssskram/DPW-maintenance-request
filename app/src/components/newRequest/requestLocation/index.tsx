@@ -27,37 +27,77 @@ export default class RequestLocation extends React.Component<props, state> {
     super(props);
     this.state = {
       selectionType: undefined,
-      selectedFacility: undefined,
+      selectedFacility: undefined, // maint requests
       locationConfirmed: false
     };
   }
 
-  componentDidUpdate(nextProps: props) {
+  componentDidMount() {
+    // if store contains building, set facility
+    if (this.props.newRequest.building != "") {
+      this.setState({
+        selectedFacility: this.props.facilities.find(
+          f => f.name == this.props.newRequest.building
+        )
+      });
+      // store contains latlng, display pin map
+    } else if (this.props.newRequest.latLng != undefined) {
+      this.setState({
+        selectionType: "pin"
+      });
+    }
+  }
+
+  componentWillUpdate(nextProps: props, nextState: state) {
+    console.log(nextState);
+    // clear location when requestType changes
     if (this.props.newRequest.requestType != nextProps.newRequest.requestType) {
       this.setState({
         selectionType: undefined,
         selectedFacility: undefined,
-        locationConfirmed: undefined
+        locationConfirmed: false
       });
+    }
+    switch (this.props.newRequest.requestType) {
+      case "Maintenance Request":
+        // write building to store when location is confirmed
+        if (
+          this.state.locationConfirmed == false &&
+          nextState.locationConfirmed == true
+        ) {
+          this.props.updateRequest({
+            building: nextState.selectedFacility.name
+          });
+        }
     }
   }
 
   render() {
     const { selectionType, selectedFacility, locationConfirmed } = this.state;
+    const header = (
+      <SectionHeader
+        header={
+          this.props.newRequest.requestType == "Construction"
+            ? "Where will the work be performed?"
+            : "Where is the problem located?"
+        }
+      />
+    );
     if (locationConfirmed) {
       return (
         <div>
-          <SectionHeader header="Where is the problem located?" />
+          {header}
           <SelectedFacility
             facility={selectedFacility}
             setParentState={this.setState.bind(this)}
+            updateRequest={this.props.updateRequest.bind(this)}
           />
         </div>
       );
     } else {
       return (
         <div>
-          <SectionHeader header="Where is the problem located?" />
+          {header}
           <LocationSelectionOptions
             selectedType={selectionType}
             newRequest={this.props.newRequest}
