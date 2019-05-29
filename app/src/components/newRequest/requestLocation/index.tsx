@@ -33,12 +33,13 @@ export default class RequestLocation extends React.Component<props, state> {
   }
 
   componentDidMount() {
-    // if store contains building, set facility
+    // if store contains building, set and confirm facility
     if (this.props.newRequest.building != "") {
       this.setState({
         selectedFacility: this.props.facilities.find(
           f => f.name == this.props.newRequest.building
-        )
+        ),
+        locationConfirmed: true
       });
       // store contains latlng, display pin map
     } else if (this.props.newRequest.latLng != undefined) {

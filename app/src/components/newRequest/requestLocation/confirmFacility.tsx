@@ -98,7 +98,7 @@ export default class ConfirmFacility extends React.Component<props, state> {
               onClick={() => this.props.clearRequest()}
               className="btn btn-secondary"
             >
-              <div className='oswald-header'>Yes</div>
+              <div className="oswald-header">Yes</div>
               <div>My issue has already been reported</div>
             </button>
             <button
@@ -107,7 +107,7 @@ export default class ConfirmFacility extends React.Component<props, state> {
               }
               className="btn btn-secondary"
             >
-              <div className='oswald-header'>No</div>
+              <div className="oswald-header">No</div>
               <div>I'd like to continue with reporting this issue</div>
             </button>
           </div>
