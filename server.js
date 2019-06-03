@@ -133,6 +133,7 @@ app.get('*', ensureAuthenticated, (req, res) => {
   })
 })
 
+
 // helper function to validate user on every route
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
