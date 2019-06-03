@@ -50,6 +50,8 @@ export default function storeLoad(
       };
       return omLoad;
     case "Construction":
+      return undefined;
+    case "":
+      return undefined;
   }
-  return undefined;
 }
