@@ -117,6 +117,7 @@ export class Request extends React.Component<props, {}> {
             success={this.props.successMessage.bind(this)}
             failure={this.props.errorMessage.bind(this)}
             clearRequest={this.props.clearRequest.bind(this)}
+            updateRequest={this.props.updateRequest.bind(this)}
           />
         )}
       </div>

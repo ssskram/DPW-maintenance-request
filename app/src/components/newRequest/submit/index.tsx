@@ -9,6 +9,7 @@ type props = {
   newRequest: types.newRequest;
   user: types.user;
   addRequest: (storeLoad: types.request) => void;
+  updateRequest: (newData: object) => void;
   clearRequest: () => void;
   success: () => void;
   failure: () => void;
@@ -30,7 +31,10 @@ export default class Submit extends React.Component<props, state> {
     this.setState({ spinner: true }, async () => {
       const success = await post(this.props.newRequest, this.props.user);
       if (success == true) {
-        const newReq: types.request = await storeLoad(this.props.newRequest, this.props.user);
+        const newReq: types.request = await storeLoad(
+          this.props.newRequest,
+          this.props.user
+        );
         await this.props.addRequest(newReq);
         this.props.clearRequest();
         this.props.success();

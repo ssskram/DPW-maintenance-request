@@ -4,31 +4,44 @@ export default async function post(
   request: types.newRequest,
   user: types.user
 ): Promise<boolean> {
+  // build office move load
+  if (request.requestType == "Office Move") {
+    const desc =
+      "Office move for " +
+      request.name +
+      ". Additional information: " +
+      request.description;
+    request.building = request.originFacility.value;
+    request.description = desc;
+    request.location = buildLocation(request as types.newRequest);
+  }
   let postSuccess;
   let Oid;
   let sendgridLoad;
 
   // format data for cartegraph
-  let data = JSON.stringify({
+  let data = {
     ActivityField: activity(request),
     DepartmentField: "Facilities",
     cgAssetTypeField: "Facility",
     cgAssetAndIdField: "Facility " + request.building,
     StatusField: "Planned",
     cgAssetIDField: request.building,
-    RequestIssueField: request.maintenanceIssue,
+    RequestIssueField: request.maintenanceIssue.value || "Office Move",
     TaskDescriptionField: request.description,
-    RequestDepartmentField: request.department,
+    RequestDepartmentField: request.department.value,
     RequestLocationField: request.location,
     RequestorPhoneNumberField: request.phone,
-    RequesterEmailField: user
-  });
-  let cleanedData = data.replace(/'/g, "");
+    RequesterEmailField: user.email
+  };
+  let cleanedData = JSON.stringify(data).replace(/'/g, "");
   const body = '{ "cgTasksClass" : [ ' + cleanedData + " ] }";
+  console.log(body);
 
   // await post response
   const dataResponse = await fetch(
-    "https://cartegraphapi.azurewebsites.us/maintenanceRequests/newRequest",
+    "http://localhost:3000/maintenanceRequests/newRequest",
+    // "https://cartegraphapi.azurewebsites.us/maintenanceRequests/newRequest",
     {
       method: "POST",
       body: body,
@@ -58,7 +71,7 @@ export default async function post(
           (emailBody = String.format(
             text,
             request.building,
-            request.maintenanceIssue,
+            request.maintenanceIssue.value || "Office Move",
             request.description,
             request.location,
             request.phone
@@ -92,10 +105,10 @@ export default async function post(
         sendgridLoad = JSON.stringify({
           to: user,
           from: {
-            email: user,
+            email: user.email,
             name: "Department of Public Works"
           },
-          subject: "Your maintenance request has been received",
+          subject: "Your request has been received",
           html: emailBody,
           attachments: [
             {
@@ -122,10 +135,10 @@ export default async function post(
       sendgridLoad = JSON.stringify({
         to: user,
         from: {
-          email: user,
+          email: user.email,
           name: "Department of Public Works"
         },
-        subject: "Your maintenance request has been received",
+        subject: "Your request has been received",
         html: emailBody
       });
 
@@ -144,6 +157,20 @@ export default async function post(
   return postSuccess;
 }
 
+const buildLocation = request => {
+  const location =
+    "Office move from " +
+    request.originFacility.value +
+    " (" +
+    request.originLocation +
+    ") to " +
+    request.destinationFacility.value +
+    " (" +
+    request.destinationLocation +
+    ")";
+  return location;
+};
+
 const activity = (request: types.newRequest) => {
   switch (request.maintenanceType) {
     case "Carpentry and Painting":
@@ -159,7 +186,7 @@ const activity = (request: types.newRequest) => {
     case "Heating and Air Conditioning":
       return "HVAC";
     default:
-      return "Invetigate";
+      return "Investigate";
   }
 };
 

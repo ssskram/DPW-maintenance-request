@@ -7,11 +7,13 @@ export const requestTypes = [
   {
     value: "Office Move",
     label: "Request an office move"
-  },
-  {
-    value: "Construction",
-    label: "Request construction work"
   }
+  // not ready for this one yet
+  // also, not wired up to cartegraph yet
+  // {
+  //   value: "Construction",
+  //   label: "Request construction work"
+  // }
 ];
 
 export const config = {
