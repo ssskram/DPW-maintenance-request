@@ -40,8 +40,7 @@ export default async function post(
 
   // await post response
   const dataResponse = await fetch(
-    "http://localhost:3000/maintenanceRequests/newRequest",
-    // "https://cartegraphapi.azurewebsites.us/maintenanceRequests/newRequest",
+    "https://cartegraphapi.azurewebsites.us/maintenanceRequests/newRequest",
     {
       method: "POST",
       body: body,

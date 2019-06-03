@@ -13,11 +13,11 @@ export default function storeLoad(
         location: request.location,
         description: request.description,
         department: request.department.value,
-        submitted: moment().format("MM/DD/YYYY"),
+        submitted: moment().format("MM-DD-YYYY, hh:mm A"),
         submittedBy: user.email,
         status: "Planned",
         issue: request.maintenanceIssue.value,
-        lastModified: moment().format("MM/DD/YYYY"),
+        lastModified: moment().format("MM-DD-YYYY, hh:mm A"),
         notes: ""
       };
       return maintLoad;
