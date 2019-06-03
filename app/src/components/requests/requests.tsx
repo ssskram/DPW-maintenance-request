@@ -7,6 +7,7 @@ import Filter from "./filter";
 import { Helmet } from "react-helmet";
 import { Cat } from "react-kawaii";
 import Spinner from "../utilities/spinner";
+const moment = require("moment");
 
 const dropdownStyle =
   ".custom-modal { overflow: visible; } .Select-menu-outer { overflow: visible}";
@@ -55,10 +56,16 @@ export default class Requests extends React.Component<props, any> {
     if (this.props.collection == "My") {
       return requests
         .filter(request => request.submittedBy == this.props.user.email)
-        .sort((a, b) => +new Date(b.submitted) - +new Date(a.submitted));
+        .sort(
+          (a, b) =>
+            +new Date(moment(b.submitted, "MM-DD-YYYY h:m A")) -
+            +new Date(moment(a.submitted, "MM-DD-YYYY h:m A"))
+        );
     } else {
       return requests.sort(
-        (a, b) => +new Date(b.submitted) - +new Date(a.submitted)
+        (a, b) =>
+          +new Date(moment(b.submitted, "MM-DD-YYYY h:m A")) -
+          +new Date(moment(a.submitted, "MM-DD-YYYY h:m A"))
       );
     }
   }
