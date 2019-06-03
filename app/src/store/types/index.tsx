@@ -58,7 +58,15 @@ export interface newRequest {
   location: string;
 
   // maintenance requests
-  maintenanceType: string;
+  maintenanceType:
+    | "Doors, Locks, and Windows"
+    | "Plumbing and Gas"
+    | "Miscellaneous"
+    | "Electrical and Lighting"
+    | "Heating and Air Conditioning"
+    | "Carpentry and Painting"
+    | "Roofing"
+    | "";
   maintenanceIssue: select;
   building: string;
 
@@ -83,4 +91,4 @@ export type select = {
 export interface messages {
   message: message;
 }
-export type message = string
+export type message = string;

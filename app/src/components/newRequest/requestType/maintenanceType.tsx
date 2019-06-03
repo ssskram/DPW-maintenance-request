@@ -12,6 +12,7 @@ type props = {
 export default class MaintenanceTypes extends React.Component<props, {}> {
   render() {
     const unique = [...new Set(this.props.issues.map(item => item.type))];
+    console.log(unique);
     return (
       <div style={{ marginBottom: "60px" }}>
         <SectionHeader header="What's giving you problems?" />
