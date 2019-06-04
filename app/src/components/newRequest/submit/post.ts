@@ -37,7 +37,6 @@ export default async function post(
   };
   let cleanedData = JSON.stringify(data).replace(/'/g, "");
   const body = '{ "cgTasksClass" : [ ' + cleanedData + " ] }";
-  console.log(body);
 
   // await post response
   const dataResponse = await fetch(

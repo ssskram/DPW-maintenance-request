@@ -83,7 +83,6 @@ export class Request extends React.Component<props, {}> {
   }
 
   render() {
-    console.log(this.props.newRequest);
     return (
       <div style={{ marginBottom: "100px" }}>
         <HydrateStore />
