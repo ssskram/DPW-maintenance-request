@@ -14,6 +14,7 @@ export default async function post(
     request.building = request.originFacility.value;
     request.description = desc;
     request.location = buildLocation(request as types.newRequest);
+    request.maintenanceIssue = { value: "Office Move", label: "Office Move" };
   }
   let postSuccess;
   let Oid;
@@ -27,7 +28,7 @@ export default async function post(
     cgAssetAndIdField: "Facility " + request.building,
     StatusField: "Planned",
     cgAssetIDField: request.building,
-    RequestIssueField: request.maintenanceIssue.value || "Office Move",
+    RequestIssueField: request.maintenanceIssue.value,
     TaskDescriptionField: request.description,
     RequestDepartmentField: request.department.value,
     RequestLocationField: request.location,
@@ -70,7 +71,7 @@ export default async function post(
           (emailBody = String.format(
             text,
             request.building,
-            request.maintenanceIssue.value || "Office Move",
+            request.maintenanceIssue.value,
             request.description,
             request.location,
             request.phone
