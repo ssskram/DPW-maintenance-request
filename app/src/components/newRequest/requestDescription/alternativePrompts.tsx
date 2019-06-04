@@ -59,7 +59,7 @@ export default class AlternativePrompt extends React.Component<props, {}> {
           </div>
         )}
         <button
-          onClick={() => updateRequest({ maintenanceIssue: "" })}
+          onClick={() => updateRequest({ maintenanceIssue: undefined })}
           value="issue"
           className="btn btn-danger"
         >

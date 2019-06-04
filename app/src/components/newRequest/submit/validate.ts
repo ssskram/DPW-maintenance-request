@@ -1,6 +1,7 @@
 import * as types from "../../../store/types";
 
 export default function validate(request: types.newRequest) {
+  console.log(request);
   switch (request.requestType) {
     case "":
       return false;

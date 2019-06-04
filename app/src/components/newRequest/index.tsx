@@ -44,7 +44,7 @@ export class Request extends React.Component<props, {}> {
       prevReq.maintenanceType != "" &&
       prevReq.maintenanceType != newReq.maintenanceType
     ) {
-      this.handleUpdate({ maintenanceIssue: "" });
+      this.handleUpdate({ maintenanceIssue: undefined });
     }
     // clear state when request type changes
     if (
@@ -53,18 +53,18 @@ export class Request extends React.Component<props, {}> {
     ) {
       this.handleUpdate({
         description: "",
-        department: "",
+        department: undefined,
         phone: "",
         location: "",
         image: [],
         // maint request
         maintenanceType: "",
-        maintenanceIssue: "",
+        maintenanceIssue: undefined,
         building: "",
         // office move
-        originFacility: "",
+        originFacility: undefined,
         originLocation: "",
-        destinationFacility: "",
+        destinationFacility: undefined,
         destinationLocation: "",
         name: "",
         // construction request
@@ -83,6 +83,7 @@ export class Request extends React.Component<props, {}> {
   }
 
   render() {
+    console.log(this.props.newRequest);
     return (
       <div style={{ marginBottom: "100px" }}>
         <HydrateStore />
