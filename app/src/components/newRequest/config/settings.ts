@@ -16,13 +16,14 @@ export const requestTypes = [
   // }
 ];
 
+// defines the required data components that are necessary per type
 export const config = {
   "Maintenance Request": {
-    maintenanceTypes: true,
-    location: true,
-    facilitySelection: true,
-    geoLocate: false,
-    dataFields: true
+    maintenanceTypes: true, // types of maint request
+    location: true, // location selection
+    facilitySelection: true, // tied to specific facility
+    geoLocate: false, // geolocate (point on map)
+    dataFields: true // free text/add'l info fields
   },
   "Office Move": {
     maintenanceTypes: false,
@@ -31,7 +32,7 @@ export const config = {
     geoLocate: false,
     dataFields: true
   },
-  "Construction": {
+  Construction: {
     maintenanceTypes: false,
     location: true,
     facilitySelection: false,

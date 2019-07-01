@@ -1,3 +1,9 @@
+/*
+ * Certain request types aren't taken into Cartegraph
+ * For those, return a specific prompt for user's to follow
+ * to resolve issue
+ */
+
 import * as React from "react";
 
 type props = {

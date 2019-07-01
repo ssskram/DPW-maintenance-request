@@ -1,3 +1,7 @@
+/*
+ * Form fields for construction request
+ */
+
 import * as React from "react";
 import * as types from "../../../store/types";
 import TextArea from "../../formElements/textarea";

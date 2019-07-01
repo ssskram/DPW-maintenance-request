@@ -1,3 +1,8 @@
+/*
+ * Top level component for request description fields
+ * Conditionally returns proper fields depending on request type
+ */
+
 import * as React from "react";
 import * as types from "../../../store/types";
 import SectionHeader from "../shared/sectionHeader";
